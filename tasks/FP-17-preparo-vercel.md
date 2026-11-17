@@ -11,5 +11,6 @@
 - [ ] Configurar checagens de implantação e documentar rollback.
 - [ ] Verificar segredos, acesso ao banco, cabeçalhos de segurança e links de origem das fontes do jogo.
 - [ ] Preparar checklist de publicação e observabilidade mínima.
+- [ ] Publicar aviso de privacidade, canal de contato e procedimento de solicitações de titulares antes de coletar dados em produção.
 
 **Aceite:** um preview pode ser implantado e revisado sem segredos no repositório; publicação em produção depende de decisão explícita posterior.

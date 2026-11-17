@@ -1,6 +1,7 @@
 # FightPath project instructions
 
 Read `PRODUCT.md`, `ARCHITECTURE.md`, `ROADMAP.md`, and `TASKS.md` before changing the product. These files are the shared, durable project context. Update the relevant file whenever a decision, constraint, or scope change should survive this chat and be visible to other developers.
+Read `SOURCES.md` before publishing game content and `PRIVACY.md` before changing data collection or server behavior.
 
 ## Product scope
 
@@ -9,6 +10,7 @@ Read `PRODUCT.md`, `ARCHITECTURE.md`, `ROADMAP.md`, and `TASKS.md` before changi
 - Deliver user-facing interface, lessons, feedback, and accessibility text in both English (`en`) and Brazilian Portuguese (`pt-BR`) from the start.
 - Build a responsive, mobile-first experience that is comfortable in a desktop browser and on a phone. Account for touch targets, small screens, and physical controllers in practice flows.
 - Plan persistence with PostgreSQL on Neon and future hosting on Vercel. Never expose database credentials to browser code.
+- Build with security and Brazilian LGPD requirements in mind: minimize personal data, protect access, document purposes and retention, and support user access and deletion before public release. Follow `PRIVACY.md`.
 
 ## Game information
 

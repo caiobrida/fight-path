@@ -6,10 +6,10 @@
 
 ## Checklist
 
-- [ ] Definir hierarquia de fontes, priorizando material oficial da Capcom e documentação primária verificável.
-- [ ] Criar um registro de fontes com URL, data de consulta, versão/patch quando aplicável e informação sustentada por cada fonte.
-- [ ] Verificar o conjunto inicial de comandos e nomenclatura do Ken em Classic antes de escrever lições.
-- [ ] Definir como revisar conteúdos afetados por atualizações do jogo.
-- [ ] Distinguir fatos do jogo de regras aproximadas do simulador.
+- [x] Definir hierarquia de fontes, priorizando material oficial da Capcom e documentação primária verificável.
+- [x] Criar um registro de fontes com URL, data de consulta, versão/patch quando aplicável e informação sustentada por cada fonte.
+- [ ] Verificar o conjunto inicial de comandos e nomenclatura do Ken em Classic antes de escrever lições. Os nomes estão registrados; os comandos atuais ainda exigem checagem na lista oficial ou no jogo.
+- [x] Definir como revisar conteúdos afetados por atualizações do jogo.
+- [x] Distinguir fatos do jogo de regras aproximadas do simulador.
 
 **Aceite:** cada fato do jogo presente no primeiro conteúdo tem fonte rastreável; nenhum dado específico é preenchido por memória ou suposição.

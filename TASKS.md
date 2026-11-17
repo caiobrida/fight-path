@@ -9,6 +9,7 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 - Primeiro recorte: Street Fighter 6, Ken e controles Classic. A estrutura deve permitir outros personagens e jogos depois, sem prometer suporte a eles no MVP.
 - Informações sobre o jogo publicadas no produto precisam ser verificadas em fontes reais e renomadas, com origem e data registradas. Priorizar fontes oficiais. Distinguir dados confirmados de hipóteses de implementação.
 - Planejar persistência em PostgreSQL no Neon e futura hospedagem na Vercel. Decidir autenticação e acesso seguro ao banco antes de implementar o fluxo de dados pessoais.
+- Aplicar segurança desde a arquitetura e seguir os princípios da LGPD: coletar o mínimo necessário, proteger acesso, informar finalidade e retenção, e permitir exercício de direitos antes da publicação. Consultar `PRIVACY.md`.
 - Código e configuração de infraestrutura ficam em branches separadas, com PRs para `main` e CI desde o começo. Commits devem usar apenas `Caio Brida <caiobrida1@gmail.com>` e não mencionar o assistente em autoria, mensagens ou metadados de Git.
 - Antes de todo commit, push ou operação de PR, conferir o caminho do repositório, a branch e os URLs de fetch e push do `origin`: ambos devem ser exatamente `https://github.com/caiobrida/fight-path`. Não usar outra conta para autenticar no GitHub.
 - Não adicionar comentários ao código. Código, identificadores, nomes de branches, mensagens de commit e texto de PR devem estar em inglês; textos exibidos no produto devem existir em `en` e `pt-BR`.
@@ -20,7 +21,7 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 | Fase | Tarefa | Entrega | Depende de | Estado |
 | --- | --- | --- | --- | --- |
 | Planejamento | [FP-01](tasks/FP-01-documentacao-base.md) | Documentação base e decisões em aberto | Validação deste plano | Concluída |
-| Planejamento | [FP-02](tasks/FP-02-fontes-do-jogo.md) | Política e catálogo de fontes do jogo | FP-01 | Pendente |
+| Planejamento | [FP-02](tasks/FP-02-fontes-do-jogo.md) | Política e catálogo de fontes do jogo | FP-01 | Em andamento |
 | Fundação | [FP-03](tasks/FP-03-base-tecnica.md) | Stack e projeto inicial | FP-01 | Pendente |
 | Fundação | [FP-04](tasks/FP-04-ci.md) | CI para PRs | FP-03 | Pendente |
 | Fundação | [FP-05](tasks/FP-05-localizacao.md) | Infraestrutura `en` e `pt-BR` | FP-03 | Pendente |
