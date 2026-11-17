@@ -59,7 +59,7 @@ Universal exercises should refer to reusable input patterns. Ken lessons may ref
 
 ## Data and deployment
 
-Neon PostgreSQL is the planned durable store for progress. A local PostgreSQL 17 container supplies the same SQL development target. The browser must not connect with a privileged database credential. Next.js server routes use `DATABASE_URL` from the environment and parameterized queries. Vercel preview and production must use separate Neon databases. A daily authenticated cron route removes attempts older than 180 days. A deployment build fails if required server secrets, Clerk configuration, operator identity, or privacy contact settings are absent.
+Neon PostgreSQL is the durable store for progress. A local PostgreSQL 17 container supplies the same SQL development target. The browser must not connect with a privileged database credential. Next.js server routes use `DATABASE_URL` from the environment and parameterized queries. The current Vercel project's Preview and Production-labeled targets are both development environments and use the same Neon database and Clerk Development instance. A future public-production environment needs separate Neon and Clerk Production configuration. A daily authenticated cron route removes attempts older than 180 days on the Vercel Production target. Development builds require the database and matching Clerk keys; public-production builds additionally require the signed deletion webhook secret and reviewed operator/contact settings.
 
 Clerk handles sign-in and account sessions. Only the selected Clerk application `fight-path` (`app_3MEZV1U7aZzsep5eEdSErRrIH8q`) may supply this repository's keys. The Next.js Proxy composes Clerk middleware with locale routing. Public pages are home, privacy, sign-in, and sign-up. Setup and practice pages protect themselves on the server. Every progress handler independently requires a Clerk session and derives `userId` on the server; the client cannot choose an owner ID. PostgreSQL stores only `user_id` with attempts, not email or a duplicate profile. Migration 003 discards the old anonymous development data and session table because there are no real users to migrate.
 
@@ -69,7 +69,7 @@ Locale and controller mapping stay on the device. Mastery and lesson progress ar
 
 XP and challenges are derived from saved attempt counts; no reward balance is stored. Each of the first ten correct attempts per exercise grants 10 XP, capped at 600 XP across six exercises. Mastery evaluates the latest twenty saved attempts for each exercise, so accuracy can improve after an early learning period. Challenges require three correct attempts in specific exercises. Streaks are deferred until timezone and recovery rules can be agreed. Client-reported results are suitable only for private practice rewards, not rankings or prizes.
 
-Control mappings may be stored on the device initially; syncing them to an account is an open product decision. Raw input histories should be retained only if needed for an explicit feature, with a defined retention period. Preview and production must have separate configuration and database access when deployment is prepared in FP-17.
+Control mappings may be stored on the device initially; syncing them to an account is an open product decision. Raw input histories should be retained only if needed for an explicit feature, with a defined retention period. Keep the current development project's data separate from any future public-production environment.
 
 ## Simulator limits and quality
 

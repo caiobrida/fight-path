@@ -17,7 +17,8 @@
 - [x] Configurar no Vercel Preview a URL do Neon e as chaves Development do Clerk `fight-path`.
 - [x] Designar este projeto Vercel inteiro como ambiente de desenvolvimento, inclusive o alvo chamado Production; configurar `FIGHTPATH_RELEASE_MODE=development` nesse alvo.
 - [x] Ativar deploys Git automáticos para branches de PR e `main` em PR separado.
-- [ ] Validar o primeiro deploy de Preview e o primeiro deploy de `main`, incluindo autenticação e `/api/health`.
+- [x] Confirmar o primeiro deploy automático de `main` como Ready no domínio `fight-path.vercel.app` e `/api/health` com resposta 200.
+- [ ] Validar um deploy de Preview com autenticação, páginas nos dois idiomas e `/api/health`.
 - [ ] Configurar e testar o webhook Development `user.deleted` em cada alvo que tenha usuários de teste.
 - [ ] Criar outro banco Neon e configurar a instância Production do mesmo aplicativo Clerk antes de qualquer publicação real.
 - [ ] Publicar aviso de privacidade, canal de contato e procedimento de solicitações de titulares antes de coletar dados em produção.
