@@ -220,6 +220,11 @@ export default async function ComboLibraryPage({
                   {pt ? "Trecho / modelo" : "Segment / template"}
                 </Badge>
               )}
+              {recipe.sourceCaveat && (
+                <Badge tone="muted">
+                  {pt ? "Notas na fonte" : "Source caveats"}
+                </Badge>
+              )}
             </div>
             <h3>
               <a href={`/${locale}/ken/combos/${recipe.lesson.id}`}>

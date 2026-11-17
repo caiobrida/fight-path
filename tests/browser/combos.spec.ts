@@ -155,6 +155,13 @@ test("variable expenditure, unknown costs and incomplete templates remain explic
   await expect(
     page.getByText("This entry is a segment or template", { exact: false }),
   ).toBeVisible();
+  const caveat = publishedCombos.find((recipe) => recipe.sourceCaveat)!;
+  await page.goto(`/en/ken/combos/${caveat.lesson.id}`);
+  await expect(
+    page.getByText("The source flags caveats or incomplete data", {
+      exact: false,
+    }),
+  ).toBeVisible();
 });
 
 test("invalid combo filters and missing routes fail gracefully", async ({

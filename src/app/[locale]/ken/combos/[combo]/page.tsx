@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { categoryNames, publishedCombos } from "@/content/combos";
 import { positionLabel } from "@/content/ken-combos";
 import { isLocale } from "@/i18n/dictionaries";
-import { ActionLink, Badge } from "@/components/ui";
+import { ActionLink, Badge, Notice } from "@/components/ui";
 import { ComboSteps } from "@/components/combo-steps";
 import { LessonActivity } from "@/components/lesson-activity";
 import { ResourceMeter } from "@/components/resource-meter";
@@ -62,6 +62,13 @@ export default async function ComboPage({
         </div>
       </dl>
       <ComboSteps recipe={recipe} locale={locale} />
+      {recipe.sourceCaveat && (
+        <Notice>
+          {pt
+            ? "A fonte aponta ressalvas ou dados incompletos nesta entrada. Consulte as notas da seção antes de escolher a rota."
+            : "The source flags caveats or incomplete data for this entry. Read its section notes before choosing the route."}
+        </Notice>
+      )}
       <section>
         <h2>{pt ? "Como usar esta rota" : "Using this route"}</h2>
         <p>{recipe.conditions[locale]}</p>

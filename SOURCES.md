@@ -6,6 +6,8 @@ Owner decision, November 17, 2026: [SuperCombo Wiki](https://wiki.supercombo.gg/
 
 FP-42 captured the 126 rows of the current Starter, Basic, Super Art, Drive Rush, Drive Impact/Stun and Max Damage tables on November 17, 2026. The page reports last edited at 11:03. Raw factual fields are in `src/content/data/ken-supercombo.json`; exact transcription was checked against the rendered table data (126 rows; canonical FNV-1a 32-bit digest 706974827). Dedupe yields 124 entries. These are source-derived notations and metrics, not copied guide paragraphs. Retain alternatives and incomplete templates. Repeated rows with conflicting resource values produce an unknown cost rather than a fabricated zero. Damage marked incomplete or erroneous by the source is omitted. Earlier tables explicitly identified as legacy by the author were excluded.
 
+Entries with source caveats, incomplete metrics or conflicting costs carry a visible badge and detail notice directing readers to the source notes. Do not silently promote an editorial caveat into a recommended optimization.
+
 The input evaluator is a FightPath approximation. Its timing windows are product rules, not claims about Street Fighter 6. Label them accordingly in the interface.
 
 ## Initial source register
