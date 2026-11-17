@@ -2,7 +2,7 @@
 
 ## Status
 
-This document records the target boundaries and open technical decisions before implementation. No application stack or database schema has been implemented yet. React, TypeScript, and Vite were suggested in the earlier conversation, but FP-03 must evaluate and confirm the stack, including the server runtime needed for Neon and Vercel.
+The application uses Next.js App Router with React and TypeScript. This keeps the web UI and server routes in one project, supports Vercel deployment, and allows Neon credentials to remain server-side. The input evaluator remains framework-independent. Vite was suggested earlier, but a separate server would add complexity for the required database access.
 
 ## System boundaries
 
@@ -61,7 +61,7 @@ CI should check formatting or lint, types, relevant tests, and build on PRs once
 
 | Decision | Why it matters | Resolve in |
 | --- | --- | --- |
-| Frontend and server stack | Determines routing, server boundary, and Vercel integration | FP-03, FP-06 |
+| Frontend and server stack | Next.js App Router selected; specific database and identity libraries remain open | FP-03, FP-06 |
 | Account or anonymous identity | Determines ownership and synchronization of progress | FP-06 |
 | First command representation and tolerance rules | Determines what the simulator can claim | FP-07, FP-10 |
 | Supported hardware matrix | Depends on browser and device behavior | FP-08, FP-16 |
