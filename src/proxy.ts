@@ -16,8 +16,6 @@ export default clerkMiddleware((_auth, request: NextRequest) => {
     return response;
   }
 
-  if (request.nextUrl.pathname !== "/") return NextResponse.next();
-
   const saved = request.cookies.get("fightpath-locale")?.value;
   const preferred: Locale =
     saved && isLocale(saved)
@@ -25,6 +23,12 @@ export default clerkMiddleware((_auth, request: NextRequest) => {
       : request.headers.get("accept-language")?.toLowerCase().startsWith("pt")
         ? "pt-BR"
         : "en";
+  if (/^\/sign-(?:in|up)(?:\/|$)/.test(request.nextUrl.pathname)) {
+    const destination = request.nextUrl.clone();
+    destination.pathname = `/${preferred}${request.nextUrl.pathname}`;
+    return NextResponse.redirect(destination);
+  }
+  if (request.nextUrl.pathname !== "/") return NextResponse.next();
   return NextResponse.redirect(new URL(`/${preferred}`, request.url));
 });
 

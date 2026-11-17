@@ -1,15 +1,10 @@
 import { LocaleSwitch } from "@/components/locale-switch";
 import type { Metadata } from "next";
-import {
-  ClerkProvider,
-  Show,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider, Show, UserButton } from "@clerk/nextjs";
 import { ptBR } from "@clerk/localizations";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { AuthLinks } from "@/components/auth-links";
 import { dictionaries, isLocale, locales } from "@/i18n/dictionaries";
 import "../globals.css";
 
@@ -76,11 +71,11 @@ export default async function LocaleLayout({
             <nav
               className="fp-main-nav"
               aria-label={
-                locale === "pt-BR" ? "Navega??o principal" : "Main navigation"
+                locale === "pt-BR" ? "Navegação principal" : "Main navigation"
               }
             >
               <a href={`/${locale}`}>
-                {locale === "pt-BR" ? "In?cio" : "Home"}
+                {locale === "pt-BR" ? "Início" : "Home"}
               </a>
               <a href={`/${locale}/learn`}>
                 {locale === "pt-BR" ? "Aprender" : "Learn"}
@@ -99,20 +94,7 @@ export default async function LocaleLayout({
             >
               <Suspense>
                 <Show when="signed-out">
-                  <SignInButton
-                    mode="redirect"
-                    forceRedirectUrl={`/${locale}/practice`}
-                    signUpForceRedirectUrl={`/${locale}/practice`}
-                  >
-                    <button type="button">{dictionaries[locale].signIn}</button>
-                  </SignInButton>
-                  <SignUpButton
-                    mode="redirect"
-                    forceRedirectUrl={`/${locale}/practice`}
-                    signInForceRedirectUrl={`/${locale}/practice`}
-                  >
-                    <button type="button">{dictionaries[locale].signUp}</button>
-                  </SignUpButton>
+                  <AuthLinks locale={locale} />
                 </Show>
                 <Show when="signed-in">
                   <UserButton />
@@ -120,6 +102,15 @@ export default async function LocaleLayout({
               </Suspense>
             </nav>
           </header>
+          {(process.env.FIGHTPATH_RELEASE_MODE === "development" ||
+            process.env.NODE_ENV === "development" ||
+            process.env.VERCEL_ENV === "preview") && (
+            <p className="fp-development">
+              {locale === "pt-BR"
+                ? "Ambiente de desenvolvimento · recursos e conteúdo em validação"
+                : "Development environment · features and content under validation"}
+            </p>
+          )}
           {children}
           <footer className="site-footer">
             <a href={`/${locale}/privacy`}>

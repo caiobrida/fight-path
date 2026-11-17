@@ -74,8 +74,18 @@ export default async function PrivacyPage({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const text = copy[locale];
-  const contact = process.env.PRIVACY_CONTACT_EMAIL?.trim();
-  const operatorName = process.env.PRIVACY_OPERATOR_NAME?.trim();
+  const contactValue = process.env.PRIVACY_CONTACT_EMAIL?.trim();
+  const operatorValue = process.env.PRIVACY_OPERATOR_NAME?.trim();
+  const contact =
+    contactValue &&
+    !contactValue.startsWith("replace-with-") &&
+    !contactValue.endsWith("@example.com")
+      ? contactValue
+      : undefined;
+  const operatorName =
+    operatorValue && !operatorValue.startsWith("replace-with-")
+      ? operatorValue
+      : undefined;
 
   return (
     <main className="privacy">

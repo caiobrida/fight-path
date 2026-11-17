@@ -16,3 +16,7 @@
 **Acceptance:** approved auth paths return to a valid localized page, data stays account-bound and the privacy notice matches actual behavior. Record remaining public-release gates honestly.
 
 **Evidence:** end-to-end matrix, signed webhook check, unsafe redirect tests and reviewed public notice values.
+
+## Implementation evidence (2026-11-17)
+
+Auth links now carry one returnTo value. Server pages accept only a known published local destination in the current locale, rejecting arrays, comma-concatenation, absolute/protocol-relative URLs, encoded traversal and auth loops. Both sign-in/sign-up transfer force the sanitized target. Setup/practice/learning progress preserve intended return. Unlocalized auth aliases redirect into the preferred locale. Development deployments show an explicit banner; placeholder privacy contact is not published. No guessed Terms agreement was added. Full external Google new/existing-account consent and live signed webhook delivery still require an interactive disposable-account check; route/signature regressions are covered in FP-40.

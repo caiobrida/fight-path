@@ -166,8 +166,8 @@ const copy = {
     rateLimited:
       "Limite de salvamento atingido. Aguarde antes de tentar novamente; suas tentativas ficam neste dispositivo.",
     rejected:
-      "Algumas tentativas n?o foram aceitas. Baixe as tentativas n?o sincronizadas para revis?o; as demais podem sincronizar.",
-    unsynced: "Baixar tentativas n?o sincronizadas",
+      "Algumas tentativas não foram aceitas. Baixe as tentativas não sincronizadas para revisão; as demais podem sincronizar.",
+    unsynced: "Baixar tentativas não sincronizadas",
     retry: "Tentar sincronizar",
     export: "Exportar progresso",
     delete: "Excluir progresso",

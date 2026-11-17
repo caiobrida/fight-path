@@ -73,7 +73,7 @@ const copy = {
     saveError: "Não foi possível salvar o layout neste dispositivo.",
     save: "Salvar layout",
     reset: "Redefinir",
-    swap: "Trocar os controles atribu?dos",
+    swap: "Trocar os controles atribuídos",
     cancel: "Cancelar captura",
     clear: "Remover esta associa??o",
     test: "Input atual",
