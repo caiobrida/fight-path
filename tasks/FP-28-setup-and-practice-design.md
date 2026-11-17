@@ -14,3 +14,5 @@
 **Acceptance:** setup and practice feel like one coherent product; users can see what they should do, what the device sent and how to recover, with no regression in the approved input fixes.
 
 **Evidence:** before/after visual review and complete configure-save-practice walkthrough with DualSense USB and touch.
+
+Implementation: setup and practice share action components and semantic surfaces, compact expandable live diagnostics, responsive calibration cards, larger input notation, separated actions and feedback panels. The input adapters still receive native button events. Full hardware and mobile walkthroughs remain in FP-40.

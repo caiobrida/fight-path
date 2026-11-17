@@ -69,58 +69,68 @@ export function ControllerMonitor({
   }, []);
   const selected = activeController(pads, index);
   return (
-    <section className="setup__test" aria-label={text.title}>
-      <h2>{text.title}</h2>
-      <p>{text.activate}</p>
-      <label>
-        {text.device}
-        <select
-          value={index ?? "auto"}
-          onChange={(event) => {
-            const next =
-              event.target.value === "auto"
-                ? undefined
-                : Number(event.target.value);
-            setIndex(next);
-            selectController(next);
-          }}
-        >
-          <option value="auto">{text.automatic}</option>
-          {pads.map((pad) => (
-            <option key={pad.index} value={pad.index}>
-              {pad.index + 1}: {pad.id}
-            </option>
-          ))}
-          {index !== undefined && !pads.some((pad) => pad.index === index) && (
-            <option value={index}>
-              {index + 1}: {text.missing}
-            </option>
-          )}
-        </select>
-      </label>
-      <p role="status">
-        {error
-          ? text.error
-          : selected
-            ? `${selected.mapping || "nonstandard"} · ${selected.buttons.length} / ${selected.axes.length}`
+    <section className="fp-controller" aria-label={text.title}>
+      <details>
+        <summary>
+          {text.title} ?{" "}
+          {selected
+            ? locale === "pt-BR"
+              ? "Conectado"
+              : "Connected"
             : text.missing}
-      </p>
-      <p>
-        {text.buttons}:{" "}
-        {selected?.buttons
-          .flatMap((button, i) => (button.pressed ? [i] : []))
-          .join(", ") || text.none}
-      </p>
-      <p>
-        {text.axes}:{" "}
-        {selected?.axes.map((axis) => axis.toFixed(2)).join(", ") || "—"}
-      </p>
-      {selected && onUse && (
-        <div className="fp-actions">
-          <Button onClick={onUse}>{text.use}</Button>
-        </div>
-      )}
-      <small>{text.local}</small>
+        </summary>
+        <p>{text.activate}</p>
+        <label>
+          {text.device}
+          <select
+            value={index ?? "auto"}
+            onChange={(event) => {
+              const next =
+                event.target.value === "auto"
+                  ? undefined
+                  : Number(event.target.value);
+              setIndex(next);
+              selectController(next);
+            }}
+          >
+            <option value="auto">{text.automatic}</option>
+            {pads.map((pad) => (
+              <option key={pad.index} value={pad.index}>
+                {pad.index + 1}: {pad.id}
+              </option>
+            ))}
+            {index !== undefined &&
+              !pads.some((pad) => pad.index === index) && (
+                <option value={index}>
+                  {index + 1}: {text.missing}
+                </option>
+              )}
+          </select>
+        </label>
+        <p role="status">
+          {error
+            ? text.error
+            : selected
+              ? `${selected.mapping || "nonstandard"} · ${selected.buttons.length} / ${selected.axes.length}`
+              : text.missing}
+        </p>
+        <p>
+          {text.buttons}:{" "}
+          {selected?.buttons
+            .flatMap((button, i) => (button.pressed ? [i] : []))
+            .join(", ") || text.none}
+        </p>
+        <p>
+          {text.axes}:{" "}
+          {selected?.axes.map((axis) => axis.toFixed(2)).join(", ") || "—"}
+        </p>
+        {selected && onUse && (
+          <div className="fp-actions">
+            <Button onClick={onUse}>{text.use}</Button>
+          </div>
+        )}
+        <small>{text.local}</small>
+      </details>
     </section>
   );
 }

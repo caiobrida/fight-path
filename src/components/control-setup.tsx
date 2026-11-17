@@ -1,6 +1,6 @@
 "use client";
 
-import { ActionLink } from "./ui";
+import { ActionLink, Button } from "./ui";
 import { PracticeGuide } from "./practice-guide";
 import { useControllerProfile } from "@/devices/use-controller-profile";
 import { ControllerMonitor } from "./controller-monitor";
@@ -333,7 +333,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
         )}
         <div className="setup__grid">
           {controlActions.map((action) => (
-            <button
+            <Button
               key={action}
               type="button"
               onClick={() => choose(action)}
@@ -343,7 +343,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
                 {action in text ? text[action as keyof typeof text] : action}
               </strong>
               <span>{mapping[action]}</span>
-            </button>
+            </Button>
           ))}
         </div>
         {active && (
@@ -356,7 +356,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
         {active && (
           <div className="setup__buttons">
             {pendingControl && (
-              <button
+              <Button
                 type="button"
                 onClick={() => {
                   const updated = assignControl(
@@ -371,9 +371,9 @@ export function ControlSetup({ locale }: { locale: Locale }) {
                 }}
               >
                 {text.swap}
-              </button>
+              </Button>
             )}
-            <button
+            <Button
               type="button"
               onClick={() => {
                 const updated = assignControl(mappingRef.current, active, "");
@@ -383,16 +383,16 @@ export function ControlSetup({ locale }: { locale: Locale }) {
               }}
             >
               {text.clear}
-            </button>
-            <button type="button" onClick={cancelCapture}>
+            </Button>
+            <Button type="button" onClick={cancelCapture}>
               {text.cancel}
-            </button>
+            </Button>
           </div>
         )}
         {device === "touch" && support.touch && (
           <div ref={touchRoot} className="setup__touch">
             {controlActions.map((action) => (
-              <button
+              <Button
                 key={action}
                 type="button"
                 data-control={`Touch${action[0].toUpperCase()}${action.slice(1)}`}
@@ -401,7 +401,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
                 }
               >
                 {action in text ? text[action as keyof typeof text] : action}
-              </button>
+              </Button>
             ))}
           </div>
         )}
@@ -413,7 +413,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
           </p>
         </section>
         <div className="setup__buttons">
-          <button
+          <Button
             type="button"
             onClick={() => {
               try {
@@ -425,10 +425,10 @@ export function ControlSetup({ locale }: { locale: Locale }) {
             }}
           >
             {text.save}
-          </button>
-          <button type="button" onClick={reset}>
+          </Button>
+          <Button type="button" onClick={reset}>
             {text.reset}
-          </button>
+          </Button>
         </div>
       </div>
     </main>

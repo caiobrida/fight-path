@@ -560,3 +560,208 @@
 .fp-guide li + li {
   margin-top: 16px;
 }
+.setup,
+.practice {
+  padding: 36px 20px 64px;
+  background: var(--fp-canvas);
+}
+.setup__content,
+.practice__content {
+  max-width: 1120px;
+}
+.setup h1,
+.practice h1 {
+  font-family: var(--fp-display);
+  font-size: clamp(36px, 7vw, 64px);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-top: 20px;
+}
+.setup__content > p,
+.practice__content > p {
+  max-width: 70ch;
+}
+.setup__grid {
+  gap: 12px;
+}
+.setup__grid button {
+  background: var(--fp-surface);
+  border-color: var(--fp-border);
+  padding: 20px;
+  min-height: 100px;
+  box-shadow: none;
+}
+.setup__grid strong {
+  font-size: 18px;
+}
+.setup__grid span {
+  font-size: 13px;
+}
+.setup__grid button[aria-pressed="true"] {
+  background: #342b29;
+  border-color: var(--fp-accent);
+}
+.setup__buttons button,
+.practice__buttons button {
+  min-height: 48px;
+  padding: 14px 24px;
+  border-radius: 6px;
+}
+.setup__test,
+.practice__panel,
+.practice__feedback,
+.practice__history,
+.practice__rewards {
+  background: var(--fp-surface);
+  border-color: var(--fp-border);
+  border-radius: 12px;
+}
+.practice__panel {
+  padding: 28px;
+}
+.practice__sequence {
+  gap: 10px;
+  margin: 24px 0;
+}
+.practice__sequence span {
+  min-width: 54px;
+  min-height: 54px;
+  padding: 14px;
+  background: var(--fp-raised);
+  border: 1px solid var(--fp-border);
+}
+.practice__lessons button {
+  background: var(--fp-surface);
+  border-color: var(--fp-border);
+  padding: 18px;
+  min-height: 84px;
+}
+.practice__feedback {
+  border-left: 3px solid var(--fp-accent);
+}
+.practice__stats div {
+  background: var(--fp-surface);
+  border-color: var(--fp-border);
+  border-radius: 10px;
+  padding: 18px;
+}
+.practice__stats strong {
+  font-size: 28px;
+  color: var(--fp-accent);
+}
+.practice__header a,
+.setup__content > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--fp-border);
+  border-radius: 6px;
+  color: var(--fp-text);
+  text-decoration: none;
+  font-weight: 700;
+}
+.practice__header {
+  margin-bottom: 24px;
+}
+.fp-controller {
+  margin: 20px 0;
+  padding: 16px 20px;
+  border: 1px solid var(--fp-border);
+  border-radius: 10px;
+  background: var(--fp-surface);
+}
+.fp-controller summary {
+  cursor: pointer;
+  min-height: 28px;
+  font-weight: 700;
+  color: var(--fp-muted);
+}
+.fp-controller select {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  font: inherit;
+  padding: 12px;
+  border: 1px solid var(--fp-border);
+  border-radius: 6px;
+  background: var(--fp-canvas);
+  color: var(--fp-text);
+  white-space: normal;
+}
+.fp-controller label {
+  display: grid;
+  gap: 8px;
+  margin-top: 20px;
+}
+.fp-controller p {
+  overflow-wrap: anywhere;
+}
+.fp-controller small {
+  color: var(--fp-muted);
+}
+.practice__data button {
+  min-height: 44px;
+}
+.practice__touch button {
+  min-height: 54px;
+  padding: 10px;
+  border-radius: 8px;
+}
+.practice__rewards li {
+  align-items: start;
+}
+.practice__rewards li > span {
+  line-height: 1.5;
+}
+.practice__history {
+  margin-top: 24px;
+}
+.practice__history ol {
+  gap: 8px;
+}
+.practice__history li {
+  background: var(--fp-raised);
+  padding: 12px;
+}
+.practice__data a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .practice__lessons button {
+    min-height: 64px;
+  }
+  .practice__panel {
+    padding: 20px;
+  }
+  .practice__stats {
+    grid-template-columns: 1fr;
+  }
+  .practice__stats div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .practice__buttons > button,
+  .setup__buttons > button {
+    flex: 1 1 100%;
+  }
+  .practice__header {
+    flex-wrap: wrap;
+  }
+  .practice__rewards li {
+    flex-wrap: wrap;
+  }
+  .fp-controller {
+    padding: 16px;
+  }
+  .setup__grid button {
+    min-height: 92px;
+    padding: 16px;
+  }
+  .practice__touch {
+    gap: 12px;
+  }
+}

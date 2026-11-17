@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "./ui";
 import { PracticeGuide } from "./practice-guide";
 import { SyncFailure, syncFailure } from "@/domain/sync-failure";
 import { OperationQueue } from "@/domain/operation-queue";
@@ -681,7 +682,7 @@ export function Practice({
           <h2>{path === "ken" ? text.kenLessons : text.lessons}</h2>
           <div>
             {activeExercises.map((item, index) => (
-              <button
+              <Button
                 key={item.command.id}
                 type="button"
                 aria-pressed={index === exerciseIndex}
@@ -697,7 +698,7 @@ export function Practice({
                     ? ` · ${text.completed}`
                     : ""}
                 </small>
-              </button>
+              </Button>
             ))}
           </div>
         </section>
@@ -770,7 +771,7 @@ export function Practice({
             <p role="status">{text.touchUnsupported}</p>
           )}
           <div className="practice__buttons">
-            <button
+            <Button
               type="button"
               disabled={
                 (device === "gamepad" && !support.gamepad) ||
@@ -779,18 +780,18 @@ export function Practice({
               onClick={() => setPlaying((value) => !value)}
             >
               {playing ? text.pause : text.start}
-            </button>
-            <button type="button" onClick={reset}>
+            </Button>
+            <Button type="button" onClick={reset}>
               {text.clear}
-            </button>
+            </Button>
             {correct >= exercise.goal &&
               exerciseIndex < activeExercises.length - 1 && (
-                <button
+                <Button
                   type="button"
                   onClick={() => selectExercise(exerciseIndex + 1)}
                 >
                   {text.next}
-                </button>
+                </Button>
               )}
           </div>
         </section>
@@ -801,7 +802,7 @@ export function Practice({
                 direction === "neutral" ? (
                   <span key={direction} aria-hidden="true" />
                 ) : (
-                  <button
+                  <Button
                     key={direction}
                     type="button"
                     data-control={`Touch${direction
@@ -811,20 +812,20 @@ export function Practice({
                     aria-label={touchLabels[locale][direction]}
                   >
                     {symbols[direction]}
-                  </button>
+                  </Button>
                 ),
               )}
             </div>
             <div className="practice__attacks">
               {attacks.map((attack) => (
-                <button
+                <Button
                   key={attack}
                   type="button"
                   data-control={`Touch${attack}`}
                   aria-label={attack}
                 >
                   {attack}
-                </button>
+                </Button>
               ))}
             </div>
           </div>
@@ -885,12 +886,12 @@ export function Practice({
         <section className="practice__data" aria-live="polite">
           <p>{text[syncStatus]}</p>
           {syncStatus !== "saved" && (
-            <button type="button" onClick={() => retryRef.current()}>
+            <Button type="button" onClick={() => retryRef.current()}>
               {text.retry}
-            </button>
+            </Button>
           )}
           {syncStatus !== "saved" && (
-            <button
+            <Button
               type="button"
               onClick={() => {
                 const blob = new Blob(
@@ -915,14 +916,14 @@ export function Practice({
               }}
             >
               {text.unsynced}
-            </button>
+            </Button>
           )}
           <a href="/api/progress/export" download>
             {text.export}
           </a>
-          <button type="button" onClick={() => void deleteProgress()}>
+          <Button type="button" onClick={() => void deleteProgress()}>
             {text.delete}
-          </button>
+          </Button>
         </section>
         <section className="practice__history">
           <h2>{text.history}</h2>
