@@ -1,5 +1,7 @@
 "use client";
 
+import { AttemptWindow } from "@/domain/attempt-window";
+
 import { ControllerMonitor } from "./controller-monitor";
 import { useEffect, useRef, useState } from "react";
 import { exercises, kenExercises } from "@/content/exercises";
@@ -12,7 +14,6 @@ import { gamification, mastery } from "@/domain/gamification";
 import {
   attacks,
   appendSample,
-  newlyPressed,
   relativeDirection,
   type Facing,
   type InputSample,
@@ -261,7 +262,7 @@ export function Practice({
   const exerciseRef = useRef(exercises[0]);
   const mappingRef = useRef(mapping);
   const facingRef = useRef(facing);
-  const attemptRef = useRef<readonly InputSample[]>([]);
+  const attemptRef = useRef(new AttemptWindow());
   const historyRef = useRef<readonly InputSample[]>([]);
   const keyboardRef = useRef<KeyboardAdapter | null>(null);
   const touchRoot = useRef<HTMLDivElement | null>(null);
@@ -395,22 +396,22 @@ export function Practice({
 
   useEffect(() => {
     if (!playing) return;
+    const attemptWindow = attemptRef.current;
     let active = true;
     const sink = (snapshot: RawSnapshot) => {
       if (!active) return;
       setRaw(snapshot);
       if (!snapshot.connected) {
-        attemptRef.current = [];
+        attemptWindow.disconnect();
         return;
       }
       const sample = mapRaw(snapshot, mappingRef.current);
-      const previous = attemptRef.current.at(-1);
-      attemptRef.current = appendSample(attemptRef.current, sample);
+      const attempt = attemptWindow.observe(sample);
       historyRef.current = appendSample(historyRef.current, sample, 32);
       setHistory(historyRef.current);
-      if (!newlyPressed(previous, sample).length) return;
+      if (!attempt) return;
       const result = evaluateCommand(
-        attemptRef.current,
+        attempt,
         exerciseRef.current.command,
         facingRef.current,
       );
@@ -420,9 +421,7 @@ export function Practice({
         0,
         Math.min(
           120000,
-          Math.round(
-            result.durationMs ?? sample.atMs - attemptRef.current[0].atMs,
-          ),
+          Math.round(result.durationMs ?? sample.atMs - attempt[0].atMs),
         ),
       );
       const queued = queueAttempt(pendingRef.current, {
@@ -453,7 +452,7 @@ export function Practice({
         setSyncStatus("full");
         void flushRef.current();
       }
-      attemptRef.current = [];
+      attemptWindow.clear();
     };
     const adapter =
       device === "keyboard"
@@ -469,12 +468,12 @@ export function Practice({
       active = false;
       adapter?.stop();
       keyboardRef.current = null;
-      attemptRef.current = [];
+      attemptWindow.disconnect();
     };
   }, [device, playing, userId]);
 
   const reset = () => {
-    attemptRef.current = [];
+    attemptRef.current.clear();
     historyRef.current = [];
     setHistory([]);
     setEvaluation(null);
@@ -500,7 +499,7 @@ export function Practice({
   const selectExercise = (index: number) => {
     exerciseRef.current = activeExercises[index];
     setExerciseIndex(index);
-    attemptRef.current = [];
+    attemptRef.current.clear();
     historyRef.current = [];
     setHistory([]);
     setEvaluation(null);
@@ -510,7 +509,7 @@ export function Practice({
     exerciseRef.current = next === "ken" ? kenExercises[0] : exercises[0];
     setPath(next);
     setExerciseIndex(0);
-    attemptRef.current = [];
+    attemptRef.current.clear();
     historyRef.current = [];
     setHistory([]);
     setEvaluation(null);
@@ -647,6 +646,7 @@ export function Practice({
                 value={facing}
                 onChange={(event) => {
                   const value = event.target.value as Facing;
+                  attemptRef.current.clear();
                   facingRef.current = value;
                   setFacing(value);
                   reset();
