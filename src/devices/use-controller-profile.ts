@@ -7,7 +7,7 @@ import {
   readControllers,
 } from "./controller-selection";
 
-function readProfile(): string {
+export function readControllerProfile(): string {
   try {
     const pad = activeController(readControllers(window), controllerIndex());
     return pad ? encodeURIComponent(`${pad.id}:${pad.mapping}`) : "default";
@@ -37,7 +37,7 @@ function subscribe(update: () => void) {
 export function useControllerProfile(enabled = true): string {
   return useSyncExternalStore(
     subscribe,
-    enabled ? readProfile : defaultProfile,
+    enabled ? readControllerProfile : defaultProfile,
     defaultProfile,
   );
 }

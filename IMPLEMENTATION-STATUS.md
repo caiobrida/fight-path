@@ -2,6 +2,8 @@
 
 Updated November 17, 2026. This is the current delivery summary for FP-19 through FP-40. It supersedes the original planning-only status text; task checkboxes preserve any evidence that is still missing.
 
+Controller follow-up: the owner confirmed live DualSense button response after selecting the exact controller. Setup and practice now expose controller selection, live buttons and input-mode activation directly, with bilingual guidance. Independently reproduced first-exposure bugs no longer silently pause a running session or cancel calibration. Physical validation of every control, saved layouts and reconnect is still open; synthetic browser coverage is not hardware certification.
+
 Owner instruction: no SF6 automation of any kind, including launch, menus, training/offline modes or gameplay. Human reviewers must perform execution and captures manually. Research, source review, original content drafts, recording review/editing and isolated FightPath tests remain authorized. See `AGENTS.md`.
 
 The six routes now have original bilingual editorial drafts, mirrored candidate notation, drills and media explanation templates in `content-drafts/KEN-BNB-DRAFTS.md`. These are preparation artifacts, not published lessons or execution evidence. Current resources, timings, conditions and actual clips still require manual confirmation; caption timing follows the real recordings.

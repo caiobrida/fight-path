@@ -6,10 +6,12 @@ SF6 validation is manual-only by explicit owner instruction. Do not automate gam
 
 Current delivery and external gates: [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). Earlier observations below are historical, not substitutes for physical-device verification.
 
+Controller follow-up: the owner reported that choosing the exact DualSense restored normal live button response in Chrome on Windows 11 over USB. The complete D-pad/stick/six-attack, mapping persistence and reconnect matrix remains unverified. Seven additional isolated component cases cover visible selection and activation in setup/practice in both locales, first exposure after starting, calibration on first exposure, and saved-profile/held-button focus recovery. The first two lifecycle cases failed before the fix. Controller IDs and raw inputs remain local; no SF6 automation was used.
+
 | Check | Result and boundary |
 | --- | --- |
 | Local PostgreSQL domain/server/content suite | 48 passed, zero skipped, including revision validation, isolation, idempotency, deletion, signature/expiry/retry and webhook size limits |
-| Headless component suite | 19 passed: configure/save/practice, two pads, nonstandard axes, held attacks, touch dragging, storage denial, dialog focus, network/401/429/422/503 recovery and delayed-save deletion |
+| Headless component suite | 26 passed: visible controller selection/activation in both locales, delayed first exposure, saved profiles and focus recovery, configure/save/practice, two pads, nonstandard axes, held attacks, touch dragging, storage denial, dialog focus, network/401/429/422/503 recovery and delayed-save deletion |
 | Actual Next.js public site | 16 passed: both locales, 18 lesson routes, internal links/assets, protected returns, private endpoint denial and 320/360/390/768/1280px layouts |
 | Clerk Development accounts | Passed with two disposable users: setup, reading/check/input persistence, export, deletion and account switching. An acknowledged save response is held across switching, then recovered idempotently under its original owner |
 | Real development webhook | Passed: deleting an actual disposable Clerk account removed both its fixture attempts and learning records from Neon; remaining fixture records were zero |

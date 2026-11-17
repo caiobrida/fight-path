@@ -49,6 +49,8 @@ Device adapters emit raw control tokens and quantized axes. FP-09 will map those
 Mapping is a local, versioned preference per device family. It rejects conflicting assignments and converts raw controls to shared input samples. Gamepad analog axes remain available when no mapped digital direction is held.
 The `/[locale]/setup` screen captures a control only while the learner explicitly calibrates an action, allows a live input check, and saves the mapping to browser storage on request. Keyboard capture outside calibration remains restricted to mapped keys.
 
+Controller discovery, controller selection and the active input mode are distinct states. The monitor exposes selection and live buttons without expanding technical details, and offers an explicit action to activate Gamepad mode. On the browser's first controller exposure, load the selected profile and restart capture without cancelling a pending calibration or pausing an already started gamepad session. Reject samples belonging to a profile transition until its mapping is loaded. Switching an established profile or input mode still resets the physical baseline and pauses practice; no held input may become a phantom attempt.
+
 The practice UI is mobile first and responsive. Layouts should start with a narrow viewport, then adapt to larger screens while preserving visible controls, readable input history, and accessible touch targets. Keyboard and physical gamepad flows must remain usable on desktop. FP-11 implements the flow; FP-16 verifies actual device and viewport behavior.
 
 ## Content and localization

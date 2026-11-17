@@ -1,31 +1,45 @@
 import { expect, type Page } from "@playwright/test";
 
-type FixtureWindow = Window & { pads: (Gamepad | null)[] };
+type FixtureWindow = Window & {
+  pads: (Gamepad | null)[];
+  gamepadsVisible: boolean;
+};
 
-export async function installGamepads(page: Page, count = 1) {
-  await page.addInitScript((count) => {
-    const target = window as unknown as FixtureWindow;
-    target.pads = Array.from(
-      { length: count },
-      (_, index) =>
-        ({
-          id: `Fixture controller ${index + 1}`,
-          index,
-          connected: true,
-          mapping: index ? "" : "standard",
-          timestamp: 0,
-          buttons: Array.from({ length: 18 }, () => ({
-            pressed: false,
-            touched: false,
-            value: 0,
-          })),
-          axes: [0, 0, 0, 0, 0, 0, 0],
-        }) as unknown as Gamepad,
-    );
-    Object.defineProperty(navigator, "getGamepads", {
-      value: () => target.pads,
-    });
-  }, count);
+export async function installGamepads(page: Page, count = 1, visible = true) {
+  await page.addInitScript(
+    ({ count, visible }) => {
+      const target = window as unknown as FixtureWindow;
+      target.gamepadsVisible = visible;
+      target.pads = Array.from(
+        { length: count },
+        (_, index) =>
+          ({
+            id: `Fixture controller ${index + 1}`,
+            index,
+            connected: true,
+            mapping: index ? "" : "standard",
+            timestamp: 0,
+            buttons: Array.from({ length: 18 }, () => ({
+              pressed: false,
+              touched: false,
+              value: 0,
+            })),
+            axes: [0, 0, 0, 0, 0, 0, 0],
+          }) as unknown as Gamepad,
+      );
+      Object.defineProperty(navigator, "getGamepads", {
+        value: () => (target.gamepadsVisible ? target.pads : []),
+      });
+    },
+    { count, visible },
+  );
+}
+
+export async function activateGamepads(page: Page) {
+  await page.evaluate(() => {
+    (window as unknown as FixtureWindow).gamepadsVisible = true;
+    window.dispatchEvent(new Event("gamepadconnected"));
+  });
 }
 
 export async function padSample(

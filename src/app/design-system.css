@@ -677,6 +677,10 @@
   font-weight: 700;
   color: var(--fp-muted);
 }
+.fp-controller h2 {
+  margin-top: 0;
+  font-size: 1.125rem;
+}
 .fp-controller select {
   display: block;
   width: 100%;

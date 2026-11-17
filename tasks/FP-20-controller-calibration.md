@@ -17,6 +17,6 @@
 
 **Evidence:** calibration integration test and hardware demonstration, in `en` and `pt-BR`. Do not assume every nonstandard controller shares DualSense indices.
 
-Implementation: axis polarity tokens, explicit swap/clear/cancel, v2 per-controller local profiles with v1 fallback, preferred device and tab controller selection persistence. Profile changes pause practice and reset physical baseline. Mapping tests verify swaps, custom axis bindings and serialization. DualSense hardware, drift behavior and full visual walkthrough remain pending.
+Implementation: axis polarity tokens, explicit swap/clear/cancel, v2 per-controller local profiles with v1 fallback, preferred device and tab controller selection persistence. Switching established profiles pauses practice and resets the physical baseline. First browser activation loads the mapping and preserves the user's pending calibration or started gamepad session. Mapping tests verify swaps, custom axis bindings and serialization. The owner confirmed button response after explicitly selecting the DualSense; drift behavior, all controls, reconnect and a full physical walkthrough remain pending.
 
 Final delivery and validation boundaries are recorded in [IMPLEMENTATION-STATUS.md](../IMPLEMENTATION-STATUS.md). Physical devices, externally consented Google flows and current-game clips are not certified by synthetic tests.

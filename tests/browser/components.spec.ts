@@ -1,12 +1,144 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import { defaultMapping } from "../../src/domain/mapping";
 import {
+  activateGamepads,
   installGamepads,
   keyboardMotion,
   mockProgress,
   padSample,
   startPractice,
 } from "./fixtures";
+
+for (const locale of ["en", "pt-BR"]) {
+  for (const view of ["setup", "practice"]) {
+    test(`${view} makes controller selection and live buttons visible in ${locale}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await installGamepads(page, 2);
+      await mockProgress(page);
+      await page.goto(`/?view=${view}&locale=${locale}`);
+      const monitor = page.getByRole("region", {
+        name: locale === "en" ? "Controller test" : "Teste do controle",
+      });
+      await expect(monitor.getByRole("status")).toContainText(
+        locale === "en"
+          ? "input is using another device"
+          : "a entrada está usando outro dispositivo",
+      );
+      await monitor.getByRole("combobox").selectOption("1");
+      await padSample(page, [7], [0, 0], 1);
+      await expect(monitor.getByText(/Button7/)).toBeVisible();
+      await monitor
+        .getByRole("button", {
+          name: locale === "en" ? "Use this controller" : "Usar este controle",
+        })
+        .click();
+      await expect(
+        page.getByRole("combobox", {
+          name: locale === "en" ? /^Device/ : /^Dispositivo/,
+        }),
+      ).toHaveValue("gamepad");
+      await expect(monitor.getByRole("status")).toContainText(
+        locale === "en"
+          ? "Controller selected for input"
+          : "Controle selecionado para entrada",
+      );
+      await expect(monitor.getByRole("button")).toHaveCount(0);
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+      ).toBe(true);
+      await page.screenshot({
+        path: `test-artifacts/${view}-controller-${locale}.png`,
+        fullPage: true,
+      });
+    });
+  }
+}
+
+test("controller activation after starting practice keeps input capture running", async ({
+  page,
+}) => {
+  await installGamepads(page, 1, false);
+  await mockProgress(page);
+  await page.goto("/?view=practice");
+  await startPractice(page, "gamepad");
+  await activateGamepads(page);
+  await expect(
+    page.getByText("Controller test · Connected", { exact: true }),
+  ).toBeVisible();
+  await padSample(page, [13]);
+  await padSample(page, [13, 15]);
+  await padSample(page, [15]);
+  await padSample(page, [15, 0]);
+  await expect(page.locator(".practice__stats > div").first()).toHaveText(
+    "Attempts1",
+  );
+  await expect(
+    page.getByRole("button", { name: "Pause", exact: true }),
+  ).toBeVisible();
+});
+
+test("controller activation preserves a pending calibration", async ({
+  page,
+}) => {
+  await installGamepads(page, 1, false);
+  await page.goto("/?view=setup");
+  await page.getByRole("combobox", { name: /^Device/ }).selectOption("gamepad");
+  await page.getByRole("button", { name: /^LP / }).click();
+  await activateGamepads(page);
+  await expect(
+    page.getByText("Controller test · Connected", { exact: true }),
+  ).toBeVisible();
+  await padSample(page, [7]);
+  await expect(page.getByRole("button", { name: /^LP / })).toContainText(
+    "Button7",
+  );
+  await expect(page.locator(".setup__test")).toContainText("LP");
+});
+
+test("first activation loads the saved profile without scoring a held button", async ({
+  page,
+}) => {
+  await installGamepads(page, 1, false);
+  await page.addInitScript(
+    (mapping) => {
+      localStorage.setItem(
+        `fightpath-mapping-v2-gamepad-${encodeURIComponent("Fixture controller 1:standard")}`,
+        JSON.stringify(mapping),
+      );
+    },
+    { ...defaultMapping("gamepad"), LP: "Button7" },
+  );
+  const progress = await mockProgress(page);
+  await page.goto("/?view=practice");
+  await startPractice(page, "gamepad");
+  await padSample(page, [7]);
+  await activateGamepads(page);
+  await expect(
+    page.getByText("Controller test · Connected", { exact: true }),
+  ).toBeVisible();
+  expect(progress.count()).toBe(0);
+  await padSample(page, []);
+  await padSample(page, [13]);
+  await padSample(page, [13, 15]);
+  await padSample(page, [15]);
+  await padSample(page, [15, 7]);
+  await expect.poll(() => progress.count()).toBe(1);
+  await expect(page.locator(".practice__feedback")).toContainText(
+    "Correct sequence",
+  );
+  await page.evaluate(() => window.dispatchEvent(new Event("blur")));
+  await page.evaluate(() => window.dispatchEvent(new Event("focus")));
+  await padSample(page, [7]);
+  expect(progress.count()).toBe(1);
+  await padSample(page, []);
+  await padSample(page, [7]);
+  await expect.poll(() => progress.count()).toBe(2);
+});
 
 test("configure a controller axis, save it and use the same profile in practice", async ({
   page,
@@ -216,9 +348,9 @@ test("blocked local storage keeps keyboard practice available and shows save fai
   await mockProgress(page);
   await page.goto("/?view=setup");
   await page.getByRole("button", { name: "Save layout", exact: true }).click();
-  await expect(page.getByRole("status")).toContainText(
-    "Could not save the layout",
-  );
+  await expect(
+    page.getByRole("status").filter({ hasText: "Could not save the layout" }),
+  ).toContainText("Could not save the layout");
   await page
     .getByRole("link", { name: "Practice fixture", exact: true })
     .click();

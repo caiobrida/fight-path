@@ -2,7 +2,11 @@
 
 **Status:** Implemented; physical device QA pending. **Priority:** P1. **Dependencies:** FP-08 baseline.
 
-**Context:** AUDIT A02, A04, A08. Owner's exact case: PS5 DualSense, USB, Windows 11, Chrome; no response in setup or practice. The first-device selection defect is reproduced with synthetic devices; the owner's hardware cause remains open.
+**Context:** AUDIT A02, A04, A08. Owner's exact case: PS5 DualSense, USB, Windows 11, Chrome; initially no response in setup or practice. Synthetic tests reproduce the first-device selection defect. The owner subsequently confirmed live response after selecting the exact controller; full hardware checks remain open.
+
+November 17 follow-up: the owner confirmed that selecting the exact controller restored button response. Controller choice and activation were hidden inside collapsed diagnostics. They are now visible alongside live buttons, with an explicit warning when another input mode is active and a Use this controller action in both locales. This confirms reported button recognition after selection, not the complete physical-device matrix.
+
+An additional browser reproduction exposed first-activation defects: connecting after starting left practice at Attempts0 and connecting during calibration cancelled the selected action. Both failed before the fix and pass after separating first exposure from an established profile switch. Profile transitions restart capture against the loaded mapping; saved bindings and held-button focus recovery have browser coverage.
 
 ## Checklist
 

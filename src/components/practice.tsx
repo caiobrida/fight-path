@@ -6,7 +6,10 @@ import { SyncFailure, syncFailure } from "@/domain/sync-failure";
 import { OperationQueue } from "@/domain/operation-queue";
 import { AttemptWindow } from "@/domain/attempt-window";
 
-import { useControllerProfile } from "@/devices/use-controller-profile";
+import {
+  readControllerProfile,
+  useControllerProfile,
+} from "@/devices/use-controller-profile";
 import { ControllerMonitor } from "./controller-monitor";
 import { useEffect, useRef, useState } from "react";
 import { exercises, kenExercises } from "@/content/exercises";
@@ -260,6 +263,7 @@ export function Practice({
   const activeExercises = path === "ken" ? kenExercises : exercises;
   const [device, setDevice] = useState<DeviceKind>("keyboard");
   const profile = useControllerProfile(device === "gamepad");
+  const loadedProfileRef = useRef({ device, profile });
   const [facing, setFacing] = useState<Facing>("right");
   const [playing, setPlaying] = useState(false);
   const [mapping, setMapping] = useState<ControlMapping>(
@@ -455,8 +459,18 @@ export function Practice({
     let cancelled = false;
     queueMicrotask(() => {
       if (cancelled) return;
-      setPlaying(false);
+      const previous = loadedProfileRef.current;
+      const firstConnection =
+        previous.device === device &&
+        previous.profile === "default" &&
+        profile !== "default";
+      loadedProfileRef.current = { device, profile };
+      if (!firstConnection) setPlaying(false);
       attemptRef.current.disconnect();
+      historyRef.current = [];
+      setHistory([]);
+      setRaw(undefined);
+      setEvaluation(null);
       let saved = defaultMapping(device);
       try {
         saved = loadMapping(window.localStorage, device, profile);
@@ -482,6 +496,7 @@ export function Practice({
     let active = true;
     const sink = (snapshot: RawSnapshot) => {
       if (!active || deletingRef.current) return;
+      if (device === "gamepad" && readControllerProfile() !== profile) return;
       setRaw(snapshot);
       if (!snapshot.connected) {
         attemptWindow.disconnect();
@@ -555,7 +570,7 @@ export function Practice({
       keyboardRef.current = null;
       attemptWindow.disconnect();
     };
-  }, [device, playing, userId]);
+  }, [device, profile, playing, userId]);
 
   const reset = () => {
     attemptRef.current.clear();
@@ -661,6 +676,7 @@ export function Practice({
         </div>
         <ControllerMonitor
           locale={locale}
+          device={device}
           onUse={() => changeDevice("gamepad")}
         />
         <label className="practice__path">

@@ -2,7 +2,10 @@
 
 import { ActionLink, Button } from "./ui";
 import { PracticeGuide } from "./practice-guide";
-import { useControllerProfile } from "@/devices/use-controller-profile";
+import {
+  readControllerProfile,
+  useControllerProfile,
+} from "@/devices/use-controller-profile";
 import { ControllerMonitor } from "./controller-monitor";
 import { controlLabel } from "@/devices/control-label";
 import { useEffect, useRef, useState } from "react";
@@ -115,6 +118,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
   const text = copy[locale];
   const [device, setDevice] = useState<DeviceKind>("keyboard");
   const profile = useControllerProfile(device === "gamepad");
+  const loadedProfileRef = useRef({ device, profile });
   const [mapping, setMapping] = useState<ControlMapping>(
     defaultMapping("keyboard"),
   );
@@ -171,8 +175,16 @@ export function ControlSetup({ locale }: { locale: Locale }) {
       setMapping(saved);
       setRaw(undefined);
       setMessage("");
-      activeRef.current = null;
-      setActive(null);
+      const previous = loadedProfileRef.current;
+      const firstConnection =
+        previous.device === device &&
+        previous.profile === "default" &&
+        profile !== "default";
+      loadedProfileRef.current = { device, profile };
+      if (!firstConnection) {
+        activeRef.current = null;
+        setActive(null);
+      }
     });
     return () => {
       cancelled = true;
@@ -181,6 +193,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
 
   useEffect(() => {
     const sink = (snapshot: RawSnapshot) => {
+      if (device === "gamepad" && readControllerProfile() !== profile) return;
       const fresh = snapshot.controls.find(
         (control) => !prior.current.has(control),
       );
@@ -219,7 +232,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
       keyboard.current = null;
       prior.current.clear();
     };
-  }, [device, text.conflict]);
+  }, [device, profile, text.conflict]);
 
   useEffect(
     () => keyboard.current?.setCodes(Object.values(mapping)),
@@ -292,6 +305,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
         </div>
         <ControllerMonitor
           locale={locale}
+          device={device}
           onUse={() => {
             setDevice("gamepad");
             try {

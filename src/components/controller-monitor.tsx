@@ -10,13 +10,20 @@ import {
 } from "@/devices/controller-selection";
 import type { Locale } from "@/i18n/dictionaries";
 import { controlLabel } from "@/devices/control-label";
+import type { DeviceKind } from "@/devices/raw";
 
 const copy = {
   en: {
     title: "Controller test",
     use: "Use this controller",
     activate:
-      "Connect your controller, keep this page focused and press a button. Select Gamepad in Device; start practice to score attempts.",
+      "Connect your controller, keep this page focused and press a button. Choose the controller whose buttons respond below.",
+    inactive:
+      "Controller detected, but input is using another device. Select Use this controller to configure or practice with it.",
+    active:
+      "Controller selected for input. In practice, start the session to record attempts.",
+    details: "Technical details",
+    connected: "Connected",
     device: "Active controller",
     automatic: "First connected controller",
     missing: "Waiting for a controller",
@@ -31,7 +38,13 @@ const copy = {
     title: "Teste do controle",
     use: "Usar este controle",
     activate:
-      "Conecte o controle, mantenha esta página em foco e pressione um botão. Selecione Controle em Dispositivo; inicie o treino para avaliar tentativas.",
+      "Conecte o controle, mantenha esta página em foco e pressione um botão. Escolha o controle cujos botões respondem abaixo.",
+    inactive:
+      "Controle detectado, mas a entrada está usando outro dispositivo. Selecione Usar este controle para configurar ou treinar com ele.",
+    active:
+      "Controle selecionado para entrada. No treino, inicie a sessão para registrar tentativas.",
+    details: "Detalhes técnicos",
+    connected: "Conectado",
     device: "Controle ativo",
     automatic: "Primeiro controle conectado",
     missing: "Aguardando um controle",
@@ -46,9 +59,11 @@ const copy = {
 
 export function ControllerMonitor({
   locale,
+  device,
   onUse,
 }: {
   locale: Locale;
+  device: DeviceKind;
   onUse?: () => void;
 }) {
   const text = copy[locale];
@@ -71,77 +86,77 @@ export function ControllerMonitor({
   const selected = activeController(pads, index);
   return (
     <section className="fp-controller" aria-label={text.title}>
-      <details>
-        <summary>
-          {text.title} ·{" "}
-          {selected
-            ? locale === "pt-BR"
-              ? "Conectado"
-              : "Connected"
+      <h2>
+        {text.title} · {selected ? text.connected : text.missing}
+      </h2>
+      <p>{text.activate}</p>
+      <label>
+        {text.device}
+        <select
+          value={index ?? "auto"}
+          onChange={(event) => {
+            const next =
+              event.target.value === "auto"
+                ? undefined
+                : Number(event.target.value);
+            setIndex(next);
+            selectController(next);
+          }}
+        >
+          <option value="auto">{text.automatic}</option>
+          {pads.map((pad) => (
+            <option key={pad.index} value={pad.index}>
+              {pad.index + 1}: {pad.id}
+            </option>
+          ))}
+          {index !== undefined && !pads.some((pad) => pad.index === index) && (
+            <option value={index}>
+              {index + 1}: {text.missing}
+            </option>
+          )}
+        </select>
+      </label>
+      <p role="status">
+        {error
+          ? text.error
+          : selected
+            ? device === "gamepad"
+              ? text.active
+              : text.inactive
             : text.missing}
-        </summary>
-        <p>{text.activate}</p>
-        <label>
-          {text.device}
-          <select
-            value={index ?? "auto"}
-            onChange={(event) => {
-              const next =
-                event.target.value === "auto"
-                  ? undefined
-                  : Number(event.target.value);
-              setIndex(next);
-              selectController(next);
-            }}
-          >
-            <option value="auto">{text.automatic}</option>
-            {pads.map((pad) => (
-              <option key={pad.index} value={pad.index}>
-                {pad.index + 1}: {pad.id}
-              </option>
-            ))}
-            {index !== undefined &&
-              !pads.some((pad) => pad.index === index) && (
-                <option value={index}>
-                  {index + 1}: {text.missing}
-                </option>
-              )}
-          </select>
-        </label>
-        <p role="status">
-          {error
-            ? text.error
-            : selected
-              ? `${selected.mapping || "nonstandard"} · ${selected.buttons.length} / ${selected.axes.length}`
-              : text.missing}
-        </p>
-        <p>
-          {text.buttons}:{" "}
-          {selected?.buttons
-            .flatMap((button, i) =>
-              button.pressed
-                ? [
-                    controlLabel(
-                      `Button${i}`,
-                      selected.mapping === "standard",
-                      locale,
-                    ),
-                  ]
-                : [],
-            )
-            .join(", ") || text.none}
-        </p>
+      </p>
+      {selected && onUse && device !== "gamepad" && (
+        <div className="fp-actions">
+          <Button onClick={onUse}>{text.use}</Button>
+        </div>
+      )}
+      <p>
+        {text.buttons}:{" "}
+        {selected?.buttons
+          .flatMap((button, i) =>
+            button.pressed
+              ? [
+                  controlLabel(
+                    `Button${i}`,
+                    selected.mapping === "standard",
+                    locale,
+                  ),
+                ]
+              : [],
+          )
+          .join(", ") || text.none}
+      </p>
+      <details>
+        <summary>{text.details}</summary>
+        {selected && (
+          <p>{`${selected.mapping || "nonstandard"} · ${selected.buttons.length} / ${selected.axes.length}`}</p>
+        )}
         <p>
           {text.axes}:{" "}
           {selected?.axes.map((axis) => axis.toFixed(2)).join(", ") || "—"}
         </p>
-        {selected && onUse && (
-          <div className="fp-actions">
-            <Button onClick={onUse}>{text.use}</Button>
-          </div>
-        )}
-        <small>{text.local}</small>
       </details>
+      <small>{text.local}</small>
     </section>
   );
 }
