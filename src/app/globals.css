@@ -446,6 +446,10 @@ h1 {
   background: #344055;
   color: #fff;
 }
+.practice__buttons button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
 .practice__touch {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

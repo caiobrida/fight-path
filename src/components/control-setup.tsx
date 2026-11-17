@@ -29,6 +29,10 @@ const copy = {
     touch: "Touch",
     connected: "Gamepad connected",
     missing: "No gamepad detected. Connect one and press a button.",
+    gamepadUnsupported:
+      "This browser cannot read gamepads. Choose keyboard or touch.",
+    touchUnsupported:
+      "This browser cannot read touch controls. Choose keyboard or gamepad.",
     mapping: "Press a control for",
     conflict: "That control is already assigned.",
     saved: "Layout saved on this device.",
@@ -52,6 +56,10 @@ const copy = {
     touch: "Toque",
     connected: "Controle conectado",
     missing: "Nenhum controle detectado. Conecte um e pressione um botão.",
+    gamepadUnsupported:
+      "Este navegador não consegue ler controles físicos. Escolha teclado ou toque.",
+    touchUnsupported:
+      "Este navegador não consegue ler controles de toque. Escolha teclado ou controle físico.",
     mapping: "Pressione um controle para",
     conflict: "Esse controle já está atribuído.",
     saved: "Layout salvo neste dispositivo.",
@@ -101,11 +109,26 @@ export function ControlSetup({ locale }: { locale: Locale }) {
   const [raw, setRaw] = useState<RawSnapshot>();
   const [active, setActive] = useState<ControlAction | null>(null);
   const [message, setMessage] = useState("");
+  const [support, setSupport] = useState({ gamepad: true, touch: true });
   const mappingRef = useRef(mapping);
   const activeRef = useRef(active);
   const prior = useRef(new Set<string>());
   const keyboard = useRef<KeyboardAdapter | null>(null);
   const touchRoot = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    queueMicrotask(() => {
+      if (!active) return;
+      setSupport({
+        gamepad: typeof window.navigator.getGamepads === "function",
+        touch: typeof window.PointerEvent === "function",
+      });
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -207,7 +230,16 @@ export function ControlSetup({ locale }: { locale: Locale }) {
           <option value="touch">{text.touch}</option>
         </select>
         {device === "gamepad" && (
-          <p role="status">{raw?.connected ? text.connected : text.missing}</p>
+          <p role="status">
+            {!support.gamepad
+              ? text.gamepadUnsupported
+              : raw?.connected
+                ? text.connected
+                : text.missing}
+          </p>
+        )}
+        {device === "touch" && !support.touch && (
+          <p role="status">{text.touchUnsupported}</p>
         )}
         <div className="setup__grid">
           {controlActions.map((action) => (
@@ -230,7 +262,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
           </p>
         )}
         {message && <p role="status">{message}</p>}
-        {device === "touch" && (
+        {device === "touch" && support.touch && (
           <div ref={touchRoot} className="setup__touch">
             {controlActions.map((action) => (
               <button
@@ -241,7 +273,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
                   action in text ? text[action as keyof typeof text] : action
                 }
               >
-                {action}
+                {action in text ? text[action as keyof typeof text] : action}
               </button>
             ))}
           </div>

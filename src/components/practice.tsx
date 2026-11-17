@@ -61,6 +61,10 @@ const copy = {
     active: "Perform the direction sequence and press the shown button.",
     success: "Correct sequence. Keep practicing!",
     disconnected: "Connect a gamepad and press a button.",
+    gamepadUnsupported:
+      "This browser cannot read gamepads. Choose keyboard or touch.",
+    touchUnsupported:
+      "This browser cannot read touch controls. Choose keyboard or gamepad.",
     attempts: "Attempts",
     correct: "Correct",
     accuracy: "Accuracy",
@@ -129,6 +133,10 @@ const copy = {
     active: "Faça a sequência direcional e pressione o botão indicado.",
     success: "Sequência correta. Continue praticando!",
     disconnected: "Conecte um controle e pressione um botão.",
+    gamepadUnsupported:
+      "Este navegador não consegue ler controles físicos. Escolha teclado ou toque.",
+    touchUnsupported:
+      "Este navegador não consegue ler controles de toque. Escolha teclado ou controle físico.",
     attempts: "Tentativas",
     correct: "Acertos",
     accuracy: "Precisão",
@@ -227,6 +235,7 @@ export function Practice({ locale }: { locale: Locale }) {
     defaultMapping("keyboard"),
   );
   const [raw, setRaw] = useState<RawSnapshot>();
+  const [support, setSupport] = useState({ gamepad: true, touch: true });
   const [history, setHistory] = useState<readonly InputSample[]>([]);
   const [evaluation, setEvaluation] = useState<Evaluation | null>(null);
   const [exerciseIndex, setExerciseIndex] = useState(0);
@@ -248,6 +257,20 @@ export function Practice({ locale }: { locale: Locale }) {
   const readyRef = useRef(false);
   const sendingRef = useRef(false);
   const flushRef = useRef<() => Promise<void>>(async () => {});
+
+  useEffect(() => {
+    let active = true;
+    queueMicrotask(() => {
+      if (!active) return;
+      setSupport({
+        gamepad: typeof window.navigator.getGamepads === "function",
+        touch: typeof window.PointerEvent === "function",
+      });
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -612,11 +635,23 @@ export function Practice({ locale }: { locale: Locale }) {
               </select>
             </label>
           </div>
-          {device === "gamepad" && !raw?.connected && (
-            <p role="status">{text.disconnected}</p>
+          {device === "gamepad" && (!support.gamepad || !raw?.connected) && (
+            <p role="status">
+              {support.gamepad ? text.disconnected : text.gamepadUnsupported}
+            </p>
+          )}
+          {device === "touch" && !support.touch && (
+            <p role="status">{text.touchUnsupported}</p>
           )}
           <div className="practice__buttons">
-            <button type="button" onClick={() => setPlaying((value) => !value)}>
+            <button
+              type="button"
+              disabled={
+                (device === "gamepad" && !support.gamepad) ||
+                (device === "touch" && !support.touch)
+              }
+              onClick={() => setPlaying((value) => !value)}
+            >
               {playing ? text.pause : text.start}
             </button>
             <button type="button" onClick={reset}>
@@ -633,7 +668,7 @@ export function Practice({ locale }: { locale: Locale }) {
               )}
           </div>
         </section>
-        {device === "touch" && (
+        {device === "touch" && support.touch && (
           <div ref={touchRoot} className="practice__touch">
             <div className="practice__dpad">
               {touchDirections.map((direction) =>
