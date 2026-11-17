@@ -12,6 +12,7 @@ npm run dev
 ```
 
 Open `http://localhost:3000`. Use `npm run lint`, `npm run typecheck`, and `npm run build` to verify the application.
+The home route selects `/en` or `/pt-BR` from the saved language preference or browser language. Both routes can be opened directly.
 Pull requests run formatting, lint, type checking, tests, and a production build in GitHub Actions before integration.
 
 Copy `.env.example` to `.env.local` when database and session features are configured. Keep real secrets out of Git.

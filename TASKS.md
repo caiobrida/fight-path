@@ -24,7 +24,7 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 | Planejamento | [FP-02](tasks/FP-02-fontes-do-jogo.md) | Política e catálogo de fontes do jogo | FP-01 | Em andamento |
 | Fundação | [FP-03](tasks/FP-03-base-tecnica.md) | Stack e projeto inicial | FP-01 | Concluída |
 | Fundação | [FP-04](tasks/FP-04-ci.md) | CI para PRs | FP-03 | Concluída |
-| Fundação | [FP-05](tasks/FP-05-localizacao.md) | Infraestrutura `en` e `pt-BR` | FP-03 | Pendente |
+| Fundação | [FP-05](tasks/FP-05-localizacao.md) | Infraestrutura `en` e `pt-BR` | FP-03 | Concluída |
 | Fundação | [FP-06](tasks/FP-06-dados-e-identidade.md) | Contrato de dados, identidade e segurança | FP-01 | Pendente |
 | Simulador | [FP-07](tasks/FP-07-modelo-de-inputs.md) | Modelo de inputs independente da interface | FP-03 | Pendente |
 | Simulador | [FP-08](tasks/FP-08-adaptadores-de-dispositivos.md) | Teclado, gamepad e touch | FP-07 | Pendente |

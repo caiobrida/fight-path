@@ -43,6 +43,8 @@ The practice UI is mobile first and responsive. Layouts should start with a narr
 
 UI messages, exercise instructions, and feedback need `en` and `pt-BR` versions. Translation keys and source data should make missing translations detectable. Game content must retain source URL, access date, and applicable version or patch when relevant. A game fact and an evaluator threshold are different data: the former needs game evidence; the latter needs an explicit FightPath rule and testing.
 
+Locale routes use `/en` and `/pt-BR`. A lightweight Next.js Proxy redirects `/` using a saved locale cookie or the browser language. The dictionary type keeps both current translations aligned; future lesson data should use the same locale keys. The locale layout sets the HTML language for assistive technology.
+
 Universal exercises should refer to reusable input patterns. Ken lessons may refer to those patterns while adding sourced, character-specific context. Adding another character should add content and definitions without changing device capture. Adding another game may require a new command dialect or evaluator rule; that boundary remains subject to prototype evidence.
 
 ## Data and deployment

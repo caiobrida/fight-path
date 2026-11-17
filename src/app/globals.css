@@ -29,6 +29,32 @@ body {
   margin: auto;
 }
 
+.language {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+}
+
+.language a {
+  color: #f7f7f3;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ffffff55;
+  border-radius: 0.5rem;
+  text-decoration: none;
+}
+
+.language a[aria-current="page"] {
+  color: #10131b;
+  background: #ffad71;
+  border-color: #ffad71;
+}
+
+.language a:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}
+
 .eyebrow {
   margin: 0 0 1.5rem;
   color: #ffad71;
