@@ -1,6 +1,6 @@
 # FP-39 — Complete authentication return flows and privacy checks
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-27; FP-18 baseline.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-27; FP-18 baseline.
 
 **Context:** AUDIT A13/A14. The previous OAuth fix changed parameters but did not verify a full Google return. The product currently has a privacy notice, no linked Terms page.
 

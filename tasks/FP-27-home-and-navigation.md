@@ -1,6 +1,6 @@
 # FP-27 — Redesign the home and persistent navigation
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-26; FP-37 for shipped media.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-26; FP-37 for shipped media.
 
 **Context:** AUDIT A01/A10/A12. No implementation of proposed sections is implied by their appearance in a design.
 

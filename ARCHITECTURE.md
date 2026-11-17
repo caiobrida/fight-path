@@ -79,7 +79,7 @@ CI should check formatting or lint, types, relevant tests, and build on PRs once
 
 ## Decisions still open
 
-The expansion proposed in FP-19 through FP-40 is awaiting owner approval. `AUDIT.md` identifies input orchestration and calibration defects before a new lesson/reader boundary is introduced. The proposal keeps source-reviewed bilingual lesson content separate from command definitions, media provenance and account-bound learning activity records. A BnB reference does not reuse the single-motion evaluator as a combat simulator. No schema, framework, UI library or module migration is selected by the planning documents; the design/library decision belongs to FP-25 and any new persistence contract to FP-38.
+The owner approved the FP-19 through FP-40 expansion on November 17, 2026. `AUDIT.md` identifies input orchestration and calibration defects before a new lesson/reader boundary is introduced. The proposal keeps source-reviewed bilingual lesson content separate from command definitions, media provenance and account-bound learning activity records. A BnB reference does not reuse the single-motion evaluator as a combat simulator. No schema, framework, UI library or module migration is selected by the planning documents; the design/library decision belongs to FP-25 and any new persistence contract to FP-38.
 
 | Decision                                         | Why it matters                                                                 | Resolve in          |
 | ------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------- |

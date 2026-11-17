@@ -1,6 +1,6 @@
 # FP-21 — Count actual attack edges once
 
-**Status:** Awaiting owner approval. **Priority:** P1. **Dependencies:** FP-10/FP-11 baseline.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P1. **Dependencies:** FP-10/FP-11 baseline.
 
 **Context:** AUDIT A06: one physical LP press produces a correct attempt followed by an incorrect attempt when direction is released while LP remains held.
 

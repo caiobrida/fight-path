@@ -1,6 +1,6 @@
 # FP-32 — Teach Street Fighter 6 systems with versioned evidence
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-30.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-30.
 
 ## Checklist
 

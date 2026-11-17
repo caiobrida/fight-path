@@ -1,6 +1,6 @@
 # FP-20 — Make controller calibration complete and recoverable
 
-**Status:** Awaiting owner approval. **Priority:** P1. **Dependencies:** FP-19.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P1. **Dependencies:** FP-19.
 
 **Context:** AUDIT A03, A05, A09. Axes cannot be bound, and default assignments prevent direct swaps.
 

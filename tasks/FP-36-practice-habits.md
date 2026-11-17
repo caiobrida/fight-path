@@ -1,6 +1,6 @@
 # FP-36 — Teach practice habits and adaptation
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-29, FP-30; FP-33 for Ken examples.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-29, FP-30; FP-33 for Ken examples.
 
 ## Checklist
 

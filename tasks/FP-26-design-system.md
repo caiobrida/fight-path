@@ -1,6 +1,6 @@
 # FP-26 — Build the shared accessible design system
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** approved FP-25 direction.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** approved FP-25 direction.
 
 ## Checklist
 

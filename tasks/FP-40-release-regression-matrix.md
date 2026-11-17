@@ -1,6 +1,6 @@
 # FP-40 — Add regression coverage and repeat the site audit
 
-**Status:** Awaiting owner approval. **Priority:** P2, release gate. **Dependencies:** approved changes being validated; final pass after FP-19 through FP-39.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2, release gate. **Dependencies:** approved changes being validated; final pass after FP-19 through FP-39.
 
 ## Checklist
 

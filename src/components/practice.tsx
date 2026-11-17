@@ -1,5 +1,6 @@
 "use client";
 
+import { ControllerMonitor } from "./controller-monitor";
 import { useEffect, useRef, useState } from "react";
 import { exercises, kenExercises } from "@/content/exercises";
 import { GamepadAdapter } from "@/devices/gamepad";
@@ -557,6 +558,7 @@ export function Practice({
         <p className="eyebrow">FightPath</p>
         <h1>{text.title}</h1>
         <p>{text.intro}</p>
+        <ControllerMonitor locale={locale} />
         <label className="practice__path">
           {text.path}
           <select

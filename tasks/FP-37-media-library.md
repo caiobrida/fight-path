@@ -1,6 +1,6 @@
 # FP-37 — Add purposeful images and controlled demonstrations
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-25, FP-26; content verification for gameplay clips.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-25, FP-26; content verification for gameplay clips.
 
 ## Checklist
 

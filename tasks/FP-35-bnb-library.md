@@ -1,6 +1,6 @@
 # FP-35 — Present Ken BnBs as a practical reference and drill
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-29, FP-34, FP-37.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-29, FP-34, FP-37.
 
 ## Checklist
 

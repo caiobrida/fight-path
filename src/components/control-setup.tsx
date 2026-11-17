@@ -1,5 +1,6 @@
 "use client";
 
+import { ControllerMonitor } from "./controller-monitor";
 import { useEffect, useRef, useState } from "react";
 import {
   assignControl,
@@ -224,6 +225,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
         <a href={`/${locale}`}>{text.back}</a>
         <h1>{text.title}</h1>
         <p>{text.intro}</p>
+        <ControllerMonitor locale={locale} />
         <label htmlFor="device">{text.device}</label>
         <select
           id="device"

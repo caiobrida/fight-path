@@ -1,6 +1,6 @@
 # FP-24 — Guide learners from connected device to first valid input
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-19, FP-20, FP-21, FP-26.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-19, FP-20, FP-21, FP-26.
 
 **Context:** AUDIT A02/A09. Both screens start in Keyboard and practice captures only after Start, without a complete readiness flow.
 

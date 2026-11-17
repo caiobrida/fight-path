@@ -1,6 +1,6 @@
 # FP-33 — Build Ken Classic's beginner game plan
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-31, FP-32.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-31, FP-32.
 
 ## Checklist
 

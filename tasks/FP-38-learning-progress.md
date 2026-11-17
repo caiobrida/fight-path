@@ -1,6 +1,6 @@
 # FP-38 — Track learning activities without conflating skill measures
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-23, FP-29, FP-35, FP-36.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-23, FP-29, FP-35, FP-36.
 
 ## Checklist
 

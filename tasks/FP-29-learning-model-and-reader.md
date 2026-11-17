@@ -1,6 +1,6 @@
 # FP-29 — Add the bilingual learning catalog and reader
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-26, FP-27 navigation contract; RESEARCH-CONTENT.md.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-26, FP-27 navigation contract; RESEARCH-CONTENT.md.
 
 ## Checklist
 

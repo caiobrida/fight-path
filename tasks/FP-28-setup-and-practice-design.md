@@ -1,6 +1,6 @@
 # FP-28 — Redesign setup and the execution workspace
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-19 through FP-22, FP-24, FP-26.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-19 through FP-22, FP-24, FP-26.
 
 ## Checklist
 

@@ -1,5 +1,10 @@
 import { quantizeAxis } from "@/domain/input";
 import {
+  activeController,
+  controllerIndex,
+  readControllers,
+} from "./controller-selection";
+import {
   rawSnapshot,
   sameRawState,
   type RawSink,
@@ -43,6 +48,10 @@ export class GamepadAdapter {
     this.target.addEventListener("focus", this.onFocus);
     this.target.addEventListener("gamepadconnected", this.onConnection);
     this.target.addEventListener("gamepaddisconnected", this.onConnection);
+    this.target.addEventListener(
+      "fightpath-controller-change",
+      this.onSelection,
+    );
     this.frame = this.target.requestAnimationFrame(this.poll);
   }
 
@@ -52,6 +61,10 @@ export class GamepadAdapter {
     this.target.removeEventListener("focus", this.onFocus);
     this.target.removeEventListener("gamepadconnected", this.onConnection);
     this.target.removeEventListener("gamepaddisconnected", this.onConnection);
+    this.target.removeEventListener(
+      "fightpath-controller-change",
+      this.onSelection,
+    );
     this.emit(gamepadSnapshot(null, performance.now()));
   }
 
@@ -69,13 +82,23 @@ export class GamepadAdapter {
     this.poll();
   };
 
+  private readonly onSelection = (): void => {
+    this.emit(gamepadSnapshot(null, performance.now()));
+    this.poll();
+  };
+
   private readonly poll = (): void => {
     if (this.frame !== undefined) this.target.cancelAnimationFrame(this.frame);
-    const gamepad = this.suspended
-      ? null
-      : ([...this.target.navigator.getGamepads()].find(
-          (item): item is Gamepad => item !== null,
-        ) ?? null);
+    let gamepad: Gamepad | null = null;
+    try {
+      if (!this.suspended)
+        gamepad = activeController(
+          readControllers(this.target),
+          controllerIndex(),
+        );
+    } catch {
+      gamepad = null;
+    }
     this.emit(gamepadSnapshot(gamepad, performance.now()));
     this.frame = this.target.requestAnimationFrame(this.poll);
   };

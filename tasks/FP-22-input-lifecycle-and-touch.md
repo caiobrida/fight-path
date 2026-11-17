@@ -1,6 +1,6 @@
 # FP-22 — Make input gestures and lifecycle recovery reliable
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-19, FP-20, FP-21.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-19, FP-20, FP-21.
 
 **Context:** AUDIT A07-A09. Touch remains bound to the initial cell during a drag; capture, focus loss and device transitions need integrated checks.
 

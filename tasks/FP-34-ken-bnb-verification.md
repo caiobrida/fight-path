@@ -1,6 +1,6 @@
 # FP-34 — Verify the first Ken BnB recipes
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-32, FP-33.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-32, FP-33.
 
 **Context:** RESEARCH-CONTENT proposes six situations. No exact current-build route was validated in the study.
 

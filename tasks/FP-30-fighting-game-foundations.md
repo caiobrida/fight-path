@@ -1,6 +1,6 @@
 # FP-30 — Teach the first fighting-game foundations path
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-29, FP-37 for examples.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-29, FP-37 for examples.
 
 ## Checklist
 

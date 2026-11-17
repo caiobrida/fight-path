@@ -1,6 +1,6 @@
 # FP-25 — Approve the design direction and system contract
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** DESIGN-STUDY.md.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** DESIGN-STUDY.md.
 
 ## Checklist
 

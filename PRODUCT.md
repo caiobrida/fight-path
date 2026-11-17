@@ -44,7 +44,7 @@ The first release shows attempts, correct attempts, accuracy, and per-exercise m
 
 ### Proposed learning expansion under owner review
 
-On November 17, 2026 the owner requested research and task planning for a more complete learning product. FP-19 through FP-40 are not yet approved for implementation. The proposed areas are Learn (foundations, neutral/footsies, SF6 systems and practice habits), Ken Classic (a beginner game plan and dependable BnBs) and Practice (reliable input exercises with guided controller setup). Preserve both languages and the dark/orange palette while developing a coherent mobile-first design system with purposeful imagery. `AUDIT.md`, `DESIGN-STUDY.md` and `RESEARCH-CONTENT.md` contain the evidence and proposal.
+On November 17, 2026 the owner requested research and task planning for a more complete learning product. The owner approved FP-19 through FP-40 on November 17, 2026. The proposed areas are Learn (foundations, neutral/footsies, SF6 systems and practice habits), Ken Classic (a beginner game plan and dependable BnBs) and Practice (reliable input exercises with guided controller setup). Preserve both languages and the dark/orange palette while developing a coherent mobile-first design system with purposeful imagery. `AUDIT.md`, `DESIGN-STUDY.md` and `RESEARCH-CONTENT.md` contain the evidence and proposal.
 
 The first proposed BnB feature is a verified reference and in-game practice guide. Reading, a self-reported drill and a browser input match are different learning activities. Exact combos, damage and patch-dependent advice remain unpublished until sources and current-game execution are checked. The reported DualSense USB issue and duplicate-attempt defect take priority over adding execution complexity.
 

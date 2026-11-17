@@ -1,6 +1,6 @@
 # FP-23 — Verify progress synchronization and deletion races
 
-**Status:** Awaiting owner approval. **Priority:** P2. **Dependencies:** FP-21.
+**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** FP-21.
 
 **Context:** AUDIT A11 is a source-review risk, not a confirmed live data-loss incident. Existing retries collapse HTTP failures into generic pending state.
 
