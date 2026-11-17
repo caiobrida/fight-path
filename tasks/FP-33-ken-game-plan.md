@@ -13,3 +13,7 @@
 **Acceptance:** learners can describe a simple Ken plan and when to stop pressure, defend or change a repeated option. Every move-specific claim has current evidence and both translations.
 
 **Evidence:** reviewed toolkit, timestamps, build scope and a training/replay example for each decision.
+
+## Implementation evidence (2026-11-17)
+
+Three bilingual lessons cover a small toolkit, hit/block decisions, ending a turn and adapting repeated pressure. Official Ken guide/toolkit links and Infil confirmation concepts accompany original proposed drills. No unverified move-strength safety, frame data or exact BnB is asserted. Scene-by-scene current-game demonstration remains a content validation gate. Catalog tests pass.

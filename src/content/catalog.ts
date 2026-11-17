@@ -1,5 +1,6 @@
 import { footsiesLessons } from "./footsies";
 import { sf6Lessons } from "./sf6";
+import { kenLessons } from "./ken";
 import { foundationsLessons } from "./foundations";
 import { baseLessons, type Lesson } from "./learning";
 
@@ -8,6 +9,7 @@ export const lessons: readonly Lesson[] = [
   ...foundationsLessons,
   ...footsiesLessons,
   ...sf6Lessons,
+  ...kenLessons,
 ];
 export const publishedLessons = lessons.filter(
   (lesson) =>
