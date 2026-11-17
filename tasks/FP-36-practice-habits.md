@@ -13,3 +13,7 @@
 **Acceptance:** learners can set and evaluate a concrete practice goal without treating win rate as the only sign of progress. Content is source-backed and understandable in both locales.
 
 **Evidence:** bilingual editorial review and example practice sessions.
+
+## Implementation evidence (2026-11-17)
+
+Two bilingual lessons provide focused repetition, one-goal sessions, replay observation and a test/reassess template, including contextual Ken examples. Original teaching proposals are distinguished from sourced glossary concepts. No personal notes, replay files or psychological data are collected. TypeScript and catalog validation pass.
