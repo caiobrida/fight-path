@@ -3,35 +3,13 @@ import { auth } from "@clerk/nextjs/server";
 import { database } from "@/server/db";
 import { logServerFailure } from "@/server/log";
 import { parseAttempt, type ProgressRow } from "@/domain/progress";
+import { limitedJson } from "@/server/request-body";
+import { deleteUserProgress } from "@/server/learning";
 import { sameOrigin } from "@/server/origin";
 
 export const runtime = "nodejs";
 
 const privateHeaders = { "Cache-Control": "private, no-store" };
-
-async function limitedBody(request: NextRequest): Promise<unknown> {
-  if (!request.body) throw new Error("Empty body");
-  const reader = request.body.getReader();
-  const chunks: Uint8Array[] = [];
-  let size = 0;
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    size += value.byteLength;
-    if (size > 2048) {
-      await reader.cancel();
-      throw new Error("Body too large");
-    }
-    chunks.push(value);
-  }
-  const bytes = new Uint8Array(size);
-  let offset = 0;
-  for (const chunk of chunks) {
-    bytes.set(chunk, offset);
-    offset += chunk.byteLength;
-  }
-  return JSON.parse(new TextDecoder().decode(bytes));
-}
 
 async function summary(userId: string): Promise<ProgressRow[]> {
   const result = await database().query<{
@@ -87,7 +65,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "invalid-attempt" }, { status: 413 });
   let input: unknown;
   try {
-    input = await limitedBody(request);
+    input = await limitedJson(request);
   } catch {
     return NextResponse.json({ error: "invalid-attempt" }, { status: 400 });
   }
@@ -134,7 +112,7 @@ export async function DELETE(request: NextRequest) {
   if (!sameOrigin(request))
     return NextResponse.json({ error: "invalid-origin" }, { status: 403 });
   try {
-    await database().query("DELETE FROM attempts WHERE user_id = $1", [userId]);
+    await deleteUserProgress(userId);
     return NextResponse.json({ deleted: true }, { headers: privateHeaders });
   } catch (error) {
     logServerFailure("progress-delete", error);

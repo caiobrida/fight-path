@@ -8,9 +8,13 @@ import type { Locale } from "@/i18n/dictionaries";
 export function KnowledgeCheck({
   check,
   locale,
+  onAnswer,
+  disabled,
 }: {
   check: LessonCopy["check"];
   locale: Locale;
+  onAnswer?: (answer: number) => void;
+  disabled?: boolean;
 }) {
   const [choice, setChoice] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -36,7 +40,13 @@ export function KnowledgeCheck({
         ))}
       </fieldset>
       <div className="fp-actions">
-        <Button disabled={choice === null} onClick={() => setSubmitted(true)}>
+        <Button
+          disabled={choice === null || disabled}
+          onClick={() => {
+            setSubmitted(true);
+            if (choice !== null && choice === check.answer) onAnswer?.(choice);
+          }}
+        >
           {pt ? "Conferir resposta" : "Check answer"}
         </Button>
       </div>

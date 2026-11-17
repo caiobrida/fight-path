@@ -89,3 +89,7 @@ The owner approved the FP-19 through FP-40 expansion on November 17, 2026. `AUDI
 | Supported hardware matrix                        | Depends on browser and device behavior                                         | FP-08, FP-16        |
 | Stored attempt detail and retention              | Balances metrics with data minimization                                        | FP-06, FP-14        |
 | Game content update procedure                    | Keeps lessons correct across game patches                                      | FP-02               |
+
+## Learning progress (FP-38)
+
+Migration 004 adds account/lesson/revision/kind activity with idempotent insertion. Server-resolved Clerk identity owns every read/write; the browser cannot choose an owner. Reading, correct checks and self-reported drills remain separate from input attempts and XP. The public reader supports visitors, while saving and the resume dashboard require authentication. See db/LEARNING-MIGRATION.md for compatibility and rollback.

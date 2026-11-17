@@ -23,8 +23,14 @@ export async function GET(request: NextRequest) {
     const result = await database().query(
       "DELETE FROM attempts WHERE created_at < now() - interval '180 days'",
     );
+    const learning = await database().query(
+      "DELETE FROM learning_activity WHERE created_at < now() - interval '180 days'",
+    );
     return NextResponse.json(
-      { deletedAttempts: result.rowCount ?? 0 },
+      {
+        deletedAttempts: result.rowCount ?? 0,
+        deletedActivities: learning.rowCount ?? 0,
+      },
       { headers: { "Cache-Control": "private, no-store" } },
     );
   } catch (error) {

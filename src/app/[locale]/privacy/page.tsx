@@ -14,6 +14,7 @@ const copy = {
       "A private contact channel will be published before public launch.",
     data: "Data we handle",
     dataItems: [
+      "Optional learning records store the lesson ID, revision, read/correct-check/self-reported-drill state and timestamp under your account. They do not store quiz answers, replay files or private notes.",
       "Optional lesson videos load a YouTube/Google player only after you choose to load it. Google then receives connection data under its own policies. You can close the player or use the written lesson instead.",
       "Clerk handles your account details and authentication cookies. FightPath stores your Clerk user ID with saved practice attempts, but not your email or password in its database.",
       "Exercise ID, correct or incorrect result, duration, and timestamp for saved practice attempts.",
@@ -44,6 +45,7 @@ const copy = {
       "Um canal privado de contato será publicado antes do lançamento público.",
     data: "Dados tratados",
     dataItems: [
+      "Registros opcionais de aprendizado salvam identificador e revisão da aula, estado de leitura/resposta correta/treino declarado e data na sua conta. Não guardam respostas, replays nem anotações pessoais.",
       "Vídeos opcionais nas aulas carregam um player do YouTube/Google só após sua escolha. O Google então recebe dados de conexão conforme suas próprias políticas. Você pode fechar o player ou usar a aula escrita.",
       "A Clerk gerencia os dados da conta e os cookies de autenticação. O FightPath salva o identificador de usuário da Clerk com as tentativas, mas não armazena e-mail nem senha no próprio banco.",
       "Identificador do exercício, resultado correto ou incorreto, duração e data das tentativas salvas.",

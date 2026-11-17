@@ -3,6 +3,8 @@ import { auth } from "@clerk/nextjs/server";
 import { database } from "@/server/db";
 import { logServerFailure } from "@/server/log";
 
+import { readLearning } from "@/server/learning";
+
 export const runtime = "nodejs";
 
 export async function GET() {
@@ -22,13 +24,20 @@ export async function GET() {
       "SELECT exercise_id, correct, duration_ms, created_at FROM attempts WHERE user_id = $1 ORDER BY created_at ASC",
       [userId],
     );
-    return new NextResponse(JSON.stringify({ attempts: result.rows }), {
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        "Content-Disposition": 'attachment; filename="fightpath-progress.json"',
-        "Cache-Control": "private, no-store",
+    return new NextResponse(
+      JSON.stringify({
+        attempts: result.rows,
+        learningActivities: await readLearning(userId),
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Disposition":
+            'attachment; filename="fightpath-progress.json"',
+          "Cache-Control": "private, no-store",
+        },
       },
-    });
+    );
   } catch (error) {
     logServerFailure("progress-export", error);
     return NextResponse.json(

@@ -3,7 +3,7 @@ import { findLesson, publishedLessons } from "@/content/catalog";
 import { trackNames } from "@/content/learning";
 import { isLocale } from "@/i18n/dictionaries";
 import { ActionLink, Badge, Notice } from "@/components/ui";
-import { KnowledgeCheck } from "@/components/knowledge-check";
+import { LessonActivity } from "@/components/lesson-activity";
 import { LessonVisual } from "@/components/lesson-visual";
 import { KenVideo } from "@/components/ken-video";
 
@@ -72,7 +72,7 @@ export default async function LessonPage({
         <h2>{pt ? "Leve para o treino" : "Take it into practice"}</h2>
         <p>{text.drill}</p>
       </section>
-      <KnowledgeCheck key={lesson.id} check={text.check} locale={locale} />
+      <LessonActivity lesson={lesson} locale={locale} />
       {lesson.id === "ken-start-small" && <KenVideo locale={locale} />}
       <div className="fp-actions">
         {next ? (

@@ -13,3 +13,7 @@
 **Acceptance:** learning progress survives sign-in/reload and remains private to the account. Reading or a self-check is never displayed as proof of in-game combo execution or match competence.
 
 **Evidence:** isolation, idempotency, migration rollback/compatibility review, export/delete tests and bilingual dashboard review.
+
+## Implementation evidence (2026-11-17)
+
+Additive migration 004, authenticated bounded JSON API, explicit activity actions, revision-aware resume dashboard and shared transactional deletion implemented. Export, signed Clerk webhook and retention include activity. No reading XP or inferred mastery. Migration compatibility and rollback documented in db/LEARNING-MIGRATION.md. Local migration applied; local/CI isolation, idempotency and deletion integration coverage added.

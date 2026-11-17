@@ -38,3 +38,7 @@ Rejected attempt outcomes remain in an account-scoped local review queue and can
 ## Optional embedded video
 
 FP-37 adds one external official Ken guide. Until the learner explicitly loads it, no YouTube iframe, thumbnail or preconnect request exists. Loading a privacy-enhanced YouTube player shares connection data with Google under its policies. Autoplay is disabled, closing unloads it, and written lesson/source-link alternatives remain available. No viewing analytics are stored by FightPath. The public notice explains this choice in both locales.
+
+## Learning activity
+
+Optional account-bound records contain only lesson ID, revision, activity kind (read, correct check or self-reported in-game drill) and first timestamp. Quiz answers are validated but not retained. No notes/replays are collected. Existing export includes these records; progress deletion and the signed account webhook remove them transactionally with attempts. Retention removes records after 180 days. They grant no XP and do not certify match skill.
