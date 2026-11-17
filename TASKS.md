@@ -5,6 +5,7 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 ## Regras que se aplicam a todas as tarefas
 
 - Produto disponível em inglês (`en`) e português do Brasil (`pt-BR`) desde o início; interface, conteúdo e feedback devem contemplar os dois idiomas.
+- A experiência deve ser responsiva e mobile first, com prática confortável no navegador de desktop e no celular.
 - Primeiro recorte: Street Fighter 6, Ken e controles Classic. A estrutura deve permitir outros personagens e jogos depois, sem prometer suporte a eles no MVP.
 - Informações sobre o jogo publicadas no produto precisam ser verificadas em fontes reais e renomadas, com origem e data registradas. Priorizar fontes oficiais. Distinguir dados confirmados de hipóteses de implementação.
 - Planejar persistência em PostgreSQL no Neon e futura hospedagem na Vercel. Decidir autenticação e acesso seguro ao banco antes de implementar o fluxo de dados pessoais.

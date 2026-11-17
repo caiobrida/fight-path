@@ -10,6 +10,7 @@
 - [ ] Verificar navegação por teclado, foco, contraste, leitura de resultados e alternativas a feedback exclusivamente visual.
 - [ ] Testar respostas a desconexão, perda de foco, troca de lado e mudança de idioma.
 - [ ] Conferir desempenho e legibilidade em telas pequenas.
+- [ ] Verificar layouts mobile first em diferentes larguras, orientação de tela e alvos de toque, além da experiência em desktop.
 - [ ] Registrar bugs encontrados, limitações de compatibilidade e correções antes da liberação.
 
 **Aceite:** os fluxos essenciais passam na matriz registrada; limitações remanescentes são visíveis e documentadas.
