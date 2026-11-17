@@ -2,6 +2,7 @@
 
 Read `PRODUCT.md`, `ARCHITECTURE.md`, `ROADMAP.md`, and `TASKS.md` before changing the product. These files are the shared, durable project context. Update the relevant file whenever a decision, constraint, or scope change should survive this chat and be visible to other developers.
 Read `SOURCES.md` before publishing game content and `PRIVACY.md` before changing data collection or server behavior.
+Read `QA.md` before claiming device compatibility or public-release readiness.
 
 ## Product scope
 

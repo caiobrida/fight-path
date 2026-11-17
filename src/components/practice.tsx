@@ -9,6 +9,7 @@ import type { DeviceKind, RawSnapshot } from "@/devices/raw";
 import { evaluateCommand, type Evaluation } from "@/domain/evaluator";
 import { gamification, mastery } from "@/domain/gamification";
 import {
+  attacks,
   appendSample,
   newlyPressed,
   relativeDirection,
@@ -16,7 +17,6 @@ import {
   type InputSample,
 } from "@/domain/input";
 import {
-  controlActions,
   defaultMapping,
   loadMapping,
   mapRaw,
@@ -180,6 +180,41 @@ const symbols: Record<string, string> = {
   "up-left": "↖",
   "up-right": "↗",
 };
+
+const touchDirections = [
+  "up-left",
+  "up",
+  "up-right",
+  "left",
+  "neutral",
+  "right",
+  "down-left",
+  "down",
+  "down-right",
+] as const;
+
+const touchLabels = {
+  en: {
+    "up-left": "Up left",
+    up: "Up",
+    "up-right": "Up right",
+    left: "Left",
+    right: "Right",
+    "down-left": "Down left",
+    down: "Down",
+    "down-right": "Down right",
+  },
+  "pt-BR": {
+    "up-left": "Cima esquerda",
+    up: "Cima",
+    "up-right": "Cima direita",
+    left: "Esquerda",
+    right: "Direita",
+    "down-left": "Baixo esquerda",
+    down: "Baixo",
+    "down-right": "Baixo direita",
+  },
+} as const;
 
 export function Practice({ locale }: { locale: Locale }) {
   const text = copy[locale];
@@ -600,16 +635,37 @@ export function Practice({ locale }: { locale: Locale }) {
         </section>
         {device === "touch" && (
           <div ref={touchRoot} className="practice__touch">
-            {controlActions.map((action) => (
-              <button
-                key={action}
-                type="button"
-                data-control={`Touch${action[0].toUpperCase()}${action.slice(1)}`}
-                aria-label={action}
-              >
-                {action}
-              </button>
-            ))}
+            <div className="practice__dpad">
+              {touchDirections.map((direction) =>
+                direction === "neutral" ? (
+                  <span key={direction} aria-hidden="true" />
+                ) : (
+                  <button
+                    key={direction}
+                    type="button"
+                    data-control={`Touch${direction
+                      .split("-")
+                      .map((part) => part[0].toUpperCase() + part.slice(1))
+                      .join("")}`}
+                    aria-label={touchLabels[locale][direction]}
+                  >
+                    {symbols[direction]}
+                  </button>
+                ),
+              )}
+            </div>
+            <div className="practice__attacks">
+              {attacks.map((attack) => (
+                <button
+                  key={attack}
+                  type="button"
+                  data-control={`Touch${attack}`}
+                  aria-label={attack}
+                >
+                  {attack}
+                </button>
+              ))}
+            </div>
           </div>
         )}
         <section className="practice__feedback" aria-live="polite">

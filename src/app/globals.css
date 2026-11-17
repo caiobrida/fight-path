@@ -405,10 +405,19 @@ h1 {
 }
 .practice__touch {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
   margin-top: 1.5rem;
   touch-action: none;
+}
+.practice__dpad,
+.practice__attacks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.125rem;
+}
+.practice__attacks {
+  align-content: center;
 }
 .practice__touch button {
   border: 1px solid #ffffff55;
@@ -416,6 +425,16 @@ h1 {
   background: #344055;
   color: #fff;
   touch-action: none;
+}
+@media (max-width: 22rem) {
+  .practice__touch {
+    grid-template-columns: 1fr;
+  }
+  .practice__dpad,
+  .practice__attacks {
+    width: min(100%, 17rem);
+    margin: auto;
+  }
 }
 .practice__feedback,
 .practice__history {

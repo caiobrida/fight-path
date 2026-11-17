@@ -5,6 +5,36 @@ import {
   type RawSnapshot,
 } from "./raw";
 
+const diagonalAxes: Record<string, readonly [number, number]> = {
+  TouchUpLeft: [-1, -1],
+  TouchUpRight: [1, -1],
+  TouchDownLeft: [-1, 1],
+  TouchDownRight: [1, 1],
+};
+
+export function touchSnapshot(
+  atMs: number,
+  controls: Iterable<string>,
+): RawSnapshot {
+  const active = [...controls];
+  let horizontal = 0;
+  let vertical = 0;
+  for (const control of active) {
+    const axes = diagonalAxes[control];
+    if (!axes) continue;
+    horizontal += axes[0];
+    vertical += axes[1];
+  }
+  return rawSnapshot(
+    "touch",
+    atMs,
+    true,
+    active,
+    Math.sign(horizontal),
+    Math.sign(vertical),
+  );
+}
+
 export class TouchAdapter {
   private readonly pointers = new Map<number, string>();
   private previous: RawSnapshot | undefined;
@@ -56,12 +86,7 @@ export class TouchAdapter {
   };
 
   private emit(): void {
-    const current = rawSnapshot(
-      "touch",
-      performance.now(),
-      true,
-      this.pointers.values(),
-    );
+    const current = touchSnapshot(performance.now(), this.pointers.values());
     if (!sameRawState(this.previous, current)) {
       this.previous = current;
       this.sink(current);
