@@ -765,3 +765,91 @@
     gap: 12px;
   }
 }
+.fp-lesson {
+  max-width: 860px;
+}
+.fp-lesson > p,
+.fp-lesson section > p {
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--fp-muted);
+  max-width: 70ch;
+}
+.fp-lesson h1 {
+  max-width: 18ch;
+}
+.fp-lesson h2 {
+  font-size: 26px;
+  letter-spacing: -0.03em;
+  margin: 36px 0 16px;
+}
+.fp-lesson__summary {
+  font-size: 21px !important;
+}
+.fp-lesson__example,
+.fp-lesson__drill {
+  background: var(--fp-surface);
+  border: 1px solid var(--fp-border);
+  padding: 24px;
+  border-radius: 12px;
+  margin-block: 28px;
+}
+.fp-lesson__example h2,
+.fp-lesson__drill h2 {
+  margin-top: 0;
+}
+.fp-breadcrumb {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  line-height: 1.5;
+  margin-bottom: 32px;
+}
+.fp-breadcrumb a,
+.fp-sources a {
+  color: var(--fp-accent);
+  text-underline-offset: 4px;
+}
+.fp-sources {
+  border-top: 1px solid var(--fp-border);
+  margin-top: 40px;
+  font-size: 14px;
+}
+.fp-sources li {
+  margin: 12px 0;
+}
+.fp-knowledge {
+  margin: 36px 0;
+}
+.fp-knowledge fieldset {
+  border: 1px solid var(--fp-border);
+  padding: 20px;
+  border-radius: 12px;
+}
+.fp-knowledge legend {
+  padding: 0 8px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.fp-knowledge fieldset label {
+  display: flex;
+  gap: 12px;
+  align-items: start;
+  line-height: 1.6;
+  min-height: 44px;
+  padding: 12px 4px;
+  cursor: pointer;
+}
+.fp-knowledge input {
+  margin-top: 6px;
+  accent-color: var(--fp-accent);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.fp-page > h1 {
+  white-space: pre-line;
+}
+.fp-page section[id] {
+  scroll-margin-top: 32px;
+}

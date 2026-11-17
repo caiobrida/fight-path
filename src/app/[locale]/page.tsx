@@ -161,6 +161,13 @@ export default async function HomePage({
                     {text.open}
                     <ArrowRight size={16} aria-hidden="true" />
                   </ActionLink>
+                ) : index === 1 ? (
+                  <ActionLink variant="quiet" href={`/${locale}/learn`}>
+                    {locale === "pt-BR"
+                      ? "Explorar as aulas"
+                      : "Explore lessons"}{" "}
+                    ?
+                  </ActionLink>
                 ) : (
                   <Badge tone="muted">{text.coming}</Badge>
                 )}

@@ -14,3 +14,5 @@
 **Acceptance:** a reviewed sample lesson can be read in both languages and linked to a drill; a lesson without required evidence cannot be published by accident.
 
 **Evidence:** content validation and route/locale checks. Reading completion must not be presented as execution mastery.
+
+Implementation: typed versioned bilingual lesson model, publication filtering, catalog, per-track navigation, lesson reader, source footer and interactive knowledge checks. Source/translation/prerequisite validation runs in the unit suite. Reading is public; account-bound progress and all execution remain protected. The first notation lesson uses the previously reviewed commands.

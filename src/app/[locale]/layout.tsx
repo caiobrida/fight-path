@@ -82,6 +82,9 @@ export default async function LocaleLayout({
               <a href={`/${locale}`}>
                 {locale === "pt-BR" ? "In?cio" : "Home"}
               </a>
+              <a href={`/${locale}/learn`}>
+                {locale === "pt-BR" ? "Aprender" : "Learn"}
+              </a>
               <a href={`/${locale}/practice`}>
                 {locale === "pt-BR" ? "Praticar" : "Practice"}
               </a>
