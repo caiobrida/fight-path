@@ -2,6 +2,10 @@
 
 Updated November 17, 2026. This is the current delivery summary for FP-19 through FP-40. It supersedes the original planning-only status text; task checkboxes preserve any evidence that is still missing.
 
+Owner instruction: no SF6 automation of any kind, including launch, menus, training/offline modes or gameplay. Human reviewers must perform execution and captures manually. Research, source review, original content drafts, recording review/editing and isolated FightPath tests remain authorized. See `AGENTS.md`.
+
+The six routes now have original bilingual editorial drafts, mirrored candidate notation, drills and media explanation templates in `content-drafts/KEN-BNB-DRAFTS.md`. These are preparation artifacts, not published lessons or execution evidence. Current resources, timings, conditions and actual clips still require manual confirmation; caption timing follows the real recordings.
+
 ## Delivered application
 
 - A shared dark/orange design system, action spacing, responsive header, locale-preserving navigation, accessible dialogs and a component gallery. Primary and secondary actions have explicit button styling; secondary card actions are no longer underlined.
@@ -29,8 +33,8 @@ Updated November 17, 2026. This is the current delivery summary for FP-19 throug
 | --- | --- | --- |
 | DualSense USB on Windows 11 / Chrome, D-pad/stick/six attacks | Synthetic browser fixtures cannot certify the owner's physical device or its driver/browser exposure | FP-08, FP-16, FP-19, FP-20, FP-21, FP-28, FP-40 |
 | Real Android/iOS multi-touch and assistive technology | Viewport tests and automated accessibility checks are not real-phone or screen-reader sessions | FP-16, FP-22, FP-26, FP-28, FP-40 |
-| Six Ken routes, both sides, instructional clips and exact battle build | Source tables and the observed title version 2.0500.001 are not in-game execution evidence. No training attempt was performed | FP-32, FP-33, FP-34, FP-35, FP-37 |
+| Six Ken routes, both sides, instructional clips and exact battle build | Requires a human's manual execution and captures. SF6 automation is prohibited. Source tables and the observed title version 2.0500.001 are not execution evidence; no training attempt was performed | FP-32, FP-33, FP-34, FP-35, FP-37 |
 | Google consent/new-existing-account transfer | Clerk testing tokens validate account behavior while bypassing the external provider consent step | FP-18, FP-39 |
 | Learner walkthrough and future public launch | Requires actual learner feedback and the owner's future production operator/contact, infrastructure and privacy choices | FP-12, FP-13, FP-16, FP-17, FP-18, FP-39 |
 
-The current Vercel Production-labeled target remains development, as authorized. Public-production configuration is intentionally deferred. Before any further browser, game or desktop control, tell the owner which application will be controlled and why; do not open it silently.
+The current Vercel Production-labeled target remains development, as authorized. Public-production configuration is intentionally deferred. Announce any permitted browser or desktop control before interacting. Do not automate SF6 even after giving notice.

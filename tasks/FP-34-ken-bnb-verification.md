@@ -4,6 +4,8 @@
 
 **Context:** RESEARCH-CONTENT proposes six situations. No exact current-build route was validated in the study.
 
+**Execution constraint:** manual human verification only. The owner prohibits launching or controlling SF6 through any automation, including offline/training. Source review, original bilingual drafts and editing/reviewing human-provided recordings remain authorized. Publication still requires actual current-build evidence.
+
 ## Checklist
 
 - [ ] Select dependable beginner routes for close light starter, large meterless punish, jump-in, grounded Drive Rush conversion, corner and super ender.

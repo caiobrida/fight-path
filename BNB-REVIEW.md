@@ -1,5 +1,11 @@
 # Ken Classic BnB verification sheet
 
+## Mandatory manual verification boundary
+
+Original bilingual text, drill and storyboard drafts are prepared in [content-drafts/KEN-BNB-DRAFTS.md](content-drafts/KEN-BNB-DRAFTS.md). They remain outside the application catalog and must be revised against a human's actual recordings before publication.
+
+The owner prohibited all SF6 automation on November 17, 2026. Do not launch or control the game, including menus and offline/training modes, with automation. A human must execute and capture the routes. Source research, original bilingual draft preparation, review of human recordings, captions and FightPath website tests can continue. Notice before computer use does not override this prohibition. `AGENTS.md` is the shared instruction for future contributors.
+
 Reviewed November 17, 2026. The SuperCombo Ken/Combos page successfully rendered in the in-app browser after earlier HTTP failures. Its visible edit timestamp was November 17, 2026 at 11:03. An edit date is not current-game execution evidence.
 
 The installed SF6 title screen visibly reported **Ver. 2.0500.001**. Read-only Steam metadata reports app 1364780, build ID and target 25071972, last updated November 15, 2026 00:26:11 UTC. Executable file version 1.0.0.34 is not the displayed game version. No battle-version screen, training attempt or clip was verified: desktop control was interrupted at the title screen. Do not claim these routes were reproduced.
@@ -17,4 +23,4 @@ Notation below follows the source: facing right, 2 down, 5 standing, 6 forward, 
 
 Primary collaborative source: [SuperCombo's Ken combo reference](https://wiki.supercombo.gg/w/Street_Fighter_6/Ken/Combos). This sheet records facts about the source's own recipe tables, not a certification that they work in today's game. Source damage, exact frame windows and safety judgments are deliberately not imported. Candidate records remain unpublished until independent in-game verification supplies the battle build, conditions and both-side evidence.
 
-Promotion procedure: verify official current command data; set consistent training position, hit state, opponent stance and resources; perform each route facing right and left; capture a short instructional clip with inputs and a written accessible explanation; record observed costs and fallback; review both locales; only then change its review to verified and include its game build. Mark pending again after a balance change that may affect it.
+Promotion procedure: review official current command data; have a human reviewer manually set consistent training position, hit state, opponent stance and resources, execute each route facing right and left, and capture the evidence. Prepare a short instructional edit with inputs and an accessible written explanation; record observed costs and fallback; review both locales; only then change its review to verified and include its game build. Never automate the game to obtain this evidence. Mark pending again after a balance change that may affect it.

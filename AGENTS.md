@@ -20,13 +20,16 @@ Read `QA.md` before claiming device compatibility or public-release readiness.
 
 ## Game information
 
+- The owner explicitly prohibited automating Street Fighter 6 on November 17, 2026. Do not launch, focus, navigate, control or execute inputs in SF6 through computer-use tools, scripts, bots, macros, injected input, game integration or any other automation. This applies to menus, training/offline modes and online play. Do not alter game processes or attempt to bypass anti-cheat. Advance notice does not authorize SF6 automation.
+- Continue source research, FightPath implementation and isolated website tests without controlling SF6. Gameplay verification and capture must be performed manually by the owner or another human reviewer. Review supplied recordings and prepare original bilingual explanations, captions and media edits within their recorded evidence. Keep unverifiable recipes unpublished; never describe a source table, synthetic fixture or storyboard as a successful in-game test.
+
 - Publish game facts only after checking real, reputable sources. Prefer official Capcom material and record the URL, access date, and applicable game version or patch. FP-02 defines the source catalog and review process.
 - Separate verified game facts from FightPath's approximate input evaluation. Do not claim that a browser simulator reproduces Street Fighter 6 timing or confirms an in-game combo without evidence.
 - Treat ideas from the earlier conversation as proposals unless `PRODUCT.md` or another decision record labels them confirmed.
 
 ## Code and documentation
 
-- Before interacting with any browser, game or other desktop application through computer-use tools, tell the owner what application will be controlled and why. Do not open or take control silently. Code edits, terminal commands and automated project tests can continue within the authorized development scope; announce any test that will visibly control the owner's desktop first.
+- Before interacting with any permitted browser or other desktop application through computer-use tools, tell the owner what application will be controlled and why. Do not open or take control silently. The SF6 prohibition above takes precedence over this notice rule. Code edits, terminal commands and isolated automated FightPath tests can continue within the authorized development scope; announce any test that will visibly control the owner's desktop first. Synthetic input fixtures must remain isolated from the actual game.
 
 - Write all code, identifiers, filenames for code, configuration, and technical Git text in English. Localize user-facing strings instead of hardcoding one language.
 - Do not add comments in code. Make intent clear through names, structure, types, and tests where useful.

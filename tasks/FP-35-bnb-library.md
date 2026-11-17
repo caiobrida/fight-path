@@ -4,6 +4,8 @@
 
 ## Checklist
 
+Editorial preparation: [six bilingual route drafts](../content-drafts/KEN-BNB-DRAFTS.md) include original learning goals, conditional drop checks, drills, mirrored candidate notation and media explanation templates. They are unpublished and await the manual verification required by FP-34. No SF6 automation is permitted.
+
 - [ ] Add a Ken BnB collection filtered by starter/situation, difficulty, resource use and position using the verified recipes.
 - [ ] Show step-by-step notation, button legend, left/right presentation, source/build and a controlled example clip.
 - [ ] Explain when to choose the route, common drop points and an easy alternative; provide the exact in-game setup for practice.

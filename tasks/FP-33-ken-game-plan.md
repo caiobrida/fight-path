@@ -4,6 +4,8 @@
 
 ## Checklist
 
+Current-game toolkit validation and recording are manual human tasks. Source review and original bilingual content preparation may continue without controlling SF6. Follow the explicit no-automation rule in AGENTS.md.
+
 - [ ] Choose a small verified toolkit for range control, anti-air, conversion, pressure and defense; explain why each tool is selected.
 - [x] Teach approaching, confirming, ending a turn, corner decisions and adaptation to repeated opponent choices.
 - [x] Explain risk/context for run, Jinrai and Dragonlash where covered; do not turn offensive identity into advice to attack continuously.

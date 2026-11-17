@@ -2,6 +2,8 @@
 
 Each task has a checklist, dependencies and acceptance criteria. The owner approved FP-19 through FP-40 on 2026-11-17, with one branch and PR per task and passing CI before merge.
 
+Owner constraint added November 17, 2026: never automate SF6, including launch, menus and training/offline play. Complete source research, original content preparation, recording review and isolated FightPath tests independently. Obtain actual game execution/capture evidence from a human reviewer. Do not bypass the publication gate or mark manual gameplay checks complete from website fixtures.
+
 Current evidence and remaining gates: [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). Original planning statements below are historical; the status column and implementation notes describe delivered work.
 ## Regras que se aplicam a todas as tarefas
 

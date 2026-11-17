@@ -1,5 +1,7 @@
 # QA and accessibility matrix
 
+SF6 validation is manual-only by explicit owner instruction. Do not automate game launch, menus, training/offline modes or execution. Synthetic browser inputs in this repository test FightPath alone and must never be forwarded to the game. Gameplay evidence must come from a human reviewer; advance notice does not waive this rule.
+
 ## Expansion regression evidence, November 17, 2026
 
 Current delivery and external gates: [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). Earlier observations below are historical, not substitutes for physical-device verification.

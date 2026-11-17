@@ -4,6 +4,8 @@
 
 ## Checklist
 
+Verification involving the installed game must be performed manually by a human. Source research and review of supplied evidence can continue; SF6 launch, menus and training must never be automated, as required by AGENTS.md.
+
 - [ ] Establish the applicable SF6 build from official battle changes and in-game version information.
 - [x] Explain Drive and super resources, Impact, Parry, Rush, Reversal and Burnout with one small drill per topic.
 - [x] Record exact input, resource and frame claims only after current official/in-game verification; omit uncertain numbers.

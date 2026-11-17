@@ -4,6 +4,8 @@
 
 ## Checklist
 
+Game capture is manual-only: the owner or another human reviewer operates SF6. Do not automate the game to produce clips. Prepare diagrams, storyboards, captions and media edits separately; no unperformed gameplay may be presented as a recording.
+
 - [x] Build an asset register with author/source, license or permission, placement, dimensions, captions/alt text, patch scope and review status.
 - [ ] Select authorized hero/Ken imagery and lesson thumbnails; create original notation/range diagrams and annotated gameplay captures.
 - [x] Review Capcom video policy and individual creator permissions; official art, wiki GIFs and downloadable files are not automatically licensed for redistribution.

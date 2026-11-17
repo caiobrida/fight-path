@@ -16,6 +16,8 @@ The first Ken lessons use only the three commands confirmed in CAPCOM-KEN-MOVES.
 
 ## Content review procedure
 
+Owner instruction, November 17, 2026: all installed-SF6 execution evidence must be obtained manually by a human. Do not automate SF6 even in offline training or after announcing computer use. This decision follows the automation restrictions and account-enforcement provisions in section 4 of the [Steam Subscriber Agreement](https://store.steampowered.com/subscriber_agreement/). It is not a prediction of a specific ban or an assertion that a mode is exempt. Research and editing supplied recordings remain permitted; current-game publication evidence is still required.
+
 `RESEARCH-CONTENT.md` contains the proposed next curriculum, candidate sources and access limits for FP-29 through FP-37. Research candidates are not approved published claims. No exact current-build Ken BnB was verified in that study. Require direct route/build evidence before publication and media provenance before redistribution. `DESIGN-STUDY.md` records visual references separately from factual game evidence.
 
 1. Add source entries before adding game-specific exercise data.
