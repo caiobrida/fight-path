@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "./ui";
 import { useEffect, useState } from "react";
 import {
   activeController,
@@ -12,6 +13,7 @@ import type { Locale } from "@/i18n/dictionaries";
 const copy = {
   en: {
     title: "Controller test",
+    use: "Use this controller",
     activate:
       "Connect your controller, keep this page focused and press a button. Select Gamepad in Device; start practice to score attempts.",
     device: "Active controller",
@@ -26,6 +28,7 @@ const copy = {
   },
   "pt-BR": {
     title: "Teste do controle",
+    use: "Usar este controle",
     activate:
       "Conecte o controle, mantenha esta página em foco e pressione um botão. Selecione Controle em Dispositivo; inicie o treino para avaliar tentativas.",
     device: "Controle ativo",
@@ -40,7 +43,13 @@ const copy = {
   },
 };
 
-export function ControllerMonitor({ locale }: { locale: Locale }) {
+export function ControllerMonitor({
+  locale,
+  onUse,
+}: {
+  locale: Locale;
+  onUse?: () => void;
+}) {
   const text = copy[locale];
   const [pads, setPads] = useState<Gamepad[]>([]);
   const [index, setIndex] = useState<number | undefined>(controllerIndex);
@@ -106,6 +115,11 @@ export function ControllerMonitor({ locale }: { locale: Locale }) {
         {text.axes}:{" "}
         {selected?.axes.map((axis) => axis.toFixed(2)).join(", ") || "—"}
       </p>
+      {selected && onUse && (
+        <div className="fp-actions">
+          <Button onClick={onUse}>{text.use}</Button>
+        </div>
+      )}
       <small>{text.local}</small>
     </section>
   );

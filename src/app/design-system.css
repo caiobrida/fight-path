@@ -552,3 +552,11 @@
     margin-bottom: 40px;
   }
 }
+.fp-guide {
+  padding-left: 24px;
+  line-height: 1.75;
+  color: var(--fp-muted);
+}
+.fp-guide li + li {
+  margin-top: 16px;
+}

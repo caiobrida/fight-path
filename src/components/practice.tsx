@@ -1,5 +1,6 @@
 "use client";
 
+import { PracticeGuide } from "./practice-guide";
 import { SyncFailure, syncFailure } from "@/domain/sync-failure";
 import { OperationQueue } from "@/domain/operation-queue";
 import { AttemptWindow } from "@/domain/attempt-window";
@@ -654,7 +655,13 @@ export function Practice({
         <p className="eyebrow">FightPath</p>
         <h1>{text.title}</h1>
         <p>{text.intro}</p>
-        <ControllerMonitor locale={locale} />
+        <div className="fp-actions">
+          <PracticeGuide locale={locale} />
+        </div>
+        <ControllerMonitor
+          locale={locale}
+          onUse={() => changeDevice("gamepad")}
+        />
         <label className="practice__path">
           {text.path}
           <select

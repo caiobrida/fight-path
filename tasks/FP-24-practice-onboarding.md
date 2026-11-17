@@ -15,3 +15,5 @@
 **Acceptance:** a beginner with the reported DualSense setup can identify why input is or is not being read and complete one command without guessing which mode or state is active.
 
 **Evidence:** observed learner walkthrough and error-state review. This task owns onboarding behavior; FP-28 owns its visual integration.
+
+Implementation: local controller test has an explicit Use this controller action that sets and persists Gamepad mode. Setup links directly to practice. A bilingual accessible guide explains default keyboard mapping, six action labels, start/pause, attack release, facing and feedback scope. Preferred mode/profile carry into practice. Observed beginner and physical DualSense walkthroughs remain pending in FP-40.
