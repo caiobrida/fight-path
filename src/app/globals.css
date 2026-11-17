@@ -36,7 +36,7 @@ body {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
-.site-header__auth button {
+.site-header__auth > button {
   min-height: 2.75rem;
   padding: 0.5rem 0.75rem;
   border: 1px solid #ffad71;

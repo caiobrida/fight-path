@@ -314,3 +314,241 @@
     animation: none;
   }
 }
+.site-header {
+  width: min(100%, 1440px);
+  margin: auto;
+  padding: 20px 32px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--fp-border);
+  gap: 20px;
+}
+.site-header__brand {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+.site-header__brand span {
+  color: var(--fp-accent);
+}
+.fp-main-nav {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-left: auto;
+}
+.fp-main-nav a {
+  color: var(--fp-muted);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 12px 0;
+}
+.fp-main-nav a:hover {
+  color: var(--fp-accent);
+}
+.fp-locale {
+  display: flex;
+  gap: 4px;
+}
+.fp-locale a {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 8px;
+  color: var(--fp-muted);
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.fp-locale a[aria-current] {
+  background: var(--fp-raised);
+  color: var(--fp-accent);
+}
+.fp-locale a:focus-visible,
+.fp-main-nav a:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 3px;
+}
+.fp-home {
+  max-width: 1240px;
+  margin: auto;
+  padding: 48px 32px 64px;
+}
+.fp-hero {
+  display: grid;
+  grid-template-columns: 1.12fr 1fr;
+  gap: 48px;
+  align-items: center;
+  padding: 32px 0 64px;
+}
+.fp-hero h1 {
+  font-family: var(--fp-display);
+  font-size: clamp(56px, 7.5vw, 100px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.055em;
+}
+.fp-hero h1 em {
+  font-style: normal;
+  color: var(--fp-accent);
+}
+.fp-hero__lead {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--fp-muted);
+  max-width: 50ch;
+  margin: 28px 0;
+}
+.fp-hero__note {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--fp-muted);
+  margin-top: 28px;
+}
+.fp-hero__art {
+  border: 1px solid #614b3b;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  background: #171e2a;
+}
+.fp-hero__art img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.fp-hero__art > span {
+  position: absolute;
+  bottom: 24px;
+  text-align: center;
+  left: 16px;
+  right: 16px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--fp-muted);
+}
+.fp-home__section {
+  margin: 32px 0 64px;
+}
+.fp-home__section > h2 {
+  font-size: 32px;
+  letter-spacing: -1px;
+}
+.fp-home__section .fp-section-heading p {
+  max-width: 35ch;
+  color: var(--fp-muted);
+  line-height: 1.5;
+}
+.fp-home .fp-card > svg {
+  color: var(--fp-accent);
+  margin-bottom: 24px;
+}
+.fp-home .fp-card h3 {
+  font-size: 26px;
+  margin-top: 0;
+}
+.fp-home .fp-card .fp-button {
+  padding-left: 0;
+}
+.fp-steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  padding: 0;
+  margin: 32px 0;
+}
+.fp-steps li {
+  border-top: 1px solid var(--fp-border);
+  padding-top: 24px;
+}
+.fp-steps li > span {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--fp-accent);
+}
+.fp-steps h3 {
+  font-size: 22px;
+}
+.fp-steps p {
+  line-height: 1.65;
+  color: var(--fp-muted);
+}
+.fp-home__limit {
+  font-size: 13px;
+  color: var(--fp-muted);
+  line-height: 1.7;
+  max-width: 80ch;
+}
+.site-footer {
+  border-top: 1px solid var(--fp-border);
+  padding: 28px;
+}
+.site-header__auth > button {
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.site-header__auth > button:last-child {
+  background: var(--fp-accent);
+  color: var(--fp-accent-text);
+}
+@media (max-width: 900px) {
+  .site-header {
+    padding: 16px 20px;
+  }
+  .fp-main-nav {
+    order: 4;
+    width: 100%;
+    justify-content: center;
+    gap: 28px;
+  }
+  .fp-locale {
+    margin-left: auto;
+  }
+  .fp-hero {
+    gap: 28px;
+  }
+  .fp-hero h1 {
+    font-size: 64px;
+  }
+  .fp-home {
+    padding: 24px 20px 48px;
+  }
+}
+@media (max-width: 680px) {
+  .fp-hero {
+    grid-template-columns: 1fr;
+    padding: 24px 0 40px;
+  }
+  .fp-hero h1 {
+    font-size: clamp(52px, 13vw, 76px);
+  }
+  .fp-hero__art {
+    max-width: 440px;
+    margin: auto;
+  }
+  .fp-steps {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .fp-hero__lead {
+    font-size: 17px;
+  }
+  .site-header__auth {
+    width: 100%;
+    justify-content: center;
+  }
+  .fp-main-nav {
+    order: 3;
+  }
+  .site-header__auth {
+    order: 4;
+  }
+  .fp-home__section {
+    margin-bottom: 40px;
+  }
+}
