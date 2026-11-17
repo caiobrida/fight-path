@@ -60,15 +60,20 @@ export function assignControl(
   mapping: ControlMapping,
   action: ControlAction,
   control: string,
+  swap = false,
 ): ControlMapping {
-  if (!control || control.length > 60) throw new RangeError("Invalid control");
-  if (
-    controlActions.some(
+  if (control.length > 60) throw new RangeError("Invalid control");
+  const owner =
+    control &&
+    controlActions.find(
       (other) => other !== action && mapping[other] === control,
-    )
-  )
-    throw new RangeError("Control is already assigned");
-  return { ...mapping, [action]: control };
+    );
+  if (owner && !swap) throw new RangeError("Control is already assigned");
+  return {
+    ...mapping,
+    ...(owner ? { [owner]: mapping[action] } : {}),
+    [action]: control,
+  };
 }
 
 export function mapRaw(
@@ -106,20 +111,22 @@ function isMapping(value: unknown): value is ControlMapping {
   const controls = controlActions.map((action) => record[action]);
   return (
     controls.every(
-      (control) =>
-        typeof control === "string" &&
-        control.length > 0 &&
-        control.length <= 60,
-    ) && new Set(controls).size === controls.length
+      (control) => typeof control === "string" && control.length <= 60,
+    ) &&
+    new Set(controls.filter(Boolean)).size === controls.filter(Boolean).length
   );
 }
 
 export function loadMapping(
   storage: Pick<Storage, "getItem">,
   device: DeviceKind,
+  profile = "default",
 ): ControlMapping {
   try {
-    const saved = storage.getItem(`fightpath-mapping-v1-${device}`);
+    const saved =
+      storage.getItem(
+        `fightpath-mapping-v2-${device}-${device === "gamepad" ? profile : "default"}`,
+      ) ?? storage.getItem(`fightpath-mapping-v1-${device}`);
     const parsed: unknown = saved ? JSON.parse(saved) : null;
     return isMapping(parsed) ? parsed : defaultMapping(device);
   } catch {
@@ -131,7 +138,11 @@ export function saveMapping(
   storage: Pick<Storage, "setItem">,
   device: DeviceKind,
   mapping: ControlMapping,
+  profile = "default",
 ): void {
   if (!isMapping(mapping)) throw new RangeError("Invalid mapping");
-  storage.setItem(`fightpath-mapping-v1-${device}`, JSON.stringify(mapping));
+  storage.setItem(
+    `fightpath-mapping-v2-${device}-${device === "gamepad" ? profile : "default"}`,
+    JSON.stringify(mapping),
+  );
 }

@@ -43,6 +43,53 @@ test("rejects duplicate assignments and invalid saved data", () => {
   };
   saveMapping(storage, "keyboard", updated);
   assert.equal(loadMapping(storage, "keyboard").LP, "KeyP");
-  values.set("fightpath-mapping-v1-keyboard", "invalid json");
+  values.set("fightpath-mapping-v2-keyboard-default", "invalid json");
   assert.equal(loadMapping(storage, "keyboard").LP, "KeyJ");
+});
+
+test("explicit swaps and cleared mappings survive storage", () => {
+  const swapped = assignControl(
+    defaultMapping("gamepad"),
+    "LP",
+    "Button2",
+    true,
+  );
+  assert.equal(swapped.LP, "Button2");
+  assert.equal(swapped.HP, "Button0");
+  const cleared = assignControl(swapped, "up", "");
+  const axes = assignControl(cleared, "right", "Axis6+");
+  assert.equal(
+    mapRaw(rawSnapshot("gamepad", 0, true, ["Axis6+"]), axes).direction,
+    "right",
+  );
+  let value = "";
+  saveMapping(
+    {
+      setItem: (_key, next) => {
+        value = next;
+      },
+    },
+    "gamepad",
+    axes,
+  );
+  assert.deepEqual(loadMapping({ getItem: () => value }, "gamepad"), axes);
+});
+
+test("controller profiles remain separate and legacy layouts remain readable", () => {
+  const values = new Map<string, string>();
+  const storage = {
+    getItem: (key: string) => values.get(key) ?? null,
+    setItem: (key: string, value: string) => void values.set(key, value),
+  };
+  const legacy = assignControl(defaultMapping("gamepad"), "LP", "Button9");
+  values.set("fightpath-mapping-v1-gamepad", JSON.stringify(legacy));
+  assert.equal(loadMapping(storage, "gamepad", "first").LP, "Button9");
+  saveMapping(
+    storage,
+    "gamepad",
+    assignControl(legacy, "LP", "Button8"),
+    "first",
+  );
+  assert.equal(loadMapping(storage, "gamepad", "first").LP, "Button8");
+  assert.equal(loadMapping(storage, "gamepad", "second").LP, "Button9");
 });

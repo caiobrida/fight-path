@@ -1,5 +1,6 @@
 "use client";
 
+import { useControllerProfile } from "@/devices/use-controller-profile";
 import { ControllerMonitor } from "./controller-monitor";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -40,6 +41,9 @@ const copy = {
     saveError: "Could not save the layout on this device.",
     save: "Save layout",
     reset: "Reset",
+    swap: "Swap assigned controls",
+    cancel: "Cancel capture",
+    clear: "Clear this binding",
     test: "Current input",
     back: "Back",
     up: "Up",
@@ -67,6 +71,9 @@ const copy = {
     saveError: "Não foi possível salvar o layout neste dispositivo.",
     save: "Salvar layout",
     reset: "Redefinir",
+    swap: "Trocar os controles atribu?dos",
+    cancel: "Cancelar captura",
+    clear: "Remover esta associa??o",
     test: "Input atual",
     back: "Voltar",
     up: "Cima",
@@ -102,6 +109,7 @@ const directionNames: Record<Locale, Record<Direction, string>> = {
 };
 
 export function ControlSetup({ locale }: { locale: Locale }) {
+  const profile = useControllerProfile();
   const text = copy[locale];
   const [device, setDevice] = useState<DeviceKind>("keyboard");
   const [mapping, setMapping] = useState<ControlMapping>(
@@ -110,12 +118,27 @@ export function ControlSetup({ locale }: { locale: Locale }) {
   const [raw, setRaw] = useState<RawSnapshot>();
   const [active, setActive] = useState<ControlAction | null>(null);
   const [message, setMessage] = useState("");
+  const [pendingControl, setPendingControl] = useState<string | null>(null);
   const [support, setSupport] = useState({ gamepad: true, touch: true });
   const mappingRef = useRef(mapping);
   const activeRef = useRef(active);
   const prior = useRef(new Set<string>());
   const keyboard = useRef<KeyboardAdapter | null>(null);
   const touchRoot = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    try {
+      const preferred = window.localStorage.getItem(
+        "fightpath-preferred-device",
+      );
+      if (
+        preferred === "gamepad" ||
+        preferred === "touch" ||
+        preferred === "keyboard"
+      )
+        queueMicrotask(() => setDevice(preferred));
+    } catch {}
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -137,7 +160,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
       if (cancelled) return;
       let saved = defaultMapping(device);
       try {
-        saved = loadMapping(window.localStorage, device);
+        saved = loadMapping(window.localStorage, device, profile);
       } catch {
         saved = defaultMapping(device);
       }
@@ -151,7 +174,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
     return () => {
       cancelled = true;
     };
-  }, [device]);
+  }, [device, profile]);
 
   useEffect(() => {
     const sink = (snapshot: RawSnapshot) => {
@@ -174,6 +197,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
         setActive(null);
         keyboard.current?.setCaptureAll(false);
       } catch {
+        setPendingControl(fresh);
         setMessage(text.conflict);
       }
     };
@@ -200,12 +224,34 @@ export function ControlSetup({ locale }: { locale: Locale }) {
   );
 
   const choose = (action: ControlAction) => {
+    setPendingControl(null);
     activeRef.current = action;
     setActive(action);
     setMessage("");
     prior.current = new Set(raw?.controls ?? []);
     keyboard.current?.setCaptureAll(true);
   };
+
+  const cancelCapture = () => {
+    activeRef.current = null;
+    setActive(null);
+    setPendingControl(null);
+    setMessage("");
+    keyboard.current?.setCaptureAll(false);
+  };
+
+  useEffect(() => {
+    const cancel = (event: KeyboardEvent) => {
+      if (event.code === "Escape") {
+        activeRef.current = null;
+        setActive(null);
+        setPendingControl(null);
+        keyboard.current?.setCaptureAll(false);
+      }
+    };
+    window.addEventListener("keydown", cancel);
+    return () => window.removeEventListener("keydown", cancel);
+  }, []);
 
   const reset = () => {
     const initial = defaultMapping(device);
@@ -230,7 +276,15 @@ export function ControlSetup({ locale }: { locale: Locale }) {
         <select
           id="device"
           value={device}
-          onChange={(event) => setDevice(event.target.value as DeviceKind)}
+          onChange={(event) => {
+            setDevice(event.target.value as DeviceKind);
+            try {
+              window.localStorage.setItem(
+                "fightpath-preferred-device",
+                event.target.value,
+              );
+            } catch {}
+          }}
         >
           <option value="keyboard">{text.keyboard}</option>
           <option value="gamepad">{text.gamepad}</option>
@@ -265,10 +319,47 @@ export function ControlSetup({ locale }: { locale: Locale }) {
         </div>
         {active && (
           <p role="status">
-            {text.mapping} {active}
+            {text.mapping}{" "}
+            {active in text ? text[active as keyof typeof text] : active}
           </p>
         )}
         {message && <p role="status">{message}</p>}
+        {active && (
+          <div className="setup__buttons">
+            {pendingControl && (
+              <button
+                type="button"
+                onClick={() => {
+                  const updated = assignControl(
+                    mappingRef.current,
+                    active,
+                    pendingControl,
+                    true,
+                  );
+                  mappingRef.current = updated;
+                  setMapping(updated);
+                  cancelCapture();
+                }}
+              >
+                {text.swap}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => {
+                const updated = assignControl(mappingRef.current, active, "");
+                mappingRef.current = updated;
+                setMapping(updated);
+                cancelCapture();
+              }}
+            >
+              {text.clear}
+            </button>
+            <button type="button" onClick={cancelCapture}>
+              {text.cancel}
+            </button>
+          </div>
+        )}
         {device === "touch" && support.touch && (
           <div ref={touchRoot} className="setup__touch">
             {controlActions.map((action) => (
@@ -297,7 +388,7 @@ export function ControlSetup({ locale }: { locale: Locale }) {
             type="button"
             onClick={() => {
               try {
-                saveMapping(window.localStorage, device, mapping);
+                saveMapping(window.localStorage, device, mapping, profile);
                 setMessage(text.saved);
               } catch {
                 setMessage(text.saveError);

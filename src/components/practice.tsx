@@ -2,6 +2,7 @@
 
 import { AttemptWindow } from "@/domain/attempt-window";
 
+import { useControllerProfile } from "@/devices/use-controller-profile";
 import { ControllerMonitor } from "./controller-monitor";
 import { useEffect, useRef, useState } from "react";
 import { exercises, kenExercises } from "@/content/exercises";
@@ -238,6 +239,7 @@ export function Practice({
   locale: Locale;
   userId: string;
 }) {
+  const profile = useControllerProfile();
   const text = copy[locale];
   const [path, setPath] = useState<"universal" | "ken">("universal");
   const activeExercises = path === "ken" ? kenExercises : exercises;
@@ -272,6 +274,20 @@ export function Practice({
   const flushRef = useRef<() => Promise<void>>(async () => {});
   const retryRef = useRef<() => void>(() => {});
   const pendingStorageRef = useRef<Storage | null>(null);
+
+  useEffect(() => {
+    try {
+      const preferred = window.localStorage.getItem(
+        "fightpath-preferred-device",
+      );
+      if (
+        preferred === "gamepad" ||
+        preferred === "touch" ||
+        preferred === "keyboard"
+      )
+        queueMicrotask(() => setDevice(preferred));
+    } catch {}
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -375,9 +391,11 @@ export function Practice({
     let cancelled = false;
     queueMicrotask(() => {
       if (cancelled) return;
+      setPlaying(false);
+      attemptRef.current.disconnect();
       let saved = defaultMapping(device);
       try {
-        saved = loadMapping(window.localStorage, device);
+        saved = loadMapping(window.localStorage, device, profile);
       } catch {
         saved = defaultMapping(device);
       }
@@ -387,7 +405,7 @@ export function Practice({
     return () => {
       cancelled = true;
     };
-  }, [device]);
+  }, [device, profile]);
 
   useEffect(
     () => keyboardRef.current?.setCodes(Object.values(mapping)),
@@ -520,6 +538,9 @@ export function Practice({
     reset();
     setRaw(undefined);
     setDevice(next);
+    try {
+      window.localStorage.setItem("fightpath-preferred-device", next);
+    } catch {}
   };
 
   const feedback = evaluation

@@ -18,6 +18,6 @@ test("samples gamepad buttons and axes without a device identity", () => {
   const result = gamepadSnapshot(gamepad, 12);
   assert.equal(result.horizontal, 1);
   assert.equal(result.vertical, -1);
-  assert.deepEqual(result.controls, ["Button0"]);
+  assert.deepEqual(result.controls, ["Axis0+", "Axis1-", "Button0"]);
   assert.equal(gamepadSnapshot(null, 13).connected, false);
 });

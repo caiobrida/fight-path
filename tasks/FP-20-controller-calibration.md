@@ -7,12 +7,14 @@
 ## Checklist
 
 - [ ] Model button, axis polarity, D-pad/hat representations and dead-zone handling explicitly; inspect DualSense standard mappings before selecting defaults.
-- [ ] Add assign, swap/replace, clear and cancel flows with visible conflicts; releasing inputs must not bind an unintended held control.
+- [x] Add assign, swap/replace, clear and cancel flows with visible conflicts; releasing inputs must not bind an unintended held control.
 - [ ] Show familiar physical labels when known, with a raw-value fallback; explain LP/MP/HP/LK/MK/HK in both locales.
-- [ ] Save versioned profiles and preferred input mode so setup-to-practice uses the chosen layout; migrate or safely reset existing v1 mappings.
-- [ ] Distinguish multiple controller profiles without uploading hardware identifiers; define behavior when a different controller appears.
+- [x] Save versioned profiles and preferred input mode so setup-to-practice uses the chosen layout; migrate or safely reset existing v1 mappings.
+- [x] Distinguish multiple controller profiles without uploading hardware identifiers; define behavior when a different controller appears.
 - [ ] Verify button swaps, axis direction/inversion, analog drift, diagonals, reload, blocked storage and reconnect.
 
 **Acceptance:** DualSense D-pad and stick can be calibrated and tested, LP/HP can be swapped without a temporary binding, cancel restores normal navigation, and saved controls work on the practice page.
 
 **Evidence:** calibration integration test and hardware demonstration, in `en` and `pt-BR`. Do not assume every nonstandard controller shares DualSense indices.
+
+Implementation: axis polarity tokens, explicit swap/clear/cancel, v2 per-controller local profiles with v1 fallback, preferred device and tab controller selection persistence. Profile changes pause practice and reset physical baseline. Mapping tests verify swaps, custom axis bindings and serialization. DualSense hardware, drift behavior and full visual walkthrough remain pending.

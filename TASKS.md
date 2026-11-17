@@ -1,6 +1,6 @@
 # FightPath — plano de tarefas
 
-Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um arquivo próprio em [`tasks/`](tasks/README.md), com checklist, dependências e critérios de aceite. A autorização anterior de implementação cobre FP-01 a FP-18. **O novo lote FP-19 a FP-40 é somente uma proposta e aguarda validação do proprietário antes de qualquer implementação.** Cada tarefa aprovada deverá usar sua própria branch e PR.
+Each task has a checklist, dependencies and acceptance criteria. The owner approved FP-19 through FP-40 on 2026-11-17, with one branch and PR per task and passing CI before merge.
 
 ## Regras que se aplicam a todas as tarefas
 
@@ -45,28 +45,28 @@ Estudo de 17/11/2026: [auditoria e evidências](AUDIT.md), [direção visual e b
 
 | Ordem | Tarefa | Entrega | Dependências principais | Prioridade | Estado |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [FP-19](tasks/FP-19-dualsense-detection.md) | Diagnóstico e detecção do DualSense/controle ativo | FP-08 | P1 | Aguardando validação |
-| 2 | [FP-20](tasks/FP-20-controller-calibration.md) | Calibração, troca de botões, eixos e perfis salvos | FP-19 | P1 | Aguardando validação |
-| 3 | [FP-21](tasks/FP-21-attempt-boundaries.md) | Corrigir tentativas extras ao segurar ataque | FP-10, FP-11 | P1 | Aguardando validação |
-| 4 | [FP-22](tasks/FP-22-input-lifecycle-and-touch.md) | Touch contínuo, foco, pausa, captura e reconexão | FP-19 a FP-21 | P2 | Aguardando validação |
-| 5 | [FP-23](tasks/FP-23-progress-sync-safety.md) | Investigar sincronização, retry e exclusão concorrente | FP-21 | P2 | Aguardando validação |
-| 6 | [FP-25](tasks/FP-25-design-direction.md) | Proposta visual, tokens e escolha de biblioteca | Estudo visual | P2 | Aguardando validação |
-| 7 | [FP-26](tasks/FP-26-design-system.md) | Design system, variantes, acessibilidade e galeria | Direção FP-25 aprovada | P2 | Aguardando validação |
-| 8 | [FP-24](tasks/FP-24-practice-onboarding.md) | Jornada guiada do controle até o primeiro comando | FP-19 a FP-21, FP-26 | P2 | Aguardando validação |
-| 9 | [FP-27](tasks/FP-27-home-and-navigation.md) | Home, ações separadas, navegação e idioma persistentes | FP-26, FP-37 para mídia | P2 | Aguardando validação |
-| 10 | [FP-28](tasks/FP-28-setup-and-practice-design.md) | Novo visual da configuração e do treino | FP-19 a FP-22, FP-24, FP-26 | P2 | Aguardando validação |
-| 11 | [FP-29](tasks/FP-29-learning-model-and-reader.md) | Catálogo e leitor bilíngue com fontes e revisão | FP-26, contrato de navegação FP-27 | P2 | Aguardando validação |
-| 12 | [FP-30](tasks/FP-30-fighting-game-foundations.md) | Primeiros fundamentos e defesa | FP-29, FP-37 | P2 | Aguardando validação |
-| 13 | [FP-31](tasks/FP-31-neutral-and-footsies.md) | Neutral, espaçamento, footsies e adaptação | FP-30 | P2 | Aguardando validação |
-| 14 | [FP-32](tasks/FP-32-sf6-systems.md) | Sistemas do SF6 com versão verificada | FP-30 | P2 | Aguardando validação |
-| 15 | [FP-33](tasks/FP-33-ken-game-plan.md) | Plano de jogo e decisões do Ken Classic | FP-31, FP-32 | P2 | Aguardando validação |
-| 16 | [FP-34](tasks/FP-34-ken-bnb-verification.md) | Validar seis situações de BnB no jogo | FP-32, FP-33 | P2 | Aguardando validação |
-| 17 | [FP-35](tasks/FP-35-bnb-library.md) | Biblioteca de BnBs, exemplos e drills no SF6 | FP-29, FP-34, FP-37 | P2 | Aguardando validação |
-| 18 | [FP-36](tasks/FP-36-practice-habits.md) | Hábitos de treino, replay e comportamento em partidas | FP-29, FP-30, FP-33 | P2 | Aguardando validação |
-| Transversal | [FP-37](tasks/FP-37-media-library.md) | Imagens, diagramas, clipes e player com origem documentada | FP-25, FP-26; verificação do conteúdo | P2 | Aguardando validação |
-| 19 | [FP-38](tasks/FP-38-learning-progress.md) | Progresso de leitura, checagens e drills separado da execução | FP-23, FP-29, FP-35, FP-36 | P2 | Aguardando validação |
-| 20 | [FP-39](tasks/FP-39-auth-navigation-and-privacy.md) | Auth completa, retornos, privacidade e webhook | FP-27, FP-18 | P2 | Aguardando validação |
-| Gate contínuo/final | [FP-40](tasks/FP-40-release-regression-matrix.md) | E2E, banco no CI, dispositivos, acessibilidade e novo pente-fino | Mudanças aprovadas | P2 | Aguardando validação |
+| 1 | [FP-19](tasks/FP-19-dualsense-detection.md) | Diagnóstico e detecção do DualSense/controle ativo | FP-08 | P1 | Implementation merged; hardware check pending |
+| 2 | [FP-20](tasks/FP-20-controller-calibration.md) | Calibração, troca de botões, eixos e perfis salvos | FP-19 | P1 | In progress |
+| 3 | [FP-21](tasks/FP-21-attempt-boundaries.md) | Corrigir tentativas extras ao segurar ataque | FP-10, FP-11 | P1 | Implementation merged; hardware check pending |
+| 4 | [FP-22](tasks/FP-22-input-lifecycle-and-touch.md) | Touch contínuo, foco, pausa, captura e reconexão | FP-19 a FP-21 | P2 | Approved |
+| 5 | [FP-23](tasks/FP-23-progress-sync-safety.md) | Investigar sincronização, retry e exclusão concorrente | FP-21 | P2 | Approved |
+| 6 | [FP-25](tasks/FP-25-design-direction.md) | Proposta visual, tokens e escolha de biblioteca | Estudo visual | P2 | Approved |
+| 7 | [FP-26](tasks/FP-26-design-system.md) | Design system, variantes, acessibilidade e galeria | Direção FP-25 aprovada | P2 | Approved |
+| 8 | [FP-24](tasks/FP-24-practice-onboarding.md) | Jornada guiada do controle até o primeiro comando | FP-19 a FP-21, FP-26 | P2 | Approved |
+| 9 | [FP-27](tasks/FP-27-home-and-navigation.md) | Home, ações separadas, navegação e idioma persistentes | FP-26, FP-37 para mídia | P2 | Approved |
+| 10 | [FP-28](tasks/FP-28-setup-and-practice-design.md) | Novo visual da configuração e do treino | FP-19 a FP-22, FP-24, FP-26 | P2 | Approved |
+| 11 | [FP-29](tasks/FP-29-learning-model-and-reader.md) | Catálogo e leitor bilíngue com fontes e revisão | FP-26, contrato de navegação FP-27 | P2 | Approved |
+| 12 | [FP-30](tasks/FP-30-fighting-game-foundations.md) | Primeiros fundamentos e defesa | FP-29, FP-37 | P2 | Approved |
+| 13 | [FP-31](tasks/FP-31-neutral-and-footsies.md) | Neutral, espaçamento, footsies e adaptação | FP-30 | P2 | Approved |
+| 14 | [FP-32](tasks/FP-32-sf6-systems.md) | Sistemas do SF6 com versão verificada | FP-30 | P2 | Approved |
+| 15 | [FP-33](tasks/FP-33-ken-game-plan.md) | Plano de jogo e decisões do Ken Classic | FP-31, FP-32 | P2 | Approved |
+| 16 | [FP-34](tasks/FP-34-ken-bnb-verification.md) | Validar seis situações de BnB no jogo | FP-32, FP-33 | P2 | Approved |
+| 17 | [FP-35](tasks/FP-35-bnb-library.md) | Biblioteca de BnBs, exemplos e drills no SF6 | FP-29, FP-34, FP-37 | P2 | Approved |
+| 18 | [FP-36](tasks/FP-36-practice-habits.md) | Hábitos de treino, replay e comportamento em partidas | FP-29, FP-30, FP-33 | P2 | Approved |
+| Transversal | [FP-37](tasks/FP-37-media-library.md) | Imagens, diagramas, clipes e player com origem documentada | FP-25, FP-26; verificação do conteúdo | P2 | Approved |
+| 19 | [FP-38](tasks/FP-38-learning-progress.md) | Progresso de leitura, checagens e drills separado da execução | FP-23, FP-29, FP-35, FP-36 | P2 | Approved |
+| 20 | [FP-39](tasks/FP-39-auth-navigation-and-privacy.md) | Auth completa, retornos, privacidade e webhook | FP-27, FP-18 | P2 | Approved |
+| Gate contínuo/final | [FP-40](tasks/FP-40-release-regression-matrix.md) | E2E, banco no CI, dispositivos, acessibilidade e novo pente-fino | Mudanças aprovadas | P2 | Approved |
 
 Começar por FP-19, FP-20 e FP-21 para recuperar confiança no treino. FP-25 pode avançar em paralelo técnico após aprovação deste plano; sua proposta visual ainda terá uma revisão antes da migração de telas. Executar FP-37 conforme cada conteúdo for verificado, sem travar o desenvolvimento do catálogo em assets não aprovados. A ordem é uma sequência de entregas, não uma estimativa de datas.
 

@@ -19,6 +19,10 @@ export function gamepadSnapshot(
   const controls = gamepad.buttons.flatMap((button, index) =>
     button.pressed ? [`Button${index}`] : [],
   );
+  gamepad.axes.forEach((axis, index) => {
+    const direction = quantizeAxis(axis);
+    if (direction) controls.push(`Axis${index}${direction < 0 ? "-" : "+"}`);
+  });
   return rawSnapshot(
     "gamepad",
     atMs,
