@@ -18,25 +18,26 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 
 ## Ordem sugerida
 
-| Fase | Tarefa | Entrega | Depende de | Estado |
-| --- | --- | --- | --- | --- |
-| Planejamento | [FP-01](tasks/FP-01-documentacao-base.md) | Documentação base e decisões em aberto | Validação deste plano | Concluída |
-| Planejamento | [FP-02](tasks/FP-02-fontes-do-jogo.md) | Política e catálogo de fontes do jogo | FP-01 | Concluída |
-| Fundação | [FP-03](tasks/FP-03-base-tecnica.md) | Stack e projeto inicial | FP-01 | Concluída |
-| Fundação | [FP-04](tasks/FP-04-ci.md) | CI para PRs | FP-03 | Concluída |
-| Fundação | [FP-05](tasks/FP-05-localizacao.md) | Infraestrutura `en` e `pt-BR` | FP-03 | Concluída |
-| Fundação | [FP-06](tasks/FP-06-dados-e-identidade.md) | Contrato de dados, identidade e segurança | FP-01 | Concluída |
-| Simulador | [FP-07](tasks/FP-07-modelo-de-inputs.md) | Modelo de inputs independente da interface | FP-03 | Concluída |
-| Simulador | [FP-08](tasks/FP-08-adaptadores-de-dispositivos.md) | Teclado, gamepad e touch | FP-07 | Em andamento |
-| Simulador | [FP-09](tasks/FP-09-mapeamento-de-controles.md) | Configuração e calibração de controles | FP-08 | Concluída |
-| Simulador | [FP-10](tasks/FP-10-validacao-de-comandos.md) | Validação e explicação de erros | FP-07, FP-02 | Concluída |
-| Simulador | [FP-11](tasks/FP-11-interface-do-simulador.md) | Prática e histórico visual de inputs | FP-05, FP-09, FP-10 | Concluída |
-| Conteúdo | [FP-12](tasks/FP-12-treino-universal.md) | Treinos universais de execução | FP-02, FP-11 | Em andamento |
-| Conteúdo | [FP-13](tasks/FP-13-ken-classic.md) | Trilha inicial do Ken Classic | FP-02, FP-11 | Em andamento |
-| Progresso | [FP-14](tasks/FP-14-progresso-e-persistencia.md) | Progresso salvo no Neon | FP-06, FP-12, FP-13 | Concluída |
-| Progresso | [FP-15](tasks/FP-15-gamificacao.md) | Domínio, XP e desafios | FP-14 | Concluída |
-| Lançamento | [FP-16](tasks/FP-16-acessibilidade-e-qa.md) | Testes em dispositivos e acessibilidade | FP-11, FP-12, FP-13 | Em andamento |
-| Lançamento | [FP-17](tasks/FP-17-preparo-vercel.md) | Ambiente e publicação futura na Vercel | FP-04, FP-06, FP-16 | Em andamento |
+| Fase         | Tarefa                                              | Entrega                                                  | Depende de            | Estado       |
+| ------------ | --------------------------------------------------- | -------------------------------------------------------- | --------------------- | ------------ |
+| Planejamento | [FP-01](tasks/FP-01-documentacao-base.md)           | Documentação base e decisões em aberto                   | Validação deste plano | Concluída    |
+| Planejamento | [FP-02](tasks/FP-02-fontes-do-jogo.md)              | Política e catálogo de fontes do jogo                    | FP-01                 | Concluída    |
+| Fundação     | [FP-03](tasks/FP-03-base-tecnica.md)                | Stack e projeto inicial                                  | FP-01                 | Concluída    |
+| Fundação     | [FP-04](tasks/FP-04-ci.md)                          | CI para PRs                                              | FP-03                 | Concluída    |
+| Fundação     | [FP-05](tasks/FP-05-localizacao.md)                 | Infraestrutura `en` e `pt-BR`                            | FP-03                 | Concluída    |
+| Fundação     | [FP-06](tasks/FP-06-dados-e-identidade.md)          | Contrato de dados, identidade e segurança                | FP-01                 | Concluída    |
+| Simulador    | [FP-07](tasks/FP-07-modelo-de-inputs.md)            | Modelo de inputs independente da interface               | FP-03                 | Concluída    |
+| Simulador    | [FP-08](tasks/FP-08-adaptadores-de-dispositivos.md) | Teclado, gamepad e touch                                 | FP-07                 | Em andamento |
+| Simulador    | [FP-09](tasks/FP-09-mapeamento-de-controles.md)     | Configuração e calibração de controles                   | FP-08                 | Concluída    |
+| Simulador    | [FP-10](tasks/FP-10-validacao-de-comandos.md)       | Validação e explicação de erros                          | FP-07, FP-02          | Concluída    |
+| Simulador    | [FP-11](tasks/FP-11-interface-do-simulador.md)      | Prática e histórico visual de inputs                     | FP-05, FP-09, FP-10   | Concluída    |
+| Conteúdo     | [FP-12](tasks/FP-12-treino-universal.md)            | Treinos universais de execução                           | FP-02, FP-11          | Em andamento |
+| Conteúdo     | [FP-13](tasks/FP-13-ken-classic.md)                 | Trilha inicial do Ken Classic                            | FP-02, FP-11          | Em andamento |
+| Progresso    | [FP-14](tasks/FP-14-progresso-e-persistencia.md)    | Progresso salvo no Neon                                  | FP-06, FP-12, FP-13   | Concluída    |
+| Progresso    | [FP-15](tasks/FP-15-gamificacao.md)                 | Domínio, XP e desafios                                   | FP-14                 | Concluída    |
+| Lançamento   | [FP-16](tasks/FP-16-acessibilidade-e-qa.md)         | Testes em dispositivos e acessibilidade                  | FP-11, FP-12, FP-13   | Em andamento |
+| Lançamento   | [FP-17](tasks/FP-17-preparo-vercel.md)              | Ambiente e publicação futura na Vercel                   | FP-04, FP-06, FP-16   | Em andamento |
+| Identidade   | [FP-18](tasks/FP-18-clerk-authentication.md)        | Autenticação obrigatória com Clerk e progresso por conta | FP-05, FP-14, FP-17   | Em andamento |
 
 ## Fora do primeiro recorte
 
@@ -44,4 +45,4 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 - Validação fiel de combos do jogo. O primeiro simulador avaliará sequências de inputs e ritmo; equivalência ao motor de Street Fighter 6 exige pesquisa e testes específicos.
 - Modos de treino como side switch, memory, survival e reação. Eles podem ganhar tarefas próprias após o primeiro ciclo de uso.
 
-O recorte inicial, a stack e a sessão anônima estão registrados em `PRODUCT.md` e `ARCHITECTURE.md`. Testes com jogadores e dispositivos reais, além da configuração externa de Neon e Vercel, permanecem como gates de publicação.
+O recorte inicial, a stack e a autenticação obrigatória com Clerk estão registrados em `PRODUCT.md` e `ARCHITECTURE.md`. Testes com jogadores e dispositivos reais, além da configuração externa de Neon, Vercel e Clerk para produção, permanecem como gates de publicação.

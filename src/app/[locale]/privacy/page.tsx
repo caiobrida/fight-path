@@ -14,19 +14,19 @@ const copy = {
       "A private contact channel will be published before public launch.",
     data: "Data we handle",
     dataItems: [
-      "A random session token in a necessary HttpOnly cookie. Only its hash is stored on the server.",
+      "Clerk handles your account details and authentication cookies. FightPath stores your Clerk user ID with saved practice attempts, but not your email or password in its database.",
       "Exercise ID, correct or incorrect result, duration, and timestamp for saved practice attempts.",
-      "Language and control mapping in browser storage. Up to 500 attempts awaiting sync are held in browser storage when available, or in tab memory if storage is blocked. Raw input history stays in browser memory and is not sent to the server.",
+      "Language and control mapping stay in browser storage. Up to 500 attempts awaiting sync are stored per account in this browser when available, or in tab memory if storage is blocked. Raw input history stays in browser memory and is not sent to the server.",
     ],
     purpose: "Purpose and sharing",
     purposeText:
-      "We use this data to show feedback, save progress, and calculate private practice rewards. We do not add advertising or analytics cookies. When deployed, Vercel hosts the app and Neon hosts the database; their production regions and contractual settings must be reviewed before launch.",
+      "We use this data to sign you in, show feedback, save progress, and calculate private practice rewards. Clerk processes account data; Vercel hosts the app and Neon hosts the database when deployed. We do not add advertising or analytics cookies. Production regions and contractual settings must be reviewed before launch.",
     retention: "Retention",
     retentionText:
-      "The session cookie lasts up to 180 days. A daily server job deletes sessions created more than 180 days ago and their attempts. Browser preferences remain until you clear them; pending attempts are removed after successful sync or progress deletion. Production backup retention must be confirmed before launch.",
+      "A daily server job deletes practice attempts after 180 days. Clerk controls account and authentication cookie retention. Browser preferences remain until you clear them; pending attempts are removed after successful sync or progress deletion. Production backup retention must be confirmed before launch.",
     choices: "Your choices",
     choicesText:
-      "The practice page lets you export or permanently delete progress associated with this browser session. Deleting progress also clears pending attempts on this device. If you lose the session cookie, the anonymous progress cannot be linked back to you. Use the private contact channel for other privacy requests once it is published.",
+      "The practice page lets you export or permanently delete progress associated with your signed-in account. Deleting progress also clears pending attempts for that account on this device. A signed webhook will remove saved FightPath attempts when a Clerk account is deleted after deployment setup. Use the private contact channel for other privacy requests once it is published.",
     legal: "Publication review",
     legalText:
       "The legal basis, operator details, cross-border hosting settings, backup deletion process, and request handling procedure require review before public data collection.",
@@ -43,19 +43,19 @@ const copy = {
       "Um canal privado de contato será publicado antes do lançamento público.",
     data: "Dados tratados",
     dataItems: [
-      "Um token aleatório de sessão em cookie necessário e HttpOnly. Apenas seu hash é salvo no servidor.",
+      "A Clerk gerencia os dados da conta e os cookies de autenticação. O FightPath salva o identificador de usuário da Clerk com as tentativas, mas não armazena e-mail nem senha no próprio banco.",
       "Identificador do exercício, resultado correto ou incorreto, duração e data das tentativas salvas.",
-      "Idioma e mapeamento de controles no armazenamento do navegador. Até 500 tentativas aguardando sincronização ficam nesse armazenamento quando disponível, ou na memória da aba quando bloqueado. O histórico bruto de inputs fica na memória do navegador e não é enviado ao servidor.",
+      "Idioma e mapeamento de controles ficam no navegador. Até 500 tentativas aguardando sincronização são armazenadas por conta neste navegador quando possível, ou na memória da aba se o armazenamento estiver bloqueado. O histórico bruto de inputs não é enviado ao servidor.",
     ],
     purpose: "Finalidade e compartilhamento",
     purposeText:
-      "Usamos esses dados para mostrar feedback, salvar progresso e calcular recompensas privadas de treino. Não adicionamos cookies de publicidade ou análise. Quando implantado, a Vercel hospedará o aplicativo e a Neon hospedará o banco; as regiões e condições contratuais precisam de revisão antes do lançamento.",
+      "Usamos esses dados para autenticar você, mostrar feedback, salvar progresso e calcular recompensas privadas de treino. A Clerk processa os dados da conta; a Vercel hospedará o aplicativo e a Neon hospedará o banco. Não adicionamos cookies de publicidade ou análise. Regiões e condições contratuais precisam de revisão antes do lançamento.",
     retention: "Retenção",
     retentionText:
-      "O cookie de sessão dura até 180 dias. Uma rotina diária exclui sessões criadas há mais de 180 dias e suas tentativas. As preferências do navegador permanecem até serem apagadas; tentativas pendentes são removidas após sincronização ou exclusão do progresso. A retenção dos backups de produção precisa ser confirmada antes do lançamento.",
+      "Uma rotina diária exclui tentativas de treino após 180 dias. A Clerk controla a retenção da conta e dos cookies de autenticação. As preferências do navegador permanecem até serem apagadas; tentativas pendentes são removidas após sincronização ou exclusão do progresso. A retenção dos backups de produção precisa ser confirmada antes do lançamento.",
     choices: "Suas opções",
     choicesText:
-      "A página de treino permite exportar ou excluir permanentemente o progresso desta sessão do navegador. A exclusão também limpa tentativas pendentes neste dispositivo. Se o cookie de sessão for perdido, não será possível associar novamente o progresso anônimo a você. Use o canal privado de contato para outras solicitações quando ele for publicado.",
+      "A página de treino permite exportar ou excluir permanentemente o progresso da sua conta. A exclusão também limpa as tentativas pendentes desta conta neste dispositivo. Após configurar a implantação, um webhook assinado removerá as tentativas salvas quando uma conta da Clerk for excluída. Use o canal privado de contato para outras solicitações quando ele for publicado.",
     legal: "Revisão para publicação",
     legalText:
       "A base legal, a identificação do responsável, as condições de hospedagem internacional, a exclusão de backups e o atendimento de solicitações precisam de revisão antes da coleta pública de dados.",

@@ -1,7 +1,8 @@
+import { clerkMiddleware } from "@clerk/nextjs/server";
 import { NextResponse, type NextRequest } from "next/server";
 import { isLocale, type Locale } from "@/i18n/dictionaries";
 
-export function proxy(request: NextRequest) {
+export default clerkMiddleware((_auth, request: NextRequest) => {
   const segment = request.nextUrl.pathname.split("/")[1];
 
   if (isLocale(segment)) {
@@ -15,6 +16,8 @@ export function proxy(request: NextRequest) {
     return response;
   }
 
+  if (request.nextUrl.pathname !== "/") return NextResponse.next();
+
   const saved = request.cookies.get("fightpath-locale")?.value;
   const preferred: Locale =
     saved && isLocale(saved)
@@ -23,6 +26,12 @@ export function proxy(request: NextRequest) {
         ? "pt-BR"
         : "en";
   return NextResponse.redirect(new URL(`/${preferred}`, request.url));
-}
+});
 
-export const config = { matcher: ["/", "/en/:path*", "/pt-BR/:path*"] };
+export const config = {
+  matcher: [
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    "/(api|trpc)(.*)",
+    "/__clerk/(.*)",
+  ],
+};

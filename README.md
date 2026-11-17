@@ -4,7 +4,7 @@ FightPath is a bilingual, mobile-first training platform for fighting game input
 
 ## Local development
 
-Requirements: Node.js 22 or newer and npm. PostgreSQL is needed when persistence work begins; the application shell runs without it.
+Requirements: Node.js 22 or newer, npm, and development keys for the existing Clerk application `fight-path` (`app_3MEZV1U7aZzsep5eEdSErRrIH8q`). PostgreSQL is needed for saved progress.
 
 ```sh
 npm ci
@@ -13,13 +13,13 @@ npm run dev
 
 Open `http://localhost:3000`. Use `npm run lint`, `npm run typecheck`, and `npm run build` to verify the application.
 The home route selects `/en` or `/pt-BR` from the saved language preference or browser language. Both routes can be opened directly.
-Open `/en/setup` or `/pt-BR/setup` to map keyboard, gamepad, or touch controls and test the input before saving the layout on the device.
+Sign in first. Open `/en/setup` or `/pt-BR/setup` to map keyboard, gamepad, or touch controls and test the input before saving the layout on the device.
 Open `/en/practice` or `/pt-BR/practice` for the first universal input challenge. Practice feedback follows FightPath's documented timing rules, not the game's combat engine.
 Pull requests run formatting, lint, type checking, tests, and a production build in GitHub Actions before integration.
 
-For local persistence, copy `.env.example` to `.env.local`, replace the sample password with a random local value in both `POSTGRES_PASSWORD` and `DATABASE_URL`, then run `npm run db:up` and `npm run db:migrate:local`. Docker Desktop runs PostgreSQL on `127.0.0.1:5433`. Keep real secrets out of Git.
+For local persistence, copy `.env.example` to `.env.local`, replace the sample password with a random local value in both `POSTGRES_PASSWORD` and `DATABASE_URL`, then run `npm run db:up` and `npm run db:migrate:local`. Docker Desktop runs PostgreSQL on `127.0.0.1:5433`. Link the existing Clerk application with `npx -y clerk@latest link --app app_3MEZV1U7aZzsep5eEdSErRrIH8q` and pull its development keys with `npx -y clerk@latest env pull --app app_3MEZV1U7aZzsep5eEdSErRrIH8q`. Never create a second Clerk application for this repository. Keep real secrets out of Git.
 
-The first identity model is an opaque anonymous session cookie. Progress can be exported and deleted, but cannot be recovered if the cookie is lost. Neon will replace the local `DATABASE_URL` in a production environment.
+Clerk accounts are mandatory for setup, practice, and progress. PostgreSQL stores the Clerk user ID with each attempt; the old anonymous development records are discarded by migration 003. Progress can be exported or deleted from the signed-in account. Account deletion requires a signed Clerk `user.deleted` webhook at `/api/webhooks/clerk`, configured separately for each deployed environment. Neon will replace the local `DATABASE_URL` in production.
 
 ## Project context
 

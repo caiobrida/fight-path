@@ -16,6 +16,7 @@ The intended learner may use a keyboard, console controller, arcade stick, lever
 - Progress and gamification should reflect practice and skill development.
 - Game-specific information shown to learners must come from real, reputable sources, preferably official ones.
 - PostgreSQL on Neon is the planned database; Vercel is the planned hosting platform.
+- An account is required to configure controls, practice, and save progress. Clerk handles sign-in and accounts through the existing `fight-path` application. The home page and privacy notice remain public.
 
 ## Proposed learning experience
 
@@ -29,7 +30,7 @@ The **universal practice area** teaches reusable movement and button patterns. T
 
 ## Initial release candidate
 
-The first release proves one complete learning loop: configure an input method, practice three universal and three source-backed Ken Classic commands, receive understandable feedback in both languages, and see saved anonymous progress. The supported physical-device matrix and learner validation remain open in FP-08, FP-12, FP-13, and FP-16.
+The first release proves one complete learning loop: create an account, configure an input method, practice three universal and three source-backed Ken Classic commands, receive understandable feedback in both languages, and see account-bound progress. The supported physical-device matrix and learner validation remain open in FP-08, FP-12, FP-13, and FP-16.
 
 The learning loop must remain usable on narrow touch screens and on larger desktop layouts. Device setup, input history, and feedback need room to remain readable without relying on hover or precise pointer input.
 
@@ -48,10 +49,10 @@ The first release shows attempts, correct attempts, accuracy, and per-exercise m
 
 ## Open product decisions
 
-| Decision | Current status | Owner task |
-| --- | --- | --- |
-| Exact first-release exercise list and success criteria | Three universal and three sourced Ken exercises implemented; learner review pending | FP-02, FP-12, FP-13 |
-| Required devices and browsers for the first release | Open; test availability and compatibility | FP-08, FP-16 |
-| Accounts versus anonymous progress | Anonymous cookie session selected; no cross-device account in MVP | FP-06 |
-| Progress and reward formulas | Initial formulas implemented; validate motivation with learners | FP-14, FP-15 |
-| Visual style and onboarding details | Open; validate with learners | FP-11, FP-16 |
+| Decision                                               | Current status                                                                                                                | Owner task          |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| Exact first-release exercise list and success criteria | Three universal and three sourced Ken exercises implemented; learner review pending                                           | FP-02, FP-12, FP-13 |
+| Required devices and browsers for the first release    | Open; test availability and compatibility                                                                                     | FP-08, FP-16        |
+| Accounts versus anonymous progress                     | Clerk account required; anonymous development progress is discarded during the schema change because no real learners used it | FP-18               |
+| Progress and reward formulas                           | Initial formulas implemented; validate motivation with learners                                                               | FP-14, FP-15        |
+| Visual style and onboarding details                    | Open; validate with learners                                                                                                  | FP-11, FP-16        |

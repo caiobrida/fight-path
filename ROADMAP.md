@@ -44,11 +44,11 @@ Store practice results in Neon using the identity model from FP-06, display grow
 
 ## 5. Release readiness
 
-**Tasks:** FP-16, FP-17.
+**Tasks:** FP-16, FP-17, FP-18.
 
-Test accessibility and the declared device/browser matrix, then prepare Vercel preview and release configuration.
+Test accessibility and the declared device/browser matrix, prepare Vercel preview and release configuration, and require Clerk accounts for setup, practice, and progress. Discard old anonymous development data. Configure the selected `fight-path` Clerk application and signed account-deletion webhook before public release.
 
-**Exit criteria:** core flows pass the recorded matrix, important limitations are documented, CI passes, and a preview can be reviewed without committing secrets. Production publication is a separate decision.
+**Exit criteria:** core flows pass the recorded matrix, important limitations are documented, CI passes, unauthorized users cannot access practice or progress, and a preview can be reviewed without committing secrets. Production publication is a separate decision.
 
 ## After the first release
 

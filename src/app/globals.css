@@ -14,6 +14,48 @@ body {
   min-height: 100vh;
 }
 
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: #10131b;
+}
+.site-header__brand {
+  color: #f7f7f3;
+  font-weight: 700;
+  text-decoration: none;
+}
+.site-header__auth {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.site-header__auth button {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ffad71;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: #ffad71;
+  font: inherit;
+  cursor: pointer;
+}
+.site-header a:focus-visible,
+.site-header button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+.auth-page {
+  display: grid;
+  place-items: center;
+  min-height: calc(100vh - 8rem);
+  padding: 2rem 1rem;
+}
+
 .site-footer {
   padding: 1rem;
   background: #10131b;

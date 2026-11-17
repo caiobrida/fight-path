@@ -1,5 +1,14 @@
 import type { Metadata } from "next";
+import {
+  ClerkProvider,
+  Show,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs";
+import { ptBR } from "@clerk/localizations";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { dictionaries, isLocale, locales } from "@/i18n/dictionaries";
 import "../globals.css";
 
@@ -33,10 +42,43 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body>
-        {children}
-        <footer className="site-footer">
-          <a href={`/${locale}/privacy`}>{dictionaries[locale].privacyLink}</a>
-        </footer>
+        <ClerkProvider
+          localization={locale === "pt-BR" ? ptBR : undefined}
+          signInUrl={`/${locale}/sign-in`}
+          signUpUrl={`/${locale}/sign-up`}
+          signInFallbackRedirectUrl={`/${locale}/practice`}
+          signUpFallbackRedirectUrl={`/${locale}/practice`}
+        >
+          <header className="site-header">
+            <a href={`/${locale}`} className="site-header__brand">
+              FightPath
+            </a>
+            <nav
+              className="site-header__auth"
+              aria-label={dictionaries[locale].accountLabel}
+            >
+              <Suspense>
+                <Show when="signed-out">
+                  <SignInButton mode="redirect">
+                    <button type="button">{dictionaries[locale].signIn}</button>
+                  </SignInButton>
+                  <SignUpButton mode="redirect">
+                    <button type="button">{dictionaries[locale].signUp}</button>
+                  </SignUpButton>
+                </Show>
+                <Show when="signed-in">
+                  <UserButton />
+                </Show>
+              </Suspense>
+            </nav>
+          </header>
+          {children}
+          <footer className="site-footer">
+            <a href={`/${locale}/privacy`}>
+              {dictionaries[locale].privacyLink}
+            </a>
+          </footer>
+        </ClerkProvider>
       </body>
     </html>
   );

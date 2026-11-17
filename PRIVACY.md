@@ -4,23 +4,25 @@ FightPath is being built with data minimization and user control in mind. This d
 
 ## Planned data
 
-| Data | Purpose | Storage | Default handling |
-| --- | --- | --- | --- |
-| Anonymous session identifier | Keep progress separated between learners | HttpOnly cookie and server database | Random, opaque token in cookie; only its hash in the database; no email required |
-| Locale and control mapping | Preserve preferences | Browser storage | Local to the device; no raw device identity sent to the server |
-| Practice outcome | Show progress and skill mastery | PostgreSQL | Store exercise ID, result, and time; avoid raw input histories |
-| Pending practice outcome | Resume a failed sync | Browser local storage when available | Store only attempt ID, exercise ID, result, and time until server confirmation; cap at 500 outcomes and clear on progress deletion. If browser storage is blocked, pending outcomes remain only in tab memory until sync |
-| Raw input history | Immediate feedback during a practice attempt | Browser memory | Discard after the attempt or page session; do not transmit by default |
+| Data                       | Purpose                                      | Storage                              | Default handling                                                                                                                                                                                                                                     |
+| -------------------------- | -------------------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Clerk account and session  | Sign users in and protect access to progress | Clerk                                | Clerk handles account details and session cookies; FightPath does not duplicate email or passwords in PostgreSQL                                                                                                                                     |
+| Clerk user ID              | Associate practice attempts with an account  | PostgreSQL                           | Store only the provider ID with minimal attempt outcomes                                                                                                                                                                                             |
+| Locale and control mapping | Preserve preferences                         | Browser storage                      | Local to the device; no raw device identity sent to the server                                                                                                                                                                                       |
+| Practice outcome           | Show progress and skill mastery              | PostgreSQL                           | Store exercise ID, result, and time; avoid raw input histories                                                                                                                                                                                       |
+| Pending practice outcome   | Resume a failed sync                         | Browser local storage when available | Scope to the Clerk user ID; store only attempt ID, exercise ID, result, and time until server confirmation; cap at 500 outcomes and clear on progress deletion. If browser storage is blocked, pending outcomes remain only in tab memory until sync |
+| Raw input history          | Immediate feedback during a practice attempt | Browser memory                       | Discard after the attempt or page session; do not transmit by default                                                                                                                                                                                |
 
 ## Engineering requirements
 
-- Validate every server request and authorize access to progress by session; never trust a client-supplied owner ID.
+- Validate every server request and authorize access to progress with the Clerk user ID derived on the server; never trust a client-supplied owner ID.
 - Keep database credentials and signing keys server-side. Use separate local, preview, and production settings.
 - Use parameterized queries, least-privilege database credentials, secure cookies, CSRF protection for state-changing requests, rate limits, and security headers.
 - Offer clear language choices, a privacy notice, progress export, and deletion before public release.
-- Anonymous progress uses an HttpOnly cookie and is inaccessible if that cookie is lost. Export and deletion act on the current session only. Public release still needs a reviewed notice, contact channel, retention job, and backup deletion procedure.
+- Export and deletion act on the signed-in account only. A signed Clerk `user.deleted` webhook removes the deleted account's attempts. Configure and test its endpoint and signing secret before public release.
 - Do not install analytics or marketing cookies by default. Assess any future third-party service before collecting extra data.
-- The daily authenticated retention job deletes sessions and their attempts after 180 days. Verify that `CRON_SECRET` is set in production and monitor the job. Define production backup deletion periods before public release.
+- The daily authenticated retention job deletes attempts after 180 days. Verify that `CRON_SECRET` is set in production and monitor the job. Define production backup deletion periods before public release.
+- Use only Clerk application `fight-path` (`app_3MEZV1U7aZzsep5eEdSErRrIH8q`). Review Clerk as a data processor, its account data handling, regions, and deletion behavior before public launch.
 - Confirm and publish the operator identity and a private privacy-request contact before public release. The bilingual notice is at `/en/privacy` and `/pt-BR/privacy`; its missing operator or contact state blocks publication.
 - Record security incidents and a response process. Confirm the production legal basis, data regions, processor agreements, and request handling with the project owner before public collection.
 

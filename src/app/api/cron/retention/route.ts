@@ -21,10 +21,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   try {
     const result = await database().query(
-      "DELETE FROM sessions WHERE created_at < now() - interval '180 days'",
+      "DELETE FROM attempts WHERE created_at < now() - interval '180 days'",
     );
     return NextResponse.json(
-      { deletedSessions: result.rowCount ?? 0 },
+      { deletedAttempts: result.rowCount ?? 0 },
       { headers: { "Cache-Control": "private, no-store" } },
     );
   } catch (error) {

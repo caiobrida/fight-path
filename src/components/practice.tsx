@@ -229,7 +229,13 @@ const touchLabels = {
   },
 } as const;
 
-export function Practice({ locale }: { locale: Locale }) {
+export function Practice({
+  locale,
+  userId,
+}: {
+  locale: Locale;
+  userId: string;
+}) {
   const text = copy[locale];
   const [path, setPath] = useState<"universal" | "ken">("universal");
   const activeExercises = path === "ken" ? kenExercises : exercises;
@@ -286,7 +292,10 @@ export function Practice({ locale }: { locale: Locale }) {
     } catch {
       pendingStorageRef.current = null;
     }
-    pendingRef.current = readPending(pendingStorageRef.current);
+    try {
+      pendingStorageRef.current?.removeItem("fightpath-pending-attempts");
+    } catch {}
+    pendingRef.current = readPending(pendingStorageRef.current, userId);
     const flush = async () => {
       if (!readyRef.current || sendingRef.current) return;
       sendingRef.current = true;
@@ -301,7 +310,7 @@ export function Practice({ locale }: { locale: Locale }) {
           const data = (await response.json()) as { progress: ProgressRow[] };
           if (active) setVerifiedRows(data.progress);
           pendingRef.current.shift();
-          writePending(pendingStorageRef.current, pendingRef.current);
+          writePending(pendingStorageRef.current, userId, pendingRef.current);
           if (active && !pendingRef.current.length)
             setProgress(progressById(data.progress));
         }
@@ -358,7 +367,7 @@ export function Practice({ locale }: { locale: Locale }) {
       active = false;
       window.removeEventListener("online", retry);
     };
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     let cancelled = false;
@@ -436,7 +445,7 @@ export function Practice({ locale }: { locale: Locale }) {
           };
         });
         pendingRef.current = queued;
-        const stored = writePending(pendingStorageRef.current, queued);
+        const stored = writePending(pendingStorageRef.current, userId, queued);
         setSyncStatus(stored ? "pending" : "unavailable");
         void flushRef.current();
       } else {
@@ -461,7 +470,7 @@ export function Practice({ locale }: { locale: Locale }) {
       keyboardRef.current = null;
       attemptRef.current = [];
     };
-  }, [device, playing]);
+  }, [device, playing, userId]);
 
   const reset = () => {
     attemptRef.current = [];
@@ -476,7 +485,7 @@ export function Practice({ locale }: { locale: Locale }) {
       const response = await fetch("/api/progress", { method: "DELETE" });
       if (!response.ok) throw new Error("Progress delete failed");
       pendingRef.current = [];
-      writePending(pendingStorageRef.current, []);
+      writePending(pendingStorageRef.current, userId, []);
       readyRef.current = false;
       setProgress({});
       setVerifiedRows([]);

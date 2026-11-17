@@ -21,12 +21,12 @@ test("pending attempts are validated and bounded", () => {
     attempt,
     { ...attempt, exerciseId: "unknown" },
   ]);
-  assert.deepEqual(readPending({ getItem: () => saved }), [attempt]);
-  assert.deepEqual(readPending(null), []);
-  assert.deepEqual(readPending({ getItem: () => "not-json" }), []);
+  assert.deepEqual(readPending({ getItem: () => saved }, "user_a"), [attempt]);
+  assert.deepEqual(readPending(null, "user_a"), []);
+  assert.deepEqual(readPending({ getItem: () => "not-json" }, "user_a"), []);
   assert.equal(queueAttempt(Array(pendingLimit).fill(attempt), attempt), null);
   assert.equal(queueAttempt([], attempt)?.length, 1);
-  assert.equal(writePending(null, [attempt]), false);
+  assert.equal(writePending(null, "user_a", [attempt]), false);
 });
 
 test("pending storage failures leave the in-memory queue available", () => {
@@ -38,6 +38,7 @@ test("pending storage failures leave the in-memory queue available", () => {
         },
         removeItem: () => {},
       },
+      "user_a",
       [attempt],
     ),
     false,
@@ -49,9 +50,26 @@ test("pending storage failures leave the in-memory queue available", () => {
         setItem: (key) => writes.push(key),
         removeItem: (key) => writes.push(key),
       },
+      "user_a",
       [],
     ),
     true,
   );
-  assert.deepEqual(writes, [pendingKey]);
+  assert.deepEqual(writes, [pendingKey("user_a")]);
+});
+
+test("pending attempts stay separate across accounts", () => {
+  const values = new Map<string, string>();
+  const storage = {
+    getItem: (key: string) => values.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      values.set(key, value);
+    },
+    removeItem: (key: string) => {
+      values.delete(key);
+    },
+  };
+  assert.equal(writePending(storage, "user_a", [attempt]), true);
+  assert.deepEqual(readPending(storage, "user_a"), [attempt]);
+  assert.deepEqual(readPending(storage, "user_b"), []);
 });

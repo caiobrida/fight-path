@@ -13,6 +13,6 @@
 - [x] Preparar checklist de publicação e observabilidade mínima.
 - [ ] Publicar aviso de privacidade, canal de contato e procedimento de solicitações de titulares antes de coletar dados em produção.
 
-The bilingual notice and export/deletion procedure are implemented. Production operator identity, private contact, Neon URLs, Vercel project settings, backup retention, and a live preview must be provided or verified before closure. `DEPLOYMENT.md` is the runbook; `QA.md` lists the remaining real-device gate.
+The bilingual notice and export/deletion procedure are implemented. Production operator identity, private contact, Neon URLs, Vercel project settings, matching keys for the selected Clerk application, signed account-deletion webhook, backup retention, and a live preview must be provided or verified before closure. `DEPLOYMENT.md` is the runbook; `QA.md` lists the remaining real-device gate.
 
 **Aceite:** um preview pode ser implantado e revisado sem segredos no repositório; publicação em produção depende de decisão explícita posterior.

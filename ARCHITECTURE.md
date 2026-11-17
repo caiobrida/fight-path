@@ -30,16 +30,16 @@ Device adapters must emit a neutral, button-free sample on focus loss or disconn
 
 ## Proposed modules
 
-| Boundary | Responsibility | Task |
-| --- | --- | --- |
-| Device adapters | Capture keyboard, Gamepad API, and touch events; handle connection and focus | FP-08 |
-| Control mapping | Associate physical inputs with directions and attack buttons; support manual calibration | FP-09 |
-| Input domain | Represent direction, buttons, orientation, simultaneity, and timestamps | FP-07 |
-| Command evaluator | Match events to command definitions and produce reasoned results | FP-10 |
-| Content catalog | Store universal exercises and sourced, localized character lessons | FP-02, FP-12, FP-13 |
-| Practice UI | Show challenge, input history, feedback, and recovery states | FP-05, FP-11 |
-| Progress domain | Compute attempts, mastery, and optional rewards | FP-14, FP-15 |
-| Server and data | Authenticate or identify sessions, authorize data access, store progress | FP-06, FP-14 |
+| Boundary          | Responsibility                                                                           | Task                |
+| ----------------- | ---------------------------------------------------------------------------------------- | ------------------- |
+| Device adapters   | Capture keyboard, Gamepad API, and touch events; handle connection and focus             | FP-08               |
+| Control mapping   | Associate physical inputs with directions and attack buttons; support manual calibration | FP-09               |
+| Input domain      | Represent direction, buttons, orientation, simultaneity, and timestamps                  | FP-07               |
+| Command evaluator | Match events to command definitions and produce reasoned results                         | FP-10               |
+| Content catalog   | Store universal exercises and sourced, localized character lessons                       | FP-02, FP-12, FP-13 |
+| Practice UI       | Show challenge, input history, feedback, and recovery states                             | FP-05, FP-11        |
+| Progress domain   | Compute attempts, mastery, and optional rewards                                          | FP-14, FP-15        |
+| Server and data   | Authenticate Clerk users, authorize data access, store progress                          | FP-06, FP-14, FP-18 |
 
 This is a responsibility map, not a required folder structure. FP-03 will choose code organization after confirming the stack.
 
@@ -59,11 +59,13 @@ Universal exercises should refer to reusable input patterns. Ken lessons may ref
 
 ## Data and deployment
 
-Neon PostgreSQL is the planned durable store for progress. A local PostgreSQL 17 container supplies the same SQL development target. The browser must not connect with a privileged database credential. Next.js server routes use `DATABASE_URL` from the environment and parameterized queries. Vercel preview and production must use separate Neon databases. A daily authenticated cron route removes sessions older than 180 days, cascading to attempts; the cookie has the same maximum age. A deployment build fails if required server secrets, operator identity, or privacy contact settings are absent.
+Neon PostgreSQL is the planned durable store for progress. A local PostgreSQL 17 container supplies the same SQL development target. The browser must not connect with a privileged database credential. Next.js server routes use `DATABASE_URL` from the environment and parameterized queries. Vercel preview and production must use separate Neon databases. A daily authenticated cron route removes attempts older than 180 days. A deployment build fails if required server secrets, Clerk configuration, operator identity, or privacy contact settings are absent.
 
-The first identity model is an anonymous, random session token held in an HttpOnly, SameSite cookie. The database stores only a SHA-256 token hash. Attempts belong to the server-resolved session; the client cannot choose a session ID. Losing the cookie loses access to that progress. Server routes offer export and deletion, reject cross-origin writes, validate exercise IDs and metrics, and limit each session to 500 attempts per hour. Client-generated attempt IDs make retries idempotent. Raw input histories remain in browser memory. The browser keeps only minimal pending attempt outcomes locally while waiting to sync, capped at 500 entries. If local storage is unavailable, practice continues with an in-memory queue and a visible retry action. The current migration contains only sessions and minimal attempt outcomes. The client-reported correctness is adequate for personal practice progress but is not an anti-cheat proof.
+Clerk handles sign-in and account sessions. Only the selected Clerk application `fight-path` (`app_3MEZV1U7aZzsep5eEdSErRrIH8q`) may supply this repository's keys. The Next.js Proxy composes Clerk middleware with locale routing. Public pages are home, privacy, sign-in, and sign-up. Setup and practice pages protect themselves on the server. Every progress handler independently requires a Clerk session and derives `userId` on the server; the client cannot choose an owner ID. PostgreSQL stores only `user_id` with attempts, not email or a duplicate profile. Migration 003 discards the old anonymous development data and session table because there are no real users to migrate.
 
-There is no profile or email table in the anonymous MVP. Locale and controller mapping stay on the device. Mastery and lesson progress are derived from stored attempt outcomes, so no duplicate score state is required initially.
+Progress routes offer export and deletion, reject cross-origin writes, validate exercise IDs and metrics, and limit each user to 500 attempts per hour. Client-generated attempt IDs make retries idempotent. Raw input histories remain in browser memory. The browser keeps only minimal pending attempt outcomes locally while waiting to sync, capped at 500 entries and scoped to Clerk user ID so account switching cannot transfer them. If local storage is unavailable, practice continues with an in-memory queue and a visible retry action. The client-reported correctness is adequate for personal practice progress but is not an anti-cheat proof.
+
+Locale and controller mapping stay on the device. Mastery and lesson progress are derived from stored attempt outcomes, so no duplicate score state is required initially. Account deletion in Clerk sends a signed `user.deleted` webhook that removes the user's attempts; the production webhook endpoint and signing secret must be configured before public release.
 
 XP and challenges are derived from saved attempt counts; no reward balance is stored. Each of the first ten correct attempts per exercise grants 10 XP, capped at 600 XP across six exercises. Mastery evaluates the latest twenty saved attempts for each exercise, so accuracy can improve after an early learning period. Challenges require three correct attempts in specific exercises. Streaks are deferred until timezone and recovery rules can be agreed. Client-reported results are suitable only for private practice rewards, not rankings or prizes.
 
@@ -77,11 +79,11 @@ CI should check formatting or lint, types, relevant tests, and build on PRs once
 
 ## Decisions still open
 
-| Decision | Why it matters | Resolve in |
-| --- | --- | --- |
-| Frontend and server stack | Next.js App Router selected; specific database and identity libraries remain open | FP-03, FP-06 |
-| Account or anonymous identity | Anonymous cookie session selected for the first release; account linking remains future scope | FP-06 |
-| First command representation and tolerance rules | Determines what the simulator can claim | FP-07, FP-10 |
-| Supported hardware matrix | Depends on browser and device behavior | FP-08, FP-16 |
-| Stored attempt detail and retention | Balances metrics with data minimization | FP-06, FP-14 |
-| Game content update procedure | Keeps lessons correct across game patches | FP-02 |
+| Decision                                         | Why it matters                                                                 | Resolve in          |
+| ------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------- |
+| Frontend and server stack                        | Next.js App Router and PostgreSQL selected; Clerk is the account provider      | FP-03, FP-06, FP-18 |
+| Account or anonymous identity                    | Clerk authentication required; old anonymous development records are discarded | FP-18               |
+| First command representation and tolerance rules | Determines what the simulator can claim                                        | FP-07, FP-10        |
+| Supported hardware matrix                        | Depends on browser and device behavior                                         | FP-08, FP-16        |
+| Stored attempt detail and retention              | Balances metrics with data minimization                                        | FP-06, FP-14        |
+| Game content update procedure                    | Keeps lessons correct across game patches                                      | FP-02               |

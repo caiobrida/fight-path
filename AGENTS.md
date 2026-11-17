@@ -11,6 +11,8 @@ Read `QA.md` before claiming device compatibility or public-release readiness.
 - Deliver user-facing interface, lessons, feedback, and accessibility text in both English (`en`) and Brazilian Portuguese (`pt-BR`) from the start.
 - Build a responsive, mobile-first experience that is comfortable in a desktop browser and on a phone. Account for touch targets, small screens, and physical controllers in practice flows.
 - Plan persistence with PostgreSQL on Neon and future hosting on Vercel. Never expose database credentials to browser code.
+- Authentication is mandatory for control setup, practice, and progress. Clerk owns accounts and sessions; PostgreSQL stores only Clerk user IDs alongside practice attempts.
+- Use only the existing Clerk application named `fight-path` with application ID `app_3MEZV1U7aZzsep5eEdSErRrIH8q`. Before any Clerk CLI operation that can link, pull keys, change settings, or deploy, confirm that exact application is selected. Never create another Clerk application, switch applications, or replace working keys for this repository.
 - Build with security and Brazilian LGPD requirements in mind: minimize personal data, protect access, document purposes and retention, and support user access and deletion before public release. Follow `PRIVACY.md`.
 
 ## Game information
@@ -37,4 +39,4 @@ Read `QA.md` before claiming device compatibility or public-release readiness.
 
 ## Current work tracking
 
-The task index is `TASKS.md`; each `tasks/FP-XX-*.md` file has a checklist and acceptance criteria. The project owner has authorized implementation of all listed tasks, with a separate branch, PR, passing CI, and merge for each task. Neon and Vercel production credentials will be supplied later; complete local and deployment-ready work without waiting for them.
+The task index is `TASKS.md`; each `tasks/FP-XX-*.md` file has a checklist and acceptance criteria. The project owner has authorized implementation of all listed tasks, with a separate branch, PR, passing CI, and merge for each task. Neon, Vercel, and Clerk production configuration will be supplied later; complete local and deployment-ready work without waiting for them.
