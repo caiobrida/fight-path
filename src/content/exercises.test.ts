@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { evaluateCommand } from "@/domain/evaluator";
-import { createSample } from "@/domain/input";
-import { exercises } from "./exercises";
+import { createSample, relativeDirection } from "@/domain/input";
+import { exercises, kenExercises } from "./exercises";
 
 test("every universal exercise has a working input path and two translations", () => {
   assert.equal(
@@ -25,5 +25,29 @@ test("every universal exercise has a working input path and two translations", (
       evaluateCommand(history, exercise.command, "right").correct,
       true,
     );
+  }
+});
+
+test("Ken Classic lessons are sourced and work on both sides", () => {
+  assert.equal(kenExercises.length, 3);
+  for (const exercise of kenExercises) {
+    assert.equal(exercise.source?.id, "CAPCOM-KEN-MOVES");
+    assert.ok(exercise.title.en && exercise.title["pt-BR"]);
+    assert.ok(exercise.description?.en && exercise.description["pt-BR"]);
+    for (const facing of ["right", "left"] as const) {
+      const history = exercise.command.directions.map((direction, index) =>
+        createSample(
+          index * 100,
+          relativeDirection(direction, facing),
+          index === exercise.command.directions.length - 1
+            ? [exercise.command.attacks[0]]
+            : [],
+        ),
+      );
+      assert.equal(
+        evaluateCommand(history, exercise.command, facing).correct,
+        true,
+      );
+    }
   }
 });

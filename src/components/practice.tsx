@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { exercises } from "@/content/exercises";
+import { exercises, kenExercises } from "@/content/exercises";
 import { GamepadAdapter } from "@/devices/gamepad";
 import { KeyboardAdapter } from "@/devices/keyboard";
 import { TouchAdapter } from "@/devices/touch";
@@ -27,8 +27,13 @@ const copy = {
   en: {
     title: "Practice an input",
     intro:
-      "Follow the directions, then press any punch button. FightPath checks your input sequence, not the game's combat engine.",
+      "Follow the directions, then press the shown button. FightPath checks your input sequence, not the game's combat engine.",
     lessons: "Universal practice path",
+    kenLessons: "Ken Classic path",
+    universal: "Universal",
+    ken: "Ken Classic",
+    path: "Practice path",
+    source: "Official command list",
     goal: "Complete 10 correct attempts",
     completed: "Completed",
     next: "Next exercise",
@@ -47,7 +52,7 @@ const copy = {
     history: "Your inputs",
     result: "Feedback",
     waiting: "Press start to begin.",
-    active: "Perform the direction sequence and press a punch button.",
+    active: "Perform the direction sequence and press the shown button.",
     success: "Correct sequence. Keep practicing!",
     disconnected: "Connect a gamepad and press a button.",
     attempts: "Attempts",
@@ -55,7 +60,7 @@ const copy = {
     accuracy: "Accuracy",
     reasons: {
       incomplete: "Complete the sequence and press a button.",
-      "wrong-button": "Use a punch button: LP, MP, or HP.",
+      "wrong-button": "Use one of the shown attack buttons.",
       "missing-direction": "A direction is missing from the sequence.",
       "wrong-order": "The directions were in the wrong order.",
       "button-early": "Press the button after the final direction.",
@@ -66,8 +71,13 @@ const copy = {
   "pt-BR": {
     title: "Pratique um comando",
     intro:
-      "Siga as direções e pressione um botão de soco. O FightPath avalia a sequência de inputs, não o motor de combate do jogo.",
+      "Siga as direções e pressione o botão indicado. O FightPath avalia a sequência de inputs, não o motor de combate do jogo.",
     lessons: "Trilha de treino universal",
+    kenLessons: "Trilha do Ken Classic",
+    universal: "Universal",
+    ken: "Ken Classic",
+    path: "Trilha de treino",
+    source: "Lista oficial de comandos",
     goal: "Conclua 10 execuções corretas",
     completed: "Concluído",
     next: "Próximo exercício",
@@ -86,7 +96,7 @@ const copy = {
     history: "Seus inputs",
     result: "Feedback",
     waiting: "Inicie para começar.",
-    active: "Faça a sequência direcional e pressione um botão de soco.",
+    active: "Faça a sequência direcional e pressione o botão indicado.",
     success: "Sequência correta. Continue praticando!",
     disconnected: "Conecte um controle e pressione um botão.",
     attempts: "Tentativas",
@@ -94,7 +104,7 @@ const copy = {
     accuracy: "Precisão",
     reasons: {
       incomplete: "Complete a sequência e pressione um botão.",
-      "wrong-button": "Use um botão de soco: LP, MP ou HP.",
+      "wrong-button": "Use um dos botões de ataque indicados.",
       "missing-direction": "Faltou uma direção na sequência.",
       "wrong-order": "As direções vieram na ordem errada.",
       "button-early": "Pressione o botão depois da última direção.",
@@ -118,6 +128,8 @@ const symbols: Record<string, string> = {
 
 export function Practice({ locale }: { locale: Locale }) {
   const text = copy[locale];
+  const [path, setPath] = useState<"universal" | "ken">("universal");
+  const activeExercises = path === "ken" ? kenExercises : exercises;
   const [device, setDevice] = useState<DeviceKind>("keyboard");
   const [facing, setFacing] = useState<Facing>("right");
   const [playing, setPlaying] = useState(false);
@@ -225,8 +237,18 @@ export function Practice({ locale }: { locale: Locale }) {
   };
 
   const selectExercise = (index: number) => {
-    exerciseRef.current = exercises[index];
+    exerciseRef.current = activeExercises[index];
     setExerciseIndex(index);
+    attemptRef.current = [];
+    historyRef.current = [];
+    setHistory([]);
+    setEvaluation(null);
+  };
+
+  const selectPath = (next: "universal" | "ken") => {
+    exerciseRef.current = next === "ken" ? kenExercises[0] : exercises[0];
+    setPath(next);
+    setExerciseIndex(0);
     attemptRef.current = [];
     historyRef.current = [];
     setHistory([]);
@@ -247,7 +269,7 @@ export function Practice({ locale }: { locale: Locale }) {
     : playing
       ? text.active
       : text.waiting;
-  const exercise = exercises[exerciseIndex];
+  const exercise = activeExercises[exerciseIndex];
   const { attempts = 0, correct = 0 } = progress[exercise.command.id] ?? {};
   const accuracy = attempts ? Math.round((correct / attempts) * 100) : 0;
 
@@ -261,10 +283,25 @@ export function Practice({ locale }: { locale: Locale }) {
         <p className="eyebrow">FightPath</p>
         <h1>{text.title}</h1>
         <p>{text.intro}</p>
-        <section className="practice__lessons" aria-label={text.lessons}>
-          <h2>{text.lessons}</h2>
+        <label className="practice__path">
+          {text.path}
+          <select
+            value={path}
+            onChange={(event) =>
+              selectPath(event.target.value as "universal" | "ken")
+            }
+          >
+            <option value="universal">{text.universal}</option>
+            <option value="ken">{text.ken}</option>
+          </select>
+        </label>
+        <section
+          className="practice__lessons"
+          aria-label={path === "ken" ? text.kenLessons : text.lessons}
+        >
+          <h2>{path === "ken" ? text.kenLessons : text.lessons}</h2>
           <div>
-            {exercises.map((item, index) => (
+            {activeExercises.map((item, index) => (
               <button
                 key={item.command.id}
                 type="button"
@@ -287,6 +324,18 @@ export function Practice({ locale }: { locale: Locale }) {
         </section>
         <section className="practice__panel">
           <h2>{exercise.title[locale]}</h2>
+          {exercise.description && <p>{exercise.description[locale]}</p>}
+          {exercise.source && (
+            <p>
+              <a
+                href={exercise.source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {text.source}
+              </a>
+            </p>
+          )}
           <p>
             {text.goal}: {Math.min(correct, exercise.goal)}/{exercise.goal}
           </p>
@@ -300,7 +349,7 @@ export function Practice({ locale }: { locale: Locale }) {
               </span>
             ))}
             <span>+</span>
-            <span>LP / MP / HP</span>
+            <span>{exercise.command.attacks.join(" / ")}</span>
           </div>
           <div className="practice__options">
             <label>
@@ -343,7 +392,7 @@ export function Practice({ locale }: { locale: Locale }) {
               {text.reset}
             </button>
             {correct >= exercise.goal &&
-              exerciseIndex < exercises.length - 1 && (
+              exerciseIndex < activeExercises.length - 1 && (
                 <button
                   type="button"
                   onClick={() => selectExercise(exerciseIndex + 1)}

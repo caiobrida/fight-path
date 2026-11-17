@@ -9,10 +9,10 @@ The input evaluator is a FightPath approximation. Its timing windows are product
 | ID | Source | Accessed | Supports | Limits |
 | --- | --- | --- | --- | --- |
 | CAPCOM-KEN-GUIDE | [Street Fighter 6 Character Guide: Ken](https://www.youtube.com/watch?v=1SX2m7sqbtA), official Street Fighter channel | 2026-11-17 | Ken is a Street Fighter 6 character; official character guide | Launch-era guide; move details require direct video review and a current command list |
-| CAPCOM-KEN-MOVES | [Capcom Ken character move list](https://www.streetfighter.com/6/character/ken/movelist) | 2026-11-17 | Primary reference for Classic command names and motions | Automated access returned 403; verify in browser or in-game before claiming exact current commands |
+| CAPCOM-KEN-MOVES | [Capcom Ken character move list](https://www.streetfighter.com/6/character/ken/movelist) | 2026-11-17 | Classic Hadoken: down, down-forward, forward + punch; Shoryuken: forward, down, down-forward + punch; grounded Tatsumaki Senpu-kyaku: down, down-back, back + kick | Visually verified in Capcom's Classic tab in a browser; site does not state a patch number in this view; recheck after updates |
 | SUPERCOMBO-KEN | [SuperCombo Street Fighter 6 Ken page](https://wiki.supercombo.gg/w/Street_Fighter_6/Ken) | 2026-11-17 | Community cross-check for names and commands | Community maintained; may lag a patch; automated access returned 403 |
 
-Hadoken, Shoryuken, and Tatsumaki Senpukyaku are candidate first lessons from the project conversation. Their exact current commands and nomenclature require direct verification before being published as game facts.
+The first Ken lessons use only the three commands confirmed in CAPCOM-KEN-MOVES. FightPath's 1200 ms motion limit, 600 ms gap limit, and 10-success goal are training rules, not Street Fighter 6 engine properties. The grounded Tatsumaki lesson excludes the separate aerial command.
 
 ## Content review procedure
 
