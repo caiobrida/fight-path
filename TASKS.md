@@ -10,14 +10,16 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 - Informações sobre o jogo publicadas no produto precisam ser verificadas em fontes reais e renomadas, com origem e data registradas. Priorizar fontes oficiais. Distinguir dados confirmados de hipóteses de implementação.
 - Planejar persistência em PostgreSQL no Neon e futura hospedagem na Vercel. Decidir autenticação e acesso seguro ao banco antes de implementar o fluxo de dados pessoais.
 - Código e configuração de infraestrutura ficam em branches separadas, com PRs para `main` e CI desde o começo. Commits devem usar apenas `Caio Brida <caiobrida1@gmail.com>` e não mencionar o assistente em autoria, mensagens ou metadados de Git.
+- Antes de todo commit, push ou operação de PR, conferir o caminho do repositório, a branch e os URLs de fetch e push do `origin`: ambos devem ser exatamente `https://github.com/caiobrida/fight-path`. Não usar outra conta para autenticar no GitHub.
+- Não adicionar comentários ao código. Código, identificadores, nomes de branches, mensagens de commit e texto de PR devem estar em inglês; textos exibidos no produto devem existir em `en` e `pt-BR`.
 - Decisões duráveis devem ser registradas em `AGENTS.md`, `PRODUCT.md`, `ARCHITECTURE.md` ou `ROADMAP.md`, conforme a natureza. Cada PR atualiza a documentação afetada.
-- Marcar um item como concluído somente após cumprir seus critérios de aceite e registrar a evidência no PR. Um `- [ ]` significa pendente.
+- Marcar um item da checklist após criar e verificar o artefato correspondente. Marcar a tarefa como concluída após revisão e registro da evidência no PR. Um `- [ ]` significa pendente.
 
 ## Ordem sugerida
 
 | Fase | Tarefa | Entrega | Depende de | Estado |
 | --- | --- | --- | --- | --- |
-| Planejamento | [FP-01](tasks/FP-01-documentacao-base.md) | Documentação base e decisões em aberto | Validação deste plano | Pendente |
+| Planejamento | [FP-01](tasks/FP-01-documentacao-base.md) | Documentação base e decisões em aberto | Validação deste plano | Pronta para revisão |
 | Planejamento | [FP-02](tasks/FP-02-fontes-do-jogo.md) | Política e catálogo de fontes do jogo | FP-01 | Pendente |
 | Fundação | [FP-03](tasks/FP-03-base-tecnica.md) | Stack e projeto inicial | FP-01 | Pendente |
 | Fundação | [FP-04](tasks/FP-04-ci.md) | CI para PRs | FP-03 | Pendente |
