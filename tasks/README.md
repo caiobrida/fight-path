@@ -4,6 +4,8 @@ O [índice do plano](../TASKS.md) mostra a ordem e o estado. Cada arquivo `FP-XX
 
 O estado de cada tarefa consta em `TASKS.md`. Checklists marcadas registram trabalho verificado; configuração externa e validação em dispositivos reais continuam nos respectivos gates de publicação.
 
+FP-19 a FP-40 são propostas aguardando validação. A instrução anterior de implementar todas as tarefas não autoriza este novo lote. O levantamento está em `AUDIT.md`, `DESIGN-STUDY.md` e `RESEARCH-CONTENT.md`; antes de implementar, registrar a aprovação do proprietário para o escopo correspondente.
+
 Ao iniciar uma tarefa:
 
 1. Confirme dependências e dúvidas abertas.

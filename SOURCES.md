@@ -16,6 +16,8 @@ The first Ken lessons use only the three commands confirmed in CAPCOM-KEN-MOVES.
 
 ## Content review procedure
 
+`RESEARCH-CONTENT.md` contains the proposed next curriculum, candidate sources and access limits for FP-29 through FP-37. Research candidates are not approved published claims. No exact current-build Ken BnB was verified in that study. Require direct route/build evidence before publication and media provenance before redistribution. `DESIGN-STUDY.md` records visual references separately from factual game evidence.
+
 1. Add source entries before adding game-specific exercise data.
 2. Record the supported claim and source ID alongside each content entry.
 3. Prefer the current Capcom command list or in-game command list for control input claims.

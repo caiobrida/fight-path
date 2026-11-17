@@ -1,6 +1,6 @@
 # FightPath roadmap
 
-The roadmap groups the task files in [`TASKS.md`](TASKS.md) into reviewable milestones. It contains dependencies and exit criteria, not dates or a promise of a particular release schedule. The project owner has authorized implementation of all listed tasks. Public release remains a separate decision after the external configuration and real-device validation gates.
+The roadmap groups the task files in [`TASKS.md`](TASKS.md) into reviewable milestones. It contains dependencies and exit criteria, not dates or a promise of a particular release schedule. The earlier implementation authorization covers FP-01 through FP-18. FP-19 through FP-40 are a proposed phase awaiting owner validation. Public release remains a separate decision after the external configuration and real-device validation gates.
 
 ## 0. Shared product context
 
@@ -51,5 +51,14 @@ Test accessibility and the declared device/browser matrix, prepare Vercel previe
 **Exit criteria:** core flows pass the recorded matrix, important limitations are documented, CI passes, unauthorized users cannot access practice or progress, and a preview can be reviewed without committing secrets. Production publication is a separate decision.
 
 ## After the first release
+
+The owner has requested the following research-backed expansion before choosing an implementation start:
+
+1. Restore reliable input and data behavior: FP-19 through FP-24. Exit: the reported DualSense scenario is diagnosed, calibration works and held inputs cannot generate extra attempts.
+2. Establish an approved visual direction, design system and screen redesign: FP-25 through FP-28, with FP-37 for imagery. Exit: accessible shared components, distinct home actions and readable mobile practice layouts.
+3. Build the learning catalog, fundamentals, footsies, SF6 systems, Ken plan, BnB library and practice habits: FP-29 through FP-36. Exit: bilingual reviewed lessons and verified in-game BnB examples with traceable sources.
+4. Add appropriate learning progress and complete auth/privacy/regression coverage: FP-38 through FP-40. Exit: distinct learning activity states, account isolation and recorded browser/device evidence.
+
+These are proposals only. `TASKS.md` records the sequencing and explicit approval gate; planning does not authorize changing code, dependencies or services. A future public-production Vercel/Neon/Clerk setup remains separate from this development environment.
 
 Candidates include more characters and games, Modern controls, broader fighting-game fundamentals, reaction and memory modes, and more faithful combo validation. Create new task files only after deciding what feedback or evidence justifies the next slice.

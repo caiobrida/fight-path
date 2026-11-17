@@ -28,6 +28,8 @@ Calculated contrast ratios for representative practice colors are 11.49:1 for mu
 
 ## Remaining validation
 
+The November 17 product/input investigation is recorded in `AUDIT.md`. Its reproduced defects are proposed work in FP-19 through FP-40, all awaiting owner validation. This investigation does not add a physical DualSense pass or a mobile-viewport pass to the matrix above. Do not treat previously passed unit/visual checks as proof that the newly reported setup-to-practice flow works.
+
 - Test a physical gamepad, arcade stick, and leverless controller with the actual browsers and operating systems available to learners. The adapter has unit coverage, but no physical hardware was connected for this matrix.
 - Test Android Chrome and iOS Safari on real phones, including multi-touch behavior, orientation changes, and on-screen keyboard interactions.
 - Observe a learner completing the universal and Ken paths, then revise unclear language or exercise pacing.
