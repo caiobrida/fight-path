@@ -37,6 +37,7 @@ export class GamepadAdapter {
   private frame: number | undefined;
   private previous: RawSnapshot | undefined;
   private suspended = false;
+  private running = false;
 
   constructor(
     private readonly target: Window,
@@ -44,11 +45,17 @@ export class GamepadAdapter {
   ) {}
 
   start(): void {
+    if (this.running) return;
+    this.running = true;
     if (typeof this.target.navigator.getGamepads !== "function") {
       this.sink(gamepadSnapshot(null, performance.now()));
       return;
     }
     this.target.addEventListener("blur", this.onBlur);
+    this.target.document?.addEventListener(
+      "visibilitychange",
+      this.onVisibility,
+    );
     this.target.addEventListener("focus", this.onFocus);
     this.target.addEventListener("gamepadconnected", this.onConnection);
     this.target.addEventListener("gamepaddisconnected", this.onConnection);
@@ -60,8 +67,13 @@ export class GamepadAdapter {
   }
 
   stop(): void {
+    this.running = false;
     if (this.frame !== undefined) this.target.cancelAnimationFrame(this.frame);
     this.target.removeEventListener("blur", this.onBlur);
+    this.target.document?.removeEventListener(
+      "visibilitychange",
+      this.onVisibility,
+    );
     this.target.removeEventListener("focus", this.onFocus);
     this.target.removeEventListener("gamepadconnected", this.onConnection);
     this.target.removeEventListener("gamepaddisconnected", this.onConnection);
@@ -78,6 +90,7 @@ export class GamepadAdapter {
   };
 
   private readonly onFocus = (): void => {
+    if (this.target.document?.hidden) return;
     this.suspended = false;
     this.poll();
   };
@@ -92,6 +105,7 @@ export class GamepadAdapter {
   };
 
   private readonly poll = (): void => {
+    if (!this.running) return;
     if (this.frame !== undefined) this.target.cancelAnimationFrame(this.frame);
     let gamepad: Gamepad | null = null;
     try {
@@ -105,6 +119,11 @@ export class GamepadAdapter {
     }
     this.emit(gamepadSnapshot(gamepad, performance.now()));
     this.frame = this.target.requestAnimationFrame(this.poll);
+  };
+
+  private readonly onVisibility = (): void => {
+    if (this.target.document.hidden) this.onBlur();
+    else this.onFocus();
   };
 
   private emit(current: RawSnapshot): void {

@@ -48,6 +48,10 @@ export class KeyboardAdapter {
     this.target.addEventListener("keydown", this.onKeyDown);
     this.target.addEventListener("keyup", this.onKeyUp);
     this.target.addEventListener("blur", this.onBlur);
+    this.target.document?.addEventListener(
+      "visibilitychange",
+      this.onVisibility,
+    );
     this.emit();
   }
 
@@ -55,6 +59,10 @@ export class KeyboardAdapter {
     this.target.removeEventListener("keydown", this.onKeyDown);
     this.target.removeEventListener("keyup", this.onKeyUp);
     this.target.removeEventListener("blur", this.onBlur);
+    this.target.document?.removeEventListener(
+      "visibilitychange",
+      this.onVisibility,
+    );
     this.pressed.clear();
     this.emit();
   }
@@ -69,6 +77,13 @@ export class KeyboardAdapter {
   }
 
   private readonly onKeyDown = (event: KeyboardEvent): void => {
+    if (
+      ["Escape", "Tab"].includes(event.code) ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.altKey
+    )
+      return;
     if (
       (!this.captureAll && !this.codes.has(event.code)) ||
       isTypingTarget(event.target)
@@ -94,6 +109,10 @@ export class KeyboardAdapter {
   private readonly onBlur = (): void => {
     this.pressed.clear();
     this.emit();
+  };
+
+  private readonly onVisibility = (): void => {
+    if (this.target.document.hidden) this.onBlur();
   };
 
   private emit(): void {

@@ -241,16 +241,26 @@ export function ControlSetup({ locale }: { locale: Locale }) {
   };
 
   useEffect(() => {
+    const clearCapture = () => {
+      activeRef.current = null;
+      setActive(null);
+      setPendingControl(null);
+      keyboard.current?.setCaptureAll(false);
+    };
     const cancel = (event: KeyboardEvent) => {
-      if (event.code === "Escape") {
-        activeRef.current = null;
-        setActive(null);
-        setPendingControl(null);
-        keyboard.current?.setCaptureAll(false);
-      }
+      if (event.code === "Escape") clearCapture();
+    };
+    const hidden = () => {
+      if (document.hidden) clearCapture();
     };
     window.addEventListener("keydown", cancel);
-    return () => window.removeEventListener("keydown", cancel);
+    window.addEventListener("blur", clearCapture);
+    document.addEventListener("visibilitychange", hidden);
+    return () => {
+      window.removeEventListener("keydown", cancel);
+      window.removeEventListener("blur", clearCapture);
+      document.removeEventListener("visibilitychange", hidden);
+    };
   }, []);
 
   const reset = () => {

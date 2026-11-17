@@ -37,6 +37,7 @@ export function touchSnapshot(
 
 export class TouchAdapter {
   private readonly pointers = new Map<number, string>();
+  private readonly directionPointers = new Set<number>();
   private previous: RawSnapshot | undefined;
 
   constructor(
@@ -48,6 +49,12 @@ export class TouchAdapter {
     this.root.addEventListener("pointerdown", this.onDown);
     this.root.addEventListener("pointerup", this.onRelease);
     this.root.addEventListener("pointercancel", this.onRelease);
+    this.root.addEventListener("lostpointercapture", this.onRelease);
+    this.root.addEventListener("pointermove", this.onMove);
+    this.root.ownerDocument.addEventListener(
+      "visibilitychange",
+      this.onVisibility,
+    );
     window.addEventListener("blur", this.onBlur);
     this.emit();
   }
@@ -56,8 +63,15 @@ export class TouchAdapter {
     this.root.removeEventListener("pointerdown", this.onDown);
     this.root.removeEventListener("pointerup", this.onRelease);
     this.root.removeEventListener("pointercancel", this.onRelease);
+    this.root.removeEventListener("lostpointercapture", this.onRelease);
+    this.root.removeEventListener("pointermove", this.onMove);
+    this.root.ownerDocument.removeEventListener(
+      "visibilitychange",
+      this.onVisibility,
+    );
     window.removeEventListener("blur", this.onBlur);
     this.pointers.clear();
+    this.directionPointers.clear();
     this.emit();
   }
 
@@ -71,22 +85,52 @@ export class TouchAdapter {
     event.preventDefault();
     button.setPointerCapture(event.pointerId);
     this.pointers.set(event.pointerId, control);
+    if (/^Touch(?:Up|Down|Left|Right)/.test(control))
+      this.directionPointers.add(event.pointerId);
     this.emit();
   };
 
   private readonly onRelease = (event: PointerEvent): void => {
     if (!this.pointers.delete(event.pointerId)) return;
+    this.directionPointers.delete(event.pointerId);
     event.preventDefault();
     this.emit();
   };
 
   private readonly onBlur = (): void => {
     this.pointers.clear();
+    this.directionPointers.clear();
     this.emit();
   };
 
+  private readonly onMove = (event: PointerEvent): void => {
+    if (!this.directionPointers.has(event.pointerId)) return;
+    const button = this.root.ownerDocument
+      .elementFromPoint(event.clientX, event.clientY)
+      ?.closest<HTMLElement>("[data-control]");
+    const control = button?.dataset.control;
+    this.pointers.set(
+      event.pointerId,
+      button &&
+        this.root.contains(button) &&
+        control &&
+        /^Touch(?:Up|Down|Left|Right)/.test(control)
+        ? control
+        : "",
+    );
+    event.preventDefault();
+    this.emit();
+  };
+
+  private readonly onVisibility = (): void => {
+    if (this.root.ownerDocument.hidden) this.onBlur();
+  };
+
   private emit(): void {
-    const current = touchSnapshot(performance.now(), this.pointers.values());
+    const current = touchSnapshot(
+      performance.now(),
+      [...this.pointers.values()].filter(Boolean),
+    );
     if (!sameRawState(this.previous, current)) {
       this.previous = current;
       this.sink(current);
