@@ -29,7 +29,7 @@ The **universal practice area** teaches reusable movement and button patterns. T
 
 ## Initial release candidate
 
-The first release should prove one complete learning loop: configure an input method, practice a small verified set of universal and Ken-specific commands, receive understandable feedback in both languages, and see saved progress. FP-01 records this as a candidate boundary; the exact number of exercises, supported device matrix, identity model, and progress rules still require decisions in FP-02, FP-06, FP-12, FP-13, and FP-15.
+The first release proves one complete learning loop: configure an input method, practice three universal and three source-backed Ken Classic commands, receive understandable feedback in both languages, and see saved anonymous progress. The supported physical-device matrix and learner validation remain open in FP-08, FP-12, FP-13, and FP-16.
 
 The learning loop must remain usable on narrow touch screens and on larger desktop layouts. Device setup, input history, and feedback need room to remain readable without relying on hover or precise pointer input.
 
@@ -50,8 +50,8 @@ The first release shows attempts, correct attempts, accuracy, and per-exercise m
 
 | Decision | Current status | Owner task |
 | --- | --- | --- |
-| Exact first-release exercise list and success criteria | Open; must be source-backed | FP-02, FP-12, FP-13 |
+| Exact first-release exercise list and success criteria | Three universal and three sourced Ken exercises implemented; learner review pending | FP-02, FP-12, FP-13 |
 | Required devices and browsers for the first release | Open; test availability and compatibility | FP-08, FP-16 |
-| Accounts versus anonymous progress | Open; determines cross-device persistence | FP-06 |
+| Accounts versus anonymous progress | Anonymous cookie session selected; no cross-device account in MVP | FP-06 |
 | Progress and reward formulas | Initial formulas implemented; validate motivation with learners | FP-14, FP-15 |
 | Visual style and onboarding details | Open; validate with learners | FP-11, FP-16 |

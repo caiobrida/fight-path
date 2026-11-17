@@ -36,7 +36,7 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 | Progresso | [FP-14](tasks/FP-14-progresso-e-persistencia.md) | Progresso salvo no Neon | FP-06, FP-12, FP-13 | Concluída |
 | Progresso | [FP-15](tasks/FP-15-gamificacao.md) | Domínio, XP e desafios | FP-14 | Concluída |
 | Lançamento | [FP-16](tasks/FP-16-acessibilidade-e-qa.md) | Testes em dispositivos e acessibilidade | FP-11, FP-12, FP-13 | Em andamento |
-| Lançamento | [FP-17](tasks/FP-17-preparo-vercel.md) | Ambiente e publicação futura na Vercel | FP-04, FP-06, FP-16 | Pendente |
+| Lançamento | [FP-17](tasks/FP-17-preparo-vercel.md) | Ambiente e publicação futura na Vercel | FP-04, FP-06, FP-16 | Em andamento |
 
 ## Fora do primeiro recorte
 
@@ -44,4 +44,4 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 - Validação fiel de combos do jogo. O primeiro simulador avaliará sequências de inputs e ritmo; equivalência ao motor de Street Fighter 6 exige pesquisa e testes específicos.
 - Modos de treino como side switch, memory, survival e reação. Eles podem ganhar tarefas próprias após o primeiro ciclo de uso.
 
-As fronteiras do MVP, a stack e o fluxo de contas ainda precisam ser confirmados em FP-01 e FP-06. A ordem acima é uma proposta, não uma decisão irreversível.
+O recorte inicial, a stack e a sessão anônima estão registrados em `PRODUCT.md` e `ARCHITECTURE.md`. Testes com jogadores e dispositivos reais, além da configuração externa de Neon e Vercel, permanecem como gates de publicação.

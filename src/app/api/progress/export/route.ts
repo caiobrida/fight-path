@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { database } from "@/server/db";
+import { logServerFailure } from "@/server/log";
 import { sessionId } from "@/server/sessions";
 
 export const runtime = "nodejs";
@@ -25,7 +26,8 @@ export async function GET(request: NextRequest) {
         "Cache-Control": "private, no-store",
       },
     });
-  } catch {
+  } catch (error) {
+    logServerFailure("progress-export", error);
     return NextResponse.json(
       { error: "progress-unavailable" },
       { status: 503 },

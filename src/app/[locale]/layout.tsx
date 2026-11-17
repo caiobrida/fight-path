@@ -32,7 +32,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <footer className="site-footer">
+          <a href={`/${locale}/privacy`}>{dictionaries[locale].privacyLink}</a>
+        </footer>
+      </body>
     </html>
   );
 }

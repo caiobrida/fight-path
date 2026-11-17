@@ -14,6 +14,49 @@ body {
   min-height: 100vh;
 }
 
+.site-footer {
+  padding: 1rem;
+  background: #10131b;
+  text-align: center;
+}
+.site-footer a {
+  color: #ffad71;
+}
+.site-footer a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+.privacy {
+  min-height: 100vh;
+  padding: 2rem 1rem 4rem;
+  background: #10131b;
+}
+.privacy__content {
+  width: min(100%, 48rem);
+  margin: auto;
+}
+.privacy h1 {
+  margin: 2rem 0;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+}
+.privacy h2 {
+  margin-top: 2rem;
+  font-size: 1.4rem;
+}
+.privacy p,
+.privacy li {
+  color: #c6ccd5;
+  line-height: 1.6;
+}
+.privacy a {
+  color: #ffad71;
+}
+.privacy a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
 .home {
   min-height: 100vh;
   display: grid;

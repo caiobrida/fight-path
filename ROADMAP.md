@@ -1,6 +1,6 @@
 # FightPath roadmap
 
-The roadmap groups the task files in [`TASKS.md`](TASKS.md) into reviewable milestones. It contains dependencies and exit criteria, not dates or a promise of a particular release schedule. FP-01 documents the plan; later work starts only when its task is selected.
+The roadmap groups the task files in [`TASKS.md`](TASKS.md) into reviewable milestones. It contains dependencies and exit criteria, not dates or a promise of a particular release schedule. The project owner has authorized implementation of all listed tasks. Public release remains a separate decision after the external configuration and real-device validation gates.
 
 ## 0. Shared product context
 

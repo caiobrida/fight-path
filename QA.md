@@ -12,6 +12,7 @@
 | Keyboard navigation | Setup Save to Reset tab transition | Passed; Reset received visible solid focus outline |
 | Pointer input | Dedicated down-right touch control | Passed; input history displayed the diagonal direction |
 | Local PostgreSQL and server routes | Progress persistence, export, deletion, session isolation, retry idempotency | Passed in FP-14 HTTP checks |
+| In-app Chromium browser, 320 × 700 | Brazilian Portuguese privacy notice | Passed accessibility-tree and overflow inspection |
 
 Feedback is written as text in a polite live region. Buttons, select controls, and links have visible focus styles. Directional touch buttons expose localized accessible names. The practice surface does not depend on color alone to report success or failure.
 Calculated contrast ratios for representative practice colors are 11.49:1 for muted text on the page background, 10.14:1 for accent text on the page background, and 10.44:1 for white text on control buttons.

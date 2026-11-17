@@ -20,7 +20,9 @@ FightPath is being built with data minimization and user control in mind. This d
 - Offer clear language choices, a privacy notice, progress export, and deletion before public release.
 - Anonymous progress uses an HttpOnly cookie and is inaccessible if that cookie is lost. Export and deletion act on the current session only. Public release still needs a reviewed notice, contact channel, retention job, and backup deletion procedure.
 - Do not install analytics or marketing cookies by default. Assess any future third-party service before collecting extra data.
-- Define retention and backup deletion procedures before production deployment. Record security incidents and a response process.
+- The daily authenticated retention job deletes sessions and their attempts after 180 days. Verify that `CRON_SECRET` is set in production and monitor the job. Define production backup deletion periods before public release.
+- Confirm and publish the operator identity and a private privacy-request contact before public release. The bilingual notice is at `/en/privacy` and `/pt-BR/privacy`; its missing operator or contact state blocks publication.
+- Record security incidents and a response process. Confirm the production legal basis, data regions, processor agreements, and request handling with the project owner before public collection.
 
 ## Primary references
 

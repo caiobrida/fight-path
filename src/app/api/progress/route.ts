@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { database } from "@/server/db";
+import { logServerFailure } from "@/server/log";
 import { parseAttempt, type ProgressRow } from "@/domain/progress";
 import { sessionCookie } from "@/server/session-token";
 import { ensureSession, sameOrigin, sessionId } from "@/server/sessions";
@@ -61,7 +62,8 @@ export async function GET(request: NextRequest) {
     const id = await ensureSession(request, response);
     const rows = await summary(id);
     return NextResponse.json({ progress: rows }, { headers: response.headers });
-  } catch {
+  } catch (error) {
+    logServerFailure("progress-read", error);
     return NextResponse.json(
       { error: "progress-unavailable" },
       { status: 503, headers: privateHeaders },
@@ -103,7 +105,8 @@ export async function POST(request: NextRequest) {
       { progress: await summary(id) },
       { headers: privateHeaders },
     );
-  } catch {
+  } catch (error) {
+    logServerFailure("progress-write", error);
     return NextResponse.json(
       { error: "progress-unavailable" },
       { status: 503, headers: privateHeaders },
@@ -123,7 +126,8 @@ export async function DELETE(request: NextRequest) {
     );
     response.cookies.delete(sessionCookie);
     return response;
-  } catch {
+  } catch (error) {
+    logServerFailure("progress-delete", error);
     return NextResponse.json(
       { error: "progress-unavailable" },
       { status: 503, headers: privateHeaders },

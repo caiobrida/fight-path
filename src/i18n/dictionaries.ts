@@ -12,6 +12,7 @@ type Dictionary = {
   portuguese: string;
   setupLink: string;
   practiceLink: string;
+  privacyLink: string;
 };
 
 export const dictionaries: Record<Locale, Dictionary> = {
@@ -25,6 +26,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     portuguese: "Português (Brasil)",
     setupLink: "Set up controls",
     practiceLink: "Start practicing",
+    privacyLink: "Privacy notice",
   },
   "pt-BR": {
     description: "Pratique comandos de jogos de luta com feedback claro.",
@@ -36,6 +38,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     portuguese: "Português (Brasil)",
     setupLink: "Configurar controles",
     practiceLink: "Começar a praticar",
+    privacyLink: "Aviso de privacidade",
   },
 };
 
