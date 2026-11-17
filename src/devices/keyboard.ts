@@ -33,6 +33,7 @@ function isTypingTarget(target: EventTarget | null): boolean {
 export class KeyboardAdapter {
   private readonly pressed = new Set<string>();
   private readonly codes: Set<string>;
+  private captureAll = false;
   private previous: RawSnapshot | undefined;
 
   constructor(
@@ -58,8 +59,21 @@ export class KeyboardAdapter {
     this.emit();
   }
 
+  setCaptureAll(enabled: boolean): void {
+    this.captureAll = enabled;
+  }
+
+  setCodes(codes: Iterable<string>): void {
+    this.codes.clear();
+    for (const code of codes) this.codes.add(code);
+  }
+
   private readonly onKeyDown = (event: KeyboardEvent): void => {
-    if (!this.codes.has(event.code) || isTypingTarget(event.target)) return;
+    if (
+      (!this.captureAll && !this.codes.has(event.code)) ||
+      isTypingTarget(event.target)
+    )
+      return;
     event.preventDefault();
     if (event.repeat) return;
     this.pressed.add(event.code);
@@ -67,7 +81,12 @@ export class KeyboardAdapter {
   };
 
   private readonly onKeyUp = (event: KeyboardEvent): void => {
-    if (!this.codes.has(event.code)) return;
+    if (
+      !this.captureAll &&
+      !this.codes.has(event.code) &&
+      !this.pressed.has(event.code)
+    )
+      return;
     this.pressed.delete(event.code);
     this.emit();
   };

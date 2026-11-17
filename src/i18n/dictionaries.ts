@@ -10,6 +10,7 @@ type Dictionary = {
   languageLabel: string;
   english: string;
   portuguese: string;
+  setupLink: string;
 };
 
 export const dictionaries: Record<Locale, Dictionary> = {
@@ -21,6 +22,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     languageLabel: "Language",
     english: "English",
     portuguese: "Português (Brasil)",
+    setupLink: "Set up controls",
   },
   "pt-BR": {
     description: "Pratique comandos de jogos de luta com feedback claro.",
@@ -30,6 +32,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     languageLabel: "Idioma",
     english: "English",
     portuguese: "Português (Brasil)",
+    setupLink: "Configurar controles",
   },
 };
 

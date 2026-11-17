@@ -34,6 +34,9 @@ export default async function HomePage({
         <div className="home__status" role="status">
           {text.status}
         </div>
+        <a className="home__link" href={`/${locale}/setup`}>
+          {text.setupLink}
+        </a>
       </div>
     </main>
   );
