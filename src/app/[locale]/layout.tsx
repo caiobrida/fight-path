@@ -26,7 +26,15 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  return { title: "FightPath", description: dictionaries[locale].description };
+  const developmentDeployment =
+    process.env.VERCEL_ENV === "preview" ||
+    process.env.FIGHTPATH_RELEASE_MODE === "development";
+
+  return {
+    title: "FightPath",
+    description: dictionaries[locale].description,
+    robots: developmentDeployment ? { index: false, follow: false } : undefined,
+  };
 }
 
 export default async function LocaleLayout({

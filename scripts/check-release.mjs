@@ -1,14 +1,23 @@
 const environment = process.env.VERCEL_ENV;
 if (environment !== "preview" && environment !== "production") process.exit(0);
 
+const developmentDeployment =
+  environment === "preview" ||
+  (environment === "production" &&
+    process.env.FIGHTPATH_RELEASE_MODE === "development");
+
 const required = [
   "DATABASE_URL",
   "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
   "CLERK_SECRET_KEY",
-  "CLERK_WEBHOOK_SIGNING_SECRET",
-  "CRON_SECRET",
-  "PRIVACY_OPERATOR_NAME",
-  "PRIVACY_CONTACT_EMAIL",
+  ...(environment === "production" ? ["CRON_SECRET"] : []),
+  ...(!developmentDeployment
+    ? [
+        "CLERK_WEBHOOK_SIGNING_SECRET",
+        "PRIVACY_OPERATOR_NAME",
+        "PRIVACY_CONTACT_EMAIL",
+      ]
+    : []),
 ];
 const missing = required.filter((name) => {
   const value = process.env[name]?.trim();
@@ -17,12 +26,14 @@ const missing = required.filter((name) => {
 if (missing.length)
   throw new Error(`Missing deployment configuration: ${missing.join(", ")}`);
 
+const clerkKeyType = developmentDeployment ? "test" : "live";
 if (
-  environment === "production" &&
-  (process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.startsWith("pk_test_") ||
-    process.env.CLERK_SECRET_KEY.startsWith("sk_test_"))
+  !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.startsWith(
+    `pk_${clerkKeyType}_`,
+  ) ||
+  !process.env.CLERK_SECRET_KEY.startsWith(`sk_${clerkKeyType}_`)
 )
-  throw new Error("Production deployment requires Clerk Production keys");
+  throw new Error(`Deployment requires matching Clerk ${clerkKeyType} keys`);
 
 const database = new URL(process.env.DATABASE_URL);
 if (
@@ -31,11 +42,17 @@ if (
   database.searchParams.get("sslmode") !== "require"
 )
   throw new Error("Deployment DATABASE_URL must use a TLS Neon endpoint");
-if (process.env.CRON_SECRET.length < 32)
+if (process.env.CRON_SECRET && process.env.CRON_SECRET.length < 32)
   throw new Error("CRON_SECRET must contain at least 32 characters");
-if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(process.env.PRIVACY_CONTACT_EMAIL))
+if (
+  process.env.PRIVACY_CONTACT_EMAIL &&
+  !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(process.env.PRIVACY_CONTACT_EMAIL)
+)
   throw new Error("PRIVACY_CONTACT_EMAIL must be an email address");
-if (process.env.PRIVACY_OPERATOR_NAME.trim().length < 2)
+if (
+  process.env.PRIVACY_OPERATOR_NAME &&
+  process.env.PRIVACY_OPERATOR_NAME.trim().length < 2
+)
   throw new Error("PRIVACY_OPERATOR_NAME is incomplete");
 
 process.stdout.write(`${environment} configuration is present.\n`);

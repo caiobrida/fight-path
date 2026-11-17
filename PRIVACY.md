@@ -16,7 +16,7 @@ FightPath is being built with data minimization and user control in mind. This d
 ## Engineering requirements
 
 - Validate every server request and authorize access to progress with the Clerk user ID derived on the server; never trust a client-supplied owner ID.
-- Keep database credentials and signing keys server-side. Use separate local, preview, and production settings.
+- Keep database credentials and signing keys server-side. The current Vercel Preview and Production-labeled targets share development services by owner decision. Use separate database and Clerk Production settings before any public release.
 - Use parameterized queries, least-privilege database credentials, secure cookies, CSRF protection for state-changing requests, rate limits, and security headers.
 - Offer clear language choices, a privacy notice, progress export, and deletion before public release.
 - Export and deletion act on the signed-in account only. A signed Clerk `user.deleted` webhook removes the deleted account's attempts. Configure and test its endpoint and signing secret before public release.
