@@ -41,6 +41,15 @@ export default async function LessonPage({
       </Badge>
       <h1>{text.title}</h1>
       <p className="fp-lesson__summary">{text.summary}</p>
+      {lesson.patch && (
+        <Notice>
+          {lesson.patch.review === "conceptual"
+            ? pt
+              ? "Introdução conceitual baseada nas fontes abaixo. Custos, comandos e janelas da versão atual devem ser conferidos no jogo; esta aula não certifica uma build atual."
+              : "Conceptual introduction based on the sources below. Check current costs, inputs and timing in the game; this lesson does not certify a current build."
+            : `${pt ? "Build verificada" : "Verified build"}: ${lesson.patch.build}`}
+        </Notice>
+      )}
       <Notice>
         <strong>{pt ? "Seu objetivo: " : "Your goal: "}</strong>
         {text.objective}

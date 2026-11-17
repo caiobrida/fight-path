@@ -13,3 +13,7 @@
 **Acceptance:** SF6-specific rules are clearly labeled and traceable to the applicable build; the learner can recognize each presented system and test it in training mode.
 
 **Evidence:** official references and reproducible recordings for both locales. A launch-era video alone does not validate current numeric behavior.
+
+## Implementation evidence (2026-11-17)
+
+Three bilingual lessons cover resource planning, the five Drive techniques, Burnout and controlled training comparisons. Current numeric inputs/costs are intentionally omitted. The reader labels conceptual evidence; `patch.review=pending` removes outdated content from both catalog and direct routes. Current battle-build certification remains open; launch-era official sources are not presented as a 2026 specification. Content validation and TypeScript checks pass.

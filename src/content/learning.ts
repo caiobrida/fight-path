@@ -23,6 +23,11 @@ export type Lesson = {
   scope: "universal" | "sf6" | "ken-classic";
   status: "draft" | "published";
   reviewed: string;
+  patch?: {
+    review: "conceptual" | "verified" | "pending";
+    basis: string;
+    build?: string;
+  };
   prerequisites: string[];
   sources: { title: string; url: string; supports: string }[];
   copy: Record<Locale, LessonCopy>;
