@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { starterExercise } from "@/content/exercises";
+import { exercises } from "@/content/exercises";
 import { GamepadAdapter } from "@/devices/gamepad";
 import { KeyboardAdapter } from "@/devices/keyboard";
 import { TouchAdapter } from "@/devices/touch";
@@ -10,6 +10,7 @@ import { evaluateCommand, type Evaluation } from "@/domain/evaluator";
 import {
   appendSample,
   newlyPressed,
+  relativeDirection,
   type Facing,
   type InputSample,
 } from "@/domain/input";
@@ -27,7 +28,10 @@ const copy = {
     title: "Practice an input",
     intro:
       "Follow the directions, then press any punch button. FightPath checks your input sequence, not the game's combat engine.",
-    challenge: "Quarter circle forward + punch",
+    lessons: "Universal practice path",
+    goal: "Complete 10 correct attempts",
+    completed: "Completed",
+    next: "Next exercise",
     device: "Device",
     keyboard: "Keyboard",
     gamepad: "Gamepad",
@@ -63,7 +67,10 @@ const copy = {
     title: "Pratique um comando",
     intro:
       "Siga as direções e pressione um botão de soco. O FightPath avalia a sequência de inputs, não o motor de combate do jogo.",
-    challenge: "Quarto de círculo para frente + soco",
+    lessons: "Trilha de treino universal",
+    goal: "Conclua 10 execuções corretas",
+    completed: "Concluído",
+    next: "Próximo exercício",
     device: "Dispositivo",
     keyboard: "Teclado",
     gamepad: "Controle",
@@ -120,8 +127,11 @@ export function Practice({ locale }: { locale: Locale }) {
   const [raw, setRaw] = useState<RawSnapshot>();
   const [history, setHistory] = useState<readonly InputSample[]>([]);
   const [evaluation, setEvaluation] = useState<Evaluation | null>(null);
-  const [attempts, setAttempts] = useState(0);
-  const [correct, setCorrect] = useState(0);
+  const [exerciseIndex, setExerciseIndex] = useState(0);
+  const [progress, setProgress] = useState<
+    Record<string, { attempts: number; correct: number }>
+  >({});
+  const exerciseRef = useRef(exercises[0]);
   const mappingRef = useRef(mapping);
   const facingRef = useRef(facing);
   const attemptRef = useRef<readonly InputSample[]>([]);
@@ -165,12 +175,24 @@ export function Practice({ locale }: { locale: Locale }) {
       if (!newlyPressed(previous, sample).length) return;
       const result = evaluateCommand(
         attemptRef.current,
-        starterExercise,
+        exerciseRef.current.command,
         facingRef.current,
       );
       setEvaluation(result);
-      setAttempts((value) => value + 1);
-      if (result.correct) setCorrect((value) => value + 1);
+      const exerciseId = exerciseRef.current.command.id;
+      setProgress((current) => {
+        const previousProgress = current[exerciseId] ?? {
+          attempts: 0,
+          correct: 0,
+        };
+        return {
+          ...current,
+          [exerciseId]: {
+            attempts: previousProgress.attempts + 1,
+            correct: previousProgress.correct + Number(result.correct),
+          },
+        };
+      });
       attemptRef.current = [];
     };
     const adapter =
@@ -196,8 +218,19 @@ export function Practice({ locale }: { locale: Locale }) {
     historyRef.current = [];
     setHistory([]);
     setEvaluation(null);
-    setAttempts(0);
-    setCorrect(0);
+    setProgress((current) => ({
+      ...current,
+      [exerciseRef.current.command.id]: { attempts: 0, correct: 0 },
+    }));
+  };
+
+  const selectExercise = (index: number) => {
+    exerciseRef.current = exercises[index];
+    setExerciseIndex(index);
+    attemptRef.current = [];
+    historyRef.current = [];
+    setHistory([]);
+    setEvaluation(null);
   };
 
   const changeDevice = (next: DeviceKind) => {
@@ -214,6 +247,8 @@ export function Practice({ locale }: { locale: Locale }) {
     : playing
       ? text.active
       : text.waiting;
+  const exercise = exercises[exerciseIndex];
+  const { attempts = 0, correct = 0 } = progress[exercise.command.id] ?? {};
   const accuracy = attempts ? Math.round((correct / attempts) * 100) : 0;
 
   return (
@@ -226,12 +261,44 @@ export function Practice({ locale }: { locale: Locale }) {
         <p className="eyebrow">FightPath</p>
         <h1>{text.title}</h1>
         <p>{text.intro}</p>
+        <section className="practice__lessons" aria-label={text.lessons}>
+          <h2>{text.lessons}</h2>
+          <div>
+            {exercises.map((item, index) => (
+              <button
+                key={item.command.id}
+                type="button"
+                aria-pressed={index === exerciseIndex}
+                onClick={() => selectExercise(index)}
+              >
+                <span>
+                  {index + 1}. {item.title[locale]}
+                </span>
+                <small>
+                  {Math.min(progress[item.command.id]?.correct ?? 0, item.goal)}
+                  /{item.goal}
+                  {(progress[item.command.id]?.correct ?? 0) >= item.goal
+                    ? ` · ${text.completed}`
+                    : ""}
+                </small>
+              </button>
+            ))}
+          </div>
+        </section>
         <section className="practice__panel">
-          <h2>{text.challenge}</h2>
-          <div className="practice__sequence" aria-label={text.challenge}>
-            <span>↓</span>
-            <span>{facing === "right" ? "↘" : "↙"}</span>
-            <span>{facing === "right" ? "→" : "←"}</span>
+          <h2>{exercise.title[locale]}</h2>
+          <p>
+            {text.goal}: {Math.min(correct, exercise.goal)}/{exercise.goal}
+          </p>
+          <div
+            className="practice__sequence"
+            aria-label={exercise.title[locale]}
+          >
+            {exercise.command.directions.map((direction, index) => (
+              <span key={`${direction}-${index}`}>
+                {symbols[relativeDirection(direction, facing)]}
+              </span>
+            ))}
             <span>+</span>
             <span>LP / MP / HP</span>
           </div>
@@ -275,6 +342,15 @@ export function Practice({ locale }: { locale: Locale }) {
             <button type="button" onClick={reset}>
               {text.reset}
             </button>
+            {correct >= exercise.goal &&
+              exerciseIndex < exercises.length - 1 && (
+                <button
+                  type="button"
+                  onClick={() => selectExercise(exerciseIndex + 1)}
+                >
+                  {text.next}
+                </button>
+              )}
           </div>
         </section>
         {device === "touch" && (

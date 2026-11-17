@@ -257,6 +257,32 @@ h1 {
   border-radius: 1rem;
   background: #1b2230;
 }
+.practice__lessons {
+  margin-top: 2rem;
+}
+.practice__lessons > div {
+  display: grid;
+  gap: 0.5rem;
+}
+.practice__lessons button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem;
+  border: 1px solid #ffffff44;
+  border-radius: 0.75rem;
+  background: #1b2230;
+  color: #fff;
+  text-align: left;
+}
+.practice__lessons button[aria-pressed="true"] {
+  border-color: #ffad71;
+}
+.practice__lessons small {
+  color: #ffad71;
+  white-space: nowrap;
+}
 .practice__panel {
   margin-top: 2rem;
 }
@@ -402,6 +428,12 @@ h1 {
   }
   .practice__options {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .practice__lessons > div {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .practice__lessons button {
+    display: grid;
   }
 }
 
