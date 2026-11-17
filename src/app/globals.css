@@ -1,5 +1,6 @@
 @import "./design-system.css";
 @import "./game-media.css";
+@import "./combos.css";
 
 :root {
   color-scheme: dark;

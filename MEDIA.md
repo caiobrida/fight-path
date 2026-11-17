@@ -1,5 +1,7 @@
 # Media register
 
+FP-42 publishes SuperCombo references under the owner's source approval. Full-combo clips are optional. Existing Capcom clips on combo details are labeled isolated moves, not complete routes or independent current-build combo evidence.
+
 FP-41 adds official Street Fighter 6 visual material requested by the owner. Original Capcom URLs and output metadata are recorded in `media-sources.json`. The three portraits and fourteen move posters/clips occupy 3,168,611 bytes combined; MP4 downloads occur only after explicit playback, and offscreen images load lazily. Source resolution is 400 x 224 for the move clips; do not describe them as HD. These byte measurements do not certify real-phone performance.
 
 Reviewed November 17, 2026. Character portraits and short demonstrations were obtained from Capcom's rendered official command lists through the browser asset inventory, without operating SF6. Optimized local copies avoid observed HTTP 403 failures on direct origin requests and avoid adding third-party image/video requests. No wiki GIFs, unofficial creator videos, game-process extraction or fabricated gameplay were used. The original SVG diagrams remain conceptual teaching aids, separate from actual game imagery.

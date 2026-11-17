@@ -1,6 +1,8 @@
 # FightPath architecture outline
 
-Current delivery: [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). React Aria interaction components and plain CSS tokens form the shared design system. Versioned repository lessons and account-bound learning activity are implemented; migration 004 is applied locally and to development Neon. The BnB publication gate remains separate from the input evaluator. Earlier proposal-only statements below are historical.
+Current delivery: [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). React Aria interaction components and plain CSS tokens form the shared design system. Versioned repository lessons and account-bound learning activity are implemented; migration 004 is applied locally and to development Neon. Source publication remains separate from the input evaluator. Earlier proposal-only statements below are historical.
+
+FP-42 supersedes the former mandatory gameplay-evidence publication gate for owner-approved SuperCombo references. `src/content/data/ken-supercombo.json` stores source factual rows; `ken-combos.ts` deduplicates and creates attributed bilingual references. `sourced` references and independently `verified` gameplay evidence are different states. Catalog publication admits approved cited references without clips, while the verified-only selector retains its stricter meaning. General lesson navigation remains eighteen entries; source combo activities use the same revision-aware persistence through `findLesson`, and generic lesson URLs redirect to combo details. Resource costs retain alternatives and unknown/conflicting values. The library supports combined filters, 24-entry pagination and accessible meter segments. Pure notation helpers stay outside the data catalog to keep client-side mirroring small.
 
 ## Status
 

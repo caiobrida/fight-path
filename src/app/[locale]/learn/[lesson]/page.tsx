@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { findLesson, publishedLessons } from "@/content/catalog";
 import { trackNames } from "@/content/learning";
 import { isLocale } from "@/i18n/dictionaries";
@@ -18,6 +18,8 @@ export default async function LessonPage({
   if (!isLocale(locale)) notFound();
   const lesson = findLesson(id);
   if (!lesson) notFound();
+  if (lesson.patch?.review === "sourced")
+    redirect(`/${locale}/ken/combos/${lesson.id}`);
   const pt = locale === "pt-BR";
   const text = lesson.copy[locale];
   const track = publishedLessons.filter((item) => item.track === lesson.track);

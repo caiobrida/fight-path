@@ -4,6 +4,8 @@ SF6 validation is manual-only by explicit owner instruction. Do not automate gam
 
 ## Expansion regression evidence, November 17, 2026
 
+FP-42: 52 Node/domain/content/server tests pass against local PostgreSQL with zero skips. All 27 actual-site browser tests pass, including nine new combo-library cases: categories/pagination and combined filters, source details and facing in both locales, 320/390/768/1280px layouts, variable/unknown costs, templates, invalid filters, alias redirects and serious/critical accessibility checks. Desktop/mobile screenshots were inspected. Source-backed publication carries no independent gameplay claim; no SF6 automation was used.
+
 FP-41 visual follow-up: 31 component-browser tests and 18 actual-site tests pass. New coverage verifies success/error colors and check/cross icons, input placement, mirrored directions, reset and completion, reduced motion, explicit clip loading, actual playback, offscreen pause, exercise-switch cleanup and playback failure fallback. Actual-site checks load all lesson-card images, confirm varied character art and character-specific Ken examples, and inspect responsive public pages at 320/360/390/768/1280px in both locales. Build, lint, formatting and type checks pass. Captured desktop/mobile screenshots were inspected. The fourteen official source clips are illustrations, not newly captured/current-build executions; no SF6 automation was used.
 
 Current delivery and external gates: [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). Earlier observations below are historical, not substitutes for physical-device verification.
@@ -22,7 +24,7 @@ Controller follow-up: the owner reported that choosing the exact DualSense resto
 
 Commands: `node --env-file=.env.local scripts/test.mjs`, `npm run test:browser`, `npm run build`, `npm run test:site`, `npm run test:auth`. CI provisions PostgreSQL 17 and cannot silently skip integration tests. Auth checks are opt-in; no Clerk secret or Neon credential is copied to CI. The loopback-only Vite harness is outside deployable Next.js routes.
 
-Remaining manual evidence: the owner's DualSense USB/Windows 11/Chrome, real Android/iOS multi-touch, screen-reader/200% zoom sessions, Google consent, learner review and six current-game Ken routes with both-side clips. Real mobile loading/input performance is unmeasured. The observed title version 2.0500.001 does not certify battle-build or combo execution. Announce any future desktop/browser/game control before interacting.
+Remaining manual evidence: the owner's full DualSense matrix, real Android/iOS multi-touch, screen-reader/200% zoom sessions, Google consent and learner review. Independent combo recordings are optional after the owner's FP-42 source approval. Real-phone performance is unmeasured. Announce permitted browser/desktop control first; never automate SF6.
 
 ## Checked on 2026-11-17
 

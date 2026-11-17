@@ -1,6 +1,8 @@
 # FP-37 — Add purposeful images and controlled demonstrations
 
-**Status:** Diagrams and player shipped; gameplay clips gated. **Priority:** P2. **Dependencies:** FP-25, FP-26; content verification for gameplay clips.
+**Status:** Diagrams, official character art and move clips delivered. Full-combo recordings optional. **Priority:** P2. **Dependencies:** FP-25, FP-26; provenance for each asset.
+
+FP-41 added fourteen official move clips and three portraits. FP-42 supersedes the old FP-34 publication gate below: approved source-backed combos do not require full-route recordings. Existing move clips are explicitly labeled isolated demonstrations. Never automate SF6 to obtain media.
 
 ## Checklist
 

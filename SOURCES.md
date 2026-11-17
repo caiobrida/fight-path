@@ -2,6 +2,10 @@
 
 FightPath must not present remembered game details as facts. Every game-specific lesson records a source URL, access date, game version or patch when known, and the exact claim it supports. Prefer current Capcom material. A community source may fill a gap only when it has a strong editorial record and is cross-checked before publication. Recheck move data after major game updates.
 
+Owner decision, November 17, 2026: [SuperCombo Wiki](https://wiki.supercombo.gg/) is a trusted source to consult for general fighting-game topics, systems, character strategy and future character content. [Ken / Combos](https://wiki.supercombo.gg/w/Street_Fighter_6/Ken/Combos) is approved for publishing the current combo reference directly from the source, without independent in-game validation, battle-build reproduction or mandatory clips. This is an explicit exception to the earlier cross-check/execution publication gate. Preserve notation, conditions, alternative routes and provenance; label these references `sourced`, never independently `verified`. The SF6 automation prohibition remains in force.
+
+FP-42 captured the 126 rows of the current Starter, Basic, Super Art, Drive Rush, Drive Impact/Stun and Max Damage tables on November 17, 2026. The page reports last edited at 11:03. Raw factual fields are in `src/content/data/ken-supercombo.json`; exact transcription was checked against the rendered table data (126 rows; canonical FNV-1a 32-bit digest 706974827). Dedupe yields 124 entries. These are source-derived notations and metrics, not copied guide paragraphs. Retain alternatives and incomplete templates. Repeated rows with conflicting resource values produce an unknown cost rather than a fabricated zero. Damage marked incomplete or erroneous by the source is omitted. Earlier tables explicitly identified as legacy by the author were excluded.
+
 The input evaluator is a FightPath approximation. Its timing windows are product rules, not claims about Street Fighter 6. Label them accordingly in the interface.
 
 ## Initial source register
@@ -18,9 +22,9 @@ The first Ken lessons use only the three commands confirmed in CAPCOM-KEN-MOVES.
 
 ## Content review procedure
 
-Owner instruction, November 17, 2026: all installed-SF6 execution evidence must be obtained manually by a human. Do not automate SF6 even in offline training or after announcing computer use. This decision follows the automation restrictions and account-enforcement provisions in section 4 of the [Steam Subscriber Agreement](https://store.steampowered.com/subscriber_agreement/). It is not a prediction of a specific ban or an assertion that a mode is exempt. Research and editing supplied recordings remain permitted; current-game publication evidence is still required.
+Owner instruction, November 17, 2026: any installed-SF6 execution evidence must be obtained manually by a human. Do not automate SF6 even in offline training or after announcing computer use. This decision follows the automation restrictions and account-enforcement provisions in section 4 of the [Steam Subscriber Agreement](https://store.steampowered.com/subscriber_agreement/). It is not a prediction of a specific ban or an assertion that a mode is exempt. Optional independent evidence is separate from the approved publication of SuperCombo-sourced references above.
 
-`RESEARCH-CONTENT.md` contains the proposed next curriculum, candidate sources and access limits for FP-29 through FP-37. Research candidates are not approved published claims. No exact current-build Ken BnB was verified in that study. Require direct route/build evidence before publication and media provenance before redistribution. `DESIGN-STUDY.md` records visual references separately from factual game evidence.
+`RESEARCH-CONTENT.md` records the earlier study. Its manual route/build publication gate is superseded for approved SuperCombo content by the owner decision above. Independently gameplay-verified claims still need their actual evidence, and media provenance remains required. `DESIGN-STUDY.md` records visual references separately from factual game evidence.
 
 1. Add source entries before adding game-specific exercise data.
 2. Record the supported claim and source ID alongside each content entry.

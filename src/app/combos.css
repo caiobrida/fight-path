@@ -1,0 +1,301 @@
+.fp-combo-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 100px;
+  gap: 12px;
+  align-items: center;
+  padding: 24px;
+  border: 1px solid #78513f;
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 100% 100%, #8d392a60, transparent 70%),
+    var(--fp-surface);
+}
+.fp-combo-hero h1 {
+  font-size: clamp(32px, 5vw, 64px);
+  white-space: pre-line;
+}
+.fp-combo-hero p {
+  color: var(--fp-muted);
+  line-height: 1.7;
+}
+.fp-combo-hero .fp-fighter-art {
+  max-height: 320px;
+  filter: drop-shadow(0 12px 24px #0008);
+}
+.fp-combo-hero .fp-actions {
+  gap: 12px;
+  margin-bottom: 0;
+  font-size: 13px;
+}
+.fp-combo-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: 28px;
+}
+.fp-combo-categories a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  min-height: 44px;
+  border: 1px solid var(--fp-border);
+  border-radius: 8px;
+  color: var(--fp-muted);
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1.5;
+  transition:
+    background 150ms,
+    transform 150ms;
+}
+.fp-combo-categories a:hover {
+  background: var(--fp-raised);
+  transform: translateY(-2px);
+}
+.fp-combo-categories a[aria-current] {
+  color: var(--fp-accent-text);
+  background: var(--fp-accent);
+  border-color: var(--fp-accent);
+  font-weight: 700;
+}
+.fp-combo-categories a > span {
+  padding-inline: 6px;
+  background: #0002;
+  border-radius: 4px;
+  font-size: 11px;
+}
+.fp-combo-search {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 20px;
+  background: var(--fp-surface);
+  border: 1px solid var(--fp-border);
+  border-radius: 12px;
+}
+.fp-combo-search label,
+.fp-combo-detail section > label {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+.fp-combo-search__query,
+.fp-combo-search .fp-actions {
+  grid-column: 1 / -1;
+}
+.fp-combo-search .fp-actions {
+  margin: 4px 0 0;
+}
+.fp-combo-search input,
+.fp-combo-search select,
+.fp-combo-detail select {
+  min-width: 0;
+  width: 100%;
+  padding: 12px;
+  min-height: 44px;
+  background: var(--fp-canvas);
+  color: var(--fp-text);
+  border: 1px solid var(--fp-border);
+  border-radius: 6px;
+  font: inherit;
+}
+.fp-combo-grid {
+  display: grid;
+  gap: 20px;
+}
+.fp-combo-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 24px;
+}
+.fp-combo-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.fp-combo-card h3 {
+  margin: 0 0 18px;
+  font-size: 22px;
+}
+.fp-combo-card h3 a {
+  color: var(--fp-text);
+  text-decoration: none;
+}
+.fp-combo-card h3 a:hover {
+  color: var(--fp-accent);
+}
+.fp-combo-card > .fp-button {
+  align-self: flex-start;
+  margin-top: auto;
+}
+.fp-combo-notation {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  line-height: 1.7;
+  min-width: 0;
+  margin-bottom: 20px;
+}
+.fp-combo-notation code {
+  max-width: 100%;
+  padding: 5px 9px;
+  border: 1px solid #ffad713d;
+  border-radius: 6px;
+  background: #342c29;
+  color: #ffd2ad;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.fp-combo-notation__connector {
+  color: var(--fp-muted);
+  font-weight: 700;
+}
+.fp-combo-costs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-block: 12px 20px;
+}
+.fp-meter {
+  min-width: 0;
+}
+.fp-meter__label {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+.fp-meter__label span {
+  color: var(--fp-muted);
+}
+.fp-meter__label strong {
+  color: #a3f4bd;
+}
+.fp-meter--super .fp-meter__label strong {
+  color: #d5b1ff;
+}
+.fp-meter__label small {
+  font-size: 10px;
+  font-weight: 400;
+}
+.fp-meter__segments {
+  display: flex;
+  gap: 4px;
+}
+.fp-meter__segments span {
+  height: 9px;
+  flex: 1;
+  border: 1px solid #617081;
+  background: #253044;
+  border-radius: 2px;
+}
+.fp-meter--drive [data-fill="spent"] {
+  background: #8cdbaf;
+  border-color: #8cdbaf;
+}
+.fp-meter--super [data-fill="spent"] {
+  background: #caa1ff;
+  border-color: #caa1ff;
+}
+.fp-meter--drive [data-fill="variant"] {
+  background: repeating-linear-gradient(135deg, #8cdbaf 0 3px, #254a38 3px 6px);
+}
+.fp-meter--super [data-fill="variant"] {
+  background: repeating-linear-gradient(135deg, #caa1ff 0 3px, #49336b 3px 6px);
+}
+.fp-meter [data-fill="unknown"] {
+  border-style: dashed;
+  background: transparent;
+}
+.fp-combo-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0 0 22px;
+}
+.fp-combo-meta div {
+  min-width: 0;
+}
+.fp-combo-meta dt {
+  color: var(--fp-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.fp-combo-meta dd {
+  margin: 7px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.fp-combo-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-block: 32px;
+}
+.fp-combo-detail > section {
+  margin-block: 32px;
+}
+.fp-combo-detail .fp-combo-costs {
+  max-width: 560px;
+}
+.fp-combo-detail select {
+  width: min(100%, 280px);
+}
+.fp-combo-detail .fp-combo-notation {
+  padding: 20px;
+  background: var(--fp-surface);
+  border: 1px solid var(--fp-border);
+  border-radius: 12px;
+}
+.fp-combo-detail .fp-combo-legend {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--fp-muted);
+}
+.fp-combo-detail .fp-game-media {
+  max-width: 560px;
+}
+@media (min-width: 760px) {
+  .fp-combo-hero {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    padding: 32px;
+  }
+  .fp-combo-search {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .fp-combo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 380px) {
+  .fp-combo-hero {
+    grid-template-columns: 1fr;
+  }
+  .fp-combo-hero .fp-fighter-art {
+    max-height: 190px;
+  }
+  .fp-combo-card {
+    padding: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fp-combo-categories a {
+    transition: none;
+  }
+  .fp-combo-categories a:hover {
+    transform: none;
+  }
+}

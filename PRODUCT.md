@@ -1,6 +1,6 @@
 # FightPath product brief
 
-Current implementation: [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). The approved expansion now includes eighteen bilingual lessons, a sourced reader, learning activity/resume, media, controller improvements and the design system. The BnB library is implemented, with publication gated on current-game execution evidence. Historical future-scope statements below should be read alongside that delivery record.
+Current implementation: [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). The product includes eighteen core bilingual lessons, learning activity, contextual media, controller improvements and a separate Ken combo library. By owner instruction on November 17, 2026, SuperCombo-backed combos can be published without independent in-game validation or mandatory clips. Source attribution replaces the earlier execution-publication gate; it does not imply independent gameplay verification.
 
 ## Vision and audience
 
@@ -49,7 +49,7 @@ The first release shows attempts, correct attempts, accuracy, and per-exercise m
 
 On November 17, 2026 the owner requested research and task planning for a more complete learning product. The owner approved FP-19 through FP-40 on November 17, 2026. The proposed areas are Learn (foundations, neutral/footsies, SF6 systems and practice habits), Ken Classic (a beginner game plan and dependable BnBs) and Practice (reliable input exercises with guided controller setup). Preserve both languages and the dark/orange palette while developing a coherent mobile-first design system with purposeful imagery. `AUDIT.md`, `DESIGN-STUDY.md` and `RESEARCH-CONTENT.md` contain the evidence and proposal.
 
-The first proposed BnB feature is a verified reference and in-game practice guide. Reading, a self-reported drill and a browser input match are different learning activities. Exact combos, damage and patch-dependent advice remain unpublished until sources and current-game execution are checked. The reported DualSense USB issue and duplicate-attempt defect take priority over adding execution complexity.
+The Ken combo feature is a SuperCombo-sourced reference and in-game practice guide. Organize it by normal-hit/meterless routes, Counter Hit, Punish Counter, Drive Rush, Drive Impact, wall splat, stun, Super Arts and damage routes. Show Drive/Super expenditure visually, preserve variable alternatives and support search, difficulty and position filters. Reading, a self-reported drill and a browser input match remain distinct activities. The owner waived independent in-game validation for source-backed publication; missing or conflicting source metrics remain unknown rather than invented.
 
 ### Other future opportunities
 

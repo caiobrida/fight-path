@@ -20,8 +20,15 @@ export const lessons: readonly Lesson[] = [
 ];
 export const publishedLessons = lessons.filter(
   (lesson) =>
-    lesson.status === "published" && lesson.patch?.review !== "pending",
+    lesson.status === "published" &&
+    lesson.patch?.review !== "pending" &&
+    !publishedCombos.some((recipe) => recipe.lesson.id === lesson.id),
 );
 export function findLesson(id: string) {
-  return publishedLessons.find((lesson) => lesson.id === id);
+  return lessons.find(
+    (lesson) =>
+      lesson.id === id &&
+      lesson.status === "published" &&
+      lesson.patch?.review !== "pending",
+  );
 }

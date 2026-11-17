@@ -1,6 +1,6 @@
 # FightPath roadmap
 
-Delivery checkpoint, November 17, 2026: FP-19 through FP-40 have implementation/evidence updates in [TASKS.md](TASKS.md) and [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). Remaining gates are physical-device/assistive/learner validation, external Google consent, current-game BnB execution/media and future public-production decisions. Do not reopen completed code work or certify those gates from synthetic fixtures.
+Delivery checkpoint, November 17, 2026: FP-19 through FP-42 have delivery records in [TASKS.md](TASKS.md) and [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). Remaining release gates include physical-device/assistive/learner validation, external Google consent and future public-production decisions. The owner approved source-backed SuperCombo combos without independent gameplay validation; optional game recordings no longer block that reference library. Do not certify unperformed gameplay or device checks from synthetic fixtures.
 
 The roadmap groups the task files in [`TASKS.md`](TASKS.md) into reviewable milestones. It contains dependencies and exit criteria, not dates or a promise of a particular release schedule. The earlier implementation authorization covers FP-01 through FP-18. FP-19 through FP-40 were approved for implementation on November 17, 2026. Public release remains a separate decision after the external configuration and real-device validation gates.
 
@@ -58,7 +58,7 @@ The owner has requested the following research-backed expansion before choosing 
 
 1. Restore reliable input and data behavior: FP-19 through FP-24. Exit: the reported DualSense scenario is diagnosed, calibration works and held inputs cannot generate extra attempts.
 2. Establish an approved visual direction, design system and screen redesign: FP-25 through FP-28, with FP-37 for imagery. Exit: accessible shared components, distinct home actions and readable mobile practice layouts.
-3. Build the learning catalog, fundamentals, footsies, SF6 systems, Ken plan, BnB library and practice habits: FP-29 through FP-36. Exit: bilingual reviewed lessons and verified in-game BnB examples with traceable sources.
+3. Build the learning catalog, fundamentals, footsies, SF6 systems, Ken plan, BnB library and practice habits: FP-29 through FP-36, expanded by FP-42. Exit: bilingual reviewed lessons and attributed SuperCombo-sourced references. Independent gameplay clips are optional under the owner's updated decision.
 4. Add appropriate learning progress and complete auth/privacy/regression coverage: FP-38 through FP-40. Exit: distinct learning activity states, account isolation and recorded browser/device evidence.
 
 The owner approved this phase on November 17, 2026. `TASKS.md` records the sequencing; each implementation uses a separate branch, PR and passing CI. A future public-production Vercel/Neon/Clerk setup remains separate from this development environment.

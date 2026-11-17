@@ -1,12 +1,20 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { lessons, findLesson } from "./catalog";
+import { lessons, findLesson, publishedLessons } from "./catalog";
+import { publishedCombos } from "./combos";
 import { validateLessons } from "./learning";
 
 test("published lessons have both translations and reviewable sources", () => {
   assert.deepEqual(validateLessons(lessons), []);
   assert.ok(findLesson("read-an-input"));
   assert.equal(findLesson("unreviewed-draft"), undefined);
+  assert.equal(publishedLessons.length, 18);
+  assert.ok(findLesson(publishedCombos[0].lesson.id));
+  assert.ok(
+    !publishedLessons.some(
+      (lesson) => lesson.id === publishedCombos[0].lesson.id,
+    ),
+  );
 });
 
 test("invalid review and duplicated IDs fail content validation", () => {

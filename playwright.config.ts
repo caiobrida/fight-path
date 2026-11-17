@@ -24,7 +24,7 @@ export default defineConfig({
       ? [
           {
             name: "site",
-            testMatch: "site.spec.ts",
+            testMatch: ["site.spec.ts", "combos.spec.ts"],
             use: { baseURL: "http://localhost:3205" },
           },
         ]

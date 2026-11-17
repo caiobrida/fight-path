@@ -1,26 +1,31 @@
-# Ken Classic BnB verification sheet
+# Ken Classic source review
 
-## Mandatory manual verification boundary
+On November 17, 2026 the owner approved [SuperCombo's Ken combo reference](https://wiki.supercombo.gg/w/Street_Fighter_6/Ken/Combos) directly, without independent in-game validation, battle-build checks or mandatory both-side recordings. FP-42 supersedes the earlier FP-34/FP-35 publication gate. SuperCombo is also a preferred source for future characters and general fighting-game content. See AGENTS.md and SOURCES.md.
 
-Original bilingual text, drill and storyboard drafts are prepared in [content-drafts/KEN-BNB-DRAFTS.md](content-drafts/KEN-BNB-DRAFTS.md). They remain outside the application catalog and must be revised against a human's actual recordings before publication.
+These references are sourced, not independently gameplay-verified. No SF6 execution was performed for this import. Never launch, navigate or automate the game; any optional future recording must come from a human.
 
-The owner prohibited all SF6 automation on November 17, 2026. Do not launch or control the game, including menus and offline/training modes, with automation. A human must execute and capture the routes. Source research, original bilingual draft preparation, review of human recordings, captions and FightPath website tests can continue. Notice before computer use does not override this prohibition. `AGENTS.md` is the shared instruction for future contributors.
+## Import record
 
-Reviewed November 17, 2026. The SuperCombo Ken/Combos page successfully rendered in the in-app browser after earlier HTTP failures. Its visible edit timestamp was November 17, 2026 at 11:03. An edit date is not current-game execution evidence.
+Read the rendered page on November 17, 2026; it reported an edit at 11:03. Imported its current tables, excluding material explicitly marked legacy by the author.
 
-The installed SF6 title screen visibly reported **Ver. 2.0500.001**. Read-only Steam metadata reports app 1364780, build ID and target 25071972, last updated November 15, 2026 00:26:11 UTC. Executable file version 1.0.0.34 is not the displayed game version. No battle-version screen, training attempt or clip was verified: desktop control was interrupted at the title screen. Do not claim these routes were reproduced.
+| Source section | Groups | Rows |
+| --- | ---: | ---: |
+| Starter Combos | 1 | 4 |
+| Basic Combos: light, medium, heavy; normal, CH, PC | 9 | 37 |
+| Super Art Combos | 4 | 22 |
+| Drive Rush Combos | 2 | 10 |
+| Drive Impact and Stun Combos | 3 | 34 |
+| Max Damage Punishes | 6 | 19 |
+| Total | 25 | 126 |
 
-Notation below follows the source: facing right, 2 down, 5 standing, 6 forward, 9 up-forward; P/K strengths are explicit. `>` is a cancel, comma a subsequent link/juggle; `~` is the source's chain/target/follow-up separator. `KK` is two kicks for run; DRC is Drive Rush cancel. Training setup and exact activation must be independently checked.
+The factual notation, position, damage, Drive cost, Super cost and difficulty are recorded in src/content/data/ken-supercombo.json. Canonical transcription: 13,335 characters, FNV-1a 32-bit digest 706974827, calculated from each group's section, tab, title and rows.
 
-| Review ID / scenario | Source-backed candidate | Source section and stated restrictions | Outstanding evidence |
-| --- | --- | --- | --- |
-| ken-light / close light | `2LK ~ 2LP ~ 5LP > 623HP` | Starter Combos / Basic Combos, Light Starter, Normal Hit; anywhere, zero Drive/Super listed | Current build, exact starting distance/stance, both sides, clip |
-| ken-punish / close punish | `PC 2MP, 2HP > 214LK, 623MP` | Starter Combos; close recovery punish, anywhere, zero Drive/Super listed | Reproduce punish-counter condition, distance, juggle and both sides |
-| ken-jump / jump-in | `j.HP, 2HP > 214LK, 623MP` | Normal Hit Meterless / Heavy Confirm Combos; anywhere, zero Drive/Super listed | Jump depth/spacing, opponent stance, both sides and clip |
-| ken-drive / grounded Rush | `2MK > DRC, 5MP, 2HP > 214LK, 623MP` | Drive Rush Cancel table explicitly names a 2MK entry into 5MP, 2HP and refers to Heavy Starter enders | Combined candidate uses the source's cross-reference; full route, current cost, timing and both sides remain unverified |
-| ken-corner / corner | `2HP > 236HK ~ 6HK, 623LP` | Basic Combos / Heavy Starter / Normal Hit; corner, zero Drive/Super listed | Follow-up and ender timing, stance, corner setup, both sides and clip |
-| ken-super / super ender | `5HP > KK ~ HK > 236236P` | Super Art Combos / Any Super: cancellable medium/heavy into run HK and SA3; anywhere, zero Drive / three Super listed | Full route with this starter, cancel timing, starting resource and both sides |
+Deduplication produces 124 entries. Tags retain source contexts of repeated rows. One repeated DI entry has conflicting Drive costs; its displayed cost is unknown, never zero. Costs preserve alternatives, including disjoint Super values and total Drive expenditure above six. They describe expenditure rather than minimum starting gauge. Source damage marked incomplete or erroneous is omitted. Generic starters and ellipses remain labeled segments/templates. Notation preserves optional groups, alternatives, delays and repetitions; mirroring changes motions without changing repetition counts.
 
-Primary collaborative source: [SuperCombo's Ken combo reference](https://wiki.supercombo.gg/w/Street_Fighter_6/Ken/Combos). This sheet records facts about the source's own recipe tables, not a certification that they work in today's game. Source damage, exact frame windows and safety judgments are deliberately not imported. Candidate records remain unpublished until independent in-game verification supplies the battle build, conditions and both-side evidence.
+Each detail links to its source section and notes. Original bilingual interface and practice guidance do not reproduce guide paragraphs. The library is a reference browser, not a frame-accurate combo evaluator.
 
-Promotion procedure: review official current command data; have a human reviewer manually set consistent training position, hit state, opponent stance and resources, execute each route facing right and left, and capture the evidence. Prepare a short instructional edit with inputs and an accessible written explanation; record observed costs and fallback; review both locales; only then change its review to verified and include its game build. Never automate the game to obtain this evidence. Mark pending again after a balance change that may affect it.
+## Optional evidence and historical artifacts
+
+The six earlier drafts in content-drafts/KEN-BNB-DRAFTS.md are archived preparation and are not imported. Their former manual gate does not apply. Future independently verified recordings can document actual build, conditions, both directions and captions; only then use the stricter verified state. This enrichment does not block sourced publication.
+
+Official isolated-move clips may illustrate a move from a route. Captions distinguish an isolated demonstration from the complete combo; these clips do not prove the imported route.

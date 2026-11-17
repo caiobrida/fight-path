@@ -1,5 +1,7 @@
 # Learning content and media research
 
+Current override, November 17, 2026: the owner approved SuperCombo as a preferred general/character source and waived the independent gameplay/clip publication gate for its Ken combos. FP-42 and `BNB-REVIEW.md` describe the source-backed library. Earlier proposed gates below are historical. Do not automate SF6 or claim unperformed gameplay verification.
+
 Research date: November 17, 2026. Scope: planning only for Street Fighter 6, Ken, Classic controls, English and Brazilian Portuguese. This report proposes curriculum and editorial work; it does not approve implementation or publish game facts in the application.
 
 ## Findings and evidence limits

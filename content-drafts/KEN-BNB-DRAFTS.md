@@ -1,5 +1,7 @@
 # Ken Classic BnB editorial drafts
 
+Archived preparation: FP-42 supersedes the publication procedure below. The owner approved SuperCombo-sourced publication without independent gameplay checks or clips. These historical drafts remain outside the catalog and do not block the current library. See `BNB-REVIEW.md` for current policy. SF6 automation remains prohibited.
+
 Status: unpublished, awaiting manual human verification. Prepared November 17, 2026. These are original bilingual teaching drafts for the candidates in [BNB-REVIEW.md](../BNB-REVIEW.md), based on the inspected [SuperCombo reference](https://wiki.supercombo.gg/w/Street_Fighter_6/Ken/Combos). They are not imported by the application. No current-game execution, exact cost, safety, damage or timing is certified here. SF6 automation is prohibited by the owner; only a human operates the game.
 
 ## Review and media contract

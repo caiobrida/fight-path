@@ -1,0 +1,1001 @@
+[
+  {
+    "section": "Starter_Combos",
+    "tab": "",
+    "title": "",
+    "rows": [
+      ["2LK ~ 2LP ~ 5LP > 623HP", "Anywhere", "1490", "0", "0", "Very Easy"],
+      [
+        "(PC DI), 2LP, 5MP ~ 5HP > KK ~ 214K",
+        "Anywhere",
+        "1460 (2180)",
+        "0",
+        "0",
+        "Medium"
+      ],
+      ["5HP > KK ~ 623P", "Anywhere", "2500", "0", "0", "Easy"],
+      ["PC 2MP, 2HP > 214LK, 623MP", "Anywhere", "2990", "0", "0", "Easy"]
+    ]
+  },
+  {
+    "section": "Basic_Combos",
+    "tab": "tabber-Light_Starter",
+    "title": "Normal Hit",
+    "rows": [
+      ["2LK ~ 2LP ~ 5LP > 623HP", "Anywhere", "1490", "0", "0", "Very Easy"],
+      ["2LP ~ 2LK ~ 5LP > 623HP", "Anywhere", "1510", "0", "0", "Very Easy"],
+      ["2LP ~ (2LP), 5LK > 623HP", "Anywhere", "1520 (1590)", "0", "0", "Easy"],
+      ["5LK > 623HP", "Anywhere", "1420", "0", "0", "Easy"],
+      ["2LK ~ 2LP > 214LK, 623MP", "Anywhere", "1710", "0", "0", "Medium"],
+      ["2LP, 5MP...", "Anywhere", "780+", "0", "0", "Easy"]
+    ]
+  },
+  {
+    "section": "Basic_Combos",
+    "tab": "tabber-Light_Starter",
+    "title": "Counter Hit",
+    "rows": [
+      [
+        "CH 2LP, 2MK > {KK ~ 623P} / 214HK",
+        "Anywhere",
+        "1950 / 1460",
+        "0",
+        "0",
+        "Medium / Easy"
+      ]
+    ]
+  },
+  {
+    "section": "Basic_Combos",
+    "tab": "tabber-Light_Starter",
+    "title": "Punish Counter",
+    "rows": [
+      [
+        "PC 5LP, 2MK > {KK ~ 623P} / 214HK",
+        "Anywhere",
+        "1950 / 1460",
+        "0",
+        "0",
+        "Medium / Easy"
+      ],
+      ["PC 2LP, 2HP...", "Anywhere", "1000+", "0", "0", "Easy"]
+    ]
+  },
+  {
+    "section": "Basic_Combos",
+    "tab": "tabber-Medium_Starter",
+    "title": "Normal Hit",
+    "rows": [
+      [
+        "(2MP), 5MP ~ 5HP > KK ~ 623P / 214K / {623K, 623HP}",
+        "Anywhere",
+        "2190 / 1560 / 2540 (2540 / 2000 / 2800)",
+        "0",
+        "0",
+        "Medium"
+      ],
+      [
+        "(2MP), 5MP > 214LK, 623MP",
+        "Anywhere",
+        "2340 (2670)",
+        "0",
+        "0",
+        "Easy"
+      ],
+      [
+        "(2MP), 5MP ~ 5HP > 236KK ~ dl.6HK, KK ~ 623P",
+        "Anywhere",
+        "2960** (missing damage value)",
+        "2",
+        "0",
+        "Hard"
+      ],
+      [
+        "(2MP), 5MP ~ 5HP > 236KK ~ dl.6HK, KK ~ 623K, 623HP",
+        "Anywhere",
+        "3040**",
+        "2",
+        "0",
+        "Hard"
+      ],
+      [
+        "(2MP), 5MP ~ 5HP > 623KK, 236KK ~ dl.6HK, KK ~ 623P",
+        "Anywhere",
+        "3143**",
+        "4",
+        "0",
+        "Hard"
+      ],
+      ["2MP, 5LK > 623HP", "Anywhere", "2020", "0", "0", "Easy"],
+      ["5MK ~ 5MK ~ 5HK", "Anywhere", "1560", "0", "0", "Medium"],
+      [
+        "2MK > {KK ~ 623P} / 214HK",
+        "Anywhere",
+        "1860 / 1300",
+        "0",
+        "0",
+        "Easy / Very Easy"
+      ]
+    ]
+  },
+  {
+    "section": "Basic_Combos",
+    "tab": "tabber-Medium_Starter",
+    "title": "Counter Hit",
+    "rows": [
+      [
+        "CH 2MP, 2MK > {KK ~ 623P} / 214HK",
+        "Anywhere",
+        "2500 / 2020",
+        "0",
+        "0",
+        "Medium / Easy"
+      ],
+      ["CH 5MK, 5LK > 623HP", "Anywhere", "2140", "0", "0", "Easy"]
+    ]
+  },
+  {
+    "section": "Basic_Combos",
+    "tab": "tabber-Medium_Starter",
+    "title": "Punish Counter",
+    "rows": [
+      [
+        "PC 5MP, 2MK > {KK ~ 623P} / 214HK",
+        "Anywhere",
+        "2580**",
+        "0",
+        "0",
+        "Medium"
+      ],
+      [
+        "PC 5MP / PC 2MP, {5MP ~ 5HP...} / 2HP...",
+        "Anywhere",
+        "1640+ / 1520+",
+        "0",
+        "0",
+        "Easy"
+      ],
+      [
+        "PC 5MK, 2MK > {KK ~ 623P} / 214HK",
+        "Anywhere",
+        "2580 / 2020",
+        "0",
+        "0",
+        "Medium / Easy"
+      ]
+    ]
+  },
+  {
+    "section": "Basic_Combos",
+    "tab": "tabber-Heavy_Starter",
+    "title": "Normal Hit",
+    "rows": [
+      [
+        "5HP > 623HP / {KK ~ 623P}",
+        "Anywhere",
+        "2200 / 2500",
+        "0",
+        "0",
+        "Medium / Hard"
+      ],
+      [
+        "2HP > 214HK / {KK ~ 214K}",
+        "Anywhere",
+        "1800 / 2000",
+        "0",
+        "0",
+        "Very Easy / Easy"
+      ],
+      ["2HP > 214LK, 623MP", "Anywhere", "2540", "0", "0", "Easy"],
+      ["2HP > 236HK", "Anywhere", "1500", "0", "0", "Ver Easy"],
+      ["2HP > 236HK, 214KK", "Anywhere", "2860", "2", "0", "Easy"],
+      ["2HP > 236HK, 623KK, 623HP", "Anywhere", "3300", "2", "0", "Medium"],
+      [
+        "2HP > 236HK, 623KK, 236KK ~ 6HK, KK ~ HK",
+        "Anywhere",
+        "3580",
+        "4",
+        "0",
+        "Medium"
+      ],
+      ["2HP > 236HK ~ 6HK, 623LP", "Corner", "2910", "0", "0", "Easy"],
+      [
+        "2HP > 236HK ~ dl.6LK, 236LK ~ 6LK, 623HP",
+        "Corner",
+        "3195",
+        "0",
+        "0",
+        "Hard"
+      ]
+    ]
+  },
+  {
+    "section": "Basic_Combos",
+    "tab": "tabber-Heavy_Starter",
+    "title": "Counter Hit",
+    "rows": [["CH 5HP, 5LK > 623HP", "Anywhere", "2380", "0", "0", "Easy"]]
+  },
+  {
+    "section": "Basic_Combos",
+    "tab": "tabber-Heavy_Starter",
+    "title": "Punish Counter",
+    "rows": [
+      ["PC 5HP, 5MP...", "Anywhere", "1560+", "0", "0", "Easy"],
+      [
+        "PC 5HP, 2MK > {KK ~ 623P} / 214HK",
+        "Anywhere",
+        "2820 / 2260",
+        "0",
+        "0",
+        "Medium / Easy"
+      ],
+      ["PC 2HP > KK ~ LK, 5MP...", "Anywhere", "1560+", "0", "0", "Medium"],
+      [
+        "PC 5HK, KK ~ 623P / {623K, 623HP}",
+        "Anywhere",
+        "2150 / 2500",
+        "0",
+        "0",
+        "Medium"
+      ],
+      [
+        "PC 5HK, KK ~ HK, 623MP",
+        "Near Corner or Corner",
+        "2300",
+        "0",
+        "0",
+        "Medium"
+      ]
+    ]
+  },
+  {
+    "section": "Super_Art_Combos",
+    "tab": "tabber-Any_Super_Art_Combos",
+    "title": "Any Super Art Combos",
+    "rows": [
+      [
+        "Any Cancellable Medium or Heavy Normal > KK ~ HK > 214214K / 236236K / 236236P",
+        "Anywhere",
+        "Variable",
+        "0",
+        "1 / 2 / 3",
+        "Medium"
+      ],
+      [
+        "(2MP), 5MP ~ 5HP > 236KK ~ dl.6HK, 236KK ~ dl.6HK, {KK ~ HK > 214214K} / {KK ~ HK 236236K} / {KK ~ 623P > 236236P}",
+        "Near Corner or Corner",
+        "3520 / 4040 / 4950**",
+        "4",
+        "1 / 2 / 3",
+        "Hard"
+      ],
+      [
+        "5MK > 214214K / 236236K / {236236P, 623MP}",
+        "Anywhere",
+        "2600 / 3400 / 4600",
+        "0",
+        "1 / 2 / 3",
+        "Very Hard"
+      ],
+      [
+        "5HP > 214214K / 236236K / {236236P, 623MP}",
+        "Anywhere",
+        "2800 / 3600 / 4800",
+        "0",
+        "1 / 2 / 3",
+        "Easy"
+      ],
+      [
+        "PC DI, 8HK, KK ~ 623K > 214214K / 236236K / 236236P",
+        "Anywhere",
+        "**",
+        "1",
+        "1 / 2 / 3",
+        "Medium"
+      ],
+      [
+        "PC DI, 8HK, KK ~ HK > 214214K / 236236K / 236236P",
+        "Anywhere",
+        "**",
+        "1",
+        "1 / 2 / 3",
+        "Medium"
+      ]
+    ]
+  },
+  {
+    "section": "Super_Art_Combos",
+    "tab": "tabber-SA1_Combos",
+    "title": "SA1 Combos",
+    "rows": [
+      [
+        "- PC DI, 8HK, dl.236MK ~ 6HK, 214214K",
+        "Near Corner or Corner",
+        "3580",
+        "1",
+        "1",
+        "Medium"
+      ]
+    ]
+  },
+  {
+    "section": "Super_Art_Combos",
+    "tab": "tabber-SA2_Combos",
+    "title": "SA2 Combos",
+    "rows": [
+      ["PC 236236K", "Anywhere", "**", "0", "2", "Very Easy"],
+      [
+        "CH 2MP / PC 5MK / PC 5HP, 236236K",
+        "Anywhere",
+        "3520 / 3520 / 3760",
+        "0",
+        "2",
+        "Medium"
+      ],
+      [
+        "Any Cancellable Normal > 236KK ~ 6HK ~ 6K > 236236K",
+        "Anywhere",
+        "Variable",
+        "2",
+        "2",
+        "Easy"
+      ],
+      [
+        "PC 5HK, KK ~ (dl.)HK > 236236K",
+        "Anywhere",
+        "3200",
+        "0",
+        "2",
+        "Variable"
+      ],
+      [
+        "PC DI, 2HP > 236HK, 623KK, 236KK ~ 6HK, KK ~ HK > 236236K",
+        "Anywhere",
+        "3580",
+        "5",
+        "2",
+        "Hard"
+      ],
+      [
+        "PC DI, 8HK, dl.236MK ~ 6HK, 236236K",
+        "Near Corner or Corner",
+        "3980",
+        "1",
+        "2",
+        "Medium"
+      ]
+    ]
+  },
+  {
+    "section": "Super_Art_Combos",
+    "tab": "tabber-SA3_Combos",
+    "title": "SA3 Combos",
+    "rows": [
+      [
+        "Any Cancellable Light Normal > 236LK ~ 6HK > 236236P",
+        "Anywhere",
+        "Variable",
+        "0",
+        "3",
+        "Easy"
+      ],
+      ["...623HP > 236236P", "Anywhere", "3600+", "0", "3", "Medium"],
+      ["...236LK ~ 6HK > 236236P", "Corner", "4100+", "0", "3", "Easy"],
+      [
+        "PC DI, 8HK, dl.623KK, KK ~ 623P > 236236P",
+        "Anywhere",
+        "4972",
+        "3",
+        "3",
+        "Medium"
+      ],
+      [
+        "PC DI, 8HK, dl.236PP, 236KK ~ 6HK, 236KK ~ dl.6MK ~ 6K > 236236P",
+        "Corner",
+        "4972",
+        "7",
+        "3",
+        "Medium"
+      ],
+      [
+        "DI (hit / block), 2HP > 236KK ~ dl.6HK, 236KK ~ dl.6HK, KK ~ 623P > 236236P",
+        "Corner",
+        "5245 / 4732",
+        "5",
+        "3",
+        "Hard"
+      ],
+      [
+        "DI (hit / block), 2HP > 236KK ~ dl.6HK, 236KK ~ dl.6HK, dl.236KK ~ 6MK ~ 6K > 236236P",
+        "Anywhere",
+        "5390 / 5032",
+        "7",
+        "3",
+        "Hard"
+      ],
+      [
+        "DI (hit), 9HK, 236KK ~ dl.6HK, 236KK ~ dl.6HK, KK ~ 623P > 236236P",
+        "Near Corner",
+        "5245",
+        "5",
+        "3",
+        "Hard"
+      ],
+      [
+        "DI (hit), 9HK, 236KK ~ dl.6HK, 236KK ~ dl.6HK, dl.236KK ~ 6MK ~ 6K > 236236P",
+        "Near Corner",
+        "5032",
+        "7",
+        "3",
+        "Hard"
+      ]
+    ]
+  },
+  {
+    "section": "Drive_Rush_Combos",
+    "tab": "tabber-Parry_Drive_Rush",
+    "title": "Parry Drive Rush Routes",
+    "rows": [
+      [
+        "PC 5HK, PDR, 5HP > KK ~ 623P / 214K / {623K, 623HP}",
+        "Anywhere",
+        "2297 / 2513",
+        "1",
+        "0",
+        "Medium"
+      ],
+      [
+        "PC 5HK, PDR, 5HP > 236MK ~ dl.6HK, 623HP",
+        "Near Corner or Corner",
+        "2550",
+        "1",
+        "0",
+        "Medium"
+      ],
+      [
+        "PC 5HK, PDR, 5HP > 236KK ~ dl.6HK, KK ~ 623P / {623K, 623HP}",
+        "Anywhere",
+        "2652 / 2173**** (damage values seem off)",
+        "3",
+        "0",
+        "Medium"
+      ],
+      [
+        "PC 5HK, PDR, 5HP > 236KK ~ dl.6HK, KK ~ HK, 623HP* (seems sub-optimal, try 236MK ~ dl.6HK)",
+        "Near Corner or Corner",
+        "2696",
+        "3",
+        "0",
+        "Medium"
+      ]
+    ]
+  },
+  {
+    "section": "Drive_Rush_Combos",
+    "tab": "tabber-Drive_Rush_Cancel",
+    "title": "Drive Rush Cancel Routes",
+    "rows": [
+      [
+        "5LP / 2LP, DRC, 2LP, {5MP ~ 5HP...} / 2HP...",
+        "Anywhere",
+        "1062+ / 976+",
+        "3",
+        "0",
+        "Easy"
+      ],
+      [
+        "CH 5LK, DRC, 2LP, {5MP ~ 5HP...} / 2HP...",
+        "Anywhere",
+        "1122+ / 1036+",
+        "3",
+        "0",
+        "Easy"
+      ],
+      [
+        "PC 5LK, DRC, 5MP, {5MP ~ 5HP...} / 2HP...",
+        "Anywhere",
+        "1326+ / 1240+",
+        "3",
+        "0",
+        "Easy"
+      ],
+      [
+        "5MP / 2MP / 5HP / 2HP, DRC, 5HP, 5MP...",
+        "Anywhere",
+        "1688 / 1688 / 1888 / 1888",
+        "3",
+        "00",
+        "Medium"
+      ],
+      [
+        "Any Cancellable Medium or Heavy Normal, DRC, 5MP, 2HP...",
+        "Anywhere",
+        "Variable",
+        "3",
+        "0",
+        "Easy"
+      ],
+      [
+        "Any Cancellable Medium or Heavy Normal, DRC, 2HP > KK ~ LK, {2MP, 5MP...} / {5MP > 214LK, 623MP}",
+        "Anywhere",
+        "Variable",
+        "3",
+        "0",
+        "Hard"
+      ]
+    ]
+  },
+  {
+    "section": "Drive_Impact_and_Stun_Combos",
+    "tab": "tabber-Drive_Impact_Crumple",
+    "title": "Punish Counter DI Combos",
+    "rows": [
+      [
+        "PC DI, 2LP / {microwalk, 2MP}, 5MP ~ 5HP > KK ~ 214K",
+        "Anywhere",
+        "2180 / 2420",
+        "1",
+        "0",
+        "Easy / Medium"
+      ],
+      [
+        "PC DI, dash, 5HP > KK ~ 623P / {623K, 623HP}",
+        "Anywhere",
+        "2790 / 3140",
+        "1",
+        "0",
+        "Easy"
+      ],
+      [
+        "PC DI, 8HK, {KK ~ dl.623P} / {KK ~ dl.623K, 623HP}",
+        "Anywhere",
+        "2870 / 3220",
+        "1",
+        "0",
+        "Easy"
+      ],
+      [
+        "PC DI, wait / dash / walk / {dash, walk}, 2HP > KK ~ 214K, 623HP",
+        "~20–40% of the stage from the corner",
+        "2860",
+        "1",
+        "0",
+        "Hard"
+      ],
+      [
+        "PC DI, 8HP, PDR, 2MP > KK ~ 214K, 623LP, 623MP",
+        "~40–65% of the stage from a corner",
+        "3164",
+        "2",
+        "0",
+        "Hard"
+      ],
+      [
+        "PC DI, 8HK, dl.PDR, 5HP > KK ~ 214K, (dl.)623LP, 623MP",
+        "~30–45% of the stage from a corner",
+        "3362",
+        "2",
+        "0",
+        "Very Hard"
+      ],
+      [
+        "PC DI, 8HK, dl.PDR, 5HP > 236HK, 623HP",
+        "Anywhere",
+        "3097",
+        "2",
+        "0",
+        "Medium"
+      ],
+      [
+        "PC DI, 8HK, dl.PDR, 5HP > 236HK, 623LP, 623LP",
+        "Near Corner or Corner",
+        "3345",
+        "2",
+        "0",
+        "Very Hard"
+      ],
+      [
+        "PC DI, 8HK, 236KK ~ dl.6HK, KK ~ 623P",
+        "Anywhere",
+        "3430",
+        "3",
+        "0",
+        "Hard"
+      ],
+      [
+        "PC DI, 8HK, 5LP (whiff), 623KK, 236KK ~ 6HK, KK ~ 623P",
+        "Anywhere",
+        "3733",
+        "5",
+        "0",
+        "Medium"
+      ],
+      [
+        "PC DI, dash / walk, 5HP > 236HK ~ 6HK, 623MP",
+        "Corner",
+        "3220",
+        "1",
+        "0",
+        "Easy"
+      ],
+      [
+        "PC DI, 8HK, {KK ~ dl.623P} / {KK ~ dl.623K, 623HP}",
+        "Anywhere",
+        "2870 / 3220",
+        "0",
+        "0",
+        "Easy"
+      ],
+      ["PC DI, 8HK, dl.623LP, 623MP", "Corner", "3230", "1", "0", "Hard"],
+      [
+        "PC DI, 2HP > 236HK ~ dl.6LK, 623LP, 623LP",
+        "Corner",
+        "**",
+        "1",
+        "0",
+        "Very Hard"
+      ],
+      [
+        "PC DI, 8HK, dl.PDR, 5HP > 236HK ~ 6HK, 623MP",
+        "Near Corner or Corner",
+        "3287",
+        "2",
+        "0",
+        "Medium"
+      ],
+      [
+        "PC DI, 8HK, PDR, 5HP > 236HK, 623LP, 623MP",
+        "Corner",
+        "3413",
+        "2",
+        "0",
+        "Medium"
+      ],
+      [
+        "PC DI, 8HK, 236KK ~ dl.6HK, 236MK ~ dl.6HK, 623HP",
+        "Near Corner or Corner",
+        "3620",
+        "3",
+        "0",
+        "Hard"
+      ],
+      [
+        "PC DI, 8HK, 236KK ~ dl.6HK, 236KK ~ dl.6HK, KK ~ HK, 623HP",
+        "Near Corner or Corner",
+        "3720",
+        "5",
+        "0",
+        "Hard"
+      ]
+    ]
+  },
+  {
+    "section": "Drive_Impact_and_Stun_Combos",
+    "tab": "tabber-Wall_Splat",
+    "title": "DI Wall Splat Combos",
+    "rows": [
+      [
+        "DI (hit / block), dash / walk, 5HP > 236HK ~ 6HK, 623MP",
+        "Near Corner or Corner",
+        "3060 / 2440",
+        "1",
+        "0",
+        "Easy"
+      ],
+      [
+        "DI (hit), 2HP > 236MK, 623LP, 623LP",
+        "Corner",
+        "3070",
+        "1",
+        "0",
+        "Easy"
+      ],
+      [
+        "DI (block), 2HP > 236HK ~ dl.6LK, 236LK ~ 6LK, 623HP",
+        "Near Corner or Corner",
+        "2556",
+        "1",
+        "0",
+        "Hard"
+      ],
+      [
+        "DI (hit), (walk), 5HP > 236HK, 623LP, 623MP",
+        "Near Corner",
+        "3240",
+        "1",
+        "0",
+        "Medium"
+      ],
+      [
+        "DI (hit), 9HK, 236MK ~ 6HK, 623HP",
+        "Near Corner",
+        "3040",
+        "1",
+        "0",
+        "Easy"
+      ],
+      ["DI (hit), 9HK, 236HK", "Near CornerCorner", "1930", "1", "0", "Medium"],
+      [
+        "DI (hit / block), (dl.)2HP > 236HK",
+        "Near Corner or Corner",
+        "1930 / 1200",
+        "1",
+        "0",
+        "Easy"
+      ],
+      [
+        "DI (hit / block), 2HP > 236KK ~ dl.6HK, 236MK ~ dl.6HK, 623HP",
+        "Near Corner or Corner",
+        "3300 / 2912",
+        "3",
+        "0",
+        "Medium"
+      ],
+      [
+        "DI (hit / block), 2HP > 236KK ~ dl.6HK, 236KK ~ dl.6HK, KK ~ HK, 623HP",
+        "Near Corner or Corner",
+        "3480 / 3120",
+        "5",
+        "0",
+        "Hard"
+      ],
+      [
+        "DI (hit), 9HK, 236KK ~ dl.6HK, 236MK ~ dl.6HK, 623HP",
+        "Near Corner",
+        "3380",
+        "3",
+        "0",
+        "Medium"
+      ],
+      [
+        "DI (hit), 9HK, 236KK ~ dl.6HK, 236KK ~ dl.6HK, KK ~ HK, 623HP",
+        "Near Corner",
+        "3480",
+        "5",
+        "0",
+        "Hard"
+      ]
+    ]
+  },
+  {
+    "section": "Drive_Impact_and_Stun_Combos",
+    "tab": "tabber-Stun",
+    "title": "Stun Combo Routes",
+    "rows": [
+      [
+        "DI (hit / block), (dash), 8HK, 2HP > 236HK ~ 6HK, 623LP",
+        "Near Corner or Corner",
+        "3340 / 2740",
+        "1",
+        "0",
+        "Easy"
+      ],
+      [
+        "DI (hit / block), (dash), 8HK, 2HP > 236HK ~ dl.6LK, 623LP, 623LP",
+        "Near Corner or Corner",
+        "** / 2860",
+        "1",
+        "0",
+        "Very Hard"
+      ],
+      [
+        "DI (hit / block), (dash), 8HK, 2HP > 236HK, 623KK, 236KK ~ 6HK, 214KK",
+        "Corner",
+        "** / 3065",
+        "7",
+        "0",
+        "Medium"
+      ],
+      [
+        "DI (hit / block), (dash), 8HK, 5HP, DRC, 5HP, 2MP, DRC, 5HP, 2MP > 236MK ~ 6HK > 236236P",
+        "Near Corner or Corner",
+        "4728",
+        "7",
+        "3",
+        "Medium"
+      ],
+      [
+        "DI (hit / block), (dash), 8HK, 5HP, DRC, 2HP > KK ~ LK, 2MP, 5MP, DRC, 2HP > KK ~ LK, 2MP, 5MP > 236LK ~ dl.6LK, 236LK ~ 6HK > 236236P",
+        "Near Corner or Corner",
+        "4918",
+        "7",
+        "3",
+        "Very Hard"
+      ]
+    ]
+  },
+  {
+    "section": "Max_Damage_Punishes",
+    "tab": "tabber-0_Drive",
+    "title": "",
+    "rows": [
+      [
+        "{KK ~ PC MK} / PC 623HK / PC 623MK / PC 623LK, 2MP, 5MP ~ 5HP > KK ~ 623K, 623HP",
+        "Anywhere",
+        "3580 / 2920 / 2800 / 2620",
+        "0",
+        "0",
+        "Medium"
+      ],
+      [
+        "KK ~ PC MK, 2MP, 5MP > KK ~ HK > 214214K / 236236K / 236236P",
+        "Anywhere",
+        "4040 / 4520 / 5240",
+        "0",
+        "1 / 2 / 3",
+        "Medium"
+      ],
+      [
+        "PC 8HK, 2HP > 236HK ~ dl.6LK, 623LP, 623LP",
+        "Corner",
+        "3960",
+        "0",
+        "0",
+        "Very Hard"
+      ],
+      [
+        "PC 8HK, 2HP > 236HK ~ dl.6LK, 236LK ~ {6LK, 236236K} / {6HK > 236236P}",
+        "Corner",
+        "4525 / 5495",
+        "0",
+        "2 / 3",
+        "Hard"
+      ]
+    ]
+  },
+  {
+    "section": "Max_Damage_Punishes",
+    "tab": "tabber-1_Drive",
+    "title": "",
+    "rows": [
+      [
+        "PDR, PC 5HP, 2HP > 214LK, 623MP",
+        "Anywhere",
+        "3230",
+        "1",
+        "0",
+        "Medium"
+      ],
+      [
+        "PDR, PC 5HP, 2HP > KK ~ HK > 214214K / 236236K / 236236P",
+        "Anywhere",
+        "3800 / 4260 / 5200",
+        "1",
+        "1 / 2 / 3",
+        "Medium"
+      ],
+      [
+        "PDR, PC 5HP, 2HP > 236HK ~ dl.6LK, 623LP, 623LP",
+        "Corner",
+        "3840",
+        "1",
+        "0",
+        "Very Hard"
+      ],
+      [
+        "PDR, PC 5HP, 2HP > 236HK ~ dl.6LK, 236LK ~ {6LK, 214214K} / {6LK, 236236K} / {6HK > 236236P}",
+        "Corner",
+        "3885 / 4405 / 5375",
+        "1",
+        "1 / 2 / 3",
+        "Hard"
+      ]
+    ]
+  },
+  {
+    "section": "Max_Damage_Punishes",
+    "tab": "tabber-2_Drive",
+    "title": "",
+    "rows": [
+      [
+        "PC 8HK, 2HP > 236HK, 623KK, 623HP / 214214K / 236236K",
+        "Anywhere",
+        "3980 / 4310 / 4750",
+        "2",
+        "0 / 1 / 2",
+        "Medium"
+      ],
+      [
+        "KK ~ PC MK, 2MP, 5MP ~ 5HP > 236KK ~ dl.6HK, KK ~ 623P > 236236P",
+        "Anywhere",
+        "5465",
+        "2",
+        "0",
+        "Medium"
+      ],
+      [
+        "PC 8HK, 2HP > 236HK ~ dl.6LK, 236KK ~ 6HK, 236LK ~ dl.6LK, 623HP / 214214K / 236236K",
+        "Corner",
+        "4015 / 4475 / 4995",
+        "2",
+        "0 / 1 / 2",
+        "Very Hard"
+      ],
+      [
+        "PC 8HK, 2HP > 236HK ~ dl.6LK, 236KK ~ 6HK, 236LK ~ dl.6HK > 236236P",
+        "Corner",
+        "5925",
+        "2",
+        "0",
+        "Very Hard"
+      ]
+    ]
+  },
+  {
+    "section": "Max_Damage_Punishes",
+    "tab": "tabber-3_Drive",
+    "title": "",
+    "rows": [
+      [
+        "KK ~ PC MK, 2MP, 5MP ~ 5HP > 236KK ~ dl.6HK, PDR, 2HP > KK ~ dl.623P > 236236P",
+        "Anywhere",
+        "5541",
+        "3",
+        "0",
+        "Hard"
+      ]
+    ]
+  },
+  {
+    "section": "Max_Damage_Punishes",
+    "tab": "tabber-4_Drive",
+    "title": "",
+    "rows": [
+      [
+        "PC 8HK, 2HP > 236HK, 623KK, 236KK ~ 6HK, KK ~ HK > (214214K / 236236K)",
+        "Anywhere",
+        "4100 (4780 / 5300)",
+        "4",
+        "0 (1 / 2)",
+        "Medium"
+      ],
+      [
+        "KK ~ PC MK, 2MP, 5MP ~ 5HP > 623KK, 236KK ~ dl.6HK, KK ~ 623P > 236236P",
+        "Anywhere",
+        "Anywhere",
+        "4",
+        "3",
+        "Hard"
+      ],
+      [
+        "PC 8HK, 2HP > 236HK ~ dl.6LK, 236KK ~ 6HK, 236KK ~ 6MK, 623HP",
+        "Anywhere",
+        "4220",
+        "4",
+        "0",
+        "Very Hard"
+      ],
+      [
+        "PC 8HK, 2HP > 236HK ~ dl.6LK, 236KK ~ 6HK, 236KK ~ 6HK, KK ~ 623P / {KK ~ HK > 214214K} / {KK ~ HK > 236236K} / {KK ~ 623P > 236236P}",
+        "Corner",
+        "4213 / 4680 / 6102**",
+        "4",
+        "0 / 1 / 2 / 3",
+        "Very Hard"
+      ]
+    ]
+  },
+  {
+    "section": "Max_Damage_Punishes",
+    "tab": "tabber-6_Drive",
+    "title": "",
+    "rows": [
+      [
+        "KK ~ PC MK, 2MP, 5MP, {DRC, 2HP > KK ~ LK, 2MP, 5MP}x2 ~ 5HP > KK ~ 623K, 236236P",
+        "Anywhere",
+        "5962",
+        "6",
+        "3",
+        "Hard"
+      ],
+      [
+        "PC 8HK, 2HP > 236HK ~ dl.6LK, 236KK ~ 6HK, 236KK ~ 6HK, 214KK",
+        "Anywhere",
+        "4215",
+        "6",
+        "0",
+        "Very Hard"
+      ]
+    ]
+  }
+]

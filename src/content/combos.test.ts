@@ -6,6 +6,10 @@ import {
   filterCombos,
   publishedCombos,
   verifiedCombos,
+  publishableCombos,
+  categoryNames,
+  mirrorComboNotation,
+  localizedNotation,
   type ComboRecipe,
 } from "./combos";
 
@@ -41,7 +45,7 @@ function fixture(): ComboRecipe {
   };
 }
 
-test("unverified recipes and incomplete demonstrations cannot become public routes", () => {
+test("independent gameplay verification still requires complete demonstrations", () => {
   const recipe = fixture();
   assert.equal(verifiedCombos([recipe]).length, 1);
   assert.equal(
@@ -56,10 +60,95 @@ test("unverified recipes and incomplete demonstrations cannot become public rout
     ]).length,
     0,
   );
+  assert.ok(verifiedCombos(publishedCombos).length === 0);
+});
+
+test("approved community references publish without claiming game verification", () => {
+  assert.equal(publishedCombos.length, 124);
+  for (const recipe of publishedCombos) {
+    assert.equal(recipe.evidence.kind, "community-source");
+    assert.equal(recipe.lesson.patch?.review, "sourced");
+    assert.equal(recipe.evidence.build, "");
+    assert.equal(recipe.evidence.rightClip, "");
+    assert.ok(recipe.notation);
+    assert.ok(recipe.evidence.sourceRows?.length);
+  }
+  const source = publishedCombos[0];
+  assert.equal(
+    publishableCombos([
+      { ...source, lesson: { ...source.lesson, status: "draft" } },
+    ]).length,
+    0,
+  );
+  assert.equal(
+    publishableCombos([
+      {
+        ...source,
+        evidence: { ...source.evidence, sourceUrl: "https://example.com/" },
+      },
+    ]).length,
+    0,
+  );
+});
+
+test("source cost conflicts are unknown rather than meterless and alternatives remain explicit", () => {
+  const conflict = publishedCombos.find((recipe) => recipe.drive === null);
+  assert.ok(conflict);
   assert.ok(
-    publishedCombos.every(
-      (recipe) => recipe.lesson.patch?.review === "verified",
+    !filterCombos(publishedCombos, { resource: "meterless" }).includes(
+      conflict,
     ),
+  );
+  assert.ok(
+    filterCombos(publishedCombos, { resource: "unknown" }).includes(conflict),
+  );
+  assert.ok(
+    publishedCombos.some(
+      (recipe) =>
+        Array.isArray(recipe.super) && recipe.super.join("/") === "1/2/3",
+    ),
+  );
+  assert.ok(publishedCombos.some((recipe) => recipe.drive === 7));
+  assert.ok(publishedCombos.some((recipe) => recipe.template));
+});
+
+test("the library covers all requested categories and composes category filters", () => {
+  for (const category of Object.keys(categoryNames.en)) {
+    const results = filterCombos(publishedCombos, { category });
+    assert.ok(results.length > 0, category);
+    assert.ok(
+      results.every((recipe) =>
+        recipe.categories?.includes(category as keyof typeof categoryNames.en),
+      ),
+    );
+  }
+  const results = filterCombos(publishedCombos, {
+    category: "normal-meterless",
+    difficulty: "easy",
+    position: "anywhere",
+    resource: "meterless",
+    kind: "route",
+  });
+  assert.ok(results.length > 0);
+  assert.ok(
+    results.every(
+      (recipe) => recipe.drive === 0 && recipe.super === 0 && !recipe.template,
+    ),
+  );
+  assert.equal(
+    filterCombos(publishedCombos, { search: "nonexistent-input" }).length,
+    0,
+  );
+});
+
+test("whole notation mirrors motion tokens while preserving repetition counts and qualifiers", () => {
+  assert.equal(
+    mirrorComboNotation("PC 5HP > 236LK ~ 6LK, {623HP}x3", "left"),
+    "PC 5HP > 214LK ~ 4LK, {421HP}x3",
+  );
+  assert.equal(
+    localizedNotation("Any Cancellable Normal > 236KK (hit / block)", "pt-BR"),
+    "Qualquer normal cancelável > 236KK (acerto / defesa)",
   );
 });
 

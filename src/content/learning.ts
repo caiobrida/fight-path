@@ -25,7 +25,7 @@ export type Lesson = {
   status: "draft" | "published";
   reviewed: string;
   patch?: {
-    review: "conceptual" | "verified" | "pending";
+    review: "conceptual" | "verified" | "sourced" | "pending";
     basis: string;
     build?: string;
   };

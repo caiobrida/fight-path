@@ -2,11 +2,13 @@
 
 Each task has a checklist, dependencies and acceptance criteria. The owner approved FP-19 through FP-40 on 2026-11-17, with one branch and PR per task and passing CI before merge.
 
-Owner constraint added November 17, 2026: never automate SF6, including launch, menus and training/offline play. Complete source research, original content preparation, recording review and isolated FightPath tests independently. Obtain actual game execution/capture evidence from a human reviewer. Do not bypass the publication gate or mark manual gameplay checks complete from website fixtures.
+Owner constraint added November 17, 2026: never automate SF6, including launch, menus and training/offline play. Complete source research, original content preparation, recording review and isolated FightPath tests independently. Any optional actual game execution/capture requires a human. The owner waived the old execution/clip gate for approved SuperCombo references in FP-42; do not mark unperformed gameplay checks complete.
 
 Current evidence and remaining gates: [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). Original planning statements below are historical; the status column and implementation notes describe delivered work.
 
 Owner-requested visual follow-up: [FP-41 — Game imagery, demonstrations and execution feedback](tasks/FP-41-game-media-and-practice-feedback.md). This includes varied characters in general sections, Ken-specific visuals in his path, input comparison, result colors/icons and accessible motion.
+
+Owner-requested source follow-up: [FP-42 — SuperCombo Ken reference library](tasks/FP-42-supercombo-ken-bnbs.md). Import current tables, organize hit/Drive/Super categories, display resource expenditure and record SuperCombo as a preferred future source. Independent gameplay checks and clips are optional.
 ## Regras que se aplicam a todas as tarefas
 
 - Produto disponível em inglês (`en`) e português do Brasil (`pt-BR`) desde o início; interface, conteúdo e feedback devem contemplar os dois idiomas.
@@ -65,10 +67,10 @@ Estudo de 17/11/2026: [auditoria e evidências](AUDIT.md), [direção visual e b
 | 13 | [FP-31](tasks/FP-31-neutral-and-footsies.md) | Neutral, espaçamento, footsies e adaptação | FP-30 | P2 | Done |
 | 14 | [FP-32](tasks/FP-32-sf6-systems.md) | Sistemas do SF6 com versão verificada | FP-30 | P2 | Concept lessons shipped; battle-build review pending |
 | 15 | [FP-33](tasks/FP-33-ken-game-plan.md) | Plano de jogo e decisões do Ken Classic | FP-31, FP-32 | P2 | Concept lessons shipped; current toolkit review pending |
-| 16 | [FP-34](tasks/FP-34-ken-bnb-verification.md) | Validar seis situações de BnB no jogo | FP-32, FP-33 | P2 | Source review done; in-game reproduction required |
-| 17 | [FP-35](tasks/FP-35-bnb-library.md) | Biblioteca de BnBs, exemplos e drills no SF6 | FP-29, FP-34, FP-37 | P2 | Library implemented; verified recipe publication gated |
+| 16 | [FP-34](tasks/FP-34-ken-bnb-verification.md) | Review Ken combo source | FP-32, FP-33 | P2 | Source review complete; former gameplay gate superseded by FP-42 |
+| 17 | [FP-35](tasks/FP-35-bnb-library.md) | Ken combo library and practice references | FP-29, FP-34, FP-37 | P2 | Implemented; source publication expanded by FP-42 |
 | 18 | [FP-36](tasks/FP-36-practice-habits.md) | Hábitos de treino, replay e comportamento em partidas | FP-29, FP-30, FP-33 | P2 | Done |
-| Transversal | [FP-37](tasks/FP-37-media-library.md) | Imagens, diagramas, clipes e player com origem documentada | FP-25, FP-26; verificação do conteúdo | P2 | Diagrams and player shipped; gameplay clips gated |
+| Transversal | [FP-37](tasks/FP-37-media-library.md) | Imagens, diagramas, clipes e player com origem documentada | FP-25, FP-26; verificação do conteúdo | P2 | Delivered with FP-41; full-combo recordings optional |
 | 19 | [FP-38](tasks/FP-38-learning-progress.md) | Progresso de leitura, checagens e drills separado da execução | FP-23, FP-29, FP-35, FP-36 | P2 | Done |
 | 20 | [FP-39](tasks/FP-39-auth-navigation-and-privacy.md) | Auth completa, retornos, privacidade e webhook | FP-27, FP-18 | P2 | Implemented; external Google consent check pending |
 | Gate contínuo/final | [FP-40](tasks/FP-40-release-regression-matrix.md) | E2E, banco no CI, dispositivos, acessibilidade e novo pente-fino | Mudanças aprovadas | P2 | Automated checks delivered; physical validation pending |
