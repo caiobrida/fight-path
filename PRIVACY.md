@@ -32,3 +32,5 @@ FightPath is being built with data minimization and user control in mind. This d
 - [ANPD guidance on information security for small processing agents](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes/processo-guia-orientativo-sobre-seguranca-da-informacao-para-agentes-de-tratamento-de-pequeno-porte.pdf), accessed 2026-11-17.
 - [ANPD Resolution 2/2022](https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd/resolucao-cd-anpd-no-2-de-27-de-janeiro-de-2022), accessed 2026-11-17.
 - [OWASP ASVS](https://owasp.org/projects/asvs), accessed 2026-11-17.
+
+Rejected attempt outcomes remain in an account-scoped local review queue and can be downloaded with pending attempts. Both queues together are capped at 500 records. They store the same minimal outcomes, never raw input history or device identity, and are cleared by explicit progress deletion. Saved-attempt chronology uses server receipt time.

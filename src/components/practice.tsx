@@ -1,5 +1,6 @@
 "use client";
 
+import { SyncFailure, syncFailure } from "@/domain/sync-failure";
 import { OperationQueue } from "@/domain/operation-queue";
 import { AttemptWindow } from "@/domain/attempt-window";
 
@@ -78,6 +79,12 @@ const copy = {
     unavailable:
       "Progress is not saved yet. Keep this tab open and retry sync.",
     full: "Offline save limit reached. Retry sync to save new attempts.",
+    authentication: "Sign in again to sync your pending attempts.",
+    rateLimited:
+      "Save limit reached. Wait before retrying; your attempts stay on this device.",
+    rejected:
+      "Some attempts could not be accepted. Download the unsynced attempts for review; other attempts can still sync.",
+    unsynced: "Download unsynced attempts",
     retry: "Retry sync",
     export: "Export progress",
     delete: "Delete progress",
@@ -153,6 +160,12 @@ const copy = {
     unavailable:
       "O progresso ainda não foi salvo. Mantenha esta aba aberta e tente sincronizar.",
     full: "Limite de tentativas offline atingido. Sincronize para salvar novas tentativas.",
+    authentication: "Entre novamente para sincronizar as tentativas pendentes.",
+    rateLimited:
+      "Limite de salvamento atingido. Aguarde antes de tentar novamente; suas tentativas ficam neste dispositivo.",
+    rejected:
+      "Algumas tentativas n?o foram aceitas. Baixe as tentativas n?o sincronizadas para revis?o; as demais podem sincronizar.",
+    unsynced: "Baixar tentativas n?o sincronizadas",
     retry: "Tentar sincronizar",
     export: "Exportar progresso",
     delete: "Excluir progresso",
@@ -259,7 +272,13 @@ export function Practice({
     Record<string, { attempts: number; correct: number }>
   >({});
   const [syncStatus, setSyncStatus] = useState<
-    "saved" | "pending" | "unavailable" | "full"
+    | "saved"
+    | "pending"
+    | "unavailable"
+    | "full"
+    | "authentication"
+    | "rateLimited"
+    | "rejected"
   >("pending");
   const [verifiedRows, setVerifiedRows] = useState<ProgressRow[]>([]);
   const exerciseRef = useRef(exercises[0]);
@@ -270,6 +289,8 @@ export function Practice({
   const keyboardRef = useRef<KeyboardAdapter | null>(null);
   const touchRoot = useRef<HTMLDivElement | null>(null);
   const pendingRef = useRef<AttemptInput[]>([]);
+  const rejectedRef = useRef<AttemptInput[]>([]);
+  const retryAtRef = useRef(0);
   const readyRef = useRef(false);
   const operationsRef = useRef(new OperationQueue());
   const deletingRef = useRef(false);
@@ -315,10 +336,23 @@ export function Practice({
     try {
       pendingStorageRef.current?.removeItem("fightpath-pending-attempts");
     } catch {}
-    pendingRef.current = readPending(pendingStorageRef.current, userId);
+    rejectedRef.current = readPending(
+      pendingStorageRef.current,
+      `${userId}:rejected`,
+    );
+    pendingRef.current = readPending(pendingStorageRef.current, userId).slice(
+      0,
+      500 - rejectedRef.current.length,
+    );
     const flush = () =>
       operationsRef.current.run(async () => {
-        if (!active || !readyRef.current || deletingRef.current) return;
+        if (
+          !active ||
+          !readyRef.current ||
+          deletingRef.current ||
+          Date.now() < retryAtRef.current
+        )
+          return;
         try {
           while (active && !deletingRef.current && pendingRef.current.length) {
             const response = await fetch("/api/progress", {
@@ -326,7 +360,24 @@ export function Practice({
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(pendingRef.current[0]),
             });
-            if (!response.ok) throw new Error("Progress save failed");
+            if (!response.ok) {
+              const failure = syncFailure(response);
+              if (failure.problem === "rejected") {
+                rejectedRef.current.push(pendingRef.current.shift()!);
+                writePending(
+                  pendingStorageRef.current,
+                  `${userId}:rejected`,
+                  rejectedRef.current,
+                );
+                writePending(
+                  pendingStorageRef.current,
+                  userId,
+                  pendingRef.current,
+                );
+                continue;
+              }
+              throw failure;
+            }
             const data = (await response.json()) as { progress: ProgressRow[] };
             if (active) setVerifiedRows(data.progress);
             pendingRef.current.shift();
@@ -334,8 +385,14 @@ export function Practice({
             if (active && !pendingRef.current.length)
               setProgress(progressById(data.progress));
           }
-          if (active) setSyncStatus("saved");
-        } catch {
+          if (active)
+            setSyncStatus(rejectedRef.current.length ? "rejected" : "saved");
+        } catch (error) {
+          if (error instanceof SyncFailure) {
+            retryAtRef.current = error.retryAt;
+            if (active) setSyncStatus(error.problem);
+            return;
+          }
           if (active)
             setSyncStatus((current) =>
               current === "full" || current === "unavailable"
@@ -348,7 +405,7 @@ export function Practice({
     const load = async () => {
       try {
         const response = await fetch("/api/progress", { cache: "no-store" });
-        if (!response.ok) throw new Error("Progress load failed");
+        if (!response.ok) throw syncFailure(response);
         const data = (await response.json()) as { progress: ProgressRow[] };
         if (!active || deletingRef.current) return;
         setVerifiedRows(data.progress);
@@ -370,12 +427,17 @@ export function Practice({
         readyRef.current = true;
         setSyncStatus(pendingRef.current.length ? "pending" : "saved");
         void flush();
-      } catch {
-        if (active) setSyncStatus("unavailable");
+      } catch (error) {
+        if (error instanceof SyncFailure) retryAtRef.current = error.retryAt;
+        if (active)
+          setSyncStatus(
+            error instanceof SyncFailure ? error.problem : "unavailable",
+          );
       }
     };
     void load();
     const retry = () => {
+      if (Date.now() < retryAtRef.current || deletingRef.current) return;
       if (readyRef.current) void flush();
       else void load();
     };
@@ -442,12 +504,15 @@ export function Practice({
           Math.round(result.durationMs ?? sample.atMs - attempt[0].atMs),
         ),
       );
-      const queued = queueAttempt(pendingRef.current, {
-        id: window.crypto.randomUUID(),
-        exerciseId,
-        correct: result.correct,
-        durationMs,
-      });
+      const queued =
+        pendingRef.current.length + rejectedRef.current.length >= 500
+          ? null
+          : queueAttempt(pendingRef.current, {
+              id: window.crypto.randomUUID(),
+              exerciseId,
+              correct: result.correct,
+              durationMs,
+            });
       if (queued) {
         setProgress((current) => {
           const previousProgress = current[exerciseId] ?? {
@@ -508,6 +573,8 @@ export function Practice({
         const response = await fetch("/api/progress", { method: "DELETE" });
         if (!response.ok) throw new Error("Progress delete failed");
         pendingRef.current = [];
+        rejectedRef.current = [];
+        writePending(pendingStorageRef.current, `${userId}:rejected`, []);
         writePending(pendingStorageRef.current, userId, []);
         readyRef.current = false;
         setProgress({});
@@ -813,6 +880,34 @@ export function Practice({
           {syncStatus !== "saved" && (
             <button type="button" onClick={() => retryRef.current()}>
               {text.retry}
+            </button>
+          )}
+          {syncStatus !== "saved" && (
+            <button
+              type="button"
+              onClick={() => {
+                const blob = new Blob(
+                  [
+                    JSON.stringify(
+                      {
+                        pending: pendingRef.current,
+                        rejected: rejectedRef.current,
+                      },
+                      null,
+                      2,
+                    ),
+                  ],
+                  { type: "application/json" },
+                );
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = "fightpath-unsynced.json";
+                link.click();
+                window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+              }}
+            >
+              {text.unsynced}
             </button>
           )}
           <a href="/api/progress/export" download>
