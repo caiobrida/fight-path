@@ -1,5 +1,7 @@
 # FightPath roadmap
 
+Delivery checkpoint, November 17, 2026: FP-19 through FP-40 have implementation/evidence updates in [TASKS.md](TASKS.md) and [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). Remaining gates are physical-device/assistive/learner validation, external Google consent, current-game BnB execution/media and future public-production decisions. Do not reopen completed code work or certify those gates from synthetic fixtures.
+
 The roadmap groups the task files in [`TASKS.md`](TASKS.md) into reviewable milestones. It contains dependencies and exit criteria, not dates or a promise of a particular release schedule. The earlier implementation authorization covers FP-01 through FP-18. FP-19 through FP-40 were approved for implementation on November 17, 2026. Public release remains a separate decision after the external configuration and real-device validation gates.
 
 ## 0. Shared product context

@@ -42,9 +42,9 @@
   background: transparent;
 }
 .fp-button--quiet {
-  background: transparent;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  background: var(--fp-raised);
+  border-color: var(--fp-border);
+  text-decoration: none;
 }
 .fp-button--danger {
   border-color: var(--fp-danger);
@@ -450,7 +450,7 @@
   margin-top: 0;
 }
 .fp-home .fp-card .fp-button {
-  padding-left: 0;
+  padding-inline: 18px;
 }
 .fp-steps {
   list-style: none;
@@ -926,4 +926,10 @@
   height: auto;
   margin-block: 1rem;
   border-radius: 1rem;
+}
+
+.fp-prerequisite {
+  display: inline-block;
+  margin: 0.25rem 0.75rem 0.25rem 0;
+  padding-block: 0.5rem;
 }

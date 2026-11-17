@@ -1,5 +1,7 @@
 # Media register
 
+Local asset budget: original SVG diagrams stay below 10 KiB each and reserve their aspect ratio. Current files measure 639, 725, 899 and 1143 bytes. The hero is prioritized; offscreen lesson images retain default lazy loading. The external player is excluded from initial media loading. Byte measurements do not certify real-phone performance.
+
 Reviewed November 17, 2026. No extracted game art, wiki GIF or downloaded third-party video is redistributed. New original SVG diagrams use the FightPath palette and represent teaching concepts, not game hitboxes or frame timelines.
 
 | Asset | Author / source | Rights and scope | Placement / size | Accessibility |

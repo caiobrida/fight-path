@@ -18,6 +18,7 @@ export const habitLessons: Lesson[] = [
   {
     id: "one-goal-per-session",
     revision: 1,
+    level: "beginner",
     track: "habits",
     scope: "universal",
     status: "published",
@@ -90,6 +91,7 @@ export const habitLessons: Lesson[] = [
   {
     id: "review-one-round",
     revision: 1,
+    level: "beginner",
     track: "habits",
     scope: "universal",
     status: "published",

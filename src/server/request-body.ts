@@ -1,7 +1,7 @@
-export async function limitedJson(
+export async function limitedText(
   request: Request,
   limit = 2048,
-): Promise<unknown> {
+): Promise<string> {
   if (!request.body) throw new Error("Empty body");
   const reader = request.body.getReader();
   const chunks: Uint8Array[] = [];
@@ -22,5 +22,12 @@ export async function limitedJson(
     bytes.set(chunk, offset);
     offset += chunk.byteLength;
   }
-  return JSON.parse(new TextDecoder().decode(bytes));
+  return new TextDecoder().decode(bytes);
+}
+
+export async function limitedJson(
+  request: Request,
+  limit = 2048,
+): Promise<unknown> {
+  return JSON.parse(await limitedText(request, limit));
 }

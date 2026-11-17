@@ -4,6 +4,7 @@ export const footsiesLessons: Lesson[] = [
   {
     id: "choose-your-range",
     revision: 1,
+    level: "beginner",
     track: "footsies",
     scope: "universal",
     status: "published",
@@ -86,6 +87,7 @@ export const footsiesLessons: Lesson[] = [
   {
     id: "punish-the-whiff",
     revision: 1,
+    level: "beginner",
     track: "footsies",
     scope: "universal",
     status: "published",
@@ -163,6 +165,7 @@ export const footsiesLessons: Lesson[] = [
   {
     id: "adapt-with-space",
     revision: 1,
+    level: "beginner",
     track: "footsies",
     scope: "universal",
     status: "published",

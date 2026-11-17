@@ -28,6 +28,7 @@ export const kenLessons: Lesson[] = [
   {
     id: "ken-start-small",
     revision: 1,
+    level: "beginner",
     track: "ken",
     scope: "ken-classic",
     status: "published",
@@ -97,6 +98,7 @@ export const kenLessons: Lesson[] = [
   {
     id: "ken-confirm-and-stop",
     revision: 1,
+    level: "beginner",
     track: "ken",
     scope: "ken-classic",
     status: "published",
@@ -166,6 +168,7 @@ export const kenLessons: Lesson[] = [
   {
     id: "ken-pressure-with-a-reason",
     revision: 1,
+    level: "beginner",
     track: "ken",
     scope: "ken-classic",
     status: "published",

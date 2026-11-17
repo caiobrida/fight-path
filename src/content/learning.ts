@@ -19,6 +19,7 @@ export type LessonCopy = {
 export type Lesson = {
   id: string;
   revision: number;
+  level: "beginner" | "intermediate";
   track: "foundations" | "footsies" | "sf6" | "ken" | "habits";
   scope: "universal" | "sf6" | "ken-classic";
   status: "draft" | "published";
@@ -54,6 +55,7 @@ export const baseLessons: Lesson[] = [
   {
     id: "read-an-input",
     revision: 1,
+    level: "beginner",
     track: "foundations",
     scope: "universal",
     status: "published",
@@ -139,6 +141,12 @@ export function validateLessons(lessons: readonly Lesson[]): string[] {
     if (lesson.status !== "published") continue;
     if (!lesson.sources.length || !lesson.reviewed || lesson.revision < 1)
       errors.push(`Missing review: ${lesson.id}`);
+    if (lesson.level !== "beginner" && lesson.level !== "intermediate")
+      errors.push(`Invalid level: ${lesson.id}`);
+    if (lesson.patch?.review === "verified" && !lesson.patch.build)
+      errors.push(`Missing verified build: ${lesson.id}`);
+    if (lesson.copy.en?.check.answer !== lesson.copy["pt-BR"]?.check.answer)
+      errors.push(`Mismatched answer translation: ${lesson.id}`);
     for (const source of lesson.sources)
       if (!source.url.startsWith("https://") || !source.supports)
         errors.push(`Invalid source: ${lesson.id}`);
@@ -169,5 +177,20 @@ export function validateLessons(lessons: readonly Lesson[]): string[] {
     for (const prerequisite of lesson.prerequisites)
       if (!ids.has(prerequisite) || prerequisite === lesson.id)
         errors.push(`Invalid prerequisite: ${lesson.id}`);
+  const visiting = new Set<string>();
+  const visited = new Set<string>();
+  const byId = new Map(lessons.map((lesson) => [lesson.id, lesson]));
+  const visit = (id: string) => {
+    if (visiting.has(id)) {
+      errors.push(`Cyclic prerequisite: ${id}`);
+      return;
+    }
+    if (visited.has(id)) return;
+    visiting.add(id);
+    byId.get(id)?.prerequisites.forEach(visit);
+    visiting.delete(id);
+    visited.add(id);
+  };
+  lessons.forEach((lesson) => visit(lesson.id));
   return errors;
 }

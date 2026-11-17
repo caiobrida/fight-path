@@ -4,6 +4,7 @@ export const foundationsLessons: Lesson[] = [
   {
     id: "hit-block-and-your-turn",
     revision: 1,
+    level: "beginner",
     track: "foundations",
     scope: "universal",
     status: "published",
@@ -85,6 +86,7 @@ export const foundationsLessons: Lesson[] = [
   {
     id: "timing-links-and-cancels",
     revision: 1,
+    level: "beginner",
     track: "foundations",
     scope: "universal",
     status: "published",
@@ -166,6 +168,7 @@ export const foundationsLessons: Lesson[] = [
   {
     id: "watch-the-air",
     revision: 1,
+    level: "beginner",
     track: "foundations",
     scope: "universal",
     status: "published",

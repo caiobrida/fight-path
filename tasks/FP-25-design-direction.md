@@ -1,6 +1,6 @@
 # FP-25 — Approve the design direction and system contract
 
-**Status:** Approved for implementation (2026-11-17). **Priority:** P2. **Dependencies:** DESIGN-STUDY.md.
+**Status:** Done. **Priority:** P2. **Dependencies:** DESIGN-STUDY.md.
 
 ## Checklist
 
@@ -15,3 +15,5 @@
 **Evidence:** approved design artifact, library decision and examples of all interaction states. Research recommendations are in DESIGN-STUDY.md, not a prior dependency-install authorization.
 
 Implementation decision: DESIGN-SYSTEM.md records the selected interaction library, native/CSS boundaries, tokens, typography, spacing, imagery and motion rules. design/direction.html is the standalone desktop/mobile composition reference. The owner explicitly authorized proceeding through the backlog without further approval pauses; visual direction remains reviewable throughout implementation.
+
+Final delivery and validation boundaries are recorded in [IMPLEMENTATION-STATUS.md](../IMPLEMENTATION-STATUS.md). Physical devices, externally consented Google flows and current-game clips are not certified by synthetic tests.

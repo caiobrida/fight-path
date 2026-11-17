@@ -56,7 +56,11 @@ test("unverified recipes and incomplete demonstrations cannot become public rout
     ]).length,
     0,
   );
-  assert.equal(publishedCombos.length, 0);
+  assert.ok(
+    publishedCombos.every(
+      (recipe) => recipe.lesson.patch?.review === "verified",
+    ),
+  );
 });
 
 test("combo filters combine situation resources position and difficulty", () => {

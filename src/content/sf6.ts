@@ -22,6 +22,7 @@ export const sf6Lessons: Lesson[] = [
   {
     id: "read-your-resources",
     revision: 1,
+    level: "beginner",
     track: "sf6",
     scope: "sf6",
     status: "published",
@@ -96,6 +97,7 @@ export const sf6Lessons: Lesson[] = [
   {
     id: "recognize-drive-options",
     revision: 1,
+    level: "beginner",
     track: "sf6",
     scope: "sf6",
     status: "published",
@@ -167,6 +169,7 @@ export const sf6Lessons: Lesson[] = [
   {
     id: "defend-with-a-plan",
     revision: 1,
+    level: "beginner",
     track: "sf6",
     scope: "sf6",
     status: "published",

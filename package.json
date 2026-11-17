@@ -8,12 +8,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "format:check": "prettier --check src scripts next.config.ts eslint.config.mjs package.json tsconfig.json compose.yaml vercel.json",
+    "format:check": "prettier --check src scripts next.config.ts eslint.config.mjs package.json tsconfig.json compose.yaml vercel.json tests playwright.config.ts",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test src/**/*.test.ts",
+    "test": "node scripts/test.mjs",
     "db:up": "docker compose --env-file .env.local up -d db",
     "db:migrate:local": "node --env-file=.env.local scripts/migrate.mjs",
-    "db:migrate": "node scripts/migrate.mjs"
+    "db:migrate": "node scripts/migrate.mjs",
+    "test:browser": "playwright test --project=components",
+    "test:site": "node scripts/test-site.mjs",
+    "test:auth": "node scripts/test-auth.mjs"
   },
   "dependencies": {
     "@clerk/backend": "^3.30.0",
@@ -27,14 +30,19 @@
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@clerk/testing": "^2.3.1",
+    "@playwright/test": "^1.65.1",
     "@types/node": "^22.20.5",
     "@types/pg": "^8.23.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.4.6",
     "prettier": "^3.10.1",
     "tsx": "^4.23.15",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^8.3.8"
   }
 }

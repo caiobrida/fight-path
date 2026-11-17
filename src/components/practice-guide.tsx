@@ -1,7 +1,13 @@
 import { InfoDialog } from "./interactive-ui";
 import type { Locale } from "@/i18n/dictionaries";
 
-export function PracticeGuide({ locale }: { locale: Locale }) {
+export function PracticeGuide({
+  locale,
+  limits,
+}: {
+  locale: Locale;
+  limits?: { maxDurationMs: number; maxGapMs: number };
+}) {
   const pt = locale === "pt-BR";
   const steps = pt
     ? [
@@ -33,6 +39,18 @@ export function PracticeGuide({ locale }: { locale: Locale }) {
           <li key={step}>{step}</li>
         ))}
       </ol>
+      <p>
+        {pt
+          ? "Na notação numérica, 2 é baixo, 5 é neutro, 6 é direita e 4 é esquerda. Por exemplo, 236 descreve baixo, baixo-direita, direita; ao espelhar, vira 214."
+          : "In numpad notation, 2 is down, 5 is neutral, 6 is right and 4 is left. For example, 236 means down, down-right, right; mirrored, it becomes 214."}
+      </p>
+      {limits && (
+        <p>
+          {pt
+            ? `Este exercício permite até ${limits.maxDurationMs} ms no total e ${limits.maxGapMs} ms entre etapas. São limites didáticos do FightPath, não janelas certificadas do SF6.`
+            : `This exercise allows up to ${limits.maxDurationMs} ms overall and ${limits.maxGapMs} ms between steps. These are FightPath teaching limits, not certified SF6 windows.`}
+        </p>
+      )}
     </InfoDialog>
   );
 }

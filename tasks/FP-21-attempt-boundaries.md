@@ -1,6 +1,6 @@
 # FP-21 — Count actual attack edges once
 
-**Status:** Approved for implementation (2026-11-17). **Priority:** P1. **Dependencies:** FP-10/FP-11 baseline.
+**Status:** Implemented; physical device QA pending. **Priority:** P1. **Dependencies:** FP-10/FP-11 baseline.
 
 **Context:** AUDIT A06: one physical LP press produces a correct attempt followed by an incorrect attempt when direction is released while LP remains held.
 
@@ -17,3 +17,5 @@
 **Evidence:** failing-then-passing integration regression plus repeated commands on both facing directions. Do not rewrite evaluator tolerances to conceal an orchestration defect.
 
 Verification: the practice component now uses AttemptWindow, which retains physical held state while clearing motion history. Regression tests cover the reported five-snapshot sequence, clear and reconnect; first samples seed held state rather than manufacture presses. Hardware cross-device confirmation is tracked in FP-40.
+
+Final delivery and validation boundaries are recorded in [IMPLEMENTATION-STATUS.md](../IMPLEMENTATION-STATUS.md). Physical devices, externally consented Google flows and current-game clips are not certified by synthetic tests.

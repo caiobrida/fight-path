@@ -255,11 +255,11 @@ export function Practice({
   locale: Locale;
   userId: string;
 }) {
-  const profile = useControllerProfile();
   const text = copy[locale];
   const [path, setPath] = useState<"universal" | "ken">("universal");
   const activeExercises = path === "ken" ? kenExercises : exercises;
   const [device, setDevice] = useState<DeviceKind>("keyboard");
+  const profile = useControllerProfile(device === "gamepad");
   const [facing, setFacing] = useState<Facing>("right");
   const [playing, setPlaying] = useState(false);
   const [mapping, setMapping] = useState<ControlMapping>(
@@ -657,7 +657,7 @@ export function Practice({
         <h1>{text.title}</h1>
         <p>{text.intro}</p>
         <div className="fp-actions">
-          <PracticeGuide locale={locale} />
+          <PracticeGuide locale={locale} limits={exercise.command} />
         </div>
         <ControllerMonitor
           locale={locale}

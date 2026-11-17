@@ -1,5 +1,7 @@
 # FightPath architecture outline
 
+Current delivery: [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). React Aria interaction components and plain CSS tokens form the shared design system. Versioned repository lessons and account-bound learning activity are implemented; migration 004 is applied locally and to development Neon. The BnB publication gate remains separate from the input evaluator. Earlier proposal-only statements below are historical.
+
 ## Status
 
 The application uses Next.js App Router with React and TypeScript. This keeps the web UI and server routes in one project, supports Vercel deployment, and allows Neon credentials to remain server-side. The input evaluator remains framework-independent. Vite was suggested earlier, but a separate server would add complexity for the required database access.

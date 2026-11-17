@@ -1,5 +1,19 @@
 # Product, interface and input audit
 
+## Implementation follow-up, November 17, 2026
+
+The approved expansion is delivered as described in [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md); [QA.md](QA.md) records evidence and external gates. Original findings below describe the pre-change site.
+
+| Follow-up | Reproduction and resolution |
+| --- | --- |
+| FP40-R01: saved controller profile lost or practice stopped shortly after starting | `npm run test:browser` configure/save/practice case failed with Attempts0 on the selected second controller. The profile hook started as default and only discovered the saved controller after 500ms, triggering a layout reload/pause. Synchronous external-store snapshots remove that transition; all 19 browser regressions pass. Unrelated controller connections no longer interrupt keyboard mode |
+| FP40-R02: malformed localized return and unlocalized auth alias | Allowlisted single returnTo values now preserve setup/lesson destinations; arrays, external paths and comma-concatenation are rejected. Both auth component transfer paths use the sanitized target. Public redirect tests pass; actual Google consent remains open |
+| FP40-R03: Portuguese replacement characters and underlined action styling | Corrected corrupt home/navigation/setup/sync labels and removed underline styling from action variants; ordinary prose/source links remain identifiable. Narrow/wide screenshots inspected |
+| FP40-R04: webhook body read unbounded | Signed deletion processing now caps the raw body at 64 KiB before verification. Oversized bodies, invalid signatures and expired delivery are rejected. Valid repeated deletion is idempotent and a real development delivery cleaned both fixture tables |
+| FP40-R05: database integration skipped in CI | PostgreSQL service, migrations and a CI DATABASE_URL guard now make database integration mandatory. Browser tests use isolated fixtures; authenticated checks use disposable Clerk Development users and local data |
+
+No physical compatibility, Google consent or current-game BnB execution is inferred from these tests. BnB publication remains gated by actual both-side verification and instructional clips. The owner requires advance notice before computer-use interaction.
+
 Date: 2026-11-17. Baseline: `5a6600c` on `main`, deployed at `fight-path.vercel.app`. This is an investigation and proposed backlog, not implementation approval. No runtime code, dependencies, database records, Clerk settings or Vercel settings were changed during this audit.
 
 ## Method and limits

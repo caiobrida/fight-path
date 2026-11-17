@@ -9,6 +9,7 @@ import {
   selectController,
 } from "@/devices/controller-selection";
 import type { Locale } from "@/i18n/dictionaries";
+import { controlLabel } from "@/devices/control-label";
 
 const copy = {
   en: {
@@ -72,7 +73,7 @@ export function ControllerMonitor({
     <section className="fp-controller" aria-label={text.title}>
       <details>
         <summary>
-          {text.title} ?{" "}
+          {text.title} ·{" "}
           {selected
             ? locale === "pt-BR"
               ? "Conectado"
@@ -117,7 +118,17 @@ export function ControllerMonitor({
         <p>
           {text.buttons}:{" "}
           {selected?.buttons
-            .flatMap((button, i) => (button.pressed ? [i] : []))
+            .flatMap((button, i) =>
+              button.pressed
+                ? [
+                    controlLabel(
+                      `Button${i}`,
+                      selected.mapping === "standard",
+                      locale,
+                    ),
+                  ]
+                : [],
+            )
             .join(", ") || text.none}
         </p>
         <p>

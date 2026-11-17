@@ -1,6 +1,6 @@
 # FP-20 — Make controller calibration complete and recoverable
 
-**Status:** Approved for implementation (2026-11-17). **Priority:** P1. **Dependencies:** FP-19.
+**Status:** Implemented; physical device QA pending. **Priority:** P1. **Dependencies:** FP-19.
 
 **Context:** AUDIT A03, A05, A09. Axes cannot be bound, and default assignments prevent direct swaps.
 
@@ -8,7 +8,7 @@
 
 - [ ] Model button, axis polarity, D-pad/hat representations and dead-zone handling explicitly; inspect DualSense standard mappings before selecting defaults.
 - [x] Add assign, swap/replace, clear and cancel flows with visible conflicts; releasing inputs must not bind an unintended held control.
-- [ ] Show familiar physical labels when known, with a raw-value fallback; explain LP/MP/HP/LK/MK/HK in both locales.
+- [x] Show familiar physical labels when known, with a raw-value fallback; explain LP/MP/HP/LK/MK/HK in both locales.
 - [x] Save versioned profiles and preferred input mode so setup-to-practice uses the chosen layout; migrate or safely reset existing v1 mappings.
 - [x] Distinguish multiple controller profiles without uploading hardware identifiers; define behavior when a different controller appears.
 - [ ] Verify button swaps, axis direction/inversion, analog drift, diagonals, reload, blocked storage and reconnect.
@@ -18,3 +18,5 @@
 **Evidence:** calibration integration test and hardware demonstration, in `en` and `pt-BR`. Do not assume every nonstandard controller shares DualSense indices.
 
 Implementation: axis polarity tokens, explicit swap/clear/cancel, v2 per-controller local profiles with v1 fallback, preferred device and tab controller selection persistence. Profile changes pause practice and reset physical baseline. Mapping tests verify swaps, custom axis bindings and serialization. DualSense hardware, drift behavior and full visual walkthrough remain pending.
+
+Final delivery and validation boundaries are recorded in [IMPLEMENTATION-STATUS.md](../IMPLEMENTATION-STATUS.md). Physical devices, externally consented Google flows and current-game clips are not certified by synthetic tests.

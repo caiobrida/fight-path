@@ -33,7 +33,7 @@ const copy = {
       {
         tag: "Ken Classic",
         title: "A plan for every round",
-        text: "Connect a small toolkit to useful decisions, dependable combos and focused practice.",
+        text: "Learn when to approach, defend and adapt with a small toolkit and focused practice.",
       },
     ],
     coming: "New lessons in preparation",
@@ -72,7 +72,7 @@ const copy = {
       {
         tag: "Ken Classic",
         title: "Um plano para cada round",
-        text: "Conecte poucas ferramentas a boas decisões, combos confiáveis e treinos com objetivo.",
+        text: "Aprenda a se aproximar, defender e adaptar com poucas ferramentas e treinos com objetivo.",
       },
     ],
     coming: "Novas aulas em preparação",
@@ -169,9 +169,17 @@ export default async function HomePage({
                     →
                   </ActionLink>
                 ) : (
-                  <ActionLink variant="quiet" href={`/${locale}/learn#ken`}>
-                    {locale === "pt-BR" ? "Aprender com Ken" : "Learn Ken"} →
-                  </ActionLink>
+                  <div className="fp-actions">
+                    <ActionLink variant="quiet" href={`/${locale}/learn#ken`}>
+                      {locale === "pt-BR" ? "Aprender com Ken" : "Learn Ken"} →
+                    </ActionLink>
+                    <ActionLink variant="quiet" href={`/${locale}/ken/combos`}>
+                      {locale === "pt-BR"
+                        ? "Biblioteca de BnBs"
+                        : "BnB library"}{" "}
+                      →
+                    </ActionLink>
+                  </div>
                 )}
               </Card>
             );

@@ -1,5 +1,23 @@
 # QA and accessibility matrix
 
+## Expansion regression evidence, November 17, 2026
+
+Current delivery and external gates: [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). Earlier observations below are historical, not substitutes for physical-device verification.
+
+| Check | Result and boundary |
+| --- | --- |
+| Local PostgreSQL domain/server/content suite | 48 passed, zero skipped, including revision validation, isolation, idempotency, deletion, signature/expiry/retry and webhook size limits |
+| Headless component suite | 19 passed: configure/save/practice, two pads, nonstandard axes, held attacks, touch dragging, storage denial, dialog focus, network/401/429/422/503 recovery and delayed-save deletion |
+| Actual Next.js public site | 16 passed: both locales, 18 lesson routes, internal links/assets, protected returns, private endpoint denial and 320/360/390/768/1280px layouts |
+| Clerk Development accounts | Passed with two disposable users: setup, reading/check/input persistence, export, deletion and account switching. An acknowledged save response is held across switching, then recovered idempotently under its original owner |
+| Real development webhook | Passed: deleting an actual disposable Clerk account removed both its fixture attempts and learning records from Neon; remaining fixture records were zero |
+| Automated accessibility | No serious/critical violations in checked home, reader and practice surfaces; Escape restores dialog-trigger focus. This is not screen-reader certification |
+| Media and dependency scope | Original SVGs are 639–1143 bytes each; no player request before explicit loading. Production dependency audit reports zero vulnerabilities |
+
+Commands: `node --env-file=.env.local scripts/test.mjs`, `npm run test:browser`, `npm run build`, `npm run test:site`, `npm run test:auth`. CI provisions PostgreSQL 17 and cannot silently skip integration tests. Auth checks are opt-in; no Clerk secret or Neon credential is copied to CI. The loopback-only Vite harness is outside deployable Next.js routes.
+
+Remaining manual evidence: the owner's DualSense USB/Windows 11/Chrome, real Android/iOS multi-touch, screen-reader/200% zoom sessions, Google consent, learner review and six current-game Ken routes with both-side clips. Real mobile loading/input performance is unmeasured. The observed title version 2.0500.001 does not certify battle-build or combo execution. Announce any future desktop/browser/game control before interacting.
+
 ## Checked on 2026-11-17
 
 | Surface                              | Coverage                                                                                                | Result                                                                                           |

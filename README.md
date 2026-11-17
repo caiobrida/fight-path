@@ -21,7 +21,13 @@ For local persistence, copy `.env.example` to `.env.local`, replace the sample p
 
 Clerk accounts are mandatory for setup, practice, and progress. PostgreSQL stores the Clerk user ID with each attempt; the old anonymous development records are discarded by migration 003. Progress can be exported or deleted from the signed-in account. Account deletion requires a signed Clerk `user.deleted` webhook at `/api/webhooks/clerk`, configured separately for each deployed environment. Neon will replace the local `DATABASE_URL` in production.
 
-## Project context
+## Learning and regression checks
+
+The public learning catalog is at `/en/learn` and `/pt-BR/learn`. Signed-in learning records are at `learn/progress`. The Ken BnB library is at `ken/combos`; unverified routes remain unavailable. Read [implementation status](IMPLEMENTATION-STATUS.md) and [media provenance](MEDIA.md) before claiming current-game or hardware compatibility.
+
+Run `node --env-file=.env.local scripts/test.mjs` for local PostgreSQL integration tests. `npm test` requires a database in CI so integration tests cannot silently skip. Run `npx playwright install chromium` once, then `npm run test:browser` for isolated component regressions. After a production build, `npm run test:site` checks actual local public routes. `npm run test:auth` uses the selected Clerk Development instance and a localhost database with disposable test accounts; it never enables auth bypasses in the app or copies secrets into CI.
+
+## Shared documents
 
 - [Product brief](PRODUCT.md)
 - [Architecture](ARCHITECTURE.md)

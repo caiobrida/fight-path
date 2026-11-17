@@ -26,4 +26,6 @@ The first Ken lessons use only the three commands confirmed in CAPCOM-KEN-MOVES.
 
 ## Systems lessons review
 
+Browser control labels use the [W3C Gamepad standard layout](https://www.w3.org/TR/gamepad/), reviewed November 17, 2026. Bilingual physical-position labels apply only to browser-reported standard mappings; nonstandard controls keep raw tokens. Vendor symbols are not guessed.
+
 FP-32 uses Capcom-authored 2022 introductions for high-level Drive concepts and the separate Super resource, reviewed November 17, 2026. No current numeric costs, frame data or exact build certification is published. The lesson patch metadata distinguishes conceptual, verified and pending evidence; pending records are unavailable. After a balance update, set affected records pending, inspect current official changes and reproduce dependent rules before promoting them with an exact battle build.

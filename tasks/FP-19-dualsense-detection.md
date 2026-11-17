@@ -1,12 +1,12 @@
 # FP-19 — Diagnose and restore physical controller detection
 
-**Status:** Approved for implementation (2026-11-17). **Priority:** P1. **Dependencies:** FP-08 baseline.
+**Status:** Implemented; physical device QA pending. **Priority:** P1. **Dependencies:** FP-08 baseline.
 
 **Context:** AUDIT A02, A04, A08. Owner's exact case: PS5 DualSense, USB, Windows 11, Chrome; no response in setup or practice. The first-device selection defect is reproduced with synthetic devices; the owner's hardware cause remains open.
 
 ## Checklist
 
-- [ ] Capture a failing end-to-end case before the fix, recording device mode, index, page focus and training state.
+- [x] Capture a failing end-to-end case before the fix, recording device mode, index, page focus and training state.
 - [x] Add a local diagnostic view for connection, selected controller, buttons, axes, mapping type and permission/API errors. Keep hardware details and raw events off the server.
 - [ ] Let users select an active controller; preserve selection through polling and handle disconnect/reconnect and index reuse.
 - [x] Explain when browser activation is needed and distinguish unsupported, not detected, waiting, disconnected and running states.
@@ -18,3 +18,5 @@
 **Evidence:** before/after reproduction, adapter tests, actual browser/OS/controller details and both locales. References: [Gamepad spec](https://www.w3.org/TR/gamepad/), [MDN connection requirements](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API/Using_the_Gamepad_API).
 
 Implementation: added a local controller monitor in setup and practice, explicit controller selection and guarded API polling. Selection is tab-local and no hardware data is transmitted. Automated sparse-slot/second-controller/permission-denial checks pass. Physical DualSense USB verification remains pending; do not claim the reported hardware case is resolved yet.
+
+Final delivery and validation boundaries are recorded in [IMPLEMENTATION-STATUS.md](../IMPLEMENTATION-STATUS.md). Physical devices, externally consented Google flows and current-game clips are not certified by synthetic tests.

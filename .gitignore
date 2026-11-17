@@ -8,3 +8,6 @@ coverage/
 next-env.d.ts
 *.tsbuildinfo
 .vercel/
+test-results/
+playwright-report/
+test-artifacts/

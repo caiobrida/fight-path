@@ -4,6 +4,7 @@ import { ActionLink, Button } from "./ui";
 import { PracticeGuide } from "./practice-guide";
 import { useControllerProfile } from "@/devices/use-controller-profile";
 import { ControllerMonitor } from "./controller-monitor";
+import { controlLabel } from "@/devices/control-label";
 import { useEffect, useRef, useState } from "react";
 import {
   assignControl,
@@ -111,9 +112,9 @@ const directionNames: Record<Locale, Record<Direction, string>> = {
 };
 
 export function ControlSetup({ locale }: { locale: Locale }) {
-  const profile = useControllerProfile();
   const text = copy[locale];
   const [device, setDevice] = useState<DeviceKind>("keyboard");
+  const profile = useControllerProfile(device === "gamepad");
   const [mapping, setMapping] = useState<ControlMapping>(
     defaultMapping("keyboard"),
   );
@@ -342,7 +343,13 @@ export function ControlSetup({ locale }: { locale: Locale }) {
               <strong>
                 {action in text ? text[action as keyof typeof text] : action}
               </strong>
-              <span>{mapping[action]}</span>
+              <span>
+                {controlLabel(
+                  mapping[action],
+                  profile.endsWith("%3Astandard"),
+                  locale,
+                )}
+              </span>
             </Button>
           ))}
         </div>

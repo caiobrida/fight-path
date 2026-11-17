@@ -20,6 +20,7 @@ export default async function LessonPage({
   const text = lesson.copy[locale];
   const track = publishedLessons.filter((item) => item.track === lesson.track);
   const next = track[track.findIndex((item) => item.id === id) + 1];
+  const previous = track[track.findIndex((item) => item.id === id) - 1];
   return (
     <main className="fp-page fp-lesson">
       <nav
@@ -43,6 +44,33 @@ export default async function LessonPage({
       </Badge>
       <h1>{text.title}</h1>
       <p className="fp-lesson__summary">{text.summary}</p>
+      <p>
+        {pt ? "Nível: " : "Level: "}
+        {lesson.level === "beginner"
+          ? pt
+            ? "inicial"
+            : "beginner"
+          : pt
+            ? "intermediário"
+            : "intermediate"}
+      </p>
+      {lesson.prerequisites.length > 0 && (
+        <nav aria-label={pt ? "Antes desta aula" : "Before this lesson"}>
+          <strong>{pt ? "Antes desta aula: " : "Before this lesson: "}</strong>
+          {lesson.prerequisites.map((prerequisite) => {
+            const entry = findLesson(prerequisite);
+            return entry ? (
+              <a
+                key={prerequisite}
+                className="fp-prerequisite"
+                href={`/${locale}/learn/${entry.id}`}
+              >
+                {entry.copy[locale].title}
+              </a>
+            ) : null;
+          })}
+        </nav>
+      )}
       <LessonVisual track={lesson.track} locale={locale} />
       {lesson.patch && (
         <Notice>
@@ -75,6 +103,14 @@ export default async function LessonPage({
       <LessonActivity lesson={lesson} locale={locale} />
       {lesson.id === "ken-start-small" && <KenVideo locale={locale} />}
       <div className="fp-actions">
+        {previous && (
+          <ActionLink
+            variant="secondary"
+            href={`/${locale}/learn/${previous.id}`}
+          >
+            ← {pt ? "Aula anterior" : "Previous lesson"}
+          </ActionLink>
+        )}
         {next ? (
           <ActionLink href={`/${locale}/learn/${next.id}`}>
             {pt ? "Próxima aula" : "Next lesson"} →

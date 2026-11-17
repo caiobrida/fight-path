@@ -1,5 +1,7 @@
 # FightPath product brief
 
+Current implementation: [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). The approved expansion now includes eighteen bilingual lessons, a sourced reader, learning activity/resume, media, controller improvements and the design system. The BnB library is implemented, with publication gated on current-game execution evidence. Historical future-scope statements below should be read alongside that delivery record.
+
 ## Vision and audience
 
 FightPath is a gamified web platform for people learning fighting games. It helps a learner practice inputs deliberately, understand mistakes, and see improvement over time. The first experience focuses on Street Fighter 6, Ken, and Classic controls. The name and structure are intentionally broader than a Ken-only tutorial so future characters and games can be added.
