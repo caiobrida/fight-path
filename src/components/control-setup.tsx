@@ -134,7 +134,12 @@ export function ControlSetup({ locale }: { locale: Locale }) {
     let cancelled = false;
     queueMicrotask(() => {
       if (cancelled) return;
-      const saved = loadMapping(window.localStorage, device);
+      let saved = defaultMapping(device);
+      try {
+        saved = loadMapping(window.localStorage, device);
+      } catch {
+        saved = defaultMapping(device);
+      }
       mappingRef.current = saved;
       setMapping(saved);
       setRaw(undefined);

@@ -9,7 +9,7 @@ FightPath is being built with data minimization and user control in mind. This d
 | Anonymous session identifier | Keep progress separated between learners | HttpOnly cookie and server database | Random, opaque token in cookie; only its hash in the database; no email required |
 | Locale and control mapping | Preserve preferences | Browser storage | Local to the device; no raw device identity sent to the server |
 | Practice outcome | Show progress and skill mastery | PostgreSQL | Store exercise ID, result, and time; avoid raw input histories |
-| Pending practice outcome | Resume a failed sync | Browser local storage | Store only exercise ID, result, and time until server confirmation; clear on progress deletion |
+| Pending practice outcome | Resume a failed sync | Browser local storage when available | Store only attempt ID, exercise ID, result, and time until server confirmation; cap at 500 outcomes and clear on progress deletion. If browser storage is blocked, pending outcomes remain only in tab memory until sync |
 | Raw input history | Immediate feedback during a practice attempt | Browser memory | Discard after the attempt or page session; do not transmit by default |
 
 ## Engineering requirements

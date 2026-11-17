@@ -14,4 +14,6 @@
 
 Progress is grouped by exercise ID and the selected universal or Ken path. A separate mastery display is part of FP-15. Local PostgreSQL integration and HTTP route checks validated persistence, export, deletion, retry idempotency, and session isolation. Neon production validation remains dependent on production credentials.
 
+The offline queue is capped at 500 minimal outcomes. Storage failures no longer interrupt practice; a visible retry action resumes synchronization when the service returns. Attempts made after the queue is full remain available for immediate feedback but are not counted as saved progress.
+
 **Aceite:** progresso persiste entre visitas segundo o modelo definido, métricas são recalculáveis e um usuário não lê dados de outro.

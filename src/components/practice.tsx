@@ -23,8 +23,8 @@ import {
   type ControlMapping,
 } from "@/domain/mapping";
 import { formatNumber, type Locale } from "@/i18n/dictionaries";
+import { queueAttempt, readPending, writePending } from "@/domain/pending";
 import {
-  parseAttempt,
   progressById,
   type AttemptInput,
   type ProgressRow,
@@ -71,7 +71,10 @@ const copy = {
     pathProgress: "Path progress",
     saved: "Progress saved",
     pending: "Progress waiting to sync",
-    unavailable: "Progress service unavailable. Practice remains available.",
+    unavailable:
+      "Progress is not saved yet. Keep this tab open and retry sync.",
+    full: "Offline save limit reached. Retry sync to save new attempts.",
+    retry: "Retry sync",
     export: "Export progress",
     delete: "Delete progress",
     deleteConfirm: "Permanently delete your saved FightPath progress?",
@@ -144,7 +147,9 @@ const copy = {
     saved: "Progresso salvo",
     pending: "Progresso aguardando sincronização",
     unavailable:
-      "Serviço de progresso indisponível. O treino continua disponível.",
+      "O progresso ainda não foi salvo. Mantenha esta aba aberta e tente sincronizar.",
+    full: "Limite de tentativas offline atingido. Sincronize para salvar novas tentativas.",
+    retry: "Tentar sincronizar",
     export: "Exportar progresso",
     delete: "Excluir progresso",
     deleteConfirm: "Excluir permanentemente seu progresso salvo no FightPath?",
@@ -243,7 +248,7 @@ export function Practice({ locale }: { locale: Locale }) {
     Record<string, { attempts: number; correct: number }>
   >({});
   const [syncStatus, setSyncStatus] = useState<
-    "saved" | "pending" | "unavailable"
+    "saved" | "pending" | "unavailable" | "full"
   >("pending");
   const [verifiedRows, setVerifiedRows] = useState<ProgressRow[]>([]);
   const exerciseRef = useRef(exercises[0]);
@@ -257,6 +262,8 @@ export function Practice({ locale }: { locale: Locale }) {
   const readyRef = useRef(false);
   const sendingRef = useRef(false);
   const flushRef = useRef<() => Promise<void>>(async () => {});
+  const retryRef = useRef<() => void>(() => {});
+  const pendingStorageRef = useRef<Storage | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -274,19 +281,12 @@ export function Practice({ locale }: { locale: Locale }) {
 
   useEffect(() => {
     let active = true;
-    const stored = window.localStorage.getItem("fightpath-pending-attempts");
-    if (stored) {
-      try {
-        const parsed: unknown = JSON.parse(stored);
-        if (Array.isArray(parsed))
-          pendingRef.current = parsed
-            .map(parseAttempt)
-            .filter((item): item is AttemptInput => item !== null)
-            .slice(0, 500);
-      } catch {
-        window.localStorage.removeItem("fightpath-pending-attempts");
-      }
+    try {
+      pendingStorageRef.current = window.localStorage;
+    } catch {
+      pendingStorageRef.current = null;
     }
+    pendingRef.current = readPending(pendingStorageRef.current);
     const flush = async () => {
       if (!readyRef.current || sendingRef.current) return;
       sendingRef.current = true;
@@ -301,16 +301,18 @@ export function Practice({ locale }: { locale: Locale }) {
           const data = (await response.json()) as { progress: ProgressRow[] };
           if (active) setVerifiedRows(data.progress);
           pendingRef.current.shift();
-          window.localStorage.setItem(
-            "fightpath-pending-attempts",
-            JSON.stringify(pendingRef.current),
-          );
+          writePending(pendingStorageRef.current, pendingRef.current);
           if (active && !pendingRef.current.length)
             setProgress(progressById(data.progress));
         }
         if (active) setSyncStatus("saved");
       } catch {
-        if (active) setSyncStatus("pending");
+        if (active)
+          setSyncStatus((current) =>
+            current === "full" || current === "unavailable"
+              ? current
+              : "pending",
+          );
       } finally {
         sendingRef.current = false;
       }
@@ -350,6 +352,7 @@ export function Practice({ locale }: { locale: Locale }) {
       if (readyRef.current) void flush();
       else void load();
     };
+    retryRef.current = retry;
     window.addEventListener("online", retry);
     return () => {
       active = false;
@@ -361,7 +364,12 @@ export function Practice({ locale }: { locale: Locale }) {
     let cancelled = false;
     queueMicrotask(() => {
       if (cancelled) return;
-      const saved = loadMapping(window.localStorage, device);
+      let saved = defaultMapping(device);
+      try {
+        saved = loadMapping(window.localStorage, device);
+      } catch {
+        saved = defaultMapping(device);
+      }
       mappingRef.current = saved;
       setMapping(saved);
     });
@@ -398,19 +406,6 @@ export function Practice({ locale }: { locale: Locale }) {
       );
       setEvaluation(result);
       const exerciseId = exerciseRef.current.command.id;
-      setProgress((current) => {
-        const previousProgress = current[exerciseId] ?? {
-          attempts: 0,
-          correct: 0,
-        };
-        return {
-          ...current,
-          [exerciseId]: {
-            attempts: previousProgress.attempts + 1,
-            correct: previousProgress.correct + Number(result.correct),
-          },
-        };
-      });
       const durationMs = Math.max(
         0,
         Math.min(
@@ -420,18 +415,34 @@ export function Practice({ locale }: { locale: Locale }) {
           ),
         ),
       );
-      pendingRef.current.push({
+      const queued = queueAttempt(pendingRef.current, {
         id: window.crypto.randomUUID(),
         exerciseId,
         correct: result.correct,
         durationMs,
       });
-      window.localStorage.setItem(
-        "fightpath-pending-attempts",
-        JSON.stringify(pendingRef.current),
-      );
-      setSyncStatus("pending");
-      void flushRef.current();
+      if (queued) {
+        setProgress((current) => {
+          const previousProgress = current[exerciseId] ?? {
+            attempts: 0,
+            correct: 0,
+          };
+          return {
+            ...current,
+            [exerciseId]: {
+              attempts: previousProgress.attempts + 1,
+              correct: previousProgress.correct + Number(result.correct),
+            },
+          };
+        });
+        pendingRef.current = queued;
+        const stored = writePending(pendingStorageRef.current, queued);
+        setSyncStatus(stored ? "pending" : "unavailable");
+        void flushRef.current();
+      } else {
+        setSyncStatus("full");
+        void flushRef.current();
+      }
       attemptRef.current = [];
     };
     const adapter =
@@ -465,7 +476,7 @@ export function Practice({ locale }: { locale: Locale }) {
       const response = await fetch("/api/progress", { method: "DELETE" });
       if (!response.ok) throw new Error("Progress delete failed");
       pendingRef.current = [];
-      window.localStorage.removeItem("fightpath-pending-attempts");
+      writePending(pendingStorageRef.current, []);
       readyRef.current = false;
       setProgress({});
       setVerifiedRows([]);
@@ -758,6 +769,11 @@ export function Practice({ locale }: { locale: Locale }) {
         </section>
         <section className="practice__data" aria-live="polite">
           <p>{text[syncStatus]}</p>
+          {syncStatus !== "saved" && (
+            <button type="button" onClick={() => retryRef.current()}>
+              {text.retry}
+            </button>
+          )}
           <a href="/api/progress/export" download>
             {text.export}
           </a>

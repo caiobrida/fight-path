@@ -16,7 +16,7 @@ const copy = {
     dataItems: [
       "A random session token in a necessary HttpOnly cookie. Only its hash is stored on the server.",
       "Exercise ID, correct or incorrect result, duration, and timestamp for saved practice attempts.",
-      "Language, control mapping, and attempts awaiting sync in browser storage. Raw input history stays in browser memory and is not sent to the server.",
+      "Language and control mapping in browser storage. Up to 500 attempts awaiting sync are held in browser storage when available, or in tab memory if storage is blocked. Raw input history stays in browser memory and is not sent to the server.",
     ],
     purpose: "Purpose and sharing",
     purposeText:
@@ -45,7 +45,7 @@ const copy = {
     dataItems: [
       "Um token aleatório de sessão em cookie necessário e HttpOnly. Apenas seu hash é salvo no servidor.",
       "Identificador do exercício, resultado correto ou incorreto, duração e data das tentativas salvas.",
-      "Idioma, mapeamento de controles e tentativas aguardando sincronização no navegador. O histórico bruto de inputs fica na memória do navegador e não é enviado ao servidor.",
+      "Idioma e mapeamento de controles no armazenamento do navegador. Até 500 tentativas aguardando sincronização ficam nesse armazenamento quando disponível, ou na memória da aba quando bloqueado. O histórico bruto de inputs fica na memória do navegador e não é enviado ao servidor.",
     ],
     purpose: "Finalidade e compartilhamento",
     purposeText:
