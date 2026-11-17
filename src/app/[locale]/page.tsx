@@ -1,4 +1,6 @@
-import Image from "next/image";
+import { FighterArt } from "@/components/fighter-art";
+import { GameImage } from "@/components/game-image";
+import { GameMedia } from "@/components/game-media";
 import {
   ArrowUpRight,
   BookOpen,
@@ -124,14 +126,10 @@ export default async function HomePage({
           </div>
           <p className="fp-hero__note">{text.note}</p>
         </div>
-        <div className="fp-hero__art">
-          <Image
-            src="/images/execution-orbit.svg"
-            alt={text.art}
-            width={640}
-            height={640}
-            priority
-          />
+        <div className="fp-hero__art fp-fighter-lineup">
+          <FighterArt character="ryu" locale={locale} priority />
+          <FighterArt character="chunli" locale={locale} priority />
+          <FighterArt character="ken" locale={locale} priority />
           <span>
             {locale === "pt-BR"
               ? "PRECISÃO / DECISÃO / PRÁTICA"
@@ -152,6 +150,17 @@ export default async function HomePage({
             const Icon = icons[index];
             return (
               <Card key={card.tag}>
+                <GameImage
+                  media={
+                    index === 0
+                      ? "ryu-hadoken"
+                      : index === 1
+                        ? "chunli-swift-thrust"
+                        : "ken-shoryuken"
+                  }
+                  locale={locale}
+                  className="fp-card__image"
+                />
                 <Icon size={28} aria-hidden="true" />
                 <p className="eyebrow">{card.tag}</p>
                 <h3>{card.title}</h3>
@@ -198,7 +207,34 @@ export default async function HomePage({
           ))}
         </ol>
       </section>
+      <section className="fp-home__section">
+        <div className="fp-section-heading">
+          <div>
+            <p className="eyebrow">STREET FIGHTER 6</p>
+            <h2>
+              {locale === "pt-BR"
+                ? "Veja. Entenda. Faça."
+                : "Watch. Understand. Execute."}
+            </h2>
+          </div>
+          <p>
+            {locale === "pt-BR"
+              ? "Conecte o movimento do controle ao que acontece na tela."
+              : "Connect your input motion to the action on screen."}
+          </p>
+        </div>
+        <div className="fp-media-grid">
+          <GameMedia media="ryu-hadoken" locale={locale} />
+          <GameMedia media="chunli-swift-thrust" locale={locale} />
+          <GameMedia media="ken-shoryuken" locale={locale} />
+        </div>
+      </section>
       <p className="fp-home__limit">{text.limit}</p>
+      <p className="fp-art-credit">
+        {locale === "pt-BR"
+          ? "Arte e demonstrações de Street Fighter 6: © CAPCOM. Projeto independente de aprendizado."
+          : "Street Fighter 6 artwork and demonstrations: © CAPCOM. Independent learning project."}
+      </p>
     </main>
   );
 }

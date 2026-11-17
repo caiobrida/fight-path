@@ -37,6 +37,8 @@ Rejected attempt outcomes remain in an account-scoped local review queue and can
 
 ## Optional embedded video
 
+FP-41 adds optimized local copies of official Capcom character art and short silent move demonstrations. Loading these images and playing these local clips use the FightPath origin, without new third-party connections, viewing analytics, cookies or personal-data fields. Source links contact Capcom only when followed. The separate optional YouTube player below keeps its explicit-load behavior.
+
 FP-37 adds one external official Ken guide. Until the learner explicitly loads it, no YouTube iframe, thumbnail or preconnect request exists. Loading a privacy-enhanced YouTube player shares connection data with Google under its policies. Autoplay is disabled, closing unloads it, and written lesson/source-link alternatives remain available. No viewing analytics are stored by FightPath. The public notice explains this choice in both locales.
 
 ## Learning activity

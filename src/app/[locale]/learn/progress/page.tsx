@@ -6,6 +6,8 @@ import { isLocale } from "@/i18n/dictionaries";
 import { readLearning } from "@/server/learning";
 import { currentActivities } from "@/domain/learning-progress";
 import { ActionLink, Badge, Card, Notice } from "@/components/ui";
+import { GameImage } from "@/components/game-image";
+import { mediaForLesson } from "@/content/game-media";
 
 export default async function LearningProgressPage({
   params,
@@ -46,6 +48,13 @@ export default async function LearningProgressPage({
           ? "Leitura, entendimento e treino declarado são registros diferentes. Nenhum deles certifica habilidade numa partida."
           : "Reading, understanding and self-reported practice are separate records. None certifies match skill."}
       </p>
+      {next && (
+        <GameImage
+          media={mediaForLesson(next)}
+          locale={locale}
+          className="fp-progress-art"
+        />
+      )}
       {next && (
         <ActionLink href={`/${locale}/learn/${next.id}`}>
           {pt ? "Continuar: " : "Continue: "}

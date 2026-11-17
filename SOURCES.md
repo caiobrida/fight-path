@@ -6,6 +6,8 @@ The input evaluator is a FightPath approximation. Its timing windows are product
 
 ## Initial source register
 
+FP-41 visual references were directly inspected on Capcom's [Ryu](https://www.streetfighter.com/6/character/ryu/movelist), [Chun-Li](https://www.streetfighter.com/6/character/chunli/movelist) and [Ken](https://www.streetfighter.com/6/character/ken/movelist) command-list pages on November 17, 2026. `MEDIA.md` and `media-sources.json` record the exact portrait/clip URLs and transformation scope. Ryu's Hadoken, Shoryuken and Hashogeki clips illustrate the corresponding universal motions; the backward-motion Hashogeki command was checked visually as down, down-back, back + punch. Characters in general lessons are illustrative and do not create additional supported character paths. No new current-frame-data or combo-execution certification follows from these source clips.
+
 | ID | Source | Accessed | Supports | Limits |
 | --- | --- | --- | --- | --- |
 | CAPCOM-KEN-GUIDE | [Street Fighter 6 Character Guide: Ken](https://www.youtube.com/watch?v=1SX2m7sqbtA), official Street Fighter channel | 2026-11-17 | Ken is a Street Fighter 6 character; official character guide | Launch-era guide; move details require direct video review and a current command list |

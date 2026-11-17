@@ -15,6 +15,7 @@ The intended learner may use a keyboard, console controller, arcade stick, lever
 - Universal command practice and character-specific practice are distinct learning areas.
 - The initial character content is Ken with Classic controls in Street Fighter 6.
 - The interactive simulator should display captured inputs and explain accepted or rejected attempts.
+- Contextual Street Fighter 6 images and controllable move demonstrations complement home, lessons, setup and practice. General lessons can show varied characters; the dedicated Ken path uses Ken. In practice, captured inputs sit immediately below the expected command; completed attempts use green/check or red/cross feedback with readable explanations. Interface motion respects reduced-motion settings.
 - Progress and gamification should reflect practice and skill development.
 - Game-specific information shown to learners must come from real, reputable sources, preferably official ones.
 - PostgreSQL on Neon is the planned database; Vercel is the planned hosting platform.

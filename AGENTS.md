@@ -8,6 +8,7 @@ Read `QA.md` before claiming device compatibility or public-release readiness.
 
 - FightPath is a gamified web learning platform for fighting games. The first supported game is Street Fighter 6, the first character is Ken, and the first control scheme is Classic.
 - Keep universal input practice separate from character-specific lessons. Design for more characters and games later without claiming they are supported now.
+- The owner explicitly requested contextual SF6 character art and move demonstrations throughout relevant learning and practice surfaces. General sections may use any character; Ken-specific sections use Ken. Illustrative characters do not imply a supported character training path. Put captured inputs directly below the target command, mark accepted/rejected attempts with green/check and red/cross plus text, and respect reduced-motion preferences. Keep media provenance in `MEDIA.md` and `media-sources.json`; never automate the game to obtain assets.
 - Deliver user-facing interface, lessons, feedback, and accessibility text in both English (`en`) and Brazilian Portuguese (`pt-BR`) from the start.
 - Build a responsive, mobile-first experience that is comfortable in a desktop browser and on a phone. Account for touch targets, small screens, and physical controllers in practice flows.
 - Plan persistence with PostgreSQL on Neon and future hosting on Vercel. Never expose database credentials to browser code.

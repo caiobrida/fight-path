@@ -1,6 +1,10 @@
 "use client";
 
 import { Button } from "./ui";
+import { CircleCheck, CircleX, Target } from "lucide-react";
+import { GameMedia } from "./game-media";
+import { GameImage } from "./game-image";
+import { mediaForExercise } from "@/content/game-media";
 import { PracticeGuide } from "./practice-guide";
 import { SyncFailure, syncFailure } from "@/domain/sync-failure";
 import { OperationQueue } from "@/domain/operation-queue";
@@ -674,11 +678,6 @@ export function Practice({
         <div className="fp-actions">
           <PracticeGuide locale={locale} limits={exercise.command} />
         </div>
-        <ControllerMonitor
-          locale={locale}
-          device={device}
-          onUse={() => changeDevice("gamepad")}
-        />
         <label className="practice__path">
           {text.path}
           <select
@@ -704,10 +703,18 @@ export function Practice({
                 aria-pressed={index === exerciseIndex}
                 onClick={() => selectExercise(index)}
               >
+                <GameImage
+                  media={mediaForExercise(item.command.id)}
+                  locale={locale}
+                  decorative
+                />
                 <span>
                   {index + 1}. {item.title[locale]}
                 </span>
                 <small>
+                  {(progress[item.command.id]?.correct ?? 0) >= item.goal && (
+                    <CircleCheck size={16} aria-hidden="true" />
+                  )}
                   {Math.min(progress[item.command.id]?.correct ?? 0, item.goal)}
                   /{item.goal}
                   {(progress[item.command.id]?.correct ?? 0) >= item.goal
@@ -718,97 +725,166 @@ export function Practice({
             ))}
           </div>
         </section>
-        <section className="practice__panel">
-          <h2>{exercise.title[locale]}</h2>
-          {exercise.description && <p>{exercise.description[locale]}</p>}
-          {exercise.source && (
-            <p>
-              <a
-                href={exercise.source.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {text.source}
-              </a>
-            </p>
-          )}
-          <p>
-            {text.goal}: {Math.min(correct, exercise.goal)}/{exercise.goal}
-          </p>
-          <div
-            className="practice__sequence"
-            aria-label={exercise.title[locale]}
-          >
-            {exercise.command.directions.map((direction, index) => (
-              <span key={`${direction}-${index}`}>
-                {symbols[relativeDirection(direction, facing)]}
-              </span>
-            ))}
-            <span>+</span>
-            <span>{exercise.command.attacks.join(" / ")}</span>
-          </div>
-          <div className="practice__options">
-            <label>
-              {text.device}
-              <select
-                value={device}
-                onChange={(event) =>
-                  changeDevice(event.target.value as DeviceKind)
-                }
-              >
-                <option value="keyboard">{text.keyboard}</option>
-                <option value="gamepad">{text.gamepad}</option>
-                <option value="touch">{text.touch}</option>
-              </select>
-            </label>
-            <label>
-              {text.facing}
-              <select
-                value={facing}
-                onChange={(event) => {
-                  const value = event.target.value as Facing;
-                  attemptRef.current.clear();
-                  facingRef.current = value;
-                  setFacing(value);
-                  reset();
-                }}
-              >
-                <option value="right">{text.right}</option>
-                <option value="left">{text.left}</option>
-              </select>
-            </label>
-          </div>
-          {device === "gamepad" && (!support.gamepad || !raw?.connected) && (
-            <p role="status">
-              {support.gamepad ? text.disconnected : text.gamepadUnsupported}
-            </p>
-          )}
-          {device === "touch" && !support.touch && (
-            <p role="status">{text.touchUnsupported}</p>
-          )}
-          <div className="practice__buttons">
-            <Button
-              type="button"
-              disabled={
-                (device === "gamepad" && !support.gamepad) ||
-                (device === "touch" && !support.touch)
-              }
-              onClick={() => setPlaying((value) => !value)}
-            >
-              {playing ? text.pause : text.start}
-            </Button>
-            <Button type="button" onClick={reset}>
-              {text.clear}
-            </Button>
-            {correct >= exercise.goal &&
-              exerciseIndex < activeExercises.length - 1 && (
-                <Button
-                  type="button"
-                  onClick={() => selectExercise(exerciseIndex + 1)}
+        <section
+          className="practice__panel"
+          data-result={
+            evaluation ? (evaluation.correct ? "success" : "error") : "pending"
+          }
+        >
+          <div className="practice__controls">
+            <div className="practice__options">
+              <label>
+                {text.device}
+                <select
+                  value={device}
+                  onChange={(event) =>
+                    changeDevice(event.target.value as DeviceKind)
+                  }
                 >
-                  {text.next}
-                </Button>
+                  <option value="keyboard">{text.keyboard}</option>
+                  <option value="gamepad">{text.gamepad}</option>
+                  <option value="touch">{text.touch}</option>
+                </select>
+              </label>
+              <label>
+                {text.facing}
+                <select
+                  value={facing}
+                  onChange={(event) => {
+                    const value = event.target.value as Facing;
+                    attemptRef.current.clear();
+                    facingRef.current = value;
+                    setFacing(value);
+                    reset();
+                  }}
+                >
+                  <option value="right">{text.right}</option>
+                  <option value="left">{text.left}</option>
+                </select>
+              </label>
+            </div>
+            {device === "gamepad" && (!support.gamepad || !raw?.connected) && (
+              <p role="status">
+                {support.gamepad ? text.disconnected : text.gamepadUnsupported}
+              </p>
+            )}
+            {device === "touch" && !support.touch && (
+              <p role="status">{text.touchUnsupported}</p>
+            )}
+            <div className="practice__buttons">
+              <Button
+                type="button"
+                disabled={
+                  (device === "gamepad" && !support.gamepad) ||
+                  (device === "touch" && !support.touch)
+                }
+                onClick={() => setPlaying((value) => !value)}
+              >
+                {playing ? text.pause : text.start}
+              </Button>
+              <Button type="button" onClick={reset}>
+                {text.clear}
+              </Button>
+              {correct >= exercise.goal &&
+                exerciseIndex < activeExercises.length - 1 && (
+                  <Button
+                    type="button"
+                    onClick={() => selectExercise(exerciseIndex + 1)}
+                  >
+                    {text.next}
+                  </Button>
+                )}
+            </div>
+          </div>
+          <div className="practice__arena">
+            <GameMedia
+              media={mediaForExercise(exercise.command.id)}
+              locale={locale}
+            />
+            <div className="practice__challenge">
+              <h2>{exercise.title[locale]}</h2>
+              {exercise.description && <p>{exercise.description[locale]}</p>}
+              {exercise.source && (
+                <p>
+                  <a
+                    href={exercise.source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {text.source}
+                  </a>
+                </p>
               )}
+              <p>
+                {text.goal}: {Math.min(correct, exercise.goal)}/{exercise.goal}
+              </p>
+              <p className="practice__target-label">
+                <Target size={16} aria-hidden="true" />
+                {locale === "pt-BR" ? "Comando esperado" : "Target input"}
+              </p>
+              <div
+                className="practice__sequence"
+                aria-label={exercise.title[locale]}
+              >
+                {exercise.command.directions.map((direction, index) => (
+                  <span key={`${direction}-${index}`}>
+                    {symbols[relativeDirection(direction, facing)]}
+                  </span>
+                ))}
+                <span>+</span>
+                <span>{exercise.command.attacks.join(" / ")}</span>
+              </div>
+              <section className="practice__history">
+                <h3>{text.history}</h3>
+                {!history.length && (
+                  <p>
+                    {locale === "pt-BR"
+                      ? "Seus movimentos e botões aparecem aqui durante o treino."
+                      : "Your directions and buttons appear here during practice."}
+                  </p>
+                )}
+                <ol>
+                  {history.slice(-12).map((sample, index) => (
+                    <li key={`${sample.atMs}-${index}`}>
+                      <span>{symbols[sample.direction]}</span>
+                      <span>{sample.buttons.join(" + ") || "—"}</span>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+              <section
+                className="practice__feedback"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <h3>{text.result}</h3>
+                <div
+                  className="practice__verdict"
+                  key={evaluation ? `${attempts}-${correct}` : "waiting"}
+                >
+                  {evaluation &&
+                    (evaluation.correct ? (
+                      <CircleCheck
+                        className="practice__result-icon"
+                        size={30}
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <CircleX
+                        className="practice__result-icon"
+                        size={30}
+                        aria-hidden="true"
+                      />
+                    ))}
+                  <p>
+                    {feedback}
+                    {evaluation?.missingDirection
+                      ? ` ${symbols[evaluation.missingDirection]}`
+                      : ""}
+                  </p>
+                </div>
+              </section>
+            </div>
           </div>
         </section>
         {device === "touch" && support.touch && (
@@ -846,15 +922,11 @@ export function Practice({
             </div>
           </div>
         )}
-        <section className="practice__feedback" aria-live="polite">
-          <h2>{text.result}</h2>
-          <p>
-            {feedback}
-            {evaluation?.missingDirection
-              ? ` ${symbols[evaluation.missingDirection]}`
-              : ""}
-          </p>
-        </section>
+        <ControllerMonitor
+          locale={locale}
+          device={device}
+          onUse={() => changeDevice("gamepad")}
+        />
         <div className="practice__stats">
           <div>
             <span>{text.attempts}</span>
@@ -940,17 +1012,6 @@ export function Practice({
           <Button type="button" onClick={() => void deleteProgress()}>
             {text.delete}
           </Button>
-        </section>
-        <section className="practice__history">
-          <h2>{text.history}</h2>
-          <ol>
-            {history.slice(-12).map((sample, index) => (
-              <li key={`${sample.atMs}-${index}`}>
-                <span>{symbols[sample.direction]}</span>
-                <span>{sample.buttons.join(" + ") || "—"}</span>
-              </li>
-            ))}
-          </ol>
         </section>
       </div>
     </main>

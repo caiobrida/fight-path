@@ -6,6 +6,8 @@ import { ActionLink, Badge, Notice } from "@/components/ui";
 import { LessonActivity } from "@/components/lesson-activity";
 import { LessonVisual } from "@/components/lesson-visual";
 import { KenVideo } from "@/components/ken-video";
+import { GameMedia } from "@/components/game-media";
+import { mediaForLesson } from "@/content/game-media";
 
 export default async function LessonPage({
   params,
@@ -71,7 +73,7 @@ export default async function LessonPage({
           })}
         </nav>
       )}
-      <LessonVisual track={lesson.track} locale={locale} />
+      <GameMedia media={mediaForLesson(lesson)} locale={locale} />
       {lesson.patch && (
         <Notice>
           {lesson.patch.review === "conceptual"
@@ -90,6 +92,7 @@ export default async function LessonPage({
       ))}
       <section className="fp-lesson__example">
         <h2>{pt ? "Veja a situação" : "See the situation"}</h2>
+        <LessonVisual track={lesson.track} locale={locale} />
         <p>{text.example}</p>
       </section>
       <section>
@@ -101,6 +104,19 @@ export default async function LessonPage({
         <p>{text.drill}</p>
       </section>
       <LessonActivity lesson={lesson} locale={locale} />
+      {lesson.id === "ken-start-small" && (
+        <section>
+          <h2>
+            {pt
+              ? "Reconheça as opções de Drive com Ken"
+              : "Recognize Drive options with Ken"}
+          </h2>
+          <div className="fp-media-grid fp-media-grid--pair">
+            <GameMedia media="ken-drive-impact" locale={locale} />
+            <GameMedia media="ken-drive-parry" locale={locale} />
+          </div>
+        </section>
+      )}
       {lesson.id === "ken-start-small" && <KenVideo locale={locale} />}
       <div className="fp-actions">
         {previous && (

@@ -1,6 +1,7 @@
 "use client";
 
 import { ActionLink, Button } from "./ui";
+import { FighterArt } from "./fighter-art";
 import { PracticeGuide } from "./practice-guide";
 import {
   readControllerProfile,
@@ -295,8 +296,16 @@ export function ControlSetup({ locale }: { locale: Locale }) {
     <main className="setup">
       <div className="setup__content">
         <a href={`/${locale}`}>{text.back}</a>
-        <h1>{text.title}</h1>
-        <p>{text.intro}</p>
+        <div className="fp-setup-heading">
+          <div>
+            <p className="eyebrow">
+              {locale === "pt-BR" ? "LABORATÓRIO DE INPUTS" : "INPUT LAB"}
+            </p>
+            <h1>{text.title}</h1>
+            <p>{text.intro}</p>
+          </div>
+          <FighterArt character="chunli" locale={locale} priority />
+        </div>
         <div className="fp-actions">
           <PracticeGuide locale={locale} />
           <ActionLink variant="secondary" href={`/${locale}/practice`}>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import { GameImage } from "./game-image";
 import { Button } from "./ui";
 import type { Locale } from "@/i18n/dictionaries";
 
@@ -29,7 +29,7 @@ export function KenVideo({ locale }: { locale: Locale }) {
           referrerPolicy="strict-origin-when-cross-origin"
         />
       ) : (
-        <Image src="/images/range-study.svg" width={960} height={420} alt="" />
+        <GameImage media="ken-shoryuken" locale={locale} />
       )}
       <p>
         {pt

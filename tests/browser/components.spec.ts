@@ -229,6 +229,7 @@ test("touch dragging reaches diagonals", async ({ page }) => {
   await mockProgress(page);
   await page.goto("/?view=practice");
   await startPractice(page, "touch");
+  await page.locator(".practice__touch").scrollIntoViewIfNeeded();
   const down = await page.locator('[data-control="TouchDown"]').boundingBox();
   const diagonal = await page
     .locator('[data-control="TouchDownRight"]')

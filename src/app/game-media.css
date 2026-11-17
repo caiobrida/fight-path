@@ -1,0 +1,340 @@
+.fp-game-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 400 / 224;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.fp-game-media {
+  margin: 0;
+  min-width: 0;
+}
+.fp-page > .fp-game-media {
+  max-width: 560px;
+}
+.fp-game-media__stage {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 400 / 224;
+  border: 1px solid var(--fp-border);
+  border-radius: 12px;
+  background: #151b26;
+}
+.fp-game-media__stage video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.fp-game-media__toggle {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  min-height: 40px;
+  padding: 8px 12px;
+  background: #10131bed;
+  border-color: #ffffff80;
+  color: #fff;
+  font-size: 13px;
+  box-shadow: 0 4px 20px #0005;
+}
+.fp-game-media figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  padding-block: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--fp-muted);
+}
+.fp-game-media figcaption a {
+  color: var(--fp-muted);
+  text-underline-offset: 3px;
+}
+.fp-media-grid {
+  display: grid;
+  gap: 24px;
+}
+.fp-card__image {
+  margin-bottom: 20px;
+  transition: transform 220ms ease;
+}
+.fp-card {
+  overflow: hidden;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+.fp-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--fp-accent);
+  box-shadow: 0 12px 30px #0003;
+}
+.fp-card:hover .fp-card__image {
+  transform: scale(1.025);
+}
+.fp-button {
+  transition:
+    transform 150ms ease,
+    background 150ms ease,
+    box-shadow 150ms ease,
+    filter 150ms ease;
+}
+.fp-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px #0003;
+}
+.fp-button:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+.fp-fighter-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.fp-fighter-lineup {
+  isolation: isolate;
+  width: 100%;
+  min-height: 360px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 55%, #d15d2e66, transparent 65%);
+}
+.fp-fighter-lineup .fp-fighter-art {
+  position: absolute;
+  bottom: 0;
+  height: 94%;
+  width: 68%;
+  animation: fp-fighter-enter 650ms ease-out both;
+  filter: drop-shadow(0 12px 12px #0008);
+}
+.fp-fighter-lineup .fp-fighter-art:nth-child(1) {
+  left: -10%;
+  height: 90%;
+  animation-delay: 80ms;
+}
+.fp-fighter-lineup .fp-fighter-art:nth-child(2) {
+  right: -10%;
+  height: 90%;
+  animation-delay: 180ms;
+}
+.fp-fighter-lineup .fp-fighter-art:nth-child(3) {
+  left: 16%;
+  animation-delay: 280ms;
+}
+.fp-fighter-lineup > span {
+  z-index: 2;
+  padding: 10px;
+  background: #10131bd9;
+  border: 1px solid #ffad7150;
+  border-radius: 8px;
+}
+.fp-art-credit {
+  color: var(--fp-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.fp-setup-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 100px;
+  align-items: center;
+  gap: 16px;
+}
+.fp-setup-heading h1 {
+  margin-top: 12px;
+  font-size: clamp(2rem, 6vw, 4rem);
+}
+.fp-setup-heading .fp-fighter-art {
+  max-height: 260px;
+  filter: drop-shadow(0 0 28px #718dff30);
+}
+.fp-progress-art {
+  max-width: 560px;
+  margin-block: 20px;
+}
+.practice__arena {
+  display: grid;
+  gap: 24px;
+}
+.practice__controls {
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--fp-border);
+}
+.practice__lessons small {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.practice__challenge {
+  min-width: 0;
+}
+.practice__target-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--fp-accent);
+}
+.practice__sequence {
+  margin-block: 12px 16px;
+}
+.practice__sequence span {
+  border: 1px solid transparent;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+.practice__panel[data-result="success"] .practice__sequence span {
+  color: #a3f4bd;
+  background: #153826;
+  border-color: #60c187;
+}
+.practice__panel[data-result="error"] .practice__sequence span {
+  color: #ffb5b5;
+  background: #431f29;
+  border-color: #e5828e;
+}
+.practice__panel .practice__history {
+  margin: 0;
+  padding: 16px;
+  min-height: 116px;
+  background: #101620;
+}
+.practice__history h3,
+.practice__feedback h3 {
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+.practice__history p {
+  font-size: 13px;
+  color: var(--fp-muted);
+}
+.practice__history ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.practice__history li {
+  min-width: 35px;
+  border: 1px solid var(--fp-border);
+  border-radius: 6px;
+  padding: 6px 8px;
+  animation: fp-input-enter 120ms ease-out;
+}
+.practice__panel .practice__feedback {
+  margin-block: 12px 20px;
+  padding: 14px 16px;
+  background: #253044;
+  border: 1px solid var(--fp-border);
+}
+.practice__verdict {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.practice__verdict p {
+  margin: 0;
+}
+.practice__result-icon {
+  flex: none;
+  animation: fp-verdict-enter 300ms ease-out;
+}
+.practice__panel[data-result="success"] .practice__feedback {
+  color: #a3f4bd;
+  border-color: #60c187;
+  background: #153826;
+}
+.practice__panel[data-result="error"] .practice__feedback {
+  color: #ffb5b5;
+  border-color: #e5828e;
+  background: #431f29;
+}
+.practice__lessons button .fp-game-image {
+  width: 64px;
+  flex: none;
+  border-radius: 6px;
+}
+.practice__lessons button > span {
+  flex: 1;
+}
+@keyframes fp-fighter-enter {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fp-input-enter {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fp-verdict-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.65);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (min-width: 680px) {
+  .fp-media-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .fp-media-grid--pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fp-setup-heading {
+    grid-template-columns: minmax(0, 1fr) 200px;
+  }
+}
+@media (min-width: 900px) {
+  .practice__arena {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+}
+@media (max-width: 400px) {
+  .practice__lessons button .fp-game-image {
+    width: 48px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fp-fighter-art,
+  .practice__history li,
+  .practice__result-icon {
+    animation: none !important;
+  }
+  .fp-button,
+  .fp-card,
+  .fp-card__image,
+  .practice__sequence span {
+    transition: none;
+  }
+  .fp-button:hover:not(:disabled),
+  .fp-button:active:not(:disabled),
+  .fp-card:hover,
+  .fp-card:hover .fp-card__image {
+    transform: none;
+  }
+}

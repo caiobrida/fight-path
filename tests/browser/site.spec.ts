@@ -3,6 +3,59 @@ import AxeBuilder from "@axe-core/playwright";
 import { publishedLessons } from "../../src/content/catalog";
 
 for (const locale of ["en", "pt-BR"]) {
+  test(`real character images load and lesson media matches its scope in ${locale}`, async ({
+    page,
+  }) => {
+    await page.goto(`/${locale}`);
+    const portraits = page.locator(".fp-fighter-lineup img");
+    await expect(portraits).toHaveCount(3);
+    for (const portrait of await portraits.all()) {
+      await portrait.scrollIntoViewIfNeeded();
+      await expect
+        .poll(() =>
+          portrait.evaluate(
+            (el: HTMLImageElement) => el.complete && el.naturalWidth > 0,
+          ),
+        )
+        .toBe(true);
+    }
+    await page.evaluate(() =>
+      Promise.all(
+        document.getAnimations().map((animation) => animation.finished),
+      ),
+    );
+    await page.screenshot({
+      path: `test-artifacts/home-media-${locale}.png`,
+      fullPage: true,
+    });
+    await page.goto(`/${locale}/learn`);
+    for (const card of await page.locator(".fp-card").all()) {
+      const image = card.locator("img");
+      await image.scrollIntoViewIfNeeded();
+      await expect
+        .poll(() =>
+          image.evaluate(
+            (el: HTMLImageElement) => el.complete && el.naturalWidth > 0,
+          ),
+        )
+        .toBe(true);
+    }
+    for (const [lesson, character] of [
+      ["ken-confirm-and-stop", "ken"],
+      ["choose-your-range", "chunli"],
+      ["watch-the-air", "ryu"],
+    ]) {
+      await page.goto(`/${locale}/learn/${lesson}`);
+      await expect(page.locator(".fp-game-media img")).toHaveAttribute(
+        "src",
+        new RegExp(`/images/sf6/${character}-`),
+      );
+      await page.screenshot({
+        path: `test-artifacts/lesson-${lesson}-${locale}.png`,
+        fullPage: true,
+      });
+    }
+  });
   test(`public pages and lesson links resolve in ${locale}`, async ({
     request,
   }) => {

@@ -17,7 +17,7 @@ export default defineConfig({
   projects: [
     {
       name: "components",
-      testMatch: "components.spec.ts",
+      testMatch: ["components.spec.ts", "game-media.spec.ts"],
       use: { baseURL: "http://127.0.0.1:3204" },
     },
     ...(site

@@ -55,6 +55,8 @@ The practice UI is mobile first and responsive. Layouts should start with a narr
 
 ## Content and localization
 
+FP-41 centralizes illustrative SF6 media in `src/content/game-media.ts`, separate from exercise evaluation and game facts. Official move-list assets are optimized into local WebP posters/portraits and silent H.264 MP4 clips; `media-sources.json` records the original URLs, sizes, dimensions, hashes and review date. A shared player mounts a clip only after explicit interaction, provides native pause/seek controls, stops playback offscreen or in a hidden tab, and unloads on exercise change. Posters and source links remain available after video failure. No Capcom/Google request is needed to load these local illustrations. Interface animations are brief and disabled under reduced motion. Existing optional YouTube loading remains independent.
+
 UI messages, exercise instructions, and feedback need `en` and `pt-BR` versions. Translation keys and source data should make missing translations detectable. Game content must retain source URL, access date, and applicable version or patch when relevant. A game fact and an evaluator threshold are different data: the former needs game evidence; the latter needs an explicit FightPath rule and testing.
 
 Locale routes use `/en` and `/pt-BR`. A lightweight Next.js Proxy redirects `/` using a saved locale cookie or the browser language. The dictionary type keeps both current translations aligned; future lesson data should use the same locale keys. The locale layout sets the HTML language for assistive technology.

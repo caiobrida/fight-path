@@ -5,6 +5,8 @@ Each task has a checklist, dependencies and acceptance criteria. The owner appro
 Owner constraint added November 17, 2026: never automate SF6, including launch, menus and training/offline play. Complete source research, original content preparation, recording review and isolated FightPath tests independently. Obtain actual game execution/capture evidence from a human reviewer. Do not bypass the publication gate or mark manual gameplay checks complete from website fixtures.
 
 Current evidence and remaining gates: [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). Original planning statements below are historical; the status column and implementation notes describe delivered work.
+
+Owner-requested visual follow-up: [FP-41 — Game imagery, demonstrations and execution feedback](tasks/FP-41-game-media-and-practice-feedback.md). This includes varied characters in general sections, Ken-specific visuals in his path, input comparison, result colors/icons and accessible motion.
 ## Regras que se aplicam a todas as tarefas
 
 - Produto disponível em inglês (`en`) e português do Brasil (`pt-BR`) desde o início; interface, conteúdo e feedback devem contemplar os dois idiomas.

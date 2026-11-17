@@ -7,6 +7,7 @@ import {
 } from "@/content/combos";
 import { isLocale } from "@/i18n/dictionaries";
 import { ActionLink, Badge, Button, Card, EmptyState } from "@/components/ui";
+import { GameMedia } from "@/components/game-media";
 
 export default async function ComboLibraryPage({
   params,
@@ -35,6 +36,12 @@ export default async function ComboLibraryPage({
         {pt
           ? "Uma biblioteca de rotas por situação. A execução é praticada no SF6; um comando aceito no navegador não valida um combo."
           : "A route library organized by situation. Execution is practiced in SF6; an accepted browser input does not validate a combo."}
+      </p>
+      <GameMedia media="ken-chin-buster" locale={locale} />
+      <p className="fp-art-credit">
+        {pt
+          ? "Referência visual oficial de Chin Buster. Não é uma demonstração das rotas desta biblioteca."
+          : "Official Chin Buster visual reference. This is not a demonstration of this library's routes."}
       </p>
       <form className="fp-combo-filters">
         <label>

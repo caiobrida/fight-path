@@ -10,6 +10,8 @@ The six routes now have original bilingual editorial drafts, mirrored candidate 
 
 ## Delivered application
 
+- FP-41 adds actual Capcom character art and fourteen silent move demonstrations with local optimized posters, contextual lesson/exercise mapping, and explicit playback. General areas illustrate Ryu and Chun-Li as well as Ken; Ken's dedicated content stays character-specific. Captured inputs now sit directly below the target command, which turns green/check or red/cross after evaluation; completion, reset and mirrored directions remain distinct. Buttons, cards, entrances and result feedback have brief animations with a reduced-motion alternative. See `MEDIA.md` and `media-sources.json` for provenance and limitations.
+
 - A shared dark/orange design system, action spacing, responsive header, locale-preserving navigation, accessible dialogs and a component gallery. Primary and secondary actions have explicit button styling; secondary card actions are no longer underlined.
 - Controller selection and local diagnostics, button/axis calibration, swap/clear/cancel, local controller profiles and a saved preferred device. Standard-layout button positions have bilingual labels with raw fallbacks; vendor-specific symbols are not guessed.
 - Attempt boundaries preserve held-button state; changing direction while an attack remains held does not generate another attempt. Touch dragging, focus/disconnect resets, keyboard fallback and mapping persistence have regression coverage.

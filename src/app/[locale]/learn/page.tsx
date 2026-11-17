@@ -3,6 +3,8 @@ import { publishedLessons } from "@/content/catalog";
 import { trackNames } from "@/content/learning";
 import { isLocale } from "@/i18n/dictionaries";
 import { ActionLink, Badge, Card } from "@/components/ui";
+import { GameImage } from "@/components/game-image";
+import { mediaForLesson } from "@/content/game-media";
 
 export default async function LearnPage({
   params,
@@ -43,6 +45,11 @@ export default async function LearnPage({
             <div className="fp-card-grid">
               {entries.map((lesson) => (
                 <Card key={lesson.id}>
+                  <GameImage
+                    media={mediaForLesson(lesson)}
+                    locale={locale}
+                    className="fp-card__image"
+                  />
                   <Badge>
                     {lesson.scope === "universal"
                       ? pt
