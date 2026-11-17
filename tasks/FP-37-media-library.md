@@ -14,3 +14,7 @@
 **Acceptance:** the home, Ken pages and lessons gain relevant imagery with documented provenance; demonstrations explain an action and remain readable/usable on slow mobile connections and with reduced motion.
 
 **Evidence:** asset manifest, permissions, network inspection before play, mobile performance measurements and accessible fallback tests.
+
+## Implementation evidence (2026-11-17)
+
+Original static range, timing and resource diagrams are localized and registered in MEDIA.md. Ken has an explicitly loaded/unloaded official player with controls, requested captions, local poster and written/source fallback. No remote player request or autoplay before interaction. Historical footage is labeled; current annotated combo captures remain gated on FP-34 evidence. Fixed corrupt accents and the stale Ken home-card link found during integration.

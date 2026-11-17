@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { notFound } from "next/navigation";
 import { isLocale } from "@/i18n/dictionaries";
-import { ActionLink, Badge, Card } from "@/components/ui";
+import { ActionLink, Card } from "@/components/ui";
 
 const copy = {
   en: {
@@ -134,7 +134,7 @@ export default async function HomePage({
           />
           <span>
             {locale === "pt-BR"
-              ? "PRECIS?O / DECIS?O / PR?TICA"
+              ? "PRECISÃO / DECISÃO / PRÁTICA"
               : "PRECISION / DECISION / PRACTICE"}
           </span>
         </div>
@@ -166,10 +166,12 @@ export default async function HomePage({
                     {locale === "pt-BR"
                       ? "Explorar as aulas"
                       : "Explore lessons"}{" "}
-                    ?
+                    →
                   </ActionLink>
                 ) : (
-                  <Badge tone="muted">{text.coming}</Badge>
+                  <ActionLink variant="quiet" href={`/${locale}/learn#ken`}>
+                    {locale === "pt-BR" ? "Aprender com Ken" : "Learn Ken"} →
+                  </ActionLink>
                 )}
               </Card>
             );

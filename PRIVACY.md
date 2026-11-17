@@ -34,3 +34,7 @@ FightPath is being built with data minimization and user control in mind. This d
 - [OWASP ASVS](https://owasp.org/projects/asvs), accessed 2026-11-17.
 
 Rejected attempt outcomes remain in an account-scoped local review queue and can be downloaded with pending attempts. Both queues together are capped at 500 records. They store the same minimal outcomes, never raw input history or device identity, and are cleared by explicit progress deletion. Saved-attempt chronology uses server receipt time.
+
+## Optional embedded video
+
+FP-37 adds one external official Ken guide. Until the learner explicitly loads it, no YouTube iframe, thumbnail or preconnect request exists. Loading a privacy-enhanced YouTube player shares connection data with Google under its policies. Autoplay is disabled, closing unloads it, and written lesson/source-link alternatives remain available. No viewing analytics are stored by FightPath. The public notice explains this choice in both locales.

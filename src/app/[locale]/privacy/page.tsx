@@ -14,6 +14,7 @@ const copy = {
       "A private contact channel will be published before public launch.",
     data: "Data we handle",
     dataItems: [
+      "Optional lesson videos load a YouTube/Google player only after you choose to load it. Google then receives connection data under its own policies. You can close the player or use the written lesson instead.",
       "Clerk handles your account details and authentication cookies. FightPath stores your Clerk user ID with saved practice attempts, but not your email or password in its database.",
       "Exercise ID, correct or incorrect result, duration, and timestamp for saved practice attempts.",
       "Language and control mapping stay in browser storage. Up to 500 attempts awaiting sync are stored per account in this browser when available, or in tab memory if storage is blocked. Raw input history stays in browser memory and is not sent to the server.",
@@ -43,6 +44,7 @@ const copy = {
       "Um canal privado de contato será publicado antes do lançamento público.",
     data: "Dados tratados",
     dataItems: [
+      "Vídeos opcionais nas aulas carregam um player do YouTube/Google só após sua escolha. O Google então recebe dados de conexão conforme suas próprias políticas. Você pode fechar o player ou usar a aula escrita.",
       "A Clerk gerencia os dados da conta e os cookies de autenticação. O FightPath salva o identificador de usuário da Clerk com as tentativas, mas não armazena e-mail nem senha no próprio banco.",
       "Identificador do exercício, resultado correto ou incorreto, duração e data das tentativas salvas.",
       "Idioma e mapeamento de controles ficam no navegador. Até 500 tentativas aguardando sincronização são armazenadas por conta neste navegador quando possível, ou na memória da aba se o armazenamento estiver bloqueado. O histórico bruto de inputs não é enviado ao servidor.",

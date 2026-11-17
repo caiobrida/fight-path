@@ -4,6 +4,8 @@ import { trackNames } from "@/content/learning";
 import { isLocale } from "@/i18n/dictionaries";
 import { ActionLink, Badge, Notice } from "@/components/ui";
 import { KnowledgeCheck } from "@/components/knowledge-check";
+import { LessonVisual } from "@/components/lesson-visual";
+import { KenVideo } from "@/components/ken-video";
 
 export default async function LessonPage({
   params,
@@ -41,6 +43,7 @@ export default async function LessonPage({
       </Badge>
       <h1>{text.title}</h1>
       <p className="fp-lesson__summary">{text.summary}</p>
+      <LessonVisual track={lesson.track} locale={locale} />
       {lesson.patch && (
         <Notice>
           {lesson.patch.review === "conceptual"
@@ -70,6 +73,7 @@ export default async function LessonPage({
         <p>{text.drill}</p>
       </section>
       <KnowledgeCheck key={lesson.id} check={text.check} locale={locale} />
+      {lesson.id === "ken-start-small" && <KenVideo locale={locale} />}
       <div className="fp-actions">
         {next ? (
           <ActionLink href={`/${locale}/learn/${next.id}`}>

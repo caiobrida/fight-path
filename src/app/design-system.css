@@ -853,3 +853,31 @@
 .fp-page section[id] {
   scroll-margin-top: 32px;
 }
+
+.fp-visual {
+  margin: 1.5rem 0;
+}
+.fp-visual img,
+.fp-video > img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--fp-radius);
+}
+.fp-visual figcaption {
+  color: var(--fp-muted);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+.fp-video {
+  margin-block: 2rem;
+  padding: 1rem;
+  border: 1px solid var(--fp-border);
+  border-radius: 1rem;
+}
+.fp-video iframe {
+  width: 100%;
+  min-height: 200px;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 0.75rem;
+}
