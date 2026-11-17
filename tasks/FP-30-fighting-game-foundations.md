@@ -13,3 +13,5 @@
 **Acceptance:** a new learner can read an instruction, explain hit/block and choose an appropriate basic response in the supplied examples. No numeric frame claim or move recommendation lacks supporting evidence.
 
 **Evidence:** reviewed bilingual lesson inventory, sources/timestamps and beginner walkthrough.
+
+Implemented three source-backed bilingual lessons: hit/block/turns, links/cancels, and anti-air observation. Each has an original scenario, common mistake, in-game drill and knowledge check. Numeric move claims and unsupported guarantees are omitted. Editorial/source validation is automated; learner observation and captioned gameplay clips remain in FP-37/40.

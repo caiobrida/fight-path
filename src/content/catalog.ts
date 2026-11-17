@@ -1,6 +1,10 @@
+import { foundationsLessons } from "./foundations";
 import { baseLessons, type Lesson } from "./learning";
 
-export const lessons: readonly Lesson[] = [...baseLessons];
+export const lessons: readonly Lesson[] = [
+  ...baseLessons,
+  ...foundationsLessons,
+];
 export const publishedLessons = lessons.filter(
   (lesson) => lesson.status === "published",
 );
