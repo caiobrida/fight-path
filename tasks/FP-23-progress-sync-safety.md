@@ -15,3 +15,5 @@
 **Acceptance:** documented scenarios pass, deletion stays deleted after in-flight work settles, and retry cannot duplicate or transfer attempts. Unsupported/rejected records do not silently block the whole queue indefinitely.
 
 **Evidence:** network-controlled integration tests with before/after rows. No destructive testing on the owner's progress.
+
+Partial implementation: saves and explicit deletion now share a serial operation queue. Deletion pauses capture and blocks newly queued saves, waits for the in-flight request, then deletes. A failed delete restores retry eligibility. Loading cannot overwrite state during deletion. Deterministic queue tests cover write/delete ordering and recovery after rejection. HTTP error classification, browser race tests, offline scenarios and rejected-record handling remain pending.

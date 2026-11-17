@@ -1,5 +1,6 @@
 "use client";
 
+import { OperationQueue } from "@/domain/operation-queue";
 import { AttemptWindow } from "@/domain/attempt-window";
 
 import { useControllerProfile } from "@/devices/use-controller-profile";
@@ -270,7 +271,8 @@ export function Practice({
   const touchRoot = useRef<HTMLDivElement | null>(null);
   const pendingRef = useRef<AttemptInput[]>([]);
   const readyRef = useRef(false);
-  const sendingRef = useRef(false);
+  const operationsRef = useRef(new OperationQueue());
+  const deletingRef = useRef(false);
   const flushRef = useRef<() => Promise<void>>(async () => {});
   const retryRef = useRef<() => void>(() => {});
   const pendingStorageRef = useRef<Storage | null>(null);
@@ -314,43 +316,41 @@ export function Practice({
       pendingStorageRef.current?.removeItem("fightpath-pending-attempts");
     } catch {}
     pendingRef.current = readPending(pendingStorageRef.current, userId);
-    const flush = async () => {
-      if (!readyRef.current || sendingRef.current) return;
-      sendingRef.current = true;
-      try {
-        while (pendingRef.current.length) {
-          const response = await fetch("/api/progress", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(pendingRef.current[0]),
-          });
-          if (!response.ok) throw new Error("Progress save failed");
-          const data = (await response.json()) as { progress: ProgressRow[] };
-          if (active) setVerifiedRows(data.progress);
-          pendingRef.current.shift();
-          writePending(pendingStorageRef.current, userId, pendingRef.current);
-          if (active && !pendingRef.current.length)
-            setProgress(progressById(data.progress));
+    const flush = () =>
+      operationsRef.current.run(async () => {
+        if (!active || !readyRef.current || deletingRef.current) return;
+        try {
+          while (active && !deletingRef.current && pendingRef.current.length) {
+            const response = await fetch("/api/progress", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(pendingRef.current[0]),
+            });
+            if (!response.ok) throw new Error("Progress save failed");
+            const data = (await response.json()) as { progress: ProgressRow[] };
+            if (active) setVerifiedRows(data.progress);
+            pendingRef.current.shift();
+            writePending(pendingStorageRef.current, userId, pendingRef.current);
+            if (active && !pendingRef.current.length)
+              setProgress(progressById(data.progress));
+          }
+          if (active) setSyncStatus("saved");
+        } catch {
+          if (active)
+            setSyncStatus((current) =>
+              current === "full" || current === "unavailable"
+                ? current
+                : "pending",
+            );
         }
-        if (active) setSyncStatus("saved");
-      } catch {
-        if (active)
-          setSyncStatus((current) =>
-            current === "full" || current === "unavailable"
-              ? current
-              : "pending",
-          );
-      } finally {
-        sendingRef.current = false;
-      }
-    };
+      });
     flushRef.current = flush;
     const load = async () => {
       try {
         const response = await fetch("/api/progress", { cache: "no-store" });
         if (!response.ok) throw new Error("Progress load failed");
         const data = (await response.json()) as { progress: ProgressRow[] };
-        if (!active) return;
+        if (!active || deletingRef.current) return;
         setVerifiedRows(data.progress);
         const combined = progressById(data.progress);
         for (const attempt of pendingRef.current) {
@@ -417,7 +417,7 @@ export function Practice({
     const attemptWindow = attemptRef.current;
     let active = true;
     const sink = (snapshot: RawSnapshot) => {
-      if (!active) return;
+      if (!active || deletingRef.current) return;
       setRaw(snapshot);
       if (!snapshot.connected) {
         attemptWindow.disconnect();
@@ -498,19 +498,28 @@ export function Practice({
   };
 
   const deleteProgress = async () => {
-    if (!window.confirm(text.deleteConfirm)) return;
+    if (deletingRef.current || !window.confirm(text.deleteConfirm)) return;
+    deletingRef.current = true;
+    setPlaying(false);
+    const ready = readyRef.current;
+    readyRef.current = false;
     try {
-      const response = await fetch("/api/progress", { method: "DELETE" });
-      if (!response.ok) throw new Error("Progress delete failed");
-      pendingRef.current = [];
-      writePending(pendingStorageRef.current, userId, []);
-      readyRef.current = false;
-      setProgress({});
-      setVerifiedRows([]);
-      setSyncStatus("pending");
-      window.location.reload();
+      await operationsRef.current.run(async () => {
+        const response = await fetch("/api/progress", { method: "DELETE" });
+        if (!response.ok) throw new Error("Progress delete failed");
+        pendingRef.current = [];
+        writePending(pendingStorageRef.current, userId, []);
+        readyRef.current = false;
+        setProgress({});
+        setVerifiedRows([]);
+        setSyncStatus("pending");
+        window.location.reload();
+      });
     } catch {
+      readyRef.current = ready;
       setSyncStatus("unavailable");
+    } finally {
+      deletingRef.current = false;
     }
   };
 
