@@ -22,6 +22,12 @@ import {
   type ControlMapping,
 } from "@/domain/mapping";
 import { formatNumber, type Locale } from "@/i18n/dictionaries";
+import {
+  parseAttempt,
+  progressById,
+  type AttemptInput,
+  type ProgressRow,
+} from "@/domain/progress";
 
 const copy = {
   en: {
@@ -46,7 +52,6 @@ const copy = {
     left: "Left",
     start: "Start practice",
     pause: "Pause",
-    reset: "Reset",
     setup: "Configure controls",
     back: "Back",
     history: "Your inputs",
@@ -58,6 +63,14 @@ const copy = {
     attempts: "Attempts",
     correct: "Correct",
     accuracy: "Accuracy",
+    pathProgress: "Path progress",
+    saved: "Progress saved",
+    pending: "Progress waiting to sync",
+    unavailable: "Progress service unavailable. Practice remains available.",
+    export: "Export progress",
+    delete: "Delete progress",
+    deleteConfirm: "Permanently delete your saved FightPath progress?",
+    clear: "Clear inputs",
     reasons: {
       incomplete: "Complete the sequence and press a button.",
       "wrong-button": "Use one of the shown attack buttons.",
@@ -90,7 +103,6 @@ const copy = {
     left: "Esquerda",
     start: "Iniciar treino",
     pause: "Pausar",
-    reset: "Reiniciar",
     setup: "Configurar controles",
     back: "Voltar",
     history: "Seus inputs",
@@ -102,6 +114,15 @@ const copy = {
     attempts: "Tentativas",
     correct: "Acertos",
     accuracy: "Precisão",
+    pathProgress: "Progresso da trilha",
+    saved: "Progresso salvo",
+    pending: "Progresso aguardando sincronização",
+    unavailable:
+      "Serviço de progresso indisponível. O treino continua disponível.",
+    export: "Exportar progresso",
+    delete: "Excluir progresso",
+    deleteConfirm: "Excluir permanentemente seu progresso salvo no FightPath?",
+    clear: "Limpar inputs",
     reasons: {
       incomplete: "Complete a sequência e pressione um botão.",
       "wrong-button": "Use um dos botões de ataque indicados.",
@@ -143,6 +164,9 @@ export function Practice({ locale }: { locale: Locale }) {
   const [progress, setProgress] = useState<
     Record<string, { attempts: number; correct: number }>
   >({});
+  const [syncStatus, setSyncStatus] = useState<
+    "saved" | "pending" | "unavailable"
+  >("pending");
   const exerciseRef = useRef(exercises[0]);
   const mappingRef = useRef(mapping);
   const facingRef = useRef(facing);
@@ -150,6 +174,90 @@ export function Practice({ locale }: { locale: Locale }) {
   const historyRef = useRef<readonly InputSample[]>([]);
   const keyboardRef = useRef<KeyboardAdapter | null>(null);
   const touchRoot = useRef<HTMLDivElement | null>(null);
+  const pendingRef = useRef<AttemptInput[]>([]);
+  const readyRef = useRef(false);
+  const sendingRef = useRef(false);
+  const flushRef = useRef<() => Promise<void>>(async () => {});
+
+  useEffect(() => {
+    let active = true;
+    const stored = window.localStorage.getItem("fightpath-pending-attempts");
+    if (stored) {
+      try {
+        const parsed: unknown = JSON.parse(stored);
+        if (Array.isArray(parsed))
+          pendingRef.current = parsed
+            .map(parseAttempt)
+            .filter((item): item is AttemptInput => item !== null)
+            .slice(0, 500);
+      } catch {
+        window.localStorage.removeItem("fightpath-pending-attempts");
+      }
+    }
+    const flush = async () => {
+      if (!readyRef.current || sendingRef.current) return;
+      sendingRef.current = true;
+      try {
+        while (pendingRef.current.length) {
+          const response = await fetch("/api/progress", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(pendingRef.current[0]),
+          });
+          if (!response.ok) throw new Error("Progress save failed");
+          const data = (await response.json()) as { progress: ProgressRow[] };
+          pendingRef.current.shift();
+          window.localStorage.setItem(
+            "fightpath-pending-attempts",
+            JSON.stringify(pendingRef.current),
+          );
+          if (active && !pendingRef.current.length)
+            setProgress(progressById(data.progress));
+        }
+        if (active) setSyncStatus("saved");
+      } catch {
+        if (active) setSyncStatus("pending");
+      } finally {
+        sendingRef.current = false;
+      }
+    };
+    flushRef.current = flush;
+    const load = async () => {
+      try {
+        const response = await fetch("/api/progress", { cache: "no-store" });
+        if (!response.ok) throw new Error("Progress load failed");
+        const data = (await response.json()) as { progress: ProgressRow[] };
+        if (!active) return;
+        const combined = progressById(data.progress);
+        for (const attempt of pendingRef.current) {
+          const current = combined[attempt.exerciseId] ?? {
+            attempts: 0,
+            correct: 0,
+          };
+          combined[attempt.exerciseId] = {
+            attempts: current.attempts + 1,
+            correct: current.correct + Number(attempt.correct),
+          };
+        }
+        setProgress(combined);
+        readyRef.current = true;
+        setSyncStatus(pendingRef.current.length ? "pending" : "saved");
+        void flush();
+      } catch {
+        if (active) setSyncStatus("unavailable");
+      }
+    };
+    void load();
+    const retry = () => {
+      if (readyRef.current) void flush();
+      else void load();
+    };
+    window.addEventListener("online", retry);
+    return () => {
+      active = false;
+      window.removeEventListener("online", retry);
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -205,6 +313,27 @@ export function Practice({ locale }: { locale: Locale }) {
           },
         };
       });
+      const durationMs = Math.max(
+        0,
+        Math.min(
+          120000,
+          Math.round(
+            result.durationMs ?? sample.atMs - attemptRef.current[0].atMs,
+          ),
+        ),
+      );
+      pendingRef.current.push({
+        id: window.crypto.randomUUID(),
+        exerciseId,
+        correct: result.correct,
+        durationMs,
+      });
+      window.localStorage.setItem(
+        "fightpath-pending-attempts",
+        JSON.stringify(pendingRef.current),
+      );
+      setSyncStatus("pending");
+      void flushRef.current();
       attemptRef.current = [];
     };
     const adapter =
@@ -230,10 +359,22 @@ export function Practice({ locale }: { locale: Locale }) {
     historyRef.current = [];
     setHistory([]);
     setEvaluation(null);
-    setProgress((current) => ({
-      ...current,
-      [exerciseRef.current.command.id]: { attempts: 0, correct: 0 },
-    }));
+  };
+
+  const deleteProgress = async () => {
+    if (!window.confirm(text.deleteConfirm)) return;
+    try {
+      const response = await fetch("/api/progress", { method: "DELETE" });
+      if (!response.ok) throw new Error("Progress delete failed");
+      pendingRef.current = [];
+      window.localStorage.removeItem("fightpath-pending-attempts");
+      readyRef.current = false;
+      setProgress({});
+      setSyncStatus("pending");
+      window.location.reload();
+    } catch {
+      setSyncStatus("unavailable");
+    }
   };
 
   const selectExercise = (index: number) => {
@@ -272,6 +413,16 @@ export function Practice({ locale }: { locale: Locale }) {
   const exercise = activeExercises[exerciseIndex];
   const { attempts = 0, correct = 0 } = progress[exercise.command.id] ?? {};
   const accuracy = attempts ? Math.round((correct / attempts) * 100) : 0;
+  const pathTotals = activeExercises.reduce(
+    (totals, item) => {
+      const count = progress[item.command.id];
+      return {
+        attempts: totals.attempts + (count?.attempts ?? 0),
+        correct: totals.correct + (count?.correct ?? 0),
+      };
+    },
+    { attempts: 0, correct: 0 },
+  );
 
   return (
     <main className="practice">
@@ -389,7 +540,7 @@ export function Practice({ locale }: { locale: Locale }) {
               {playing ? text.pause : text.start}
             </button>
             <button type="button" onClick={reset}>
-              {text.reset}
+              {text.clear}
             </button>
             {correct >= exercise.goal &&
               exerciseIndex < activeExercises.length - 1 && (
@@ -439,6 +590,19 @@ export function Practice({ locale }: { locale: Locale }) {
             <strong>{formatNumber(locale, accuracy)}%</strong>
           </div>
         </div>
+        <p className="practice__path-progress">
+          {text.pathProgress}: {formatNumber(locale, pathTotals.correct)}/
+          {formatNumber(locale, pathTotals.attempts)}
+        </p>
+        <section className="practice__data" aria-live="polite">
+          <p>{text[syncStatus]}</p>
+          <a href="/api/progress/export" download>
+            {text.export}
+          </a>
+          <button type="button" onClick={() => void deleteProgress()}>
+            {text.delete}
+          </button>
+        </section>
         <section className="practice__history">
           <h2>{text.history}</h2>
           <ol>

@@ -9,6 +9,7 @@ FightPath is being built with data minimization and user control in mind. This d
 | Anonymous session identifier | Keep progress separated between learners | HttpOnly cookie and server database | Random, opaque token in cookie; only its hash in the database; no email required |
 | Locale and control mapping | Preserve preferences | Browser storage | Local to the device; no raw device identity sent to the server |
 | Practice outcome | Show progress and skill mastery | PostgreSQL | Store exercise ID, result, and time; avoid raw input histories |
+| Pending practice outcome | Resume a failed sync | Browser local storage | Store only exercise ID, result, and time until server confirmation; clear on progress deletion |
 | Raw input history | Immediate feedback during a practice attempt | Browser memory | Discard after the attempt or page session; do not transmit by default |
 
 ## Engineering requirements
@@ -17,6 +18,7 @@ FightPath is being built with data minimization and user control in mind. This d
 - Keep database credentials and signing keys server-side. Use separate local, preview, and production settings.
 - Use parameterized queries, least-privilege database credentials, secure cookies, CSRF protection for state-changing requests, rate limits, and security headers.
 - Offer clear language choices, a privacy notice, progress export, and deletion before public release.
+- Anonymous progress uses an HttpOnly cookie and is inaccessible if that cookie is lost. Export and deletion act on the current session only. Public release still needs a reviewed notice, contact channel, retention job, and backup deletion procedure.
 - Do not install analytics or marketing cookies by default. Assess any future third-party service before collecting extra data.
 - Define retention and backup deletion procedures before production deployment. Record security incidents and a response process.
 

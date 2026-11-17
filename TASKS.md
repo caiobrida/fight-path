@@ -1,6 +1,6 @@
-# FightPath — plano de tarefas (proposta para validação)
+# FightPath — plano de tarefas
 
-Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um arquivo próprio em [`tasks/`](tasks/README.md), com checklist, dependências e critérios de aceite. Nenhuma tarefa de implementação foi iniciada.
+Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um arquivo próprio em [`tasks/`](tasks/README.md), com checklist, dependências e critérios de aceite. O proprietário autorizou a implementação de todas as tarefas, cada uma em uma branch e PR separados.
 
 ## Regras que se aplicam a todas as tarefas
 
@@ -33,7 +33,7 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 | Simulador | [FP-11](tasks/FP-11-interface-do-simulador.md) | Prática e histórico visual de inputs | FP-05, FP-09, FP-10 | Concluída |
 | Conteúdo | [FP-12](tasks/FP-12-treino-universal.md) | Treinos universais de execução | FP-02, FP-11 | Em andamento |
 | Conteúdo | [FP-13](tasks/FP-13-ken-classic.md) | Trilha inicial do Ken Classic | FP-02, FP-11 | Em andamento |
-| Progresso | [FP-14](tasks/FP-14-progresso-e-persistencia.md) | Progresso salvo no Neon | FP-06, FP-12, FP-13 | Pendente |
+| Progresso | [FP-14](tasks/FP-14-progresso-e-persistencia.md) | Progresso salvo no Neon | FP-06, FP-12, FP-13 | Concluída |
 | Progresso | [FP-15](tasks/FP-15-gamificacao.md) | Domínio, XP e desafios | FP-14 | Pendente |
 | Lançamento | [FP-16](tasks/FP-16-acessibilidade-e-qa.md) | Testes em dispositivos e acessibilidade | FP-11, FP-12, FP-13 | Pendente |
 | Lançamento | [FP-17](tasks/FP-17-preparo-vercel.md) | Ambiente e publicação futura na Vercel | FP-04, FP-06, FP-16 | Pendente |

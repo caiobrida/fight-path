@@ -318,6 +318,31 @@ h1 {
   gap: 0.4rem;
   font-weight: 700;
 }
+.practice__path {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 20rem;
+  margin: 1.5rem 0;
+  font-weight: 700;
+}
+.practice__data {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.practice__data p {
+  flex-basis: 100%;
+  margin: 0;
+}
+.practice__data button {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ffffff55;
+  border-radius: 0.5rem;
+  background: #344055;
+  color: #fff;
+}
 .practice select {
   min-height: 2.75rem;
   padding: 0.5rem;

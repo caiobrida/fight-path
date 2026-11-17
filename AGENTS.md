@@ -36,4 +36,4 @@ Read `SOURCES.md` before publishing game content and `PRIVACY.md` before changin
 
 ## Current work tracking
 
-The task index is `TASKS.md`; each `tasks/FP-XX-*.md` file has a checklist and acceptance criteria. FP-01 is the documentation task. Do not infer that later tasks are authorized merely because they are listed in the roadmap.
+The task index is `TASKS.md`; each `tasks/FP-XX-*.md` file has a checklist and acceptance criteria. The project owner has authorized implementation of all listed tasks, with a separate branch, PR, passing CI, and merge for each task. Neon and Vercel production credentials will be supplied later; complete local and deployment-ready work without waiting for them.
