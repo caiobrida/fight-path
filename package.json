@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "format:check": "prettier --check src scripts next.config.ts eslint.config.mjs package.json tsconfig.json compose.yaml",
     "typecheck": "tsc --noEmit",
-    "test": "node --test",
+    "test": "tsx --test src/**/*.test.ts",
     "db:up": "docker compose --env-file .env.local up -d db",
     "db:migrate:local": "node --env-file=.env.local scripts/migrate.mjs",
     "db:migrate": "node scripts/migrate.mjs"
@@ -28,6 +28,7 @@
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.4.6",
     "prettier": "^3.10.1",
+    "tsx": "^4.23.15",
     "typescript": "^5.9.3"
   }
 }

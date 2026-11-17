@@ -22,6 +22,9 @@ Practice UI → Progress service → Server API → Neon PostgreSQL
 
 The input model and evaluator should run independently of the UI framework and browser device APIs. Device adapters translate raw events into the same representation; content supplies command definitions; the evaluator returns deterministic results. This permits tests with synthetic input histories and later reuse across characters or games.
 
+The normalized domain now uses timestamped snapshots of a direction and held attack buttons. It quantizes analog axes with a dead zone, mirrors left/right orientation, retains ordered state changes, and detects button press edges. It does not depend on React or a particular controller.
+Device adapters must emit a neutral, button-free sample on focus loss or disconnection so an interrupted attempt cannot leave a control logically held. FP-08 owns that browser behavior.
+
 ## Proposed modules
 
 | Boundary | Responsibility | Task |
