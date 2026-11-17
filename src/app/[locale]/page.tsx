@@ -37,6 +37,9 @@ export default async function HomePage({
         <a className="home__link" href={`/${locale}/setup`}>
           {text.setupLink}
         </a>
+        <a className="home__link" href={`/${locale}/practice`}>
+          {text.practiceLink}
+        </a>
       </div>
     </main>
   );

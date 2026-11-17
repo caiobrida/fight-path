@@ -14,6 +14,7 @@ npm run dev
 Open `http://localhost:3000`. Use `npm run lint`, `npm run typecheck`, and `npm run build` to verify the application.
 The home route selects `/en` or `/pt-BR` from the saved language preference or browser language. Both routes can be opened directly.
 Open `/en/setup` or `/pt-BR/setup` to map keyboard, gamepad, or touch controls and test the input before saving the layout on the device.
+Open `/en/practice` or `/pt-BR/practice` for the first universal input challenge. Practice feedback follows FightPath's documented timing rules, not the game's combat engine.
 Pull requests run formatting, lint, type checking, tests, and a production build in GitHub Actions before integration.
 
 For local persistence, copy `.env.example` to `.env.local`, replace the sample password with a random local value in both `POSTGRES_PASSWORD` and `DATABASE_URL`, then run `npm run db:up` and `npm run db:migrate:local`. Docker Desktop runs PostgreSQL on `127.0.0.1:5433`. Keep real secrets out of Git.

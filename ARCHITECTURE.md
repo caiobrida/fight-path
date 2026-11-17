@@ -24,6 +24,7 @@ The input model and evaluator should run independently of the UI framework and b
 
 The normalized domain now uses timestamped snapshots of a direction and held attack buttons. It quantizes analog axes with a dead zone, mirrors left/right orientation, retains ordered state changes, and detects button press edges. It does not depend on React or a particular controller.
 The command evaluator accepts data-driven definitions with direction sequence, accepted buttons, and explicit duration and gap limits. It reports the observed input result and error reason; these limits are FightPath training rules, not verified Street Fighter 6 timing.
+The practice screen joins adapters, saved mapping, evaluator, and live input history. It starts a fresh evaluation window after each attack attempt, while preserving a bounded visual history. The first challenge is a universal motion pattern without character-specific move claims.
 Device adapters must emit a neutral, button-free sample on focus loss or disconnection so an interrupted attempt cannot leave a control logically held. FP-08 owns that browser behavior.
 
 ## Proposed modules

@@ -30,7 +30,7 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 | Simulador | [FP-08](tasks/FP-08-adaptadores-de-dispositivos.md) | Teclado, gamepad e touch | FP-07 | Em andamento |
 | Simulador | [FP-09](tasks/FP-09-mapeamento-de-controles.md) | Configuração e calibração de controles | FP-08 | Concluída |
 | Simulador | [FP-10](tasks/FP-10-validacao-de-comandos.md) | Validação e explicação de erros | FP-07, FP-02 | Concluída |
-| Simulador | [FP-11](tasks/FP-11-interface-do-simulador.md) | Prática e histórico visual de inputs | FP-05, FP-09, FP-10 | Pendente |
+| Simulador | [FP-11](tasks/FP-11-interface-do-simulador.md) | Prática e histórico visual de inputs | FP-05, FP-09, FP-10 | Concluída |
 | Conteúdo | [FP-12](tasks/FP-12-treino-universal.md) | Treinos universais de execução | FP-02, FP-11 | Pendente |
 | Conteúdo | [FP-13](tasks/FP-13-ken-classic.md) | Trilha inicial do Ken Classic | FP-02, FP-11 | Pendente |
 | Progresso | [FP-14](tasks/FP-14-progresso-e-persistencia.md) | Progresso salvo no Neon | FP-06, FP-12, FP-13 | Pendente |

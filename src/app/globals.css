@@ -222,6 +222,189 @@ h1 {
   }
 }
 
+.practice {
+  min-height: 100vh;
+  padding: 1.5rem 1rem 4rem;
+  background:
+    radial-gradient(circle at 90% 0%, #553b34, transparent 30%), #10131b;
+}
+.practice__content {
+  width: min(100%, 64rem);
+  margin: auto;
+}
+.practice__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.practice a {
+  color: #ffad71;
+  font-weight: 700;
+}
+.practice h1 {
+  font-size: clamp(2.6rem, 9vw, 5rem);
+}
+.practice p {
+  color: #c6ccd5;
+  line-height: 1.5;
+}
+.practice__panel,
+.practice__feedback,
+.practice__history {
+  padding: 1.25rem;
+  border: 1px solid #ffffff33;
+  border-radius: 1rem;
+  background: #1b2230;
+}
+.practice__panel {
+  margin-top: 2rem;
+}
+.practice h2 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+}
+.practice__sequence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+.practice__sequence span {
+  min-width: 2.4rem;
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  background: #344055;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.practice__sequence span:last-child {
+  font-size: 0.9rem;
+}
+.practice__options {
+  display: grid;
+  gap: 1rem;
+}
+.practice__options label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 700;
+}
+.practice select {
+  min-height: 2.75rem;
+  padding: 0.5rem;
+  border: 1px solid #ffffff55;
+  border-radius: 0.5rem;
+  background: #252c38;
+  color: #fff;
+  font: inherit;
+}
+.practice__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.practice button {
+  min-height: 2.75rem;
+  font: inherit;
+  cursor: pointer;
+}
+.practice__buttons button {
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: #ffad71;
+  color: #10131b;
+  font-weight: 700;
+}
+.practice__buttons button + button {
+  background: #344055;
+  color: #fff;
+}
+.practice__touch {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  touch-action: none;
+}
+.practice__touch button {
+  border: 1px solid #ffffff55;
+  border-radius: 0.5rem;
+  background: #344055;
+  color: #fff;
+  touch-action: none;
+}
+.practice__feedback,
+.practice__history {
+  margin-top: 1rem;
+}
+.practice__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.practice__stats div {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.9rem;
+  border: 1px solid #ffffff33;
+  border-radius: 0.75rem;
+  background: #1b2230;
+}
+.practice__stats span {
+  color: #c6ccd5;
+  font-size: 0.8rem;
+}
+.practice__stats strong {
+  font-size: 1.5rem;
+}
+.practice__history ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.practice__history li {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 3.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: #344055;
+  text-align: center;
+}
+.practice__history li span:first-child {
+  font-size: 1.3rem;
+}
+.practice__history li span:last-child {
+  font-size: 0.75rem;
+}
+.practice button:focus-visible,
+.practice select:focus-visible,
+.practice a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+@media (min-width: 48rem) {
+  .practice {
+    padding: 3rem;
+  }
+  .practice__panel {
+    padding: 2rem;
+  }
+  .practice__options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (min-width: 48rem) {
   .home {
     padding: 5rem;
