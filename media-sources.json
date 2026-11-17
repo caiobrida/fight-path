@@ -8,17 +8,22 @@
     "bytes": 211484,
     "sha256": "5644166093188f8bddfb85769995990c8031a7746f454d40ddc5356a706dc09e",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 10820,
+    "posterSha256": "626cd54ee67c0fdf1ecd226c77a9544ff299ded60b64b5ea6708b8c8265ed6b1",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   },
   {
     "file": "ken-portrait.webp",
     "source": "https://www.streetfighter.com/6/assets/images/character/ken/ken.png",
     "width": 640,
     "height": 731,
-    "bytes": 84200,
-    "sha256": "d42685d30e106f6bf5edf10c99122186ea420653bb74b338454e3866fe732a74",
+    "bytes": 150220,
+    "sha256": "394bfceae24b0d7726ac908cfe33c12d3b7e9d2d477092b05a183cc145fd3544",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "webpQuality": 86
   },
   {
     "file": "ryu-hashogeki.mp4",
@@ -29,7 +34,11 @@
     "bytes": 195113,
     "sha256": "837b7791111e8c0ba8a95d21ea64e224ee953d377543ae7201577d5443970424",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 10566,
+    "posterSha256": "033577f7d24153b9838c88d452afb502707523b7d190663afd9d20c824afa93e",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   },
   {
     "file": "ryu-hadoken.mp4",
@@ -40,17 +49,22 @@
     "bytes": 208480,
     "sha256": "82e67e75bab7e4112f1c328a35c81a340614dc59bba6fd689ec83add7a72d438",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 11310,
+    "posterSha256": "393932f7374ec6a37b219e74c3c9d3c294d5d3b9c3bc4b95d59de1cb158335da",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   },
   {
     "file": "ryu-portrait.webp",
     "source": "https://www.streetfighter.com/6/assets/images/character/ryu/ryu.png",
     "width": 640,
     "height": 892,
-    "bytes": 94950,
-    "sha256": "9954dd80e3109f56ab484e9ad39c61d895f8cb2c28f631ae7e7359b5e66e1e5f",
+    "bytes": 177694,
+    "sha256": "af49d73c586ef474711f5c53466c2449289215982508d0f1d038141ad0b5933b",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "webpQuality": 86
   },
   {
     "file": "chunli-kikoken.mp4",
@@ -61,17 +75,22 @@
     "bytes": 206519,
     "sha256": "266b6afe418a2a9d68dccdf322455c8bc0052c2d7fd1db725915301870ed6734",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 11678,
+    "posterSha256": "dd4fd42b372ce47825be32a5449e0fcd00bf202f1fc089d3342fd5dc9884633e",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   },
   {
     "file": "chunli-portrait.webp",
     "source": "https://www.streetfighter.com/6/assets/images/character/chunli/chunli.png",
     "width": 564,
     "height": 900,
-    "bytes": 72964,
-    "sha256": "092fabfd16906130cabd38cdab31266947cdcfda5d9e72b28594ca29066619fe",
+    "bytes": 139824,
+    "sha256": "7a773d80de2f04718e6fbcd6888b869a32e4707af88c5f87268b1f7782d1a52c",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "webpQuality": 86
   },
   {
     "file": "ken-drive-parry.mp4",
@@ -82,7 +101,11 @@
     "bytes": 116584,
     "sha256": "e77855f33fdb308c98395341821c80dc4b85ff1a284b51abde47c505b9c5b3e8",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 11246,
+    "posterSha256": "985920370b644fb70fccf62e1a6fdba3b1771062641b16fb3c467eb8f017ebae",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   },
   {
     "file": "ryu-shoryuken.mp4",
@@ -93,7 +116,11 @@
     "bytes": 281998,
     "sha256": "b1d94a808e1ad2f278c0cdbf749c5852f73354c9feea46ee387e475ddd89f3f9",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 7554,
+    "posterSha256": "1faac6bbf20b901a4d7ed94d97434126f99a882587bbedc9d632b4155af44f13",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   },
   {
     "file": "chunli-swift-thrust.mp4",
@@ -104,7 +131,11 @@
     "bytes": 60298,
     "sha256": "1bb477e41d05148a5a9a616d2e357483d912b9a95938f0dea14e96d2b6631a94",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 10560,
+    "posterSha256": "10c25ab06c20ec02e68748adf94c7cb096f2cc26b12c6627ce10942acfb7228e",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   },
   {
     "file": "chunli-drive-parry.mp4",
@@ -115,7 +146,11 @@
     "bytes": 54281,
     "sha256": "ce39b9828c12479d95eebc97f5c9dbaabd5fcefec17b872458bc31ca9017e0ef",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 12542,
+    "posterSha256": "09bee32ff0f2e4ac10b28651c4b3d417cd0d83dd266f9584b0e7a2a77a6d3095",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   },
   {
     "file": "chunli-drive-impact.mp4",
@@ -126,7 +161,11 @@
     "bytes": 157433,
     "sha256": "1c7c72f91d7614b0f336d1b900df300d66b781bcaae3ee24207f8998c87333aa",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 13466,
+    "posterSha256": "08ca34921653b960a8fb93fed282e90f13314909c951da27f40ac9486f8acf88",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   },
   {
     "file": "ken-tatsumaki.mp4",
@@ -137,7 +176,11 @@
     "bytes": 317873,
     "sha256": "fc11afc2eabb4a61273ee02f5d3241136867f0154c47860780d1b147b8dcb9ee",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 9184,
+    "posterSha256": "942b41fc1c78584fa49a69ac9053a6a8399214f0f0bff1227e166b9385609f59",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   },
   {
     "file": "ken-drive-impact.mp4",
@@ -148,7 +191,11 @@
     "bytes": 168401,
     "sha256": "93200a5f6c2c02720c238580e81e6a8eae47ce2f284fa13d2e2ffb13bd3d406c",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 14954,
+    "posterSha256": "93175395aa81bfd7e5f61c53b359ac44f1ef5f9bebd68844bafbceeedf42096c",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   },
   {
     "file": "ken-chin-buster.mp4",
@@ -159,7 +206,11 @@
     "bytes": 115116,
     "sha256": "2dc4218bbe361f717c569292b51a0e842130445b446bd5437a9c32df65e9ea7f",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 9970,
+    "posterSha256": "3eaf54efecae028137346c0f7d9e4064c96ae7b9c74c5dd81f66078ba9c9e528",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   },
   {
     "file": "ken-shoryuken.mp4",
@@ -170,7 +221,11 @@
     "bytes": 298581,
     "sha256": "d8ede6a6b404ee8985192dac8f4a981caeee97afe4310c2938f1ddea5fbe220d",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 9350,
+    "posterSha256": "991d6864757318aa2e2ae7b22e92416cb63e3b3aa028c43f429fed5ee8c7e46b",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   },
   {
     "file": "ken-throw.mp4",
@@ -181,6 +236,10 @@
     "bytes": 156310,
     "sha256": "967b9d2db485cb6ce819ffc58ea27996e0ecb3166a490ec1e1acb49a9294cfbb",
     "reviewed": "2026-11-17",
-    "copyright": "CAPCOM"
+    "copyright": "CAPCOM",
+    "posterBytes": 9202,
+    "posterSha256": "a325e0e972806ac3053e04f6e575b0b675fac8fe81b837429ccf4fc412b3e247",
+    "posterFrameSeconds": 0.9,
+    "posterWebpQuality": 88
   }
 ]
