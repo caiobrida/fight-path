@@ -67,6 +67,9 @@ export default async function LearnPage({
         );
       })}
       <div className="fp-actions">
+        <ActionLink variant="secondary" href={`/${locale}/ken/combos`}>
+          {pt ? "BnBs de Ken" : "Ken BnBs"}
+        </ActionLink>
         <ActionLink variant="secondary" href={`/${locale}/learn/progress`}>
           {pt ? "Meu aprendizado" : "My learning"}
         </ActionLink>

@@ -13,3 +13,7 @@
 **Acceptance:** a beginner can find a useful route and practice it in SF6; the UI truthfully describes whether the activity is reading, browser input practice or in-game practice.
 
 **Evidence:** catalog/locale checks, video fallback and learner route-selection walkthrough.
+
+## Implementation evidence (2026-11-17)
+
+Bilingual BnB collection, combined situation/difficulty/resource/position filters and source/review empty states implemented. Published detail routes support mirrored step notation, transition labels, conditions, resource/build metadata, captioned both-side clips, fallback, sources and separate account activity. Unverified routes remain unavailable, including direct URLs; candidate notation stays in BNB-REVIEW.md, outside the application catalog. Publication is blocked only by FP-34 in-game execution and clip evidence, not remaining library code. Filter/facing/publication-gate regressions added.

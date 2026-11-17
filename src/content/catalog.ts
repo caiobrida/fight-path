@@ -2,6 +2,7 @@ import { footsiesLessons } from "./footsies";
 import { sf6Lessons } from "./sf6";
 import { kenLessons } from "./ken";
 import { habitLessons } from "./habits";
+import { publishedCombos } from "./combos";
 import { foundationsLessons } from "./foundations";
 import { baseLessons, type Lesson } from "./learning";
 
@@ -12,6 +13,7 @@ export const lessons: readonly Lesson[] = [
   ...sf6Lessons,
   ...kenLessons,
   ...habitLessons,
+  ...publishedCombos.map((recipe) => recipe.lesson),
 ];
 export const publishedLessons = lessons.filter(
   (lesson) =>
