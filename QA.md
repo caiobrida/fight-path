@@ -15,6 +15,7 @@
 | In-app Chromium browser, 320 × 700   | Brazilian Portuguese privacy notice                                                                     | Passed accessibility-tree and overflow inspection                                                |
 | Local PostgreSQL after migration 003 | Clerk user ID isolation and discarded anonymous development tables                                      | Passed integration test in FP-18                                                                 |
 | Local HTTP without a Clerk session   | Setup and practice redirect to localized sign-in; progress read, write, export, and deletion return 401 | Passed in FP-18                                                                                  |
+| Local Chromium browser               | Header sign-in and sign-up from privacy in `en` and `pt-BR`                                             | Force redirects target localized practice; Google OAuth callback still untested                  |
 
 Feedback is written as text in a polite live region. Buttons, select controls, and links have visible focus styles. Directional touch buttons expose localized accessible names. The practice surface does not depend on color alone to report success or failure.
 Calculated contrast ratios for representative practice colors are 11.49:1 for muted text on the page background, 10.14:1 for accent text on the page background, and 10.44:1 for white text on control buttons.
@@ -23,6 +24,7 @@ Calculated contrast ratios for representative practice colors are 11.49:1 for mu
 
 - A diagonal on touch originally required two simultaneous directional presses. The virtual pad now offers dedicated diagonal buttons.
 - The original five-column touch grid could produce narrow targets. The revised pad stacks direction and attack groups at widths up to 352 px.
+- Starting sign-up from the privacy page supplied Clerk with both a practice fallback and a privacy-page redirect. The header buttons now force the localized practice destination for sign-in and sign-up, including transfers between those flows.
 
 ## Remaining validation
 

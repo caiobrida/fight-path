@@ -67,10 +67,18 @@ export default async function LocaleLayout({
             >
               <Suspense>
                 <Show when="signed-out">
-                  <SignInButton mode="redirect">
+                  <SignInButton
+                    mode="redirect"
+                    forceRedirectUrl={`/${locale}/practice`}
+                    signUpForceRedirectUrl={`/${locale}/practice`}
+                  >
                     <button type="button">{dictionaries[locale].signIn}</button>
                   </SignInButton>
-                  <SignUpButton mode="redirect">
+                  <SignUpButton
+                    mode="redirect"
+                    forceRedirectUrl={`/${locale}/practice`}
+                    signInForceRedirectUrl={`/${locale}/practice`}
+                  >
                     <button type="button">{dictionaries[locale].signUp}</button>
                   </SignUpButton>
                 </Show>

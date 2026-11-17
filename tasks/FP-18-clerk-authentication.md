@@ -14,6 +14,7 @@
 - [x] Add a signed `user.deleted` webhook endpoint for account-deletion cleanup.
 - [x] Update privacy, architecture, release configuration, and agent instructions with the exact Clerk application restriction.
 - [x] Verify types, tests, build, database migration, user isolation, and unauthenticated HTTP behavior locally.
+- [x] Force the localized practice destination from header sign-in and sign-up buttons so Clerk's page-origin redirect cannot take precedence after OAuth.
 - [ ] Configure Clerk production keys and a `user.deleted` webhook signing secret for each deployed environment; test real account deletion.
 - [ ] Have a learner review complete sign-in, sign-up, sign-out, and account switching flows in both languages on mobile and desktop.
 
