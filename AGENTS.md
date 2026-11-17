@@ -11,9 +11,11 @@ Read `QA.md` before claiming device compatibility or public-release readiness.
 - Deliver user-facing interface, lessons, feedback, and accessibility text in both English (`en`) and Brazilian Portuguese (`pt-BR`) from the start.
 - Build a responsive, mobile-first experience that is comfortable in a desktop browser and on a phone. Account for touch targets, small screens, and physical controllers in practice flows.
 - Plan persistence with PostgreSQL on Neon and future hosting on Vercel. Never expose database credentials to browser code.
+- The currently supplied Neon database is for development and Vercel Preview. Its migrations 001-003 are applied and it has no learner attempts. Create a separate Neon database before Production deployment; never promote the Preview connection as Production configuration.
 - The Vercel project for this repository is `fight-path` in scope `caiobrida1-5669s-projects`, project ID `prj_2nqJOlMttvYTtrtyN2eULelvlwY1`. Confirm that identity before changing Vercel settings, variables, or deployments. Never create or connect a different Vercel project for this repository.
 - Authentication is mandatory for control setup, practice, and progress. Clerk owns accounts and sessions; PostgreSQL stores only Clerk user IDs alongside practice attempts.
 - Use only the existing Clerk application named `fight-path` with application ID `app_3MEZV1U7aZzsep5eEdSErRrIH8q`. Before any Clerk CLI operation that can link, pull keys, change settings, or deploy, confirm that exact application is selected. Never create another Clerk application, switch applications, or replace working keys for this repository.
+- Use the `fight-path` Clerk Development instance for local and Preview work. Defer its Production instance until the Production database and deployment are being prepared. Keep automatic Production deployments disabled meanwhile.
 - Build with security and Brazilian LGPD requirements in mind: minimize personal data, protect access, document purposes and retention, and support user access and deletion before public release. Follow `PRIVACY.md`.
 
 ## Game information

@@ -17,6 +17,13 @@ const missing = required.filter((name) => {
 if (missing.length)
   throw new Error(`Missing deployment configuration: ${missing.join(", ")}`);
 
+if (
+  environment === "production" &&
+  (process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.startsWith("pk_test_") ||
+    process.env.CLERK_SECRET_KEY.startsWith("sk_test_"))
+)
+  throw new Error("Production deployment requires Clerk Production keys");
+
 const database = new URL(process.env.DATABASE_URL);
 if (
   !["postgres:", "postgresql:"].includes(database.protocol) ||
