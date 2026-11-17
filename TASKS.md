@@ -27,7 +27,7 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 | Fundação | [FP-05](tasks/FP-05-localizacao.md) | Infraestrutura `en` e `pt-BR` | FP-03 | Concluída |
 | Fundação | [FP-06](tasks/FP-06-dados-e-identidade.md) | Contrato de dados, identidade e segurança | FP-01 | Concluída |
 | Simulador | [FP-07](tasks/FP-07-modelo-de-inputs.md) | Modelo de inputs independente da interface | FP-03 | Concluída |
-| Simulador | [FP-08](tasks/FP-08-adaptadores-de-dispositivos.md) | Teclado, gamepad e touch | FP-07 | Pendente |
+| Simulador | [FP-08](tasks/FP-08-adaptadores-de-dispositivos.md) | Teclado, gamepad e touch | FP-07 | Em andamento |
 | Simulador | [FP-09](tasks/FP-09-mapeamento-de-controles.md) | Configuração e calibração de controles | FP-08 | Pendente |
 | Simulador | [FP-10](tasks/FP-10-validacao-de-comandos.md) | Validação e explicação de erros | FP-07, FP-02 | Pendente |
 | Simulador | [FP-11](tasks/FP-11-interface-do-simulador.md) | Prática e histórico visual de inputs | FP-05, FP-09, FP-10 | Pendente |

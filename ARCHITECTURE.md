@@ -40,6 +40,8 @@ Device adapters must emit a neutral, button-free sample on focus loss or disconn
 
 This is a responsibility map, not a required folder structure. FP-03 will choose code organization after confirming the stack.
 
+Device adapters emit raw control tokens and quantized axes. FP-09 will map those tokens to normalized game inputs. Keyboard capture uses an allowlist and ignores typing fields; raw device identifiers and raw input histories are not sent to the server.
+
 The practice UI is mobile first and responsive. Layouts should start with a narrow viewport, then adapt to larger screens while preserving visible controls, readable input history, and accessible touch targets. Keyboard and physical gamepad flows must remain usable on desktop. FP-11 implements the flow; FP-16 verifies actual device and viewport behavior.
 
 ## Content and localization
