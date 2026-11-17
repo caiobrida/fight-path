@@ -13,3 +13,5 @@
 **Acceptance:** learners can explain why a move misses and why a spacing choice is useful in the lesson scenario, then practice a specific response in SF6.
 
 **Evidence:** sources, example conditions, captions and learner comprehension check.
+
+Implemented three bilingual lessons on choosing range, whiff punishment and adapting with space. Each uses authored definitions, original scenarios, drills and checks. No hitbox or numeric frame claims are made. Original range diagrams are integrated in FP-37; learner comprehension remains in FP-40.
