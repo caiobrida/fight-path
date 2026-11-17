@@ -37,7 +37,7 @@ The initial simulator evaluates input sequences and rhythm. It does not claim to
 
 ## Progress and motivation
 
-Proposed metrics include attempts, correct attempts, accuracy, consistency, and mastery by universal pattern and by character skill. XP, levels, missions, streaks, and achievements were discussed as possible motivators. Their exact formulas and first-release scope are open; FP-14 and FP-15 must define them so rewards follow verified practice rather than passive reading.
+The first release shows attempts, correct attempts, accuracy, and per-exercise mastery. Mastery is based on the latest 20 saved attempts: Building requires 3 correct attempts and at least 50% recent accuracy; Confident requires 10 correct attempts and at least 70% recent accuracy over at least 10 attempts. Each of the first 10 correct attempts per exercise grants 10 XP. Six exercises cap XP at 600, and each 100 XP adds one level. Three challenges reward correct attempts in universal and Ken exercises. These rewards are private practice feedback based on saved, client-reported results; they are not a competitive ranking. Streaks and achievements are deferred until their behavior can be designed with learners.
 
 ## Later opportunities
 
@@ -53,5 +53,5 @@ Proposed metrics include attempts, correct attempts, accuracy, consistency, and 
 | Exact first-release exercise list and success criteria | Open; must be source-backed | FP-02, FP-12, FP-13 |
 | Required devices and browsers for the first release | Open; test availability and compatibility | FP-08, FP-16 |
 | Accounts versus anonymous progress | Open; determines cross-device persistence | FP-06 |
-| Progress and reward formulas | Open; define after usable practice exists | FP-14, FP-15 |
+| Progress and reward formulas | Initial formulas implemented; validate motivation with learners | FP-14, FP-15 |
 | Visual style and onboarding details | Open; validate with learners | FP-11, FP-16 |

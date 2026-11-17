@@ -332,6 +332,34 @@ h1 {
   gap: 1rem;
   margin-top: 1.5rem;
 }
+.practice__rewards {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid #ffffff44;
+  border-radius: 0.75rem;
+  background: #1b2230;
+}
+.practice__rewards h3 {
+  font-size: 1rem;
+}
+.practice__reward-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: #ffad71;
+}
+.practice__rewards ul {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.practice__rewards li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
 .practice__data p {
   flex-basis: 100%;
   margin: 0;

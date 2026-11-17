@@ -37,14 +37,18 @@ async function summary(id: string): Promise<ProgressRow[]> {
     exercise_id: string;
     attempts: number;
     correct: number;
+    recent_attempts: number;
+    recent_correct: number;
   }>(
-    "SELECT exercise_id, COUNT(*)::int AS attempts, COUNT(*) FILTER (WHERE correct)::int AS correct FROM attempts WHERE session_id = $1 GROUP BY exercise_id",
+    "WITH ranked AS (SELECT exercise_id, correct, ROW_NUMBER() OVER (PARTITION BY exercise_id ORDER BY created_at DESC, id DESC) AS position FROM attempts WHERE session_id = $1) SELECT exercise_id, COUNT(*)::int AS attempts, COUNT(*) FILTER (WHERE correct)::int AS correct, COUNT(*) FILTER (WHERE position <= 20)::int AS recent_attempts, COUNT(*) FILTER (WHERE position <= 20 AND correct)::int AS recent_correct FROM ranked GROUP BY exercise_id",
     [id],
   );
   return result.rows.map((row) => ({
     exerciseId: row.exercise_id,
     attempts: row.attempts,
     correct: row.correct,
+    recentAttempts: row.recent_attempts,
+    recentCorrect: row.recent_correct,
   }));
 }
 

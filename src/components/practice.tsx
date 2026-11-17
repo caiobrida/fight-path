@@ -7,6 +7,7 @@ import { KeyboardAdapter } from "@/devices/keyboard";
 import { TouchAdapter } from "@/devices/touch";
 import type { DeviceKind, RawSnapshot } from "@/devices/raw";
 import { evaluateCommand, type Evaluation } from "@/domain/evaluator";
+import { gamification, mastery } from "@/domain/gamification";
 import {
   appendSample,
   newlyPressed,
@@ -71,6 +72,23 @@ const copy = {
     delete: "Delete progress",
     deleteConfirm: "Permanently delete your saved FightPath progress?",
     clear: "Clear inputs",
+    rewards: "Practice rewards",
+    xpRule:
+      "Earn 10 XP for each saved correct attempt, up to 10 per exercise. Maximum: 600 XP.",
+    level: "Level",
+    mastery: "Current exercise",
+    starting: "Starting",
+    building:
+      "Building: 3 correct attempts and at least 50% accuracy in the latest 20",
+    confident:
+      "Confident: 10 correct attempts and at least 70% accuracy in the latest 20",
+    missions: "Challenges",
+    missionNames: {
+      "first-motion": "First motion: 3 correct quarter circles",
+      "universal-foundation":
+        "Universal foundation: 3 correct attempts in each exercise",
+      "ken-foundation": "Ken foundation: 3 correct attempts with each move",
+    },
     reasons: {
       incomplete: "Complete the sequence and press a button.",
       "wrong-button": "Use one of the shown attack buttons.",
@@ -123,6 +141,22 @@ const copy = {
     delete: "Excluir progresso",
     deleteConfirm: "Excluir permanentemente seu progresso salvo no FightPath?",
     clear: "Limpar inputs",
+    rewards: "Recompensas de treino",
+    xpRule:
+      "Ganhe 10 XP por acerto salvo, até 10 por exercício. Máximo: 600 XP.",
+    level: "Nível",
+    mastery: "Exercício atual",
+    starting: "Começando",
+    building:
+      "Evoluindo: 3 acertos e pelo menos 50% de precisão nas últimas 20 tentativas",
+    confident:
+      "Confiante: 10 acertos e pelo menos 70% de precisão nas últimas 20 tentativas",
+    missions: "Desafios",
+    missionNames: {
+      "first-motion": "Primeiro movimento: 3 quartos de círculo corretos",
+      "universal-foundation": "Base universal: 3 acertos em cada exercício",
+      "ken-foundation": "Base do Ken: 3 acertos com cada golpe",
+    },
     reasons: {
       incomplete: "Complete a sequência e pressione um botão.",
       "wrong-button": "Use um dos botões de ataque indicados.",
@@ -167,6 +201,7 @@ export function Practice({ locale }: { locale: Locale }) {
   const [syncStatus, setSyncStatus] = useState<
     "saved" | "pending" | "unavailable"
   >("pending");
+  const [verifiedRows, setVerifiedRows] = useState<ProgressRow[]>([]);
   const exerciseRef = useRef(exercises[0]);
   const mappingRef = useRef(mapping);
   const facingRef = useRef(facing);
@@ -206,6 +241,7 @@ export function Practice({ locale }: { locale: Locale }) {
           });
           if (!response.ok) throw new Error("Progress save failed");
           const data = (await response.json()) as { progress: ProgressRow[] };
+          if (active) setVerifiedRows(data.progress);
           pendingRef.current.shift();
           window.localStorage.setItem(
             "fightpath-pending-attempts",
@@ -228,13 +264,17 @@ export function Practice({ locale }: { locale: Locale }) {
         if (!response.ok) throw new Error("Progress load failed");
         const data = (await response.json()) as { progress: ProgressRow[] };
         if (!active) return;
+        setVerifiedRows(data.progress);
         const combined = progressById(data.progress);
         for (const attempt of pendingRef.current) {
           const current = combined[attempt.exerciseId] ?? {
             attempts: 0,
             correct: 0,
+            recentAttempts: 0,
+            recentCorrect: 0,
           };
           combined[attempt.exerciseId] = {
+            ...current,
             attempts: current.attempts + 1,
             correct: current.correct + Number(attempt.correct),
           };
@@ -370,6 +410,7 @@ export function Practice({ locale }: { locale: Locale }) {
       window.localStorage.removeItem("fightpath-pending-attempts");
       readyRef.current = false;
       setProgress({});
+      setVerifiedRows([]);
       setSyncStatus("pending");
       window.location.reload();
     } catch {
@@ -422,6 +463,10 @@ export function Practice({ locale }: { locale: Locale }) {
       };
     },
     { attempts: 0, correct: 0 },
+  );
+  const rewards = gamification(verifiedRows);
+  const currentMastery = mastery(
+    verifiedRows.find((row) => row.exerciseId === exercise.command.id),
   );
 
   return (
@@ -594,6 +639,32 @@ export function Practice({ locale }: { locale: Locale }) {
           {text.pathProgress}: {formatNumber(locale, pathTotals.correct)}/
           {formatNumber(locale, pathTotals.attempts)}
         </p>
+        <section className="practice__rewards">
+          <h2>{text.rewards}</h2>
+          <p>{text.xpRule}</p>
+          <div className="practice__reward-stats">
+            <strong>{formatNumber(locale, rewards.xp)} XP</strong>
+            <strong>
+              {text.level} {formatNumber(locale, rewards.level)}
+            </strong>
+          </div>
+          <p>
+            {text.mastery}: {text[currentMastery]}
+          </p>
+          <h3>{text.missions}</h3>
+          <ul>
+            {rewards.missions.map((mission) => (
+              <li key={mission.id}>
+                <span>{text.missionNames[mission.id]}</span>
+                <strong>
+                  {formatNumber(locale, mission.current)}/
+                  {formatNumber(locale, mission.goal)}
+                  {mission.complete ? ` · ${text.completed}` : ""}
+                </strong>
+              </li>
+            ))}
+          </ul>
+        </section>
         <section className="practice__data" aria-live="polite">
           <p>{text[syncStatus]}</p>
           <a href="/api/progress/export" download>

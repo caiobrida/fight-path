@@ -65,6 +65,8 @@ The first identity model is an anonymous, random session token held in an HttpOn
 
 There is no profile or email table in the anonymous MVP. Locale and controller mapping stay on the device. Mastery and lesson progress are derived from stored attempt outcomes, so no duplicate score state is required initially.
 
+XP and challenges are derived from saved attempt counts; no reward balance is stored. Each of the first ten correct attempts per exercise grants 10 XP, capped at 600 XP across six exercises. Mastery evaluates the latest twenty saved attempts for each exercise, so accuracy can improve after an early learning period. Challenges require three correct attempts in specific exercises. Streaks are deferred until timezone and recovery rules can be agreed. Client-reported results are suitable only for private practice rewards, not rankings or prizes.
+
 Control mappings may be stored on the device initially; syncing them to an account is an open product decision. Raw input histories should be retained only if needed for an explicit feature, with a defined retention period. Preview and production must have separate configuration and database access when deployment is prepared in FP-17.
 
 ## Simulator limits and quality

@@ -34,7 +34,7 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 | Conteúdo | [FP-12](tasks/FP-12-treino-universal.md) | Treinos universais de execução | FP-02, FP-11 | Em andamento |
 | Conteúdo | [FP-13](tasks/FP-13-ken-classic.md) | Trilha inicial do Ken Classic | FP-02, FP-11 | Em andamento |
 | Progresso | [FP-14](tasks/FP-14-progresso-e-persistencia.md) | Progresso salvo no Neon | FP-06, FP-12, FP-13 | Concluída |
-| Progresso | [FP-15](tasks/FP-15-gamificacao.md) | Domínio, XP e desafios | FP-14 | Pendente |
+| Progresso | [FP-15](tasks/FP-15-gamificacao.md) | Domínio, XP e desafios | FP-14 | Concluída |
 | Lançamento | [FP-16](tasks/FP-16-acessibilidade-e-qa.md) | Testes em dispositivos e acessibilidade | FP-11, FP-12, FP-13 | Pendente |
 | Lançamento | [FP-17](tasks/FP-17-preparo-vercel.md) | Ambiente e publicação futura na Vercel | FP-04, FP-06, FP-16 | Pendente |
 

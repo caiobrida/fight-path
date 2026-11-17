@@ -15,6 +15,8 @@ export type ProgressRow = Readonly<{
   exerciseId: string;
   attempts: number;
   correct: number;
+  recentAttempts: number;
+  recentCorrect: number;
 }>;
 
 export function parseAttempt(value: unknown): AttemptInput | null {
@@ -46,7 +48,12 @@ export function progressById(rows: readonly ProgressRow[]) {
   return Object.fromEntries(
     rows.map((row) => [
       row.exerciseId,
-      { attempts: row.attempts, correct: row.correct },
+      {
+        attempts: row.attempts,
+        correct: row.correct,
+        recentAttempts: row.recentAttempts,
+        recentCorrect: row.recentCorrect,
+      },
     ]),
   );
 }
