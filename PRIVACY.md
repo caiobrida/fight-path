@@ -6,7 +6,7 @@ FightPath is being built with data minimization and user control in mind. This d
 
 | Data | Purpose | Storage | Default handling |
 | --- | --- | --- | --- |
-| Anonymous session identifier | Keep progress separated between learners | HttpOnly cookie and server database | Random, opaque identifier; no email required for the first release |
+| Anonymous session identifier | Keep progress separated between learners | HttpOnly cookie and server database | Random, opaque token in cookie; only its hash in the database; no email required |
 | Locale and control mapping | Preserve preferences | Browser storage | Local to the device; no raw device identity sent to the server |
 | Practice outcome | Show progress and skill mastery | PostgreSQL | Store exercise ID, result, and time; avoid raw input histories |
 | Raw input history | Immediate feedback during a practice attempt | Browser memory | Discard after the attempt or page session; do not transmit by default |

@@ -49,7 +49,11 @@ Universal exercises should refer to reusable input patterns. Ken lessons may ref
 
 ## Data and deployment
 
-Neon PostgreSQL is the planned durable store for progress. The browser must not connect with a privileged database credential. A server boundary compatible with Vercel will validate identity, authorize requests, and use database credentials stored in environment configuration. FP-06 decides the identity model, data minimization, migrations, and server framework before FP-14 implements persistence.
+Neon PostgreSQL is the planned durable store for progress. A local PostgreSQL 17 container supplies the same SQL development target. The browser must not connect with a privileged database credential. Next.js server routes will use `DATABASE_URL` from the environment and parameterized queries.
+
+The first identity model is an anonymous, random session token held in an HttpOnly, SameSite cookie. The database stores only a SHA-256 token hash. Attempts belong to the server-resolved session; the client cannot choose a session ID. Losing the cookie loses access to that progress. The production service must offer export and deletion, and should not store raw input histories. The current migration contains only sessions and minimal attempt outcomes. FP-14 implements these flows.
+
+There is no profile or email table in the anonymous MVP. Locale and controller mapping stay on the device. Mastery and lesson progress are derived from stored attempt outcomes, so no duplicate score state is required initially.
 
 Control mappings may be stored on the device initially; syncing them to an account is an open product decision. Raw input histories should be retained only if needed for an explicit feature, with a defined retention period. Preview and production must have separate configuration and database access when deployment is prepared in FP-17.
 
@@ -64,7 +68,7 @@ CI should check formatting or lint, types, relevant tests, and build on PRs once
 | Decision | Why it matters | Resolve in |
 | --- | --- | --- |
 | Frontend and server stack | Next.js App Router selected; specific database and identity libraries remain open | FP-03, FP-06 |
-| Account or anonymous identity | Determines ownership and synchronization of progress | FP-06 |
+| Account or anonymous identity | Anonymous cookie session selected for the first release; account linking remains future scope | FP-06 |
 | First command representation and tolerance rules | Determines what the simulator can claim | FP-07, FP-10 |
 | Supported hardware matrix | Depends on browser and device behavior | FP-08, FP-16 |
 | Stored attempt detail and retention | Balances metrics with data minimization | FP-06, FP-14 |
