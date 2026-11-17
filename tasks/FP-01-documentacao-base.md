@@ -4,7 +4,7 @@
 
 **Dependência:** plano de tarefas autorizado para iniciar FP-01.
 
-**Estado:** pronta para revisão. Os arquivos foram criados; a tarefa será concluída após revisão e PR com a conta pessoal correta.
+**Estado:** concluída na integração da PR de documentação. Os quatro arquivos foram criados, verificados e publicados com a conta pessoal correta.
 
 ## Checklist
 

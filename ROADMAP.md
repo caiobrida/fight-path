@@ -14,9 +14,9 @@ Produce the product, architecture, roadmap, and project instruction files. Then 
 
 **Tasks:** FP-03, FP-04, FP-05, FP-06.
 
-Choose the frontend and server stack, create the repository baseline, add PR CI early, prepare both languages, and decide identity and secure Neon access.
+Choose the frontend and server stack, create a responsive mobile-first repository baseline, add PR CI early, prepare both languages, and decide identity and secure Neon access.
 
-**Exit criteria:** the application builds, required checks run on a PR, both locales work in the basic shell, and the data flow has no browser-held database secret.
+**Exit criteria:** the application builds, required checks run on a PR, both locales work in the basic mobile-first shell, and the data flow has no browser-held database secret.
 
 ## 2. Input practice engine
 
@@ -24,7 +24,7 @@ Choose the frontend and server stack, create the repository baseline, add PR CI 
 
 Create normalized input events, device adapters, manual mapping, deterministic command evaluation, and the practice interface.
 
-**Exit criteria:** a learner can configure an available device, attempt a command, see an input history, and receive understandable feedback in both languages. Supported devices and simulator limits are explicit.
+**Exit criteria:** a learner can configure an available device, attempt a command, see an input history, and receive understandable feedback in both languages on phone and desktop layouts. Supported devices and simulator limits are explicit.
 
 ## 3. First learning paths
 

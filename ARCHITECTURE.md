@@ -37,6 +37,8 @@ The input model and evaluator should run independently of the UI framework and b
 
 This is a responsibility map, not a required folder structure. FP-03 will choose code organization after confirming the stack.
 
+The practice UI is mobile first and responsive. Layouts should start with a narrow viewport, then adapt to larger screens while preserving visible controls, readable input history, and accessible touch targets. Keyboard and physical gamepad flows must remain usable on desktop. FP-11 implements the flow; FP-16 verifies actual device and viewport behavior.
+
 ## Content and localization
 
 UI messages, exercise instructions, and feedback need `en` and `pt-BR` versions. Translation keys and source data should make missing translations detectable. Game content must retain source URL, access date, and applicable version or patch when relevant. A game fact and an evaluator threshold are different data: the former needs game evidence; the latter needs an explicit FightPath rule and testing.

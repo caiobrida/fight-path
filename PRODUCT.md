@@ -9,6 +9,7 @@ The intended learner may use a keyboard, console controller, arcade stick, lever
 ## Confirmed product constraints
 
 - The product supports English and Brazilian Portuguese from the beginning.
+- The experience is responsive and mobile first, with comfortable practice in a desktop browser and on a phone.
 - Universal command practice and character-specific practice are distinct learning areas.
 - The initial character content is Ken with Classic controls in Street Fighter 6.
 - The interactive simulator should display captured inputs and explain accepted or rejected attempts.
@@ -29,6 +30,8 @@ The **universal practice area** teaches reusable movement and button patterns. T
 ## Initial release candidate
 
 The first release should prove one complete learning loop: configure an input method, practice a small verified set of universal and Ken-specific commands, receive understandable feedback in both languages, and see saved progress. FP-01 records this as a candidate boundary; the exact number of exercises, supported device matrix, identity model, and progress rules still require decisions in FP-02, FP-06, FP-12, FP-13, and FP-15.
+
+The learning loop must remain usable on narrow touch screens and on larger desktop layouts. Device setup, input history, and feedback need room to remain readable without relying on hover or precise pointer input.
 
 The initial simulator evaluates input sequences and rhythm. It does not claim to recreate Street Fighter 6's combat engine or establish whether a move or combo would succeed in the game. Any stronger claim requires researched rules and validation against the game.
 

@@ -19,7 +19,7 @@ Este plano divide o desenvolvimento em entregas revisáveis. Cada tarefa tem um 
 
 | Fase | Tarefa | Entrega | Depende de | Estado |
 | --- | --- | --- | --- | --- |
-| Planejamento | [FP-01](tasks/FP-01-documentacao-base.md) | Documentação base e decisões em aberto | Validação deste plano | Pronta para revisão |
+| Planejamento | [FP-01](tasks/FP-01-documentacao-base.md) | Documentação base e decisões em aberto | Validação deste plano | Concluída |
 | Planejamento | [FP-02](tasks/FP-02-fontes-do-jogo.md) | Política e catálogo de fontes do jogo | FP-01 | Pendente |
 | Fundação | [FP-03](tasks/FP-03-base-tecnica.md) | Stack e projeto inicial | FP-01 | Pendente |
 | Fundação | [FP-04](tasks/FP-04-ci.md) | CI para PRs | FP-03 | Pendente |
