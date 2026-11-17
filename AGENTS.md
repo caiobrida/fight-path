@@ -26,6 +26,8 @@ Read `QA.md` before claiming device compatibility or public-release readiness.
 
 ## Code and documentation
 
+- Before interacting with any browser, game or other desktop application through computer-use tools, tell the owner what application will be controlled and why. Do not open or take control silently. Code edits, terminal commands and automated project tests can continue within the authorized development scope; announce any test that will visibly control the owner's desktop first.
+
 - Write all code, identifiers, filenames for code, configuration, and technical Git text in English. Localize user-facing strings instead of hardcoding one language.
 - Do not add comments in code. Make intent clear through names, structure, types, and tests where useful.
 - Keep input capture, normalized input events, command evaluation, content, and persistence separate. `ARCHITECTURE.md` records the current boundaries and unresolved decisions.

@@ -16,3 +16,7 @@
 **Acceptance:** every selected route is reproducible under its stated conditions in the applicable game build. An absent recipe remains unpublished rather than being filled from memory.
 
 **Evidence:** review sheet and clips for both facing directions. This task creates verified content, not a browser combat or combo validator.
+
+## Evidence update (2026-11-17)
+
+Six source-backed candidates and explicit unverified conditions are recorded in BNB-REVIEW.md. SuperCombo is now accessible in the browser. Installed title version 2.0500.001 was observed, but no training execution occurred before computer use was interrupted. Current-game/both-side reproduction and clips remain open; no candidate is promoted to a verified public recipe. The owner requires advance notice before any future desktop/browser/game control.
