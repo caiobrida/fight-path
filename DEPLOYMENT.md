@@ -1,6 +1,6 @@
 # Deployment runbook
 
-The Vercel project `fight-path` (`prj_2nqJOlMttvYTtrtyN2eULelvlwY1`) exists in scope `caiobrida1-5669s-projects` and is connected to `caiobrida/fight-path` on GitHub, with `main` as its production branch. The local directory is linked through ignored `.vercel` metadata. The project uses the Next.js preset and Node.js 22.x. No Vercel environment variables or deployments exist yet. Automatic Git deployments are disabled in `vercel.json` until the required Preview and Production configuration is ready. Public release remains gated by `QA.md` and `PRIVACY.md`. Use only the Clerk application `fight-path` (`app_3MEZV1U7aZzsep5eEdSErRrIH8q`) for all environments. Its development instance is linked locally; a production instance is not configured yet.
+The Vercel project `fight-path` (`prj_2nqJOlMttvYTtrtyN2eULelvlwY1`) exists in scope `caiobrida1-5669s-projects` and is connected to `caiobrida/fight-path` on GitHub, with `main` as its production branch. The local directory is linked through ignored `.vercel` metadata. The project uses the Next.js preset and Node.js 22.x. Six Production environment variables exist; `CLERK_WEBHOOK_SIGNING_SECRET` and all Preview variables are still missing. No deployment exists yet. Automatic Git deployments are disabled in `vercel.json` until the required Preview and Production configuration is ready. Public release remains gated by `QA.md` and `PRIVACY.md`. Use only the Clerk application `fight-path` (`app_3MEZV1U7aZzsep5eEdSErRrIH8q`) for all environments. Its development instance is linked locally; a production instance is not configured yet.
 
 ## Environments
 
@@ -24,6 +24,8 @@ Configure the following in Vercel Project Settings separately for Preview and Pr
 
 `VERCEL_ENV` is supplied by Vercel. The `prebuild` check refuses a Preview or Production build if required values are missing, placeholder values are used, or the database URL is not a TLS Neon endpoint. Run the SQL migrations against each database before accepting traffic. `npm run db:migrate` applies numbered migrations in one transaction and can be rerun safely. The runtime uses a bounded `pg` pool and parameterized queries.
 
+The Production Neon database was inspected before migration on November 17, 2026: it had no tables or attempts. Migrations `001_initial`, `002_session_retention`, and `003_clerk_users` were then applied successfully. A read-only check confirmed only `attempts` and `schema_migrations` remain, with zero attempts. The Preview database still needs migration. Vercel Secret values cannot be pulled into a local CLI process; use a separately supplied, Git-ignored Neon connection URL and verify its host and schema before any migration. Never let a command fall back to the local Docker `DATABASE_URL` when targeting Neon.
+
 ## First preview
 
 1. Create separate Neon preview and production databases. Copy the pooled TLS URLs through secure environment settings. Review database roles and grant only the permissions needed by the app.
@@ -31,6 +33,8 @@ Configure the following in Vercel Project Settings separately for Preview and Pr
 3. Run `npm run db:migrate` with the preview `DATABASE_URL` in the command environment. Confirm `schema_migrations` contains `001_initial`, `002_session_retention`, and `003_clerk_users`. Migration 003 drops anonymous development attempts and sessions; do not run it on any database containing real learner data without a separate migration plan.
 4. Confirm the linked Vercel project is `prj_2nqJOlMttvYTtrtyN2eULelvlwY1` in scope `caiobrida1-5669s-projects`, connected to `caiobrida/fight-path` with `main` as the production branch. Remove the temporary `git.deploymentEnabled: false` setting from `vercel.json` in a separate PR after the required variables and migrations are ready, then confirm that PRs receive Preview deployments and that secrets are not exposed to the browser.
 5. Configure the signed Clerk `user.deleted` webhook for `/api/webhooks/clerk` on each deployed environment. On a Preview URL, check both locales, privacy pages, `/api/health`, sign-in, sign-up, sign-out, protected setup and practice, progress reload, export, deletion, and account switching. Verify the webhook removes attempts after account deletion. Check that `/api/cron/retention` returns 401 without the bearer secret and that all progress routes return 401 without a Clerk session.
+
+The verified default Production domain is `fight-path.vercel.app`. Its Clerk webhook URL is `https://fight-path.vercel.app/api/webhooks/clerk`, with the `user.deleted` event selected. The endpoint will not be reachable until the first Production deployment. Add that webhook's signing secret to the Production `CLERK_WEBHOOK_SIGNING_SECRET` variable before enabling deployment. Clerk's Production instance also requires an owner-controlled domain; the Vercel default domain does not replace that setup.
 
 The [Vercel environment guide](https://vercel.com/docs/environment-variables) describes Preview and Production scoping. The [Neon pooled-connection guide](https://neon.com/blog/postgres-support-case-recap) explains pooled URLs for server functions.
 
